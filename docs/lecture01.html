@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>第01回 4I-データベース工学</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#ガイダンス" id="toc-ガイダンス"><span class="toc-section-number">1</span>
+ガイダンス</a>
+<ul>
+<li><a href="#概要" id="toc-概要"><span class="toc-section-number">1.1</span> 概要</a></li>
+<li><a href="#授業の位置づけ" id="toc-授業の位置づけ"><span class="toc-section-number">1.2</span>
+授業の位置づけ</a></li>
+<li><a href="#成績評価法と履修条の注意" id="toc-成績評価法と履修条の注意"><span
+class="toc-section-number">1.3</span> 成績評価法と履修条の注意</a></li>
+</ul></li>
+<li><a href="#データベースとデータベースマネジメントシステム-概要"
+id="toc-データベースとデータベースマネジメントシステム-概要"><span
+class="toc-section-number">2</span> データベースとデータベースマネジメントシステム (概要)</a></li>
+<li><a href="#なぜdbms-が利用されるのか" id="toc-なぜdbms-が利用されるのか"><span
+class="toc-section-number">3</span> なぜ、DBMS が利用されるのか？</a>
+<ul>
+<li><a href="#データの永続化" id="toc-データの永続化"><span class="toc-section-number">3.1</span>
+データの永続化</a></li>
+<li><a href="#osのファイルシステムを直接利用したデータの永続化の問題"
+id="toc-osのファイルシステムを直接利用したデータの永続化の問題"><span
+class="toc-section-number">3.2</span>
+OSのファイルシステムを直接利用したデータの永続化の問題</a></li>
+<li><a href="#汎用性や拡張性に関する問題や制約" id="toc-汎用性や拡張性に関する問題や制約"><span
+class="toc-section-number">3.3</span> 汎用性や拡張性に関する問題や制約</a></li>
+<li><a href="#同時アクセスと排他制御に関する問題や制約"
+id="toc-同時アクセスと排他制御に関する問題や制約"><span class="toc-section-number">3.4</span>
+同時アクセスと排他制御に関する問題や制約</a></li>
+<li><a href="#セキュリティとアクセス制御に関する問題や制約"
+id="toc-セキュリティとアクセス制御に関する問題や制約"><span class="toc-section-number">3.5</span>
+セキュリティとアクセス制御に関する問題や制約</a></li>
+<li><a href="#ネットワーク経由のアクセスに関する問題や制約"
+id="toc-ネットワーク経由のアクセスに関する問題や制約"><span class="toc-section-number">3.6</span>
+ネットワーク経由のアクセスに関する問題や制約</a></li>
+<li><a href="#データサイズやパフォーマンスに関する問題や制約"
+id="toc-データサイズやパフォーマンスに関する問題や制約"><span class="toc-section-number">3.7</span>
+データサイズやパフォーマンスに関する問題や制約</a></li>
+</ul></li>
+<li><a href="#dbms-を利用したデータ管理の概要" id="toc-dbms-を利用したデータ管理の概要"><span
+class="toc-section-number">4</span> DBMS を利用したデータ管理の概要</a>
+<ul>
+<li><a href="#osのファイルシステムを直接利用したデータ管理"
+id="toc-osのファイルシステムを直接利用したデータ管理"><span class="toc-section-number">4.1</span>
+OSのファイルシステムを直接利用したデータ管理</a></li>
+<li><a href="#dbms-を使ったデータ管理" id="toc-dbms-を使ったデータ管理"><span
+class="toc-section-number">4.2</span> DBMS を使ったデータ管理</a></li>
+</ul></li>
+<li><a href="#データベースの種類" id="toc-データベースの種類"><span
+class="toc-section-number">5</span> データベースの種類</a></li>
+<li><a href="#リレーショナルデータベース-rdb" id="toc-リレーショナルデータベース-rdb"><span
+class="toc-section-number">6</span> リレーショナルデータベース (RDB)</a>
+<ul>
+<li><a href="#主要なrdbms" id="toc-主要なrdbms"><span class="toc-section-number">6.1</span>
+主要なRDBMS</a></li>
+</ul></li>
+<li><a href="#postgresql-1" id="toc-postgresql-1"><span class="toc-section-number">7</span>
+PostgreSQL</a></li>
+<li><a href="#postgresqlの環境構築" id="toc-postgresqlの環境構築"><span
+class="toc-section-number">8</span> PostgreSQLの環境構築</a></li>
+<li><a href="#授業時間外学習の指示-宿題" id="toc-授業時間外学習の指示-宿題"><span
+class="toc-section-number">9</span> 授業時間外学習の指示 (宿題)</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>2025-4I データベース工学 第01回 講義資料</p>
+      <p>毎週木曜日 3-4時限</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="ガイダンス"><span class="header-section-number">1</span>
+      ガイダンス</h1>
+      <h2 data-number="1.1" id="概要"><span class="header-section-number">1.1</span> 概要</h2>
+      <p>本科目では、「<strong>リレーショナルデータベース</strong>」について、その概念から保守運用に至るまでを体系的に学びます。具体的には、<strong>環境構築</strong>
+      ( PostgreSQL と Docker を使用)、<strong>設計</strong>
+      (概念設計・論理設計)、<strong>操作</strong> (Raw SQL/ORM)、<strong>保守運用</strong>
+      について、ハンズオン形式で (＝実際に手を動かしながら)
+      実践形式で学びます。また、「<strong>ドキュメント指向データベース</strong>」についても、基本概念や環境構築、操作などの概要を学習します。</p>
+      <ul>
+      <li>リレーショナルデータベースについては <a href="https://www.postgresql.org/">PostgreSQL</a>
+      を使用します。
+      <ul>
+      <li>Programming3 で利用した <a href="https://supabase.com/">Supabase</a> も PostgreSQL
+      を基盤としています。</li>
+      </ul></li>
+      <li>ドキュメント指向データベースについては <a href="https://www.mongodb.com/">MongoDB</a>
+      を使用します。</li>
+      </ul>
+      <p>具体的には、次のような「知識や理解」や「実践的スキル」を習得することを目指します。</p>
+      <ol type="1">
+      <li>データの永続化や管理における<strong>データベースマネジメントシステム (DBMS)</strong>
+      の位置付けと、その導入効果を説明できる。</li>
+      <li>主要なデータベースモデル（リレーショナル／ドキュメント指向など）の特性を理解し、要件に応じた適切な選択ができる。</li>
+      <li><strong>Docker を使用して PostgreSQL の実行環境を構築</strong>し、コンソール や DbGate
+      (ウェブベースのデータベース管理クライアント) から接続して、SQL
+      やユーティリティコマンドを実行できる。</li>
+      <li>現実世界の要件を分析し、<strong>ER図を用いた概念設計</strong>ができる。</li>
+      <li>リレーショナルモデルについて、<strong>正規化やキー制約、インデックス設計などの論理設計</strong>ができる。</li>
+      <li><strong>SQL</strong>を用いてリレーショナルデータベースに対する操作とクエリが実行できる。</li>
+      <li>TypeScriptから<a href="https://www.npmjs.com/package/pg">pg</a>(ドライバ)や、<a
+      href="https://www.npmjs.com/package/prisma">Prisma</a>(ORM: Object Relational Mapper)
+      による接続・利用ができる。</li>
+      <li>PostgreSQL
+      のユーティリティを用いて、データベースのバックアップ／リストア、実行計画の表示などができる。</li>
+      <li>Docker を使用して MongoDB の環境構築ができる。</li>
+      <li>TypeScript/JavaScript を用いて MongoDB に接続して基本的な CRUD
+      操作を行なうプログラムを実装できる。</li>
+      </ol>
+      <h2 data-number="1.2" id="授業の位置づけ"><span class="header-section-number">1.2</span>
+      授業の位置づけ</h2>
+      <p>この授業の位置づけは、次のようになります。</p>
+      <h3 data-number="1.2.1" id="基本情報"><span class="header-section-number">1.2.1</span>
+      基本情報</h3>
+      <ul>
+      <li>学年・学科： 4年 総合工学システム学科 <strong><em>知能情報コース</em></strong>
+      の基盤専門科目</li>
+      <li>単位数： <strong>2単位</strong> (後期・<strong>学修単位</strong>)</li>
+      <li>卒業要件との対応： DP-D
+      <ul>
+      <li>自己の基盤となる専門分野について実践的な知識と技術を修得し、工学的諸問題に適用する能力</li>
+      </ul></li>
+      <li>担当教員： Takeshi Wada</li>
+      </ul>
+      <div class="note type-senior">
+      <p><strong>学修単位</strong></p>
+      <p>本科目は「プログラミング3」や「アルゴリズムとデータ構造2」と同じく「<strong>学修単位</strong>」の科目であり「<strong>30時間
+      (相当) の対面授業</strong>」と「<strong>60時間 (相当)
+      の授業時間外学習</strong>」を前提とした内容 (ボリュームと学習難易度) の科目となります。</p>
+      <p>授業については<strong>毎週90分</strong>を実施し、これを2時間と見なして全15回の講義によって「30時間相当の対面授業」を確保しています。これに加えて、皆さんは<strong>授業1回につき、授業時間外に</strong>
+      <span class="masked">4時間相当の自主的な学習 (復習や演習、発展的探求)</span>
+      <strong>が求められます</strong>。</p>
+      </div>
+      <h3 data-number="1.2.2" id="関連科目"><span class="header-section-number">1.2.2</span>
+      関連科目</h3>
+      <ul>
+      <li>2年 前期 (学修単位) <strong>情報2</strong>
+      <ul>
+      <li><strong>第12回講義</strong>で「リレーショナルデータベースの基礎」について学習済み。
+      <ul>
+      <li>情報2 <a href="">第12回講義資料</a>(学内のみ)</li>
+      </ul></li>
+      <li>教科書「キタミ式 ITパスポート」の「Chapter7 データベース」pp.160-191。</li>
+      <li>SQLite3 を使用した SQL の基礎演習
+      (テーブルの作成、レコードの挿入、SELCET、正規化、結合)。</li>
+      </ul></li>
+      <li>2年 通年 (履修単位) <strong>プログラミング1</strong> (Python)
+      <ul>
+      <li><a
+      href="https://takeshiwada1980.github.io/Programming1-2023/lecture11.html#sqliteとの連携">Python
+      と Sqlite3 の連携</a></li>
+      </ul></li>
+      <li>3年 後期 (学修単位) <strong>プログラミング3</strong> (TypeScript/Next.js/Supabase)
+      <ul>
+      <li><a
+      href="https://takeshiwada1980.github.io/Programming3-2024/lecture08.html#データの永続化">ウェブアプリのデータの永続化</a></li>
+      <li>Prisma (TypeSCript ORM) + Supabse (PostgreSQL)</li>
+      </ul></li>
+      <li>4年 前期 <strong>知能情報実験実習2</strong>
+      <ul>
+      <li>SQLAlchemy (Python ORM) + SqLite3</li>
+      <li>Prisma (TypeSCript ORM) + SqLite3</li>
+      </ul></li>
+      </ul>
+      <p>この他、データベース (特にリレーショナルデータベース)
+      については「<strong>ITパスポート試験</strong>」「<strong>基本情報技術者試験</strong>」「<strong>応用情報技術者試験</strong>」などの資格試験の重要分野でもあり、本科目で学ぶ知識は幅広く活用できます。</p>
+      <ul>
+      <li>これらの国家資格は、実践的な開発力とは直結しないものの、<span
+      class="masked">就職活動を含めたIT業界におけるキャリア形成</span>
+      では一定の意義を持つので取得をお勧めします。</li>
+      </ul>
+      <h3 data-number="1.2.3" id="教科書"><span class="header-section-number">1.2.3</span>
+      教科書</h3>
+      <p>教科書「<strong>達人に学ぶDB設計 徹底指南書
+      (第2版)</strong>」は、授業および授業時間外学習で適宜使用します。</p>
+      <h2 data-number="1.3" id="成績評価法と履修条の注意"><span
+      class="header-section-number">1.3</span> 成績評価法と履修条の注意</h2>
+      <p><strong>総合成績</strong>（年度末の最終成績）は「シラバス」に記載されるように、以下の割合で評価します。</p>
+      <ol type="1">
+      <li>各達成目標に対する到達度を、試験<strong>45%</strong>、小テスト<strong>35%</strong>、課題<strong>20%</strong>の割合で総合して評価する。</li>
+      <li>100点法により評価し、60点以上を合格とする。</li>
+      </ol>
+      <ul>
+      <li>小テストおよび課題は、主として「授業時間外学習の取り組み」を評価するものとなります。</li>
+      <li>小テスト実施するときは、その前回講義でアナウンスします。</li>
+      </ul>
+      <div class="note type-tips">
+      <p><strong>各種事情で小テストを受験できなかったときは</strong></p>
+      <p>遅刻や欠席（公欠や出欠停止を含む）により、授業中に実施する「小テスト」を受験できず追試験を希望するときは、当該授業日を含めて2日以内に、自分から担当教員宛に
+      Teams Chat で「追試験の実施依頼」を申し出てください。例えば、10月9日 (木)
+      実施の小テストの追受験を希望する場合は、遅くとも 10日 (金) 23:59 までに連絡してください。</p>
+      <ul>
+      <li>小テストの追試験は、公欠や忌引を含めて理由に関わらず「<strong>1人あたり最大3回まで</strong>」対応します。</li>
+      <li>電子メールや口頭など、Teams Chat 以外による依頼には対応しません。</li>
+      <li>実施依頼には、具体的な希望の日時 (平日 08:40-19:00 を原則) を3案ほど添えてください。
+      <ul>
+      <li>「放課後」や「先生の空いている時間」のような抽象表現は使用しないでください。</li>
+      </ul></li>
+      </ul>
+      </div>
+      <h3 data-number="1.3.1" id="履修上の注意点"><span class="header-section-number">1.3.1</span>
+      履修上の注意点</h3>
+      <ul>
+      <li>毎回、十分に充電したノートPCを持参してください。</li>
+      <li>授業や課題の取り組みに関して、生成AIの利用に制限はありませんが、これらは「理解を深めるため」に利用してください。「正答を得るため」や「自分では記述できないクエリ
+      (SQL) を書かせるため」に利用することは推奨しません。</li>
+      </ul>
+      <h1 data-number="2" id="データベースとデータベースマネジメントシステム-概要"><span
+      class="header-section-number">2</span> データベースとデータベースマネジメントシステム
+      (概要)</h1>
+      <p>データベース (Database) とは、<strong>データ (data)</strong> と <strong>ベース
+      (base)</strong>
+      を合わせた複合語になります。データは「<strong>記録された情報</strong>」や「<strong>観測事実</strong>」を意味し、ベースは「<strong>基盤</strong>」「<strong>置き場</strong>」「<strong>土台</strong>」を意味します。また、ベースは軍事用語として
+      <span class="masked">「基地」「補給拠点」</span>
+      といった意味合いも持っています。このことから、データベースはもともと「情報の基盤」や「知識やデータの倉庫」といった比喩的イメージを持つ言葉となっています。</p>
+      <p><strong>非情報分野</strong>において、一般的に「データベース」という言葉は <span
+      class="masked">「一定の形式や構造に従って整理されたデータの集まり」</span>
+      を指します。その意味では、電話帳や国語辞典、出席簿といったアナログ資料もデータベースとみなせますし、CSV
+      や JSON などのデジタルファイルもデータベースと呼ぶことができます。</p>
+      <p>一方、<strong>コンピュータサイエンスやソフトウェア開発の分野</strong>では <span
+      class="masked">CSVやJSONような単なるファイル</span>
+      をデータベースと呼ぶことはありません。これらの分野では、データベースという言葉は「<strong>一定の形式や構造に従ってデータを蓄積・管理し、必要に応じて検索・更新・削除・集計・加工などを柔軟かつ高速に行える仕組み</strong>」のことを指します。ただし、文脈によっては、データそのものを「データベース
+      (DB)」と呼び、それらを管理する仕組みやソフトウェアを「<strong>データベースマネジメントシステム
+      (DBMS)</strong>」と区別して呼ぶこともあります。</p>
+      <p>まとめると、以下のようになります。</p>
+      <ul>
+      <li>CSV や JSON、Excel などのファイル単体をデータベースとは呼ばない。
+      <ul>
+      <li>単にCSVの読み書きをしているだけなのに「データベースから情報を取得して」のように表現すると大きな誤解を与えるので十分に注意すること。</li>
+      </ul></li>
+      <li>データの蓄積・管理と柔軟な操作を可能にする仕組みやソフトウェアを「データベースマネジメントシステム
+      (データ管理システム) と呼ぶ。
+      <ul>
+      <li>DBMS
+      には、ユーザごとのアクセス制御、ネットワーク経由での利用、データ整合性の維持、障害時復旧といった機能が標準的に備わっている。</li>
+      </ul></li>
+      <li>データベースは「DB」、データベースマネジメントシステムは「DBMS」という略語で使用される。
+      <ul>
+      <li>DB について「デービー」という読み方も比較的広く使われている。</li>
+      </ul></li>
+      </ul>
+      <div class="note type-tips">
+      <p><strong>実際の開発現場での「データベース」という言葉の使われ方</strong></p>
+      <p>ややこしいですが、ソフトウェア開発の文脈で「データベース」という用語が使われる場合、以下の例のように「データそのもの」ではなく、それを「管理・利用する仕組みやソフトウェアを含めた全体」を指すことが一般的です。</p>
+      <ul>
+      <li>「この機能では、ユーザーの行動ログをデータベースに保存する必要がありますね」</li>
+      <li>「データベースのスキーマ設計はどうしますか？正規化は第3正規形まででよいでしょうか」</li>
+      <li>「データベースの応答が遅くなっています。クエリのパフォーマンスを確認してください」</li>
+      <li>「データベースの容量が90%を超えました。ディスク拡張が必要です」</li>
+      <li>「来週末にデータベースのバージョンアップを予定しています」</li>
+      <li>「データベースのセキュリティパッチを適用する必要があります」</li>
+      <li>「性能要件：データベースの応答時間は平均100ms以下であること」</li>
+      <li>「データベースの冗長化により、システムの可用性を99.9%以上確保できます」</li>
+      </ul>
+      <p>このあたりの使い分けは、本科目を学んでいくうちに自然につかめるようになると思います。</p>
+      </div>
+      <h3 data-number="2.0.1" id="定着確認"><span class="header-section-number">2.0.1</span>
+      定着確認</h3>
+      <ul>
+      <li>DBMS とは何の略語か英語で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">Database Management System</span></li>
+      </ul></li>
+      <li>次の説明は「適切である」か「適切ではない」か答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない</span></li>
+      </ul></li>
+      </ul>
+      <blockquote>
+      <p>ソフトウェア開発やコンピュータサイエンスの分野では、一般に CSVファイル や JSONファイル
+      などのデータファイルの集合をデータベースと呼ぶ。</p>
+      </blockquote>
+      <ul>
+      <li>DBMSが標準的に備えている機能として <strong>適切ではないもの</strong>
+      はどれか。該当するものを全て答えよ。
+      <ul>
+      <li>❶ ユーザーごとのアクセス制御</li>
+      <li>❷ ネットワーク経由での利用</li>
+      <li>❸ データ整合性の維持</li>
+      <li>❹ プログラムの自動作成</li>
+      <li>❺ 障害時復旧</li>
+      <li>❻ ウイルス対策
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">❹❻</span></li>
+      </ul></li>
+      </ul></li>
+      <li>一般に <strong>DBMSとは言えないもの</strong> はどれか。該当するものを全て答えよ。
+      <ul>
+      <li>❶ SQLite3</li>
+      <li>❷ PostgreSQL</li>
+      <li>❸ Oracle Database</li>
+      <li>❹ Microsoft Excel</li>
+      <li>❺ Microsoft Access</li>
+      <li>❻ SQLAlchemy</li>
+      <li>➐ Pandas</li>
+      <li>❽ Prisma
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">❹❻➐❽</span></li>
+      </ul></li>
+      </ul></li>
+      <li>開発現場での「データベースのバージョンアップ」という表現が指しているものはどれか。最も適切なものを答えよ。
+      <ul>
+      <li>❶ データの内容を最新に更新すること</li>
+      <li>❷ DBMSソフトウェアを新しいバージョンに更新すること</li>
+      <li>❸ ファイル形式を変更すること</li>
+      <li>❹ データの量を増やすこと
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">❷</span></li>
+      </ul></li>
+      </ul></li>
+      </ul>
+      <h1 data-number="3" id="なぜdbms-が利用されるのか"><span
+      class="header-section-number">3</span> なぜ、DBMS が利用されるのか？</h1>
+      <p>現在、企業の基幹システム
+      (会計システム、人事システム、販売管理システムなど)や、ECサイトなどのウェブサービスのように
+      <strong>複数のユーザやプログラムによって共有・利用されるシステム
+      (クライアント・サーバ型のシステム)</strong> では、ほぼ例外なく <strong>DBMS</strong>
+      が利用されています。</p>
+      <p>まずは「<strong>なぜ、データの管理にデータベースマネジメントシステム (DBMS)
+      が使われているのか？</strong>」について考えていきます。視点を変えれば、<strong>CSVやJSONなどのデータファイルを用いたデータ管理には、どんな問題やリスクがあるのか？</strong>について掘り下げていきます。</p>
+      <h2 data-number="3.1" id="データの永続化"><span class="header-section-number">3.1</span>
+      データの永続化</h2>
+      <p>一般にプログラムでは「<strong>ユーザが入力した情報</strong>」や「<strong>システムが動的に生成した情報</strong>
+      (＝例えば <span class="masked">「最終ログイン日時」や「一時的な計算結果」</span>
+      など)」は、変数 (メモリ)
+      に保持されますが、<strong>これらはプログラムの実行終了とともに失われてしまいます</strong>。</p>
+      <div class="sourceCode" id="cb1"
+      data-caption="変数に格納された情報はプロセスの終了とともに失われてしまう"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Python</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>name <span class="op">=</span> <span class="bu">input</span>(<span class="st">&quot;あなたの名前を入力してください: &quot;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="bu">print</span>(<span class="ss">f&quot;こんにちは、</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">さん！&quot;</span>)</span></code></pre></div>
+      <p>プログラムの終了後も、これらの情報 (上記の例でいえば <code>name</code> の値)
+      を保持して、再びプログラムを起動したときに引き続き利用可能にするためには「<strong>データの永続化</strong>」という仕組みが必要となります。</p>
+      <h2 data-number="3.2" id="osのファイルシステムを直接利用したデータの永続化の問題"><span
+      class="header-section-number">3.2</span>
+      OSのファイルシステムを直接利用したデータの永続化の問題</h2>
+      <p>最も基本的な「データの永続化」の方法は、OSのファイルシステムを利用して
+      <strong>テキストファイル</strong> (TXT、CSV、JSONなど) や <strong>バイナリファイル</strong>
+      にデータを書き出し、必要に応じて読み出すというものです。</p>
+      <p>例えば、Python では標準ライブラリの <code>csv</code> や、外部ライブラリの
+      <code>Pandas</code>
+      は「CSVファイル」の読み書きができるので、それを利用してデータを永続化できます。また、標準ライブラリの
+      <code>json</code> を用いれば「JSONファイル」の読み書きができ、<code>pickle</code> を用いれば
+      Pythonオブジェクトを「バイナリ形式」で保存・復元できるので、これらも永続化の手段となります。</p>
+      <ul>
+      <li>参考:<a
+      href="https://takeshiwada1980.github.io/Programming1-2024/lecture18.html#json形式のシリアライズとデシリアライズ">PG1-第18回講義</a></li>
+      <li>参考:<a
+      href="https://takeshiwada1980.github.io/Programming1-2024/lecture25.html#自動セーブとロード機能の追加">PG1-第25回講義</a></li>
+      </ul>
+      <p>このように「<strong>OSのファイルシステムを直接利用したデータファイルによる永続化</strong>」は、比較的実装が容易で、プログラムに組み込みやすく便利な方法です。ただし、この方法には様々な問題や制約があり、<span
+      class="masked">実際には「限定的なケースでのみ安全かつ効率的に利用できる」にとどまります</span>。</p>
+      <p>以下では、<strong>CSV や JSON
+      などのデータファイルを使ったデータ管理で生じる問題や制約</strong>、そして、それに伴う「<strong>リスク</strong>」について見ていきます。</p>
+      <h2 data-number="3.3" id="汎用性や拡張性に関する問題や制約"><span
+      class="header-section-number">3.3</span> 汎用性や拡張性に関する問題や制約</h2>
+      <p>当該のデータファイルが、<strong>単一のアプリだけで利用される場合</strong>、その汎用性や拡張性に関する問題はあまり表面化しません。しかし、将来的な利用も含めて<strong>データファイルを複数のアプリで共用する場合</strong>には、様々な制約や問題が生じてきます。</p>
+      <p>一般に、複数のアプリからの利用を前提にしつつ、将来の拡張や汎用性、さらには読み書きのパフォーマンスまで考慮した「データファイル
+      (フォーマット・スキーマ)」と「その入出力処理 (I/O処理)」を
+      <strong>設計・実装することは非常に難しく大変な作業</strong> となります。</p>
+      <p>例えば、「アプリA」に関する要件としてデータファイルに新しい情報を追加しなければならない場合、そのデータファイルを共用する「アプリB」や「アプリC」、さらには
+      <span
+      class="masked">将来的に開発されるであろう「アプリD」に対する影響を考慮して対応する必要</span>
+      があります。これらを想定して、汎用性と拡張性を持たせた「データファイル」と「そのI/O処理」を設計・実装することは非常に難しいものとなってきます。</p>
+      <ul>
+      <li>具体例:「<strong>成績管理.exe</strong>」「<strong>出席管理.exe</strong>」「<strong>授業料支払管理.exe</strong>」で「<strong>学生情報.csv</strong>」を共通利用しているとします。このとき「<strong>成績管理.exe</strong>」の都合で「期末試験
+      (追試験)
+      の成績」という列を単純に追加すると、「<strong>出席管理.exe</strong>」や「<strong>授業料支払管理.exe</strong>」でのパフォーマンスの悪化や、形式変更による予期せぬエラーを招く可能性があります。</li>
+      </ul>
+      <h2 data-number="3.4" id="同時アクセスと排他制御に関する問題や制約"><span
+      class="header-section-number">3.4</span> 同時アクセスと排他制御に関する問題や制約</h2>
+      <p>当該データファイルが、<strong>単一のアプリかつ単一ユーザ</strong>から利用される前提で、さらに<strong>アプリの多重起動が想定されない</strong>とき、そのアプリが正しくファイルを扱っている限りは「<strong>更新競合</strong>」や「<strong>データの不整合（論理的な矛盾）</strong>」が生じることはありません。</p>
+      <p>しかし、複数のアプリや複数のユーザでデータファイルを共用して同時アクセスして操作できる場合、それらの問題が現実的に発生し、<strong>システムの信頼性に深刻な影響</strong>を与えることになります。</p>
+      <p>具体例として、次のようなデータファイル <code>学生情報.csv</code> を考えてみます。</p>
+      <div class="sourceCode" id="cb2" data-caption="学生情報.csv (11:39時点)"><pre
+      class="sourceCode numberSource csv numberLines"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a>学籍番号,氏名,住所,...,DB工学の成績,...</span>
+<span id="cb2-2"><a href="#cb2-2"></a>X002,構文 誤次郎,整合市破綻町1-1,...,70,...</span>
+<span id="cb2-3"><a href="#cb2-3"></a>X003,仕様 曖昧子,無効市矛盾町9-9,...,65,...</span>
+<span id="cb2-4"><a href="#cb2-4"></a>X004,保守 絶望太,排他市待機村7-5,...,80,...</span></code></pre></div>
+      <p>このとき、この <code>学生情報.csv</code>
+      を共用している「<strong>授業料支払管理.exe</strong>
+      (教員A👩‍🦰が使用)」と「<strong>成績管理.xe</strong>
+      (教員B👨が使用)」で、次のような操作・処理が行なわれたとします。</p>
+      <ul>
+      <li><strong>〔11時39分〕</strong> 教員A👩‍🦰が「<strong>授業料支払管理.exe</strong>」を起動
+      (アプリは <code>学生情報.csv</code> の内容をメモリに読み込む)。教員A👩‍🦰は、アプリ画面上で
+      <code>構文 誤次郎</code> の <strong>住所</strong> を <code>整合市破綻町1-1</code> から
+      <code>正規市ヌル町9-1-1</code> に変更。ここで電話があって、作業を一時中断。
+      <ul>
+      <li>アプリ画面上のテキストボックスで変更しただけで、まだ確定の保存処理はしていない。</li>
+      </ul></li>
+      <li><strong>〔11時40分〕</strong> 教員B👨が「<strong>成績管理.exe</strong>」を起動 (アプリは
+      <code>学生情報.csv</code> の内容をメモリに読み込む)。教員B👨は、<code>仕様 曖昧子</code> の
+      <strong>DB工学の成績</strong> を <code>65</code> から <code>55</code>
+      に変更。さらに「確定」ボタンを押下。
+      <ul>
+      <li><strong>成績管理.exe</strong> は、メモリの内容を <code>学生情報.csv</code>
+      に書き出す。</li>
+      </ul></li>
+      <li><strong>〔11時45分〕</strong> 教員A👩‍🦰が電話対応を終えて「確定」をボタンを押下。
+      <ul>
+      <li><strong>授業料支払管理.exe</strong> は、メモリの内容を <code>学生情報.csv</code>
+      に書き出す。</li>
+      </ul></li>
+      </ul>
+      <p>この結果、データファイル <code>学生情報.csv</code>
+      は、最終的に次のような内容になります。</p>
+      <div class="sourceCode" id="cb3" data-caption="学生情報.csv (11:46時点)"><pre
+      class="sourceCode numberSource csv numberLines"><code class="sourceCode"><span id="cb3-1"><a href="#cb3-1"></a>学籍番号,氏名,住所,...,DB工学の成績,...</span>
+<span id="cb3-2"><a href="#cb3-2"></a>X002,構文 誤次郎,正規市ヌル町9-1-1,...,70,...</span>
+<span id="cb3-3"><a href="#cb3-3"></a>X003,仕様 曖昧子,無効市矛盾町9-9,...,65,...</span>
+<span id="cb3-4"><a href="#cb3-4"></a>X004,保守 絶望太,排他市待機村7-5,...,80,...</span></code></pre></div>
+      <p>ここでは、教員B👨による成績変更処理 (<code>65</code>👉<code>55</code>)
+      が消失するという深刻な問題が生じています。これは <strong>更新競合 (Lost Update)</strong>
+      と呼ばれ、データファイルの共用によりデータ管理したときの<strong>典型的なリスク</strong>として知られています。</p>
+      <p>このような問題の回避のために、通常、OS には <strong>ファイルの排他制御 (Shared Lock /
+      Exclusive Lock)</strong>
+      という仕組みが用意されています。このロックという仕組みを利用すれば、<strong>任意のファイルを一度に操作できるアプリ
+      (プロセス) を1つに限定し、更新競合を防ぐこと</strong> ができます。</p>
+      <p>しかし、OS
+      のファイルシステムによるロックは基本的には「<strong>ファイル単位</strong>」で働きます。そのため「教員A👩‍🦰」が
+      <code>学生情報.csv</code> にロックをかけると、それが解除されるまでは、他の教員やアプリ
+      (<strong>成績管理.exe</strong> や <strong>出席管理.exe</strong> など) からは
+      <code>学生情報.csv</code>
+      を更新できず、システムの実用性を大きく損なうことになってしまいます。</p>
+      <ul>
+      <li>教員A👩‍🦰が、うっかりロックをかけたまま昼休みに入ってしまったりすると、業務に大きな影響がでてしまいます。</li>
+      </ul>
+      <div class="note type-senior">
+      <p><strong>バイト単位のファイルロック</strong></p>
+      <p>Windows や Linux、MacOS などの OS では、ファイル単位以外にも
+      <strong>バイト単位のファイルロック機能</strong>
+      も提供しています。これを利用すれば、<strong>ファイルの特定範囲にだけロックをかけること</strong>
+      が可能となります。しかし、その利用には以下のような大きな制約や難しさがあります。</p>
+      <ul>
+      <li><strong>OS依存性の問題</strong>: 各OSで異なるAPI (Windows:
+      <code>LockFileEx</code>、Linux/macOS: <code>fcntl</code> の <code>F_SETLK</code> など)
+      を使用する必要があり、クロスプラットフォーム開発が困難になります。</li>
+      <li><strong>動的変化への対応不可</strong>:
+      CSVファイルでデータの挿入・削除が発生すると、すべてのバイト位置が変化してしまいます。例えば、ファイル先頭に1行挿入しただけで、後続のすべてのロック範囲が無効になってしまいます。</li>
+      <li><strong>実装の複雑性</strong>:
+      バイト位置の計算、ロック範囲の管理、例外処理など、極めて高度な技術スキルが要求されます。さらに、文字エンコーディング
+      (UTF-8、Shift_JIS等) によってバイト数が変わるため、正確な位置計算がより困難になります。</li>
+      <li><strong>パフォーマンスの劣化</strong>:
+      細かいロック管理により、ファイル操作のオーバーヘッドが大幅に増加し、システム全体のパフォーマンスが低下します。</li>
+      </ul>
+      <p>以上のような理由から「バイト単位のファイルロック」が、実際のアプリ開発において採用されることはほとんどありません。</p>
+      </div>
+      <h2 data-number="3.5" id="セキュリティとアクセス制御に関する問題や制約"><span
+      class="header-section-number">3.5</span> セキュリティとアクセス制御に関する問題や制約</h2>
+      <p>OS のファイルシステムを直接利用したデータ管理において、データファイルに対するアクセス権
+      (パーミッション) の設定は、基本的に「ファイル」や「フォルダ」という単位になります。</p>
+      <p>たとえば、ユーザが「<strong>成績処理.exe</strong>」を通じて <code>学生情報.csv</code>
+      を操作できるとき、そのユーザは同じ権限で テキストエディタ や Excel から
+      <code>学生情報.csv</code>
+      を編集したり、ファイルごと削除したりすることが可能になります。逆に、テキストエディタで編集されないように
+      <code>学生情報.csv</code>
+      にアクセス制限をかけると、そのユーザの権限で起動した「<strong>成績処理.exe</strong>」からも書込みができなくなってしまいます。さらに、Windows、Linux、macOS
+      など一般的な OS
+      では、ファイル内部の特定の範囲だけにアクセス権を設定する仕組みは用意されていないので、部分的な読み取りや、書き込み制限をすることもできません。</p>
+      <p>このように、ファイルシステムに直接依存したデータ管理には、セキュリティやアクセス制御で大きな制約が生じます。</p>
+      <ul>
+      <li>具体例:
+      「論理回路2」の授業担当である「教員C👨‍🦳」は、本来「論理回路2の成績」の列のみに書き込み権限を持つべきです。しかし、ファイルシステムでは
+      <code>学生情報.csv</code>
+      全体に対する読み書き権限を与えるしかありません。たとえ「<strong>成績管理.exe</strong>」で「論理回路2の成績だけ編集可能」のような制限を実装しても、その制御はアプリを通した場合にしか有効ではありません。「教員C👨‍🦳」がテキストエディタで直接
+      <code>学生情報.csv</code> を開いてしまえば、他の科目の成績を改ざんすることも (技術的には)
+      できてしまいます。</li>
+      </ul>
+      <h2 data-number="3.6" id="ネットワーク経由のアクセスに関する問題や制約"><span
+      class="header-section-number">3.6</span> ネットワーク経由のアクセスに関する問題や制約</h2>
+      <p>CSV や JSON などのデータファイルを <strong>共有フォルダ</strong> や <strong>NAS</strong>
+      (Network Attached
+      Storage)、クラウドストレージなどに配置することで、複数のユーザや端末からネットワーク経由でデータファイルを共用することができます。しかし、既に述べたように、更新競合が発生するリスクはそのまま残り、また、ファイルシステムのアクセス権限の設定は依然として「ファイル単位」となるため、利用者ごとに「ファイルのなかの特定の範囲だけを編集可」といった細かい制御はできません。</p>
+      <p>無論、データファイルへのアクセスを自前のサーバアプリで受け付ける仕組みを構築すれば、より細かいセキュリティ制御や排他制御を実現することはできます。しかし、その場合、認証や通信暗号化、ログ監査なども含めてセキュリティを意識したシステムの設計と実装が必要となり、現実的ではありません。</p>
+      <div class="note type-tips">
+      <p><strong>ファイルを分割しても解決しない問題</strong></p>
+      <p>ファイルによるデータ管理において、細かな粒度で排他制御やアクセス権管理を行いたい場合、<strong>データを多数のファイルに分割して保存する</strong>
+      という戦略があります。例えば、科目ごとにファイルを分けて「2025年度のDB工学の成績.json」「2025年度の論理回路2の成績.json」といった形で管理する、といったやり方です。このようにすれば、影響範囲を最小に留めたロックや、細かなアクセス権の設定が可能になります。</p>
+      <p>しかし、この戦略には、検索や集計の際には複数ファイルを横断して読み込む必要があり、処理性能が著しく低下するという欠点があります。一般に「1KBのファイルを1000個読み込む場合」と「1MBのファイルを1個読み込む場合」を比較すると、前者の方が圧倒的に負荷が高く、処理に大きな時間がかかってしまいます。</p>
+      </div>
+      <h2 data-number="3.7" id="データサイズやパフォーマンスに関する問題や制約"><span
+      class="header-section-number">3.7</span> データサイズやパフォーマンスに関する問題や制約</h2>
+      <p>ファイルシステムを直接利用したデータ管理では、データサイズが大きくなるにつれて深刻な制約に直面します。一般に、ファイル編集を行なう場合、アプリでは、ファイル全体をメモリに読み込む必要があり、この際、ファイルが巨大であればあるほど、読み込み処理に時間とリソース
+      (主にメモリ)
+      を消費します。さらに、更新処理を行う際も基本的にファイル全体を書き戻す必要があり、処理時間が長くなるだけでなく、同時利用時の競合リスクも高まります。</p>
+      <p>無論、ファイルの途中から部分的に読み書きを行うことは理論上可能ですが、そのようなバイトオフセットを扱う実装は複雑であり、データファイルの構造に応じてアプリごとに独自の仕組みを設計・実装する必要があります。また、巨大なファイルのなかから特定のデータを高速に検索するには、インデックスやキャッシュといった仕組みが必要ですが、これを自前で実装することは現実的ではありません。</p>
+      <hr />
+      <p>以上に示したような理由から (実は、それ以外にも様々な理由から)
+      <strong>複数のユーザ、複数のアプリから、同時にデータを読み書きするようなシステム</strong>
+      において、CSV や JSON などのデータファイルを共用したデータ管理は現実的ではありません。</p>
+      <p>もちろん、高度な設計と実装技術を駆使すれば、これらの問題を解決することは可能です。ただし、そのような高度なデータ管理の仕組みを具現化したものこそが
+      DBMS であり、通常のシステム開発で、それを自前で開発することはありません。</p>
+      <p>ここでに示した問題や制約は、DBMSを導入し、適切に利用することで大部分を解決することができます。</p>
+      <h1 data-number="4" id="dbms-を利用したデータ管理の概要"><span
+      class="header-section-number">4</span> DBMS を利用したデータ管理の概要</h1>
+      <p>「OSのファイルシステムを直接利用したデータ管理」と「DBMSを使ったデータ管理」の違いについて整理しておきます。</p>
+      <h2 data-number="4.1" id="osのファイルシステムを直接利用したデータ管理"><span
+      class="header-section-number">4.1</span> OSのファイルシステムを直接利用したデータ管理</h2>
+      <ul>
+      <li>アプリは、<strong>OSのファイルシステムAPI</strong> や
+      <strong>そのラッパーライブラリ</strong>
+      を使用して、CSV、JSON、バイナリなどのファイルを直接的に読み書きすることで「データの永続化」を実現します。
+      <ul>
+      <li>ファイルの読み書き処理は、アプリ内部に組込み可能で外部サーバなどを必要としません。</li>
+      </ul></li>
+      <li>アプリの設計にあわせて、任意のデータ構造や形式でデータを永続化できる柔軟性があります。</li>
+      <li>検索処理の最適化、データ整合性の保証、複数ユーザーの同時アクセスに対する排他制御は、すべてアプリの責務として実装する必要があります。</li>
+      </ul>
+      <h2 data-number="4.2" id="dbms-を使ったデータ管理"><span
+      class="header-section-number">4.2</span> DBMS を使ったデータ管理</h2>
+      <ul>
+      <li>アプリとは別に、<strong>独立したDBMSサーバを構築して起動しておく必要</strong> があります。
+      <ul>
+      <li>DBMSサーバは、アプリと同一のホスト上でも、ネットワーク (TCP/IP)
+      接続された別ホストに配置しても問題ありません。</li>
+      </ul></li>
+      <li>アプリは、<strong>DBMSクライアントライブラリ</strong>
+      を使用して、データモデルに応じた形式でデータを操作します。
+      <ul>
+      <li>特にリレーショナルモデルの DBMS (RDBMS) では、<strong>SQL (Structured Query
+      Language)</strong>
+      という標準化された言語を使用してデータの検索・挿入・更新・削除を行います。</li>
+      </ul></li>
+      <li>検索処理の最適化、データ整合性の保証、複数ユーザーの同時アクセスに対する排他制御は、DBMS側で提供されます。</li>
+      <li>DBMSは、その内部のストレージエンジン (ストレージマネージャ) により、<span
+      class="masked">最終的にはOSのファイルシステムを利用してデータを物理的に保存</span> します。
+      <ul>
+      <li>ただし、アプリ開発者は、この低レベルのファイル操作を意識する必要はなく、DBMSが提供する抽象化されたインターフェイスを通じてデータを扱います。</li>
+      </ul></li>
+      </ul>
+      <h3 data-number="4.2.1" id="定着確認-1"><span class="header-section-number">4.2.1</span>
+      定着確認</h3>
+      <ul>
+      <li>データベースに関する文脈で SQL とは何の略語か英語で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">Structured Query Language</span></li>
+      </ul></li>
+      <li>次の説明は「適切である」か「適切ではない」か答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切である</span></li>
+      </ul></li>
+      </ul>
+      <blockquote>
+      <p>DBMSサーバは、ネットワーク経由 (TCP/IP) で接続された別ホストに配置することもできる。</p>
+      </blockquote>
+      <ul>
+      <li>次の説明は「適切である」か「適切ではない」か答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切である</span></li>
+      </ul></li>
+      </ul>
+      <blockquote>
+      <p>DBMSサーバへの接続には、DBMSクライアントライブラリまたは専用のクライアントアプリを使用する。</p>
+      </blockquote>
+      <ul>
+      <li>次の説明は「適切である」か「適切ではない」か答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない</span></li>
+      </ul></li>
+      </ul>
+      <blockquote>
+      <p>DBMS (サーバのストレージエンジン)
+      は、OSのファイルシステムを利用することなくデータの永続化を実現している。</p>
+      </blockquote>
+      <h1 data-number="5" id="データベースの種類"><span class="header-section-number">5</span>
+      データベースの種類</h1>
+      <p>データベースのアーキテクチャ (内部の仕組み/データの整理方法) は、大きく「<strong>RDB
+      (リレーショナルデータベース)</strong>」と「<strong>NoSQL
+      (ノーエスキューエル)</strong>」の2つに分けることができます。本科目では、DBの代表的モデルでにあり、基盤技術として広く利用される
+      <strong>RDB (PostgresSQL)</strong>
+      について約8割の時間をかけて学び、その後、約2割の時間を使って NoSQL の1種である
+      <strong>ドキュメント指向データベース (MongoDB)</strong> を学んでいきます。</p>
+      <ul>
+      <li>各種データベースモデルについては「📖 <strong>教科書
+      pp.6-11</strong>」を読んでおいてください。
+      <ul>
+      <li>リレーショナルデータベース (RDB)</li>
+      <li>オブジェクト指向データベース
+      <ul>
+      <li>「オブジェクトデータベース」とも呼ばれます。</li>
+      </ul></li>
+      <li>XMLデータベース</li>
+      <li><strong>キーバリュー型ストア (KVS)</strong>
+      <ul>
+      <li>Next.js などのモダンな Web アプリ開発では、状態管理に <strong>Redis</strong>（レディス）や
+      <strong>Vercel KV</strong>
+      などが使われることがあります。本科目では取り扱いませんが、興味のある学生はぜひ調べてみてください。</li>
+      </ul></li>
+      <li><strong>ドキュメント指向データベース</strong>
+      <ul>
+      <li>「ドキュメント型データベース」とも呼ばれます。</li>
+      </ul></li>
+      <li>階層型データベース</li>
+      </ul></li>
+      </ul>
+      <p>なお、本科目では、リレーショナルデータベースの DBMS として PostgresSQL
+      をハンズオンで使用しますが、PostgresSQL は、リレーショナルモデルに基づくだけはなく <span
+      class="masked">オブジェクト指向データベース的な特徴や機能</span>
+      も備えています。実際、PostgreSQLの<a
+      href="https://www.postgresql.org/docs/current/intro-whatis.html">公式ドキュメント</a>でも
+      <strong>object-relational database system (ORDBMS)</strong> と説明されています。</p>
+      <ul>
+      <li>PostgreSQL では <strong>可変長配列型</strong> や <strong>JSON型</strong>
+      をスキーマの一部として定義し、直接扱うことができます。これらは単に文字列としてシリアライズして保存されているのではなく、効率的な検索や更新を行えるように設計されています。</li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>Redis とはなんですか？Next.js などのウェブアプリにおいて、状態管理・状態共有
+      に使われることがあると聞いたのですが、どのように利用するのかイメージがつきません。</p>
+      </blockquote>
+      <h1 data-number="6" id="リレーショナルデータベース-rdb"><span
+      class="header-section-number">6</span> リレーショナルデータベース (RDB)</h1>
+      <p><strong>RDB</strong> (Relational Database、リレーショナルデータベース、関係データベース) は
+      シンプルな「<strong>2次元の表形式</strong>」でデータを保持することが特徴のDBです。近年では
+      NoSQL の普及も進んでいますが、単に「DB」と言えば RDB
+      を指すほど一般的かつ代表的なモデルであり、特に「基幹システム」や「ECサイト」などで広く採用されています。</p>
+      <p>表形式 (テーブル形式)
+      によるデータ管理には多数のメリットがあるものの<strong>「可変長配列」や「階層構造のデータ」を直接的に扱えない</strong>
+      という欠点があります (でも、PostgreSQL では扱えます)。</p>
+      <ul>
+      <li>RDB の DBMS を、特に「<strong>RDBMS</strong> (Database Management
+      System)」といいます。</li>
+      </ul>
+      <h2 data-number="6.1" id="主要なrdbms"><span class="header-section-number">6.1</span>
+      主要なRDBMS</h2>
+      <p>RDBMS としては、よく知られているものに <strong>PostgreSQL</strong>、MySQL、MariaDB、Oracle
+      Database、Microsoft SQL Server、<strong>SQLite</strong>、Microsoft Access などがあります。</p>
+      <h3 data-number="6.1.1" id="postgresql"><span class="header-section-number">6.1.1</span>
+      PostgreSQL👑</h3>
+      <ul>
+      <li>オープンソースのクライアント・サーバー型RDBMS。高機能で拡張性に優れ、標準 SQL
+      への準拠度も高い。学術や業務システムで広く利用されている。<strong>無償</strong>。</li>
+      <li>JSON/JSONB型のネイティブサポート、フルテキスト検索 (全文検索) 、地理空間データ (PostGIS)
+      など、先進的な機能が豊富。Instagram などの大規模サービスで採用されている。</li>
+      <li>トランザクションの堅牢性が高く、複雑なクエリやデータ整合性が重要なシステムに適している。</li>
+      </ul>
+      <p>近年のモダンなウェブアプリ開発やスタートアップでの採用が増加傾向にあり、PostgreSQL
+      のスキルは市場価値が高まっています。標準 SQL に準拠しているため、他の RDBMS
+      への応用も効きやすいこともメリットです。AWS RDS、Google Cloud SQL、Azure Database for
+      PostgreSQL など主要クラウドで完全サポートされている点でも、選択する価値が高いと思います。</p>
+      <h3 data-number="6.1.2" id="mysql"><span class="header-section-number">6.1.2</span> MySQL</h3>
+      <ul>
+      <li>オープンソースのクライアント・サーバー型RDBMS。ウェブアプリの利用が多い。例えば、WordPress
+      は、PHP + MySQL
+      の組み合わせで動作する設計。基本は無償だが、商用サポート付きの有償版もある。</li>
+      <li>読み取り性能が高く、レプリケーション設定が比較的容易。Facebook、Twitter (X)、YouTube
+      など世界最大級のウェブサービスで使われてきた実績がある。
+      <ul>
+      <li>YouTube については、現在はMySQLベースではないことが公表されている。</li>
+      </ul></li>
+      <li>LAMP スタック (Linux, Apache, MySQL, PHP) の一部として Web
+      開発の定番となっている。多くのレンタルサーバーで標準提供されている。</li>
+      </ul>
+      <p>ウェブ系企業での求人が最も多いです。また、初学者向けの学習リソースが豊富で、最初に学ぶ
+      RDBMS として選ばれやすいです。MySQL 8.0 からは機能が大幅に強化され、JSON
+      サポートやウィンドウ関数なども追加されています。</p>
+      <h3 data-number="6.1.3" id="mariadb"><span class="header-section-number">6.1.3</span>
+      MariaDB</h3>
+      <ul>
+      <li>MySQL から派生したオープンソースのクライアント・サーバー型RDBMS。MySQL
+      との互換性を持ちながら、コミュニティ主体で開発が続けられている。無償。</li>
+      <li>MySQL の開発者が Oracle
+      による買収後に立ち上げたプロジェクト。Wikipedia、Google（一部システム）などで採用。</li>
+      <li>MySQL からの移行が比較的容易で、最新機能の追加ペースが速い。多くの Linux
+      ディストリビューションで MySQL の代わりに標準パッケージとして採用されている。</li>
+      </ul>
+      <h3 data-number="6.1.4" id="oracle-database"><span class="header-section-number">6.1.4</span>
+      Oracle Database</h3>
+      <ul>
+      <li>商用のクライアント・サーバー型RDBMS。大規模システム向けで豊富な機能を持ち、金融・企業システムで定番。有償。</li>
+      <li>エンタープライズレベルの可用性、パフォーマンス、セキュリティ機能を提供。RAC（Real
+      Application Clusters）による高可用性構成が可能。</li>
+      <li>PL/SQL
+      による強力なストアドプロシージャ機能を持つ。大規模トランザクション処理や基幹システムで圧倒的なシェアを誇る。</li>
+      </ul>
+      <h3 data-number="6.1.5" id="microsoft-sql-server"><span
+      class="header-section-number">6.1.5</span> Microsoft SQL Server</h3>
+      <ul>
+      <li>商用のクライアント・サーバー型RDBMS。Windows
+      サーバー環境でよく利用される。有償だが、無償の簡易版 (Express Edition) も提供されている。</li>
+      <li>.NET エコシステムとの親和性が高く、C#/ASP.NET での開発に最適。Azure SQL Database
+      としてクラウドでも利用可能。</li>
+      <li>近年は Linux 対応も進み、Docker コンテナでも動作。Visual Studio
+      との統合による優れた開発体験を提供。</li>
+      </ul>
+      <h3 data-number="6.1.6" id="sqlite"><span class="header-section-number">6.1.6</span>
+      SQLite👑</h3>
+      <ul>
+      <li>組み込み型RDBMS。データベースが 1 ファイルで完結する軽量 DBMS。スマホアプリやブラウザ (例:
+      Chrome, Firefox) にも組み込まれている。オープンソースで無償。</li>
+      <li>サーバープロセス不要で、ライブラリとしてアプリケーションに直接組み込める。iOS/Android
+      アプリ開発での標準的なローカルストレージ。</li>
+      <li>テスト環境やプロトタイピング、小規模アプリに最適。世界で最も広く使われているデータベースエンジンと言える
+      (数十億以上のSQLiteデータベースがデプロイされていると推定される)。</li>
+      </ul>
+      <p>モバイルアプリ開発者なら必須スキルになります。Python（標準ライブラリ）、Node.js、React
+      Native
+      などほぼ全ての開発環境で簡単に使えるようにライブラリが整備されています。ローカル開発環境でのテストやプロトタイプ作成に便利なため「とりあえず動くものをつくる」ときに役立ちます。</p>
+      <h3 data-number="6.1.7" id="microsoft-access"><span class="header-section-number">6.1.7</span>
+      Microsoft Access</h3>
+      <ul>
+      <li>デスクトップ（パーソナル）向けのスタンドアロン型 RDBMS。GUI
+      による簡便な操作性が特徴。Office 製品の一部として提供されるため有償。</li>
+      <li>コーディング不要でフォームやレポートを作成可能。VBA によるカスタマイズにも対応。</li>
+      <li>小規模な業務アプリやデータ管理ツールとして、非エンジニアでも扱いやすい。ただし、同時接続数やデータ量に制限があるため、本格的なウェブアプリには不向き。</li>
+      </ul>
+      <h1 data-number="7" id="postgresql-1"><span class="header-section-number">7</span>
+      PostgreSQL</h1>
+      <h1 data-number="8" id="postgresqlの環境構築"><span class="header-section-number">8</span>
+      PostgreSQLの環境構築</h1>
+      <p>Docker、dbGate</p>
+      <p>これが表示されれば、Docker CLI 自体はインストール済みです。</p>
+      <pre><code>PS C:\Users\xxxx&gt; docker --version
+Docker version 28.4.0, build d8eb465</code></pre>
+      <pre><code>PS C:\Users\xxxx&gt; docker info</code></pre>
+      <p>ここで「Server」セクションが表示され、<code>Containers</code>、<code>Images</code>、<code>Server Version</code>、<code>Logging Driver</code>、<code>Cgroup Driver</code>
+      などの情報が表示されれば Docker Engine が動作中であることが確認できます。</p>
+      <p>問題がある場合 (Docker Desktopがインストールされているが正常起動していない場合など)
+      は、以下のようなエラーが表示されます。</p>
+      <pre><code>Server:
+ERROR: request returned 500 Internal Server Error for API route and version http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.51/info, check if the server supports the requested API version
+errors pretty printing info</code></pre>
+      <pre><code>docker run --rm hello-world</code></pre>
+      <pre><code>PS C:\Users\xxxx&gt; docker run --rm hello-world
+Unable to find image &#39;hello-world:latest&#39; locally
+latest: Pulling from library/hello-world
+17eec7bbc9d7: Pull complete
+Digest: sha256:54e66cc1dd1fcb1c3c58bd8017914dbed8701e2d8c74d9262e26bd9cc1642d31
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the &quot;hello-world&quot; image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/</code></pre>
+      <p>上記のメッセージを意訳すると、次のようになります。</p>
+      <blockquote>
+      <p>Dockerからこんにちは!<br />
+      このメッセージは、インストールが正常に動作していることを示しています。</p>
+      <p>このメッセージを生成するために、Dockerは次の手順を実行しました。<br />
+      1. Docker クライアント が Dockerデーモン に接続しました。<br />
+      2. Docker デーモン は、Docker Hub から “hello-world” イメージをプルしました。<br />
+      3. Docker デーモン
+      は、そのイメージから新しいコンテナを作成し、現在読んでいる出力を生成する実行可能ファイルを実行しました。
+      4. Dockerデーモンはその出力を Docker クライアントにストリーミングし、Docker
+      クライアントはそれをターミナルに送信しました。</p>
+      <p>より野心的なものを試すには、次のように Ubuntuコンテナ を実行します。<br />
+      $docker run-it ubuntu bash</p>
+      <p>無料の Docker ID を使用して、イメージの共有、ワークフローの自動化などを行います。<br />
+      https://hub.docker.com/</p>
+      <p>その他の例やアイデアについては、次のサイトを参照してください。<br />
+      https://docs.docker.com/get-started/</p>
+      </blockquote>
+      <h1 data-number="9" id="授業時間外学習の指示-宿題"><span
+      class="header-section-number">9</span> 授業時間外学習の指示 (宿題)</h1>
+      <ul>
+      <li>次回の講義で小テストを実施します。</li>
+      </ul>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/DB-2025/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
