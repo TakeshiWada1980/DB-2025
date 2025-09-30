@@ -96,12 +96,18 @@ class="toc-section-number">6</span> リレーショナルデータベース (RDB
 <li><a href="#主要なrdbms" id="toc-主要なrdbms"><span class="toc-section-number">6.1</span>
 主要なRDBMS</a></li>
 </ul></li>
-<li><a href="#postgresql-1" id="toc-postgresql-1"><span class="toc-section-number">7</span>
-PostgreSQL</a></li>
-<li><a href="#postgresqlの環境構築" id="toc-postgresqlの環境構築"><span
-class="toc-section-number">8</span> PostgreSQLの環境構築</a></li>
+<li><a href="#postgresql-の-環境構築-準備" id="toc-postgresql-の-環境構築-準備"><span
+class="toc-section-number">7</span> PostgreSQL の 環境構築 (準備)</a>
+<ul>
+<li><a href="#docker-desktop-のインストール" id="toc-docker-desktop-のインストール"><span
+class="toc-section-number">7.1</span> Docker Desktop のインストール</a></li>
+<li><a href="#docker-desktop-の動作確認" id="toc-docker-desktop-の動作確認"><span
+class="toc-section-number">7.2</span> Docker Desktop の動作確認</a></li>
+<li><a href="#hello-world-コンテナの起動確認" id="toc-hello-world-コンテナの起動確認"><span
+class="toc-section-number">7.3</span> Hello World コンテナの起動確認</a></li>
+</ul></li>
 <li><a href="#授業時間外学習の指示-宿題" id="toc-授業時間外学習の指示-宿題"><span
-class="toc-section-number">9</span> 授業時間外学習の指示 (宿題)</a></li>
+class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -750,23 +756,90 @@ class="toc-section-number">9</span> 授業時間外学習の指示 (宿題)</a><
       <li>コーディング不要でフォームやレポートを作成可能。VBA によるカスタマイズにも対応。</li>
       <li>小規模な業務アプリやデータ管理ツールとして、非エンジニアでも扱いやすい。ただし、同時接続数やデータ量に制限があるため、本格的なウェブアプリには不向き。</li>
       </ul>
-      <h1 data-number="7" id="postgresql-1"><span class="header-section-number">7</span>
-      PostgreSQL</h1>
-      <h1 data-number="8" id="postgresqlの環境構築"><span class="header-section-number">8</span>
-      PostgreSQLの環境構築</h1>
-      <p>Docker、dbGate</p>
-      <p>これが表示されれば、Docker CLI 自体はインストール済みです。</p>
-      <pre><code>PS C:\Users\xxxx&gt; docker --version
-Docker version 28.4.0, build d8eb465</code></pre>
-      <pre><code>PS C:\Users\xxxx&gt; docker info</code></pre>
-      <p>ここで「Server」セクションが表示され、<code>Containers</code>、<code>Images</code>、<code>Server Version</code>、<code>Logging Driver</code>、<code>Cgroup Driver</code>
-      などの情報が表示されれば Docker Engine が動作中であることが確認できます。</p>
-      <p>問題がある場合 (Docker Desktopがインストールされているが正常起動していない場合など)
-      は、以下のようなエラーが表示されます。</p>
-      <pre><code>Server:
-ERROR: request returned 500 Internal Server Error for API route and version http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.51/info, check if the server supports the requested API version
-errors pretty printing info</code></pre>
-      <pre><code>docker run --rm hello-world</code></pre>
+      <h1 data-number="7" id="postgresql-の-環境構築-準備"><span
+      class="header-section-number">7</span> PostgreSQL の 環境構築 (準備)</h1>
+      <p>RDB (主にSQL演習) のハンズオン学習では <strong>PostgreSQL</strong>
+      (ポストグレエスキューエル、ポストグレス、ポスグレ) を使用していきます。PostgreSQL は Windows
+      に直接インストールすることもできますが、本科目では「<strong>Docker</strong>」という仕組みを用いて、PostgreSQL
+      を「コンテナ」と呼ばれる仮想的な箱の中で起動し、その箱ごと利用します。Docker
+      を利用すれば、既存の PC 環境を汚さずに PostgreSQL
+      を構築でき、万一破損しても簡単に再構築できます。また、<a
+      href="https://dbgate.org/">DbGate</a>というウェブベースの DBMS
+      クライアントもコンテナとして利用していきます。</p>
+      <p>PostgreSQL コンテナのセットアップは次回の講義で行います。今回は、その前段階として
+      <strong>Docker</strong>（<strong>Docker
+      Desktop</strong>）のインストールと動作確認までを行います。なお、すでに Docker Desktop
+      をインストール済みの場合は再インストールの必要はありませんが、最新バージョンへアップデートしておくことを推奨します。</p>
+      <p>なお、Docker は、Git/GitHub
+      とならんで、ソフトウェア開発の現場では標準的に使われる技術になっています。既に3年生後期の「知能情報実験実習1」のなかで学んでいると思いますが、日常的な開発でも積極的に利用してなれておいてください。Git/GitHubと同じで「習うよりも慣れろ」という技術になります。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>Docker
+      は、ソフトウェア開発の現場で標準的に使われる技術だと聞きました。本当ですか。また、Docker
+      ってどのような技術なのか教えてください。どうやら、授業で「PostgreSQLのコンテナ」を使うそうです。</p>
+      </blockquote>
+      <h2 data-number="7.1" id="docker-desktop-のインストール"><span
+      class="header-section-number">7.1</span> Docker Desktop のインストール</h2>
+      <p>「Docker Desktop」は、Windows や Mac で Docker
+      を利用できるようにする公式アプリです。「Docker」は
+      <strong>コンテナを動かすための仕組みそのもの</strong> で、もともと Linux
+      向けに設計されたものとなっています。そして「Docker Desktop」は、それを Windows や Mac
+      で使いやすくするための GUIアプリ という位置づけになります。</p>
+      <p>「Docker Desktop」をインストールすると、あわせて Docker もインストールされます。Windows
+      環境の Docker
+      のインストール方法はウェブに多数の情報があるので、それを参考にインストールしてください。</p>
+      <ul>
+      <li><a href="https://www.google.com/search?q=DockerDesktop+インストール+windows">DockerDesktop
+      インストール Windows</a>@ Google検索
+      <ul>
+      <li>Docker を利用するためには、 WSL2 が有効になっている必要があります。</li>
+      </ul></li>
+      </ul>
+      <h2 data-number="7.2" id="docker-desktop-の動作確認"><span
+      class="header-section-number">7.2</span> Docker Desktop の動作確認</h2>
+      <p>Docker Desktop がインストールされ、Docker
+      が利用できる状態になっているかどうかはタスクトレイのアイコンから確認することができます。以下のように「<strong>Docker
+      Desktop running</strong>」となっていればOKです。</p>
+      <figure>
+      <img src="figs/01/docker-01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>クジラのアイコンをダブルクリックすると Docker Desktop
+      のダッシュボードが起動します。次のように「<strong>WSL2</strong>」を土台として Docker
+      が起動するような設定になっていることを確認してください。</p>
+      <figure>
+      <img src="figs/01/docker-02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>また、ウィンドウの左下に緑色で「<strong>Engine
+      running</strong>」の文字が表示されていることを確認してください。</p>
+      <div class="note type-tips">
+      <p><strong>DockerDesktopの自動起動の設定</strong></p>
+      <p>本科目以外で Docker
+      を使用することがなければ、以下のように自動起動をオフにしておくことをお勧めします。なお、自動起動をオフにした場合は、授業の開始前にスタートメニューから「<strong>Docker
+      Desktop</strong>」を手動で起動しておいてください。</p>
+      <figure>
+      <img src="figs/01/docker-04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      </div>
+      <h2 data-number="7.3" id="hello-world-コンテナの起動確認"><span
+      class="header-section-number">7.3</span> Hello World コンテナの起動確認</h2>
+      <p>Docker Desktop の起動が確認できたら、コンテナを問題なく起動できるかを確認します。ターミナル
+      (PowerShell) を開いて <code>docker run --rm hello-world</code>
+      というコマンドを実行してください。</p>
+      <pre><code>PS C:\Users\xxxx&gt; docker run --rm hello-world</code></pre>
+      <p>このコマンドの意味については、生成AIやウェブ検索を利用して把握しておいてください。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p><code>docker run --rm hello-world</code> というコマンドの意味を Docker
+      初心者向けに解説してください。</p>
+      </blockquote>
+      <p>正常に実行できると (＝<code>hello-world</code> <strong>というイメージを DockerHub
+      から取得して、それを元にコンテナを作成して、そのコンテナを起動・実行し、完了したらコンテナを削除できると</strong>)、以下のような応答がとなります。</p>
+      <ul>
+      <li><a href="https://hub.docker.com/_/hello-world">DockerHub (hello-world)</a></li>
+      </ul>
       <pre><code>PS C:\Users\xxxx&gt; docker run --rm hello-world
 Unable to find image &#39;hello-world:latest&#39; locally
 latest: Pulling from library/hello-world
@@ -812,8 +885,8 @@ For more examples and ideas, visit:
       <p>その他の例やアイデアについては、次のサイトを参照してください。<br />
       https://docs.docker.com/get-started/</p>
       </blockquote>
-      <h1 data-number="9" id="授業時間外学習の指示-宿題"><span
-      class="header-section-number">9</span> 授業時間外学習の指示 (宿題)</h1>
+      <h1 data-number="8" id="授業時間外学習の指示-宿題"><span
+      class="header-section-number">8</span> 授業時間外学習の指示 (宿題)</h1>
       <ul>
       <li>次回の講義で小テストを実施します。</li>
       </ul>
