@@ -93,7 +93,10 @@ class="toc-section-number">5</span> データベースの種類</a></li>
 <li><a href="#リレーショナルデータベース-rdb" id="toc-リレーショナルデータベース-rdb"><span
 class="toc-section-number">6</span> リレーショナルデータベース (RDB)</a>
 <ul>
-<li><a href="#主要なrdbms" id="toc-主要なrdbms"><span class="toc-section-number">6.1</span>
+<li><a href="#rdbの基礎" id="toc-rdbの基礎"><span class="toc-section-number">6.1</span>
+RDBの基礎</a></li>
+<li><a href="#演習" id="toc-演習"><span class="toc-section-number">6.2</span> 演習</a></li>
+<li><a href="#主要なrdbms" id="toc-主要なrdbms"><span class="toc-section-number">6.3</span>
 主要なRDBMS</a></li>
 </ul></li>
 <li><a href="#postgresql-の-環境構築-準備" id="toc-postgresql-の-環境構築-準備"><span
@@ -673,11 +676,225 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       <li>RDB の DBMS を、特に「<strong>RDBMS</strong> (Database Management
       System)」といいます。</li>
       </ul>
-      <h2 data-number="6.1" id="主要なrdbms"><span class="header-section-number">6.1</span>
+      <h2 data-number="6.1" id="rdbの基礎"><span class="header-section-number">6.1</span>
+      RDBの基礎</h2>
+      <p><strong>(このセクションは「情報2」の第10回の増補版です)</strong></p>
+      <p>リレーショナルデータベース (RDB: Relational Database) とは Excel のような
+      <strong>表形式</strong>
+      でデータを管理するデータベースモデルです。「<strong>RDB</strong>」と略されほか、「<strong>関係データベース</strong>」とも呼ばれたりします。特に「ITパスポート試験」や「基本情報技術者試験」では
+      <span class="masked">関係データベース</span> という呼称が使われます。</p>
+      <p>RDBでは、Excel
+      のシートに相当するものを「<strong>テーブル（Table）</strong>」と呼びます。また、「列」を「<strong>カラム
+      (Column)</strong>」や「<strong>属性 (Attribute)</strong>」、行を「<strong>レコード
+      (Record)</strong>」のように呼びます。カラムには「名前」「誕生日」「残業時間」などの項目が設定され、レコードにはそれぞれの項目に対応する具体的なデータ
+      (例えば
+      <code>1，'高負荷 耐子'，'1985-06-21', 65, 1</code>、<code>2，'不具合 直志'，'1990-11-02', 48, 1</code>
+      など) が入ります。</p>
+      <p>以下は社員情報を管理するテーブルの例です。</p>
+      <p><strong>■ employees (社員) テーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;">id</th>
+      <th>name</th>
+      <th>birthday</th>
+      <th style="text-align: right;">overtime</th>
+      <th style="text-align: center;">department_id</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td>高負荷 耐子</td>
+      <td>1985-06-21</td>
+      <td style="text-align: right;">65</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td>不具合 直志</td>
+      <td>1990-11-02</td>
+      <td style="text-align: right;">48</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td>品質 守</td>
+      <td>1978-03-14</td>
+      <td style="text-align: right;">5</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td>構文 誤次郎</td>
+      <td>1995-07-30</td>
+      <td style="text-align: right;">85</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">5</td>
+      <td>仕様 曖昧子</td>
+      <td>1988-09-09</td>
+      <td style="text-align: right;">72</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">6</td>
+      <td>保守 絶望太</td>
+      <td>1982-12-25</td>
+      <td style="text-align: right;">120</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">7</td>
+      <td>負債 雪崩美</td>
+      <td>1975-04-05</td>
+      <td style="text-align: right;">58</td>
+      <td style="text-align: center;">4</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>■ departments (部署) テーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;">id</th>
+      <th style="text-align: center;">name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">営業部</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">人事部</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">開発部</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">経理部</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">5</td>
+      <td style="text-align: center;">企画部</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>RDBの重要な機能のひとつに <strong>JOIN</strong> (結合)
+      というものがあります。JOINを使うと、複数のテーブルを関連付けて、あたかも1つのテーブルのように扱うことができます。</p>
+      <p>例えば、上記の <strong>employees</strong> テーブルには <strong>department_id</strong>
+      という「部署を示す番号だけ」が記録されていますが、<strong>JOIN</strong> を使うことで
+      <strong>departments</strong>
+      テーブルから「部署名」を引っ張ってきて、「社員情報」と「部署情報」を結合することができます。具体的には
+      <code>employees.department_id</code> と <code>departments.id</code>
+      を紐付け、以下のように結合することができます。</p>
+      <p><strong>■ employees と departments を 部署ID を使って結合</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;">id</th>
+      <th>name</th>
+      <th>birthday</th>
+      <th style="text-align: right;">overtime</th>
+      <th style="text-align: center;">department_id</th>
+      <th style="text-align: center;">department_name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td>高負荷 耐子</td>
+      <td>1985-06-21</td>
+      <td style="text-align: right;">65</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">営業部</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td>不具合 直志</td>
+      <td>1990-11-02</td>
+      <td style="text-align: right;">48</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">営業部</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td>品質 守</td>
+      <td>1978-03-14</td>
+      <td style="text-align: right;">5</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">人事部</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td>構文 誤次郎</td>
+      <td>1995-07-30</td>
+      <td style="text-align: right;">85</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">開発部</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">5</td>
+      <td>仕様 曖昧子</td>
+      <td>1988-09-09</td>
+      <td style="text-align: right;">72</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">開発部</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">6</td>
+      <td>保守 絶望太</td>
+      <td>1982-12-25</td>
+      <td style="text-align: right;">120</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">開発部</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">7</td>
+      <td>負債 雪崩美</td>
+      <td>1975-04-05</td>
+      <td style="text-align: right;">58</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">経理部</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>このように、データを複数のテーブルに分けて管理し、必要に応じて <strong>JOIN</strong>
+      で結合することで <span class="masked">効率的なデータ管理</span>
+      を実現することができます。もし、全ての情報を1つのテーブルにまとめて管理すると、「部署名」のような共通情報が社員の数だけ重複してしまうことになります。例えば、開発部に50人いれば「開発部」という文字列を50個保持することになります。これは容量の無駄になるだけでなく、<strong>部署名を変更したいときに50箇所すべてを修正しなければならず、ミスの原因</strong>にもなります。</p>
+      <p>一方で、上記のようにテーブルを分けておけば、部署名の変更は <strong>departments</strong>
+      テーブルの1レコードを修正するだけで済み、データの不整合を防ぐことができます。また <span
+      class="masked">現時点では所属社員がいない「企画部」という情報</span>
+      も自然に保持できるというメリットもあります。</p>
+      <p>なお、RDBMS では <strong>SQL</strong>
+      という言語を使って、データベースのデータに対する「検索」「取得」「挿入」「更新」「削除」などの一連の操作指示
+      (これを <strong>クエリ</strong> (Query) と呼びます) を出せることが特徴となっています。</p>
+      <h2 data-number="6.2" id="演習"><span class="header-section-number">6.2</span> 演習</h2>
+      <p>オンライン SQL 実行環境である<a href="https://www.db-fiddle.com/">DB
+      Fiddle</a>を利用して、SQL で RDBMS (PostgreSQL) を操作する体験をしてみたいと思います。SQL
+      の細かな文法などは、今後の授業の内容になるので、現時点では深く理解する必要はありません。</p>
+      <figure>
+      <img src="figs/01/db-fiddle-01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <figure>
+      <img src="figs/01/db-fiddle-02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <figure>
+      <img src="figs/01/db-fiddle-03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="6.3" id="主要なrdbms"><span class="header-section-number">6.3</span>
       主要なRDBMS</h2>
       <p>RDBMS としては、よく知られているものに <strong>PostgreSQL</strong>、MySQL、MariaDB、Oracle
       Database、Microsoft SQL Server、<strong>SQLite</strong>、Microsoft Access などがあります。</p>
-      <h3 data-number="6.1.1" id="postgresql"><span class="header-section-number">6.1.1</span>
+      <h3 data-number="6.3.1" id="postgresql"><span class="header-section-number">6.3.1</span>
       PostgreSQL👑</h3>
       <ul>
       <li>オープンソースのクライアント・サーバー型RDBMS。高機能で拡張性に優れ、標準 SQL
@@ -690,7 +907,7 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       のスキルは市場価値が高まっています。標準 SQL に準拠しているため、他の RDBMS
       への応用も効きやすいこともメリットです。AWS RDS、Google Cloud SQL、Azure Database for
       PostgreSQL など主要クラウドで完全サポートされている点でも、選択する価値が高いと思います。</p>
-      <h3 data-number="6.1.2" id="mysql"><span class="header-section-number">6.1.2</span> MySQL</h3>
+      <h3 data-number="6.3.2" id="mysql"><span class="header-section-number">6.3.2</span> MySQL</h3>
       <ul>
       <li>オープンソースのクライアント・サーバー型RDBMS。ウェブアプリの利用が多い。例えば、WordPress
       は、PHP + MySQL
@@ -706,7 +923,7 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       <p>ウェブ系企業での求人が最も多いです。また、初学者向けの学習リソースが豊富で、最初に学ぶ
       RDBMS として選ばれやすいです。MySQL 8.0 からは機能が大幅に強化され、JSON
       サポートやウィンドウ関数なども追加されています。</p>
-      <h3 data-number="6.1.3" id="mariadb"><span class="header-section-number">6.1.3</span>
+      <h3 data-number="6.3.3" id="mariadb"><span class="header-section-number">6.3.3</span>
       MariaDB</h3>
       <ul>
       <li>MySQL から派生したオープンソースのクライアント・サーバー型RDBMS。MySQL
@@ -716,7 +933,7 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       <li>MySQL からの移行が比較的容易で、最新機能の追加ペースが速い。多くの Linux
       ディストリビューションで MySQL の代わりに標準パッケージとして採用されている。</li>
       </ul>
-      <h3 data-number="6.1.4" id="oracle-database"><span class="header-section-number">6.1.4</span>
+      <h3 data-number="6.3.4" id="oracle-database"><span class="header-section-number">6.3.4</span>
       Oracle Database</h3>
       <ul>
       <li>商用のクライアント・サーバー型RDBMS。大規模システム向けで豊富な機能を持ち、金融・企業システムで定番。有償。</li>
@@ -725,8 +942,8 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       <li>PL/SQL
       による強力なストアドプロシージャ機能を持つ。大規模トランザクション処理や基幹システムで圧倒的なシェアを誇る。</li>
       </ul>
-      <h3 data-number="6.1.5" id="microsoft-sql-server"><span
-      class="header-section-number">6.1.5</span> Microsoft SQL Server</h3>
+      <h3 data-number="6.3.5" id="microsoft-sql-server"><span
+      class="header-section-number">6.3.5</span> Microsoft SQL Server</h3>
       <ul>
       <li>商用のクライアント・サーバー型RDBMS。Windows
       サーバー環境でよく利用される。有償だが、無償の簡易版 (Express Edition) も提供されている。</li>
@@ -735,7 +952,7 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       <li>近年は Linux 対応も進み、Docker コンテナでも動作。Visual Studio
       との統合による優れた開発体験を提供。</li>
       </ul>
-      <h3 data-number="6.1.6" id="sqlite"><span class="header-section-number">6.1.6</span>
+      <h3 data-number="6.3.6" id="sqlite"><span class="header-section-number">6.3.6</span>
       SQLite👑</h3>
       <ul>
       <li>組み込み型RDBMS。データベースが 1 ファイルで完結する軽量 DBMS。スマホアプリやブラウザ (例:
@@ -748,7 +965,7 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       <p>モバイルアプリ開発者なら必須スキルになります。Python（標準ライブラリ）、Node.js、React
       Native
       などほぼ全ての開発環境で簡単に使えるようにライブラリが整備されています。ローカル開発環境でのテストやプロトタイプ作成に便利なため「とりあえず動くものをつくる」ときに役立ちます。</p>
-      <h3 data-number="6.1.7" id="microsoft-access"><span class="header-section-number">6.1.7</span>
+      <h3 data-number="6.3.7" id="microsoft-access"><span class="header-section-number">6.3.7</span>
       Microsoft Access</h3>
       <ul>
       <li>デスクトップ（パーソナル）向けのスタンドアロン型 RDBMS。GUI
@@ -783,7 +1000,7 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       <p>「Docker Desktop」は、Windows や Mac で Docker
       を利用できるようにする公式アプリです。「Docker」は
       <strong>コンテナを動かすための仕組みそのもの</strong> で、もともと Linux
-      向けに設計されたものとなっています。そして「Docker Desktop」は、それを Windows や Mac
+      向けに設計されたものでした。そして「Docker Desktop」は、それを Windows や Mac
       で使いやすくするための GUIアプリ という位置づけになります。</p>
       <p>「Docker Desktop」をインストールすると、あわせて Docker もインストールされます。Windows
       環境の Docker
@@ -855,7 +1072,7 @@ To generate this message, Docker took the following steps:
  2. The Docker daemon pulled the &quot;hello-world&quot; image from the Docker Hub.
     (amd64)
  3. The Docker daemon created a new container from that image which runs the
-    executable that produces the output you are currently reading.
+    executable that produces the output you are currently reading.  
  4. The Docker daemon streamed that output to the Docker client, which sent it
     to your terminal.
 
@@ -875,7 +1092,7 @@ For more examples and ideas, visit:
       1. Docker クライアント が Dockerデーモン に接続しました。<br />
       2. Docker デーモン は、Docker Hub から “hello-world” イメージをプルしました。<br />
       3. Docker デーモン
-      は、そのイメージから新しいコンテナを作成し、現在読んでいる出力を生成する実行可能ファイルを実行しました。
+      は、そのイメージから新しいコンテナを作成し、現在読んでいる出力を生成する実行可能ファイルを実行しました。<br />
       4. Dockerデーモンはその出力を Docker クライアントにストリーミングし、Docker
       クライアントはそれをターミナルに送信しました。</p>
       <p>より野心的なものを試すには、次のように Ubuntuコンテナ を実行します。<br />
@@ -889,6 +1106,8 @@ For more examples and ideas, visit:
       class="header-section-number">8</span> 授業時間外学習の指示 (宿題)</h1>
       <ul>
       <li>次回の講義で小テストを実施します。</li>
+      <li>次回までに、Docker の hello-world
+      コンテナが正常できる状態にしておいてください。問題があれば、遅くとも講義の前日までにアポをとって解決に向けた相談をしてください。</li>
       </ul>
       <!-- ---------------------------------------- -->
     </main>
