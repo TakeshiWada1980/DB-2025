@@ -219,7 +219,7 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       </ul></li>
       <li><p>3年 後期「<strong>知能情報実験実習1</strong>」</p>
       <ul>
-      <li>サーバ構築、Docker</li>
+      <li>サーバ構築 (Linux, Apache)、Docker</li>
       </ul></li>
       <li><p>4年 前期「<strong>知能情報実験実習2</strong>」</p>
       <ul>
@@ -303,8 +303,8 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       を指します。その意味では、電話帳や国語辞典、出席簿といったアナログ資料もデータベースとみなせますし、CSV
       や JSON などのデジタルファイルもデータベースと呼ぶことができます。</p>
       <p>しかし、<strong>コンピュータサイエンスやソフトウェア開発の分野</strong>では <span
-      class="masked">CSV や JSON のような単なるデジタルファイル</span>
-      をデータベースとは言いません。これらの分野でデータベースとは「<strong>一定の形式や構造に従ってデータを蓄積・管理し、必要に応じて検索・更新・削除・集計・加工などを柔軟かつ高速に行える仕組み</strong>」のことを指します。ただし、文脈によっては、データそのものを「<strong>データベース
+      class="masked">CSV や JSON のような単なるデータファイル</span>
+      を「データベース」と呼ぶことは通常ありません。これらの分野でデータベースという言葉は「<strong>一定の形式や構造に従ってデータを蓄積・管理し、必要に応じて検索・更新・削除・集計・加工などを柔軟かつ高速に行える仕組み</strong>」を指すことが一般的です。ただし、文脈によっては、データそのものを「<strong>データベース
       (DB)</strong>」と呼び、それらを管理する仕組みやソフトウェアを「<strong>データベースマネジメントシステム
       (DBMS)</strong>」と区別して呼ぶこともあります。</p>
       <p>まとめると、以下のようになります。</p>
@@ -1105,6 +1105,7 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       <h3 data-number="6.2.3" id="group-by句-と-join-外部結合-と集計関数の使用例"><span
       class="header-section-number">6.2.3</span> GROUP BY句 と JOIN (外部結合)
       と集計関数の使用例</h3>
+      <p>現時点では、細部を理解する必要はありません。「SQLでこんな集計処理ができるんだ🤔」と理解してもらえればOKです。</p>
       <div class="sourceCode" id="cb6" data-caption="部署ごとの残業時間を集計するSQL"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">SELECT</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>  d.<span class="kw">id</span> <span class="kw">AS</span> <span class="ot">&quot;部署ID&quot;</span>,</span>
