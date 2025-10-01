@@ -1090,6 +1090,8 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       </ul>
       <h3 data-number="6.2.2" id="join-内部結合-の使用例"><span
       class="header-section-number">6.2.2</span> JOIN (内部結合) の使用例</h3>
+      <p>RDBの重要な機能のひとつである「<strong>JOIN (結合)</strong>」の例です。実際にクエリ (SQL)
+      を発行して、どのような結果が返ってくるかを確認してみてください。</p>
       <div class="sourceCode" id="cb5"
       data-caption="employeesテーブルとdepartmentsテーブルを結合するSQL"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">SELECT</span></span>
@@ -1102,10 +1104,19 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
 <span id="cb5-8"><a href="#cb5-8"></a><span class="kw">FROM</span></span>
 <span id="cb5-9"><a href="#cb5-9"></a>  employees <span class="kw">AS</span> e</span>
 <span id="cb5-10"><a href="#cb5-10"></a>  <span class="kw">JOIN</span> departments <span class="kw">AS</span> d <span class="kw">ON</span> e.department_id <span class="op">=</span> d.<span class="kw">id</span>;</span></code></pre></div>
+      <ul>
+      <li>演習: 実行結果として表示されるテーブルの <code>name</code> という列 (カラム) のヘッダを
+      <code>名前</code> に変えてみましょう。
+      <ul>
+      <li>ヒント: <span class="masked">第07行目を参考に</span></li>
+      </ul></li>
+      </ul>
       <h3 data-number="6.2.3" id="group-by句-と-join-外部結合-と集計関数の使用例"><span
       class="header-section-number">6.2.3</span> GROUP BY句 と JOIN (外部結合)
       と集計関数の使用例</h3>
-      <p>現時点では、細部を理解する必要はありません。「SQLでこんな集計処理ができるんだ🤔」と理解してもらえればOKです。</p>
+      <p>いまの時点で、SQLの構文について理解する必要はありません。大事なのは「<strong>SQLでこんな集計できちゃうんだ</strong>🤔」とイメージを掴むことです。ただし、ちょっとでも読解しようとする姿勢と行動は実力アップにつながります
+      (また、<span class="masked">Python や TypeScript
+      プログラムで同様の処理を実装するなら･･･</span>を考えてみるとおもしろいかもしれません)。</p>
       <div class="sourceCode" id="cb6" data-caption="部署ごとの残業時間を集計するSQL"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">SELECT</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>  d.<span class="kw">id</span> <span class="kw">AS</span> <span class="ot">&quot;部署ID&quot;</span>,</span>
@@ -1123,37 +1134,40 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
 <span id="cb6-14"><a href="#cb6-14"></a>  d.<span class="kw">id</span>;</span></code></pre></div>
       <h3 data-number="6.2.4" id="caseの使用例"><span class="header-section-number">6.2.4</span>
       CASEの使用例</h3>
+      <p>以下は、脱・初心者レベルのクエリになります。授業を重ねながら、このレベルのクエリも自分の手で書けるように力をつけていきましょう。</p>
       <div class="sourceCode" id="cb7"
       data-caption="部署ごとに社員が何年代生まれかを集計するSQL"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">SELECT</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a>  d.<span class="kw">id</span> <span class="kw">AS</span> <span class="ot">&quot;部署ID&quot;</span>,</span>
-<span id="cb7-3"><a href="#cb7-3"></a>  d.name <span class="kw">AS</span> <span class="ot">&quot;部署名&quot;</span>,</span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">SUM</span>(</span>
-<span id="cb7-5"><a href="#cb7-5"></a>    <span class="cf">CASE</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>      <span class="cf">WHEN</span> birthday <span class="kw">BETWEEN</span> <span class="st">&#39;1970-01-01&#39;</span> <span class="kw">AND</span> <span class="st">&#39;1979-12-31&#39;</span>  <span class="cf">THEN</span> <span class="dv">1</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a>      <span class="cf">ELSE</span> <span class="dv">0</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a>    <span class="cf">END</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a>  ) <span class="kw">AS</span> <span class="ot">&quot;1970年代&quot;</span>,</span>
-<span id="cb7-10"><a href="#cb7-10"></a>  <span class="fu">SUM</span>(</span>
-<span id="cb7-11"><a href="#cb7-11"></a>    <span class="cf">CASE</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a>      <span class="cf">WHEN</span> birthday <span class="kw">BETWEEN</span> <span class="st">&#39;1980-01-01&#39;</span> <span class="kw">AND</span> <span class="st">&#39;1989-12-31&#39;</span>  <span class="cf">THEN</span> <span class="dv">1</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a>      <span class="cf">ELSE</span> <span class="dv">0</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a>    <span class="cf">END</span></span>
-<span id="cb7-15"><a href="#cb7-15"></a>  ) <span class="kw">AS</span> <span class="ot">&quot;1980年代&quot;</span>,</span>
-<span id="cb7-16"><a href="#cb7-16"></a>  <span class="fu">SUM</span>(</span>
-<span id="cb7-17"><a href="#cb7-17"></a>    <span class="cf">CASE</span></span>
-<span id="cb7-18"><a href="#cb7-18"></a>      <span class="cf">WHEN</span> birthday <span class="kw">BETWEEN</span> <span class="st">&#39;1990-01-01&#39;</span> <span class="kw">AND</span> <span class="st">&#39;1999-12-31&#39;</span>  <span class="cf">THEN</span> <span class="dv">1</span></span>
-<span id="cb7-19"><a href="#cb7-19"></a>      <span class="cf">ELSE</span> <span class="dv">0</span></span>
-<span id="cb7-20"><a href="#cb7-20"></a>    <span class="cf">END</span></span>
-<span id="cb7-21"><a href="#cb7-21"></a>  ) <span class="kw">AS</span> <span class="ot">&quot;1990年代&quot;</span></span>
-<span id="cb7-22"><a href="#cb7-22"></a><span class="kw">FROM</span></span>
-<span id="cb7-23"><a href="#cb7-23"></a>  departments <span class="kw">AS</span> d</span>
-<span id="cb7-24"><a href="#cb7-24"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> employees <span class="kw">AS</span> e <span class="kw">ON</span> d.<span class="kw">id</span> <span class="op">=</span> e.department_id</span>
-<span id="cb7-25"><a href="#cb7-25"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
-<span id="cb7-26"><a href="#cb7-26"></a>  d.<span class="kw">id</span>,</span>
-<span id="cb7-27"><a href="#cb7-27"></a>  d.name</span>
-<span id="cb7-28"><a href="#cb7-28"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
-<span id="cb7-29"><a href="#cb7-29"></a>  d.<span class="kw">id</span>;</span></code></pre></div>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="cf">CASE</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="cf">WHEN</span> <span class="fu">GROUPING</span>(d.<span class="kw">id</span>) <span class="op">=</span> <span class="dv">1</span> <span class="cf">THEN</span> <span class="st">&#39;(全体)&#39;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="cf">ELSE</span> <span class="fu">MAX</span>(d.name)</span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">&quot;部署名&quot;</span>,</span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">SUM</span>(</span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="cf">CASE</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>      <span class="cf">WHEN</span> birthday <span class="kw">BETWEEN</span> <span class="st">&#39;1970-01-01&#39;</span> <span class="kw">AND</span> <span class="st">&#39;1979-12-31&#39;</span>  <span class="cf">THEN</span> <span class="dv">1</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>      <span class="cf">ELSE</span> <span class="dv">0</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>    <span class="cf">END</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>  ) <span class="kw">AS</span> <span class="ot">&quot;1970年代&quot;</span>,</span>
+<span id="cb7-13"><a href="#cb7-13"></a>  <span class="fu">SUM</span>(</span>
+<span id="cb7-14"><a href="#cb7-14"></a>    <span class="cf">CASE</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>      <span class="cf">WHEN</span> birthday <span class="kw">BETWEEN</span> <span class="st">&#39;1980-01-01&#39;</span> <span class="kw">AND</span> <span class="st">&#39;1989-12-31&#39;</span>  <span class="cf">THEN</span> <span class="dv">1</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>      <span class="cf">ELSE</span> <span class="dv">0</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>    <span class="cf">END</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a>  ) <span class="kw">AS</span> <span class="ot">&quot;1980年代&quot;</span>,</span>
+<span id="cb7-19"><a href="#cb7-19"></a>  <span class="fu">SUM</span>(</span>
+<span id="cb7-20"><a href="#cb7-20"></a>    <span class="cf">CASE</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a>      <span class="cf">WHEN</span> birthday <span class="kw">BETWEEN</span> <span class="st">&#39;1990-01-01&#39;</span> <span class="kw">AND</span> <span class="st">&#39;1999-12-31&#39;</span>  <span class="cf">THEN</span> <span class="dv">1</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a>      <span class="cf">ELSE</span> <span class="dv">0</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a>    <span class="cf">END</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a>  ) <span class="kw">AS</span> <span class="ot">&quot;1990年代&quot;</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="kw">FROM</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a>  departments <span class="kw">AS</span> d</span>
+<span id="cb7-27"><a href="#cb7-27"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> employees <span class="kw">AS</span> e <span class="kw">ON</span> d.<span class="kw">id</span> <span class="op">=</span> e.department_id</span>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb7-29"><a href="#cb7-29"></a>  <span class="kw">ROLLUP</span> (d.<span class="kw">id</span>)</span>
+<span id="cb7-30"><a href="#cb7-30"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb7-31"><a href="#cb7-31"></a>  d.<span class="kw">id</span>;</span></code></pre></div>
       <h2 data-number="6.3" id="主要なrdbms"><span class="header-section-number">6.3</span>
       主要なRDBMS</h2>
       <p>代表的な RDBMS として <strong>PostgreSQL</strong>、MySQL、MariaDB、Oracle
