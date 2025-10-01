@@ -34,7 +34,7 @@
     />
     <link rel="stylesheet" href="style.css" />
 
-    <title>4I-データベース工学 (2025)</title>
+    <title></title>
   </head>
 
   <body>
@@ -42,38 +42,31 @@
     <nav id="g-nav">
       <div id="g-nav-list">
         <!-- ---------------------------------------- -->
-         <ul>
-<li><a href="#資料-index" id="toc-資料-index"><span class="toc-section-number">1</span> 資料
-INDEX</a></li>
-<li><a href="#参考資料" id="toc-参考資料"><span class="toc-section-number">2</span>
-参考資料</a></li>
-</ul> 
+        
         <!-- ---------------------------------------- -->
       </div>
     </nav>
 
     <header class="markdown-body">
-      <p>2025-4I データベース工学 (後期) 講義資料</p>
-      <p>毎週木曜日 3-4時限</p>
+      <p></p>
+      <p></p>
     </header>
 
     <main class="markdown-body">
       <!-- ---------------------------------------- -->
-      <h1 data-number="1" id="資料-index"><span class="header-section-number">1</span> 資料
-      INDEX</h1>
-      <ul>
-      <li>第01回講義 10月02日(木) <a href="lecture01.html">資料</a>
-      <font size="-1">科目概要、RDBMS環境構築の準備</font></li>
-      </ul>
-      <h1 data-number="2" id="参考資料"><span class="header-section-number">2</span> 参考資料</h1>
-      <ul>
-      <li>2025年度 4I 知能情報実験実習2<a
-      href="https://takeshiwada1980.github.io/Eii2-2025/">講義資料</a></li>
-      <li>2024年度 3I プログラミング3<a
-      href="https://takeshiwada1980.github.io/Programming3-2024/">講義資料</a></li>
-      <li>2024年度 2I プログラミング1<a
-      href="https://takeshiwada1980.github.io/Programming1-2024/">講義資料</a></li>
-      </ul>
+      <p>– departments (部署) テーブルの作成 CREATE TABLE departments (id INTEGER PRIMARY KEY, name
+      VARCHAR(32) NOT NULL);</p>
+      <p>– employees (社員) テーブルの作成 CREATE TABLE employees ( id INTEGER PRIMARY KEY, name
+      VARCHAR(32) NOT NULL, birthday DATE NOT NULL, overtime INTEGER NOT NULL, department_id INTEGER
+      NOT NULL, FOREIGN KEY (department_id) REFERENCES departments (id) );</p>
+      <p>– departments テーブルへのデータ投入 INSERT INTO departments (id, name) VALUES (1,
+      ‘再起動対策本部’), (2, ‘曖昧戦略部’), (3, ‘バグ発生推進部’), (4, ‘予算消失部’), (5,
+      ‘机上片付け指導部’);</p>
+      <p>– employees テーブルへのデータ投入 INSERT INTO employees (id, name, birthday, overtime,
+      department_id) VALUES (1, ‘高負荷 耐子’, ‘1985-06-21’, 65, 1), (2, ‘不具合 直志’,
+      ‘1990-11-02’, 48, 1), (3, ‘品質 守’, ‘1978-03-14’, 5, 2), (4, ‘構文 誤次郎’, ‘1995-07-30’, 85,
+      3), (5, ‘仕様 曖昧子’, ‘1988-09-09’, 72, 3), (6, ‘保守 絶望太’, ‘1982-12-25’, 120, 3), (7,
+      ‘負債 雪崩美’, ‘1975-04-05’, 58, 4);</p>
       <!-- ---------------------------------------- -->
     </main>
 
