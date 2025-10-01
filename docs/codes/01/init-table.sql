@@ -15,11 +15,11 @@ CREATE TABLE employees (
 INSERT INTO
   departments (id, name)
 VALUES
-  (1, '営業部'),
-  (2, '人事部'),
-  (3, '開発部'),
-  (4, '経理部'),
-  (5, '企画部');
+  (1, '再起動対策本部'),
+  (2, '曖昧戦略部'),
+  (3, 'バグ発生推進部'),
+  (4, '予算消失部'),
+  (5, '机上片付け指導部');
 
 -- employees テーブルへのデータ投入
 INSERT INTO
