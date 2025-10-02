@@ -1132,6 +1132,55 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
 <span id="cb6-12"><a href="#cb6-12"></a>  d.name</span>
 <span id="cb6-13"><a href="#cb6-13"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
 <span id="cb6-14"><a href="#cb6-14"></a>  d.<span class="kw">id</span>;</span></code></pre></div>
+      <p>💻<strong>実行結果</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;">部署ID</th>
+      <th>部署名</th>
+      <th style="text-align: center;">人数</th>
+      <th style="text-align: right;">総残業時間</th>
+      <th style="text-align: right;">平均残業時間</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td>再起動対策本部</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: right;">113</td>
+      <td style="text-align: right;">56.5</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td>曖昧戦略部</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: right;">5</td>
+      <td style="text-align: right;">5.0</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td>バグ発生推進部</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: right;">277</td>
+      <td style="text-align: right;">92.3</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td>予算消失部</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: right;">58</td>
+      <td style="text-align: right;">58.0</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">5</td>
+      <td>机上片付け指導部</td>
+      <td style="text-align: center;">0</td>
+      <td style="text-align: right;">0</td>
+      <td style="text-align: right;">0.0</td>
+      </tr>
+      </tbody>
+      </table>
       <h3 data-number="6.2.4" id="caseの使用例"><span class="header-section-number">6.2.4</span>
       CASEの使用例</h3>
       <p>以下は、脱・初心者レベルのクエリになります。授業を重ねながら、このレベルのクエリも自分の手で書けるように力をつけていきましょう。</p>
@@ -1168,6 +1217,62 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
 <span id="cb7-29"><a href="#cb7-29"></a>  <span class="kw">ROLLUP</span> (d.<span class="kw">id</span>)</span>
 <span id="cb7-30"><a href="#cb7-30"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
 <span id="cb7-31"><a href="#cb7-31"></a>  d.<span class="kw">id</span>;</span></code></pre></div>
+      <p>💻<strong>実行結果</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;">部署ID</th>
+      <th>部署名</th>
+      <th style="text-align: center;">1970年代</th>
+      <th style="text-align: center;">1980年代</th>
+      <th style="text-align: center;">1990年代</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td>再起動対策本部</td>
+      <td style="text-align: center;">0</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td>曖昧戦略部</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">0</td>
+      <td style="text-align: center;">0</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td>バグ発生推進部</td>
+      <td style="text-align: center;">0</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td>予算消失部</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">0</td>
+      <td style="text-align: center;">0</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">5</td>
+      <td>机上片付け指導部</td>
+      <td style="text-align: center;">0</td>
+      <td style="text-align: center;">0</td>
+      <td style="text-align: center;">0</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;"></td>
+      <td>(全体)</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      </tbody>
+      </table>
       <h2 data-number="6.3" id="主要なrdbms"><span class="header-section-number">6.3</span>
       主要なRDBMS</h2>
       <p>代表的な RDBMS として <strong>PostgreSQL</strong>、MySQL、MariaDB、Oracle
