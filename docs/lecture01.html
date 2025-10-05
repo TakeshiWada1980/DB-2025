@@ -1547,11 +1547,18 @@ For more examples and ideas, visit:
       <a href="https://hub.docker.com/">Docker Hub</a>
       から指定の「<strong>イメージ</strong>」をプルしてくるものです。</p>
       <ul>
-      <li><code>docker pull</code>
-      コマンドの実行には、回線状況により、数分から10分程の時間がかかることがあります。</li>
+      <li><code>docker image pull</code>
+      コマンドの実行には、回線状況によっては数分から10分程度かかる場合があります。</li>
       </ul>
-      <pre><code>docker pull postgres:17.6
-docker pull dbgate/dbgate:6.6.3</code></pre>
+      <pre><code>docker image pull postgres:17.6
+docker image pull dbgate/dbgate:6.6.3</code></pre>
+      <ul>
+      <li><code>docker pull postgres:17.6</code> のように <code>image</code>
+      を省略することもできます。どちらも同じ動作ですが、<code>docker image pull</code>
+      のように明示的に書くと、「イメージ」を対象とした操作であることがより分かりやすくなります
+      (Docker
+      には、主に「イメージ」を対象とした操作と、「コンテナ」を対象とした操作があります)。</li>
+      </ul>
       <p>イメージが取得できたことを確認します。以下のコマンドを実行してください。</p>
       <pre><code>docker images</code></pre>
       <p>以下のようにリストのなかに <code>postgres:17.6</code> と <code>dbgate/dbgate:6.6.3</code>
@@ -1565,15 +1572,15 @@ hello-world               latest           1b44b5a3e06a   7 weeks ago     10.1kB
       <ul>
       <li>次回の講義で「<strong>小テスト</strong>」を実施します。</li>
       <li>📖 教科書 pp.1-15 を読んでおいてください。20分ほどで読めると思います。</li>
-      <li>この講義ノートを再読・熟読し「不明な用語」や「理解が十分な用語」があればインターネットや、ChatGPTなどの生成AIを利用して解決してください。また、興味関心を持ったトピックについて、ウェブ、生成AI、YouTube動画などを利用して知識を広げ、理解を深めてください。
+      <li>この講義資料を再読・熟読し「不明な用語」や「理解が十分な用語」があればインターネットや、ChatGPTなどの生成AIを利用して解決してください。また、興味関心を持ったトピックについて、ウェブ、生成AI、YouTube動画などを利用して知識を広げ、理解を深めてください。
       <ul>
       <li>特に <strong>(プロンプト例)</strong>
       を示しているものについては、実際に生成AIにプロンプトを投げ、さらに対話を重ねることで、知識の幅を広げるだけでなく、理解をより深く確かなものにしてください。</li>
       </ul></li>
       <li>講義資料内の「演習」に再度取り組んでください。演習内容は、授業時間中に1回取り組むだけでは定着しないので注意してください。</li>
       <li>次回までに、Docker Desktop をインストールして、hello-world
-      コンテナが正常に動作することを確認しておいてください。また、<code>docker pull</code>
-      のコマンドで <code>postgres:17.6</code> と <code>dbgate/dbgate:6.6.3</code>
+      コンテナが正常に動作することを確認しておいてください。また、<code>docker image pull</code>
+      コマンドで <code>postgres:17.6</code> と <code>dbgate/dbgate:6.6.3</code>
       のイメージをプルしておいてください。
       <ul>
       <li>問題があれば <strong>遅くとも講義の前日までにアポをとって解決に向けた相談</strong>
