@@ -384,6 +384,20 @@ div.note > pre {
   color: var(--code-pg-foreground);
 }
 
+/* ------- 番号付き箇条書き ------- */
+
+.markdown-body ol li::marker {
+  color: var(--main-theme-color);
+  font-weight: bold;
+}
+
+.markdown-body ol li {
+  position: relative;
+  padding: 0.35em 0 0 0;
+  margin: 0;
+  text-indent: 0.3em;
+}
+
 /* ------- 箇条書き ------- */
 
 .markdown-body ul {
@@ -397,6 +411,23 @@ div.note > pre {
 .markdown-body li ul {
   margin: 0 0 0.7em -0.5em;
   padding: 0;
+}
+
+/* 記号と本文の距離を変えたいのはココだけ */
+.markdown-body ol > li > ul > li {
+  /* まずテキストの食い込みを素直に管理するため text-indent を無効化 */
+  text-indent: 0;
+
+  /* 記号の“幅”＋テキストとの“すき間”をまとめて左パディングで確保 */
+  /* 例: 記号幅 1.0em + すき間 0.4em = 1.4em */
+  padding-left: 1.4em;
+}
+
+/* 疑似要素（記号）側は、左端に固定して“記号幅”ぶんのスペースを前提化 */
+.markdown-body ol > li > ul > li::before {
+  left: 0; /* 記号の起点 */
+  width: 1em; /* 記号の論理幅（↔︎ padding-left の中の“記号幅”と対応） */
+  text-align: center; /* お好みで中央寄せに */
 }
 
 .markdown-body ul p {
@@ -423,20 +454,6 @@ div.note > pre {
 .markdown-body ul li ul li::before {
   padding-top: 3px;
   font-size: 85%;
-}
-
-/* ------- 番号付き箇条書き ------- */
-
-.markdown-body ol li::marker {
-  color: var(--main-theme-color);
-  font-weight: bold;
-}
-
-.markdown-body ol li {
-  position: relative;
-  padding: 0.35em 0 0 0;
-  margin: 0;
-  text-indent: 0.3em;
 }
 
 /* ------- ノート共通 ------- */
