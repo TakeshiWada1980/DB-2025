@@ -531,12 +531,13 @@ BUG_REPORT_URL=&quot;https://bugs.debian.org/&quot;</code></pre>
       class="masked">ログインする「ユーザ名」</span>、<code>-d</code> は <span
       class="masked">接続する「データベース名」</span> を指定するためのオプションとなります。</p>
       <p>コマンドを実行すると「<strong>PostgreSQL
-      の対話モード</strong>」が開始し、ターミナルのプロンプトが以下のような表示になります。これにより、SQL
+      の対話モード</strong>」が開始し、ターミナルのプロンプトが以下のような表示
+      (<code>接続しているデータベース名=#</code>) になります。これにより、SQL
       を打ち込んで、データベースを操作する準備が整いました。</p>
       <pre><code>psql (17.6 (Debian 17.6-2.pgdg13+1))
 Type &quot;help&quot; for help.
 
-user=#</code></pre>
+playground=#</code></pre>
       <p>対話モードの利用中に、SQLを入力・実行しても「<strong>反応がない？</strong>」と感じたときは、セミコロン
       <code>;</code> を入力して Enter
       キーを入力してみてください。反応がないように見えるとき、たいていは、システムがコマンド終端の
