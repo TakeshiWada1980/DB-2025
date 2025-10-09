@@ -153,6 +153,17 @@ class="toc-section-number">7</span> 授業時間外学習の指示 (宿題)</a><
       <pre><code>docker image pull postgres:17.6
 docker image pull dbgate/dbgate:6.6.3</code></pre>
       <p>今回の講義は、以上の作業が完了していることを前提とします。</p>
+      <div class="note type-tips">
+      <p><strong>そもそも Docker とは？</strong></p>
+      <p>3年の知能情報実験実習1の後期テーマのなかで、既に Docker を使用して
+      <strong>Apacheコンテナ</strong> (ウェブサーバ)
+      を動かしているので、概要は把握しているハズですが…</p>
+      <p>Docker とは、<strong>アプリを動かすための環境を OS (Linux)ごと<sup>※</sup>
+      ひとまとめにした「イメージ」から、すぐに使える軽量な実行環境「コンテナ」を作成して、動かすことができるソフトウェア</strong>です。コンテナはそれぞれ独立して動作するため、ホスト
+      OS の環境を汚すことなく、さまざまな開発環境を安全に試すことができるメリットがあります。</p>
+      <p>※
+      ここでの「OS」とは、Linuxカーネルを除いたユーザー空間（ライブラリやコマンド群など）を指します。</p>
+      </div>
       <h1 data-number="3" id="docker-上での-postgresql-コンテナの起動と操作"><span
       class="header-section-number">3</span> Docker 上での PostgreSQL コンテナの起動と操作</h1>
       <p>Docker を使って PostgreSQL (RDBMS)
@@ -904,7 +915,8 @@ user=#</code></pre>
       <p>つづいて <code>docker container exec -it pg17 bash</code> コマンドで、<code>pg17</code>
       コンテナにログインし、<strong>psql</strong> で <code>s_user</code>
       テーブルを作成し、いくつかのレコードを挿入しておきます (<a
-      href="#テーブルの作成-create-table">参考</a>)。</p>
+      href="#テーブルの作成-create-table">参考1</a>、<a
+      href="#コンテナのシェルを利用">参考2</a>)。</p>
       <div class="note type-tips">
       <p><strong>ホストとコンテナのポート対応の確認</strong></p>
       <p>作成済みコンテナにおいて、どのポートがどのようにマッピングされているか
@@ -1093,7 +1105,10 @@ user=#</code></pre>
       <p>各種環境を Windows に直接構築する場合と比較して、Docker
       を利用して環境構築することには、次のような<strong>デメリット</strong>があります。</p>
       <ul>
-      <li>Docker そのものに対する「学習コスト」が大きい。</li>
+      <li>Docker そのものに対する「学習コスト」が大きい。
+      <ul>
+      <li>ただし、ソフトウェアエンジニアを目指すなら必要な学習投資です。</li>
+      </ul></li>
       <li>システムリソースの消費が大きい。</li>
       <li>パフォーマンスのオーバーヘッドがある。
       <ul>
@@ -1104,6 +1119,7 @@ user=#</code></pre>
       </ul>
       <h1 data-number="7" id="授業時間外学習の指示-宿題"><span
       class="header-section-number">7</span> 授業時間外学習の指示 (宿題)</h1>
+      <p>🚨<strong>本科目は「学修単位科目」であり、1回の講義あたり、4時間相当の授業時間外学習が求められる科目です</strong>🏃</p>
       <ul>
       <li>次回の講義で「<strong>小テスト</strong>」を実施します。</li>
       <li>講義のなかでは <code>docker container create</code>
@@ -1117,7 +1133,7 @@ user=#</code></pre>
       <p>いま、Docker コンテナを
       <code>docker container run --name pg17 -e POSTGRES_USER=student -e POSTGRES_PASSWORD=secret123 -e POSTGRES_DB=playground -p 5432:5432 -d postgres:17.6</code>
       のように起動しています。これを <code>docker-compose.yaml</code>
-      を使った方法に切り替えいたいです。どのようにすればよいですか。</p>
+      を使った方法に切り替えたいです。どのようにすればよいですか。</p>
       </blockquote>
       <ul>
       <li>講義では、<code>postgres:17.6</code> という PostgreSQL の公式イメージを
@@ -1131,8 +1147,17 @@ user=#</code></pre>
       href="https://www.youtube.com/watch?v=B5tSZr_QqXw&amp;t=1366s">Dockerの基本を学んでコンテナ型の仮想環境を作ろう！</a>
       <span class="citation" data-cites="YouTube">@YouTube</span>
       <ul>
-      <li><strong>22:46</strong>～ Dokcerファイルからコンテナ起動</li>
+      <li><strong>22:46</strong> ～ Dokcerfile からコンテナを起動する解説</li>
       </ul></li>
+      <li>Docker の <code>Dockerfile</code> や <code>docker-compose.yaml</code>
+      のように、インフラの構成をプログラムコードとして記述し、管理・自動化する考え方を <span
+      class="masked">IaC（Infrastructure as Code）</span> といいます。</li>
+      </ul></li>
+      <li>次の動画では、Dockerの基礎知識から実際に開発環境を構築するまで徹底解説されています。おすすめです。
+      <ul>
+      <li><a
+      href="https://www.youtube.com/watch?v=B1EQ1oncKak">【図解】これなら分かる!!はじめてのDocker</a><span
+      class="citation" data-cites="YouTube">@YouTube</span></li>
       </ul></li>
       </ul>
       <hr />
