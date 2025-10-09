@@ -69,23 +69,36 @@ id="toc-コンテナの利用-windows-から-psql-を直接実行"><span class="
 コンテナの削除</a></li>
 <li><a href="#まとめ" id="toc-まとめ"><span class="toc-section-number">3.9</span> まとめ</a></li>
 </ul></li>
+<li><a href="#docker-desktop-による-docker-の-gui-操作"
+id="toc-docker-desktop-による-docker-の-gui-操作"><span class="toc-section-number">4</span> Docker
+Desktop による Docker の GUI 操作</a>
+<ul>
+<li><a href="#コンテナの起動-1" id="toc-コンテナの起動-1"><span
+class="toc-section-number">4.1</span> コンテナの起動</a></li>
+<li><a href="#コンテナの停止-1" id="toc-コンテナの停止-1"><span
+class="toc-section-number">4.2</span> コンテナの停止</a></li>
+<li><a href="#コンテナのシェルを利用" id="toc-コンテナのシェルを利用"><span
+class="toc-section-number">4.3</span> コンテナのシェルを利用</a></li>
+<li><a href="#コンテナの削除-1" id="toc-コンテナの削除-1"><span
+class="toc-section-number">4.4</span> コンテナの削除</a></li>
+</ul></li>
 <li><a href="#docker-環境での-postgresql-のポート通信設定"
-id="toc-docker-環境での-postgresql-のポート通信設定"><span class="toc-section-number">4</span>
+id="toc-docker-環境での-postgresql-のポート通信設定"><span class="toc-section-number">5</span>
 Docker 環境での PostgreSQL のポート通信設定</a>
 <ul>
 <li><a href="#演習-宿題授業時間外" id="toc-演習-宿題授業時間外"><span
-class="toc-section-number">4.1</span> 演習 (宿題・授業時間外)</a></li>
+class="toc-section-number">5.1</span> 演習 (宿題・授業時間外)</a></li>
 </ul></li>
-<li><a href="#docker-とは-詳細" id="toc-docker-とは-詳細"><span class="toc-section-number">5</span>
+<li><a href="#docker-とは-詳細" id="toc-docker-とは-詳細"><span class="toc-section-number">6</span>
 Docker とは (詳細)</a>
 <ul>
-<li><a href="#docker-の活用法" id="toc-docker-の活用法"><span class="toc-section-number">5.1</span>
+<li><a href="#docker-の活用法" id="toc-docker-の活用法"><span class="toc-section-number">6.1</span>
 Docker の活用法</a></li>
-<li><a href="#デメリット" id="toc-デメリット"><span class="toc-section-number">5.2</span>
+<li><a href="#デメリット" id="toc-デメリット"><span class="toc-section-number">6.2</span>
 デメリット</a></li>
 </ul></li>
 <li><a href="#授業時間外学習の指示-宿題" id="toc-授業時間外学習の指示-宿題"><span
-class="toc-section-number">6</span> 授業時間外学習の指示 (宿題)</a></li>
+class="toc-section-number">7</span> 授業時間外学習の指示 (宿題)</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -728,6 +741,10 @@ user=#</code></pre>
       <p>Docker の <code>docker container run</code>
       コマンドにおいて「コンテナをデタッチモードで起動する」とは、どういうことですか？デタッチモードで起動しないときの動作はどうなりますか。</p>
       </blockquote>
+      <p>なお、<code>run</code> は、<code>pull</code> <code>create</code> <code>start</code>
+      をまとめて実行するものなので、以降は <code>stop</code> で停止、再び起動するときは
+      <code>start</code> を使用します。既に同名のコンテナが存在する場合は <code>run</code>
+      は失敗するので注意してください。</p>
       </div>
       <h2 data-number="3.9" id="まとめ"><span class="header-section-number">3.9</span> まとめ</h2>
       <p>以上のように Docker を利用することで、<strong>即座に利用可能な PostgreSQL
@@ -773,8 +790,45 @@ user=#</code></pre>
       <li><strong>答え</strong>: <span class="masked"><code>DROP TABLE s_users;</code></span></li>
       </ul></li>
       </ul>
-      <h1 data-number="4" id="docker-環境での-postgresql-のポート通信設定"><span
-      class="header-section-number">4</span> Docker 環境での PostgreSQL のポート通信設定</h1>
+      <h1 data-number="4" id="docker-desktop-による-docker-の-gui-操作"><span
+      class="header-section-number">4</span> Docker Desktop による Docker の GUI 操作</h1>
+      <p>ここまでは CLI (CUI) ベースの Docker 操作について紹介してきましたが、これらの操作は
+      <strong>Docker Desktop</strong> を利用して GUI から行なうこともできます。</p>
+      <h2 data-number="4.1" id="コンテナの起動-1"><span class="header-section-number">4.1</span>
+      コンテナの起動</h2>
+      <p><code>docker container start xxxx</code> コマンド相当の操作</p>
+      <figure>
+      <img src="figs/02/docker-desktop-04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="4.2" id="コンテナの停止-1"><span class="header-section-number">4.2</span>
+      コンテナの停止</h2>
+      <p><code>docker container stop xxxx</code> コマンド相当の操作</p>
+      <figure>
+      <img src="figs/02/docker-desktop-05.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="4.3" id="コンテナのシェルを利用"><span
+      class="header-section-number">4.3</span> コンテナのシェルを利用</h2>
+      <p><code>docker container exec -it xxxx bash</code> コマンド相当の操作</p>
+      <figure>
+      <img src="figs/02/docker-desktop-07.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><strong>Exec</strong> タブを選択します。</p>
+      <figure>
+      <img src="figs/02/docker-desktop-08.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="4.4" id="コンテナの削除-1"><span class="header-section-number">4.4</span>
+      コンテナの削除</h2>
+      <p><code>docker container rm xxxx</code> コマンド相当の操作</p>
+      <figure>
+      <img src="figs/02/docker-desktop-06.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h1 data-number="5" id="docker-環境での-postgresql-のポート通信設定"><span
+      class="header-section-number">5</span> Docker 環境での PostgreSQL のポート通信設定</h1>
       <p>ここまでの説明では <code>docker container exec</code> を使って、コンテナ内の
       <strong>psql</strong> (クライアントツール) から PostgreSQL
       のサーバプロセスを利用しました。<strong>psql</strong> は
@@ -811,7 +865,7 @@ user=#</code></pre>
       <p>なお、既にホストOS側で別のアプリで 5432 番ポートを使っている場合は
       <code>-p 5432:5433</code> のようにして、ホスト側のポート番号を 5433
       に変えることができます。</p>
-      <h3 data-number="4.0.1" id="定着確認-4"><span class="header-section-number">4.0.1</span>
+      <h3 data-number="5.0.1" id="定着確認-4"><span class="header-section-number">5.0.1</span>
       定着確認</h3>
       <ul>
       <li>PostgreSQL をはじめとする代表的な RDBMS で使用される標準の通信ポート番号を答えよ。
@@ -825,7 +879,7 @@ user=#</code></pre>
       <li><strong>答え</strong>: <span class="masked">UNIXドメインソケット</span></li>
       </ul></li>
       </ul>
-      <h2 data-number="4.1" id="演習-宿題授業時間外"><span class="header-section-number">4.1</span>
+      <h2 data-number="5.1" id="演習-宿題授業時間外"><span class="header-section-number">5.1</span>
       演習 (宿題・授業時間外)</h2>
       <p>TCP/IP ポートのマッピング設定を含めて Docker コンテナを作成・起動し、Windows (ホストOS)
       上のクライアントツールから、コンテナ内の PostgreSQL サーバプロセスに接続してみましょう。</p>
@@ -834,7 +888,7 @@ user=#</code></pre>
       <p>Dockerコンテナとホストで「ポートをマッピングをする」とは、どのようなことですか。PostgreSQL
       のコンテナを作成する状況を想定して解説してください。</p>
       </blockquote>
-      <h3 data-number="4.1.1" id="コンテナ側の準備"><span class="header-section-number">4.1.1</span>
+      <h3 data-number="5.1.1" id="コンテナ側の準備"><span class="header-section-number">5.1.1</span>
       コンテナ側の準備</h3>
       <p>まず、<code>pg17</code> という名前のコンテナが存在していれば
       <code>docker container rm pg17</code> コマンドで削除しておきます。</p>
@@ -874,8 +928,8 @@ user=#</code></pre>
       <p><strong>2行目</strong>は **IPv6*+ 向けの設定で、同様に IPv6 のすべてのアドレス
       (<code>[::]</code>) で接続を受け付けていることを示しています。</p>
       </div>
-      <h3 data-number="4.1.2" id="ホスト側の準備とtcpip接続"><span
-      class="header-section-number">4.1.2</span> ホスト側の準備とTCP/IP接続</h3>
+      <h3 data-number="5.1.2" id="ホスト側の準備とtcpip接続"><span
+      class="header-section-number">5.1.2</span> ホスト側の準備とTCP/IP接続</h3>
       <p>次に、PostgreSQLに対応し、インストール不要で使える軽量のSQLクライアント「<strong>HeidiSQL</strong>
       (ハイディエスキューエル)」を取得してきます。<a
       href="https://www.heidisql.com/download.php">こちら</a>から「<strong>Portable Windows version
@@ -927,7 +981,7 @@ user=#</code></pre>
       TCP/IP 通信で PostgreSQL に接続することができます。</p>
       <p>なお、これ以降、本授業で <strong>HeidiSQL</strong>
       を使用する予定はないので、ダウンロードしたZipと、展開したフォルダは削除してもらって構いません。</p>
-      <h1 data-number="5" id="docker-とは-詳細"><span class="header-section-number">5</span> Docker
+      <h1 data-number="6" id="docker-とは-詳細"><span class="header-section-number">6</span> Docker
       とは (詳細)</h1>
       <p>以上のハンズオンを通じて、体験的に Docker の概要が把握できたと思います。ここからは、Docker
       について、少しだけ詳しく解説していきたいと思います。</p>
@@ -991,24 +1045,50 @@ user=#</code></pre>
       パッケージのバージョン管理ができます。それらと、コンテナ型仮想化技術 (Docker)
       って何が違うのですか？</p>
       </blockquote>
-      <h2 data-number="5.1" id="docker-の活用法"><span class="header-section-number">5.1</span>
+      <h2 data-number="6.1" id="docker-の活用法"><span class="header-section-number">6.1</span>
       Docker の活用法</h2>
       <p>Docker は、次のようなケースで、特に便利に利用することができます。</p>
-      <h3 data-number="5.1.1" id="ケース1"><span class="header-section-number">5.1.1</span>
+      <h3 data-number="6.1.1" id="ケース1"><span class="header-section-number">6.1.1</span>
       ケース1</h3>
       <p>例えば Python <strong>3.10</strong> でアプリを開発していたとします。このアプリが Python
       3.7、3.8、3.9、3.11
       といった<strong>異なる実行環境でも正常に動作するかを確認したいとき</strong>、Docker
       を利用すると便利です。各バージョンの Python
       環境をコンテナとして簡単に用意できるため、複数バージョンでの動作確認を1台ので手軽に行うことができます。</p>
-      <h3 data-number="5.1.2" id="ケース2"><span class="header-section-number">5.1.2</span>
+      <h3 data-number="6.1.2" id="ケース2"><span class="header-section-number">6.1.2</span>
       ケース2</h3>
       <p>チーム開発のように「<strong>全員の開発環境をそろえたい</strong>」ときにも Docker
       は強力です。OS (Windows/macOS) やライブラリの違いによる「<strong>自分の PC
       では動くのに、他の人のでは動かない…</strong>」というトラブルを防ぐことができます。同じ Docker
       イメージ (<code>Dockerfile</code> や <code>docker-compose.yaml</code> )
       を共有すれば、全員が限りなく同じ環境で開発することができます。</p>
-      <h2 data-number="5.2" id="デメリット"><span class="header-section-number">5.2</span>
+      <h3 data-number="6.1.3" id="参考書籍"><span class="header-section-number">6.1.3</span>
+      参考書籍</h3>
+      <p>Docker を使用して開発環境を構築するときは、以下の電子書籍が参考になると思います
+      (KindleUnlimited対象 2025/10/09現在)。</p>
+      <ul>
+      <li><a href="https://www.amazon.co.jp/dp/B0F7WGR9RW/">Docker Desktop for
+      Windows/Macでつくるクリーンな開発環境構築入門 (Webアプリケーション版) 2025版</a></li>
+      <li><a href="https://www.amazon.co.jp/dp/B08D8TXXHD/">Docker Desktop for
+      Windows/Macでつくるクリーンな開発環境構築入門 (Python版) 2025版</a></li>
+      </ul>
+      <div class="note type-senior">
+      <p><strong>VSCode を Dockerコンテナ 環境に接続して開発</strong></p>
+      <p>本科目では扱いませんが、VSCode の <strong>Dev Containers</strong>
+      という拡張機能を利用すると、<strong>VSCode から Dockerコンテナ内（Linux
+      環境）に直接接続して、プログラムの実行やデバッグを含む開発作業</strong>
+      を行うこともできます。</p>
+      <ul>
+      <li><a
+      href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers">Dev
+      Containers</a> 識別子: <code>ms-vscode-remote.remote-containers</code></li>
+      </ul>
+      <figure>
+      <img src="figs/02/vscode-01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      </div>
+      <h2 data-number="6.2" id="デメリット"><span class="header-section-number">6.2</span>
       デメリット</h2>
       <p>各種環境を Windows に直接構築する場合と比較して、Docker
       を利用して環境構築することには、次のような<strong>デメリット</strong>があります。</p>
@@ -1022,8 +1102,8 @@ user=#</code></pre>
       が頻繁に発生する処理、大量のデータを扱うデータベース操作などで影響があります。</li>
       </ul></li>
       </ul>
-      <h1 data-number="6" id="授業時間外学習の指示-宿題"><span
-      class="header-section-number">6</span> 授業時間外学習の指示 (宿題)</h1>
+      <h1 data-number="7" id="授業時間外学習の指示-宿題"><span
+      class="header-section-number">7</span> 授業時間外学習の指示 (宿題)</h1>
       <ul>
       <li>次回の講義で「<strong>小テスト</strong>」を実施します。</li>
       <li>講義のなかでは <code>docker container create</code>
@@ -1049,6 +1129,7 @@ user=#</code></pre>
       <ul>
       <li><a
       href="https://www.youtube.com/watch?v=B5tSZr_QqXw&amp;t=1366s">Dockerの基本を学んでコンテナ型の仮想環境を作ろう！</a>
+      <span class="citation" data-cites="YouTube">@YouTube</span>
       <ul>
       <li><strong>22:46</strong>～ Dokcerファイルからコンテナ起動</li>
       </ul></li>
