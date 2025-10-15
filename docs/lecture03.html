@@ -1344,7 +1344,7 @@ INSERT 0 2
       <ul>
       <li><code>DATE_PART</code> 関数は、標準SQLに含まれない PostgreSQL 独自の関数です。</li>
       <li><code>DATE_PART</code> 関数は、<code>DATE</code>
-      型のデータから「年」「月」「日」を取得するときにも使用できます。</li>
+      型のデータから「年」「月」「日」を取得する場合にも使用できます。</li>
       </ul>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
@@ -1372,21 +1372,37 @@ INSERT 0 2
       <h3 data-number="7.11.1" id="sqlドリル-7"><span class="header-section-number">7.11.1</span>
       SQLドリル💻</h3>
       <ul>
-      <li><code>ex-08_1.sql</code> 👉</li>
+      <li><code>ex-08_1.sql</code> 👉 <strong>characters</strong>
+      テーブルのレコードについて、次に示すようなカラムを出力する SQL
+      を記述せよ。なお、<strong>created_on</strong> は <code>2020-09-01</code>
+      以降の日付であることを仮定してよい。
+      <ul>
+      <li>ヒント: 和暦 (令和) の年は、西暦の値から <span class="masked">2018</span>
+      を引くことで求めることができる。</li>
+      </ul></li>
       </ul>
-      <pre><code> </code></pre>
+      <pre><code> id |  name   | created_on_1 |  created_on_2   
+----+---------+--------------+-----------------
+  1 | Marvin  | 2020-09-23   | 令和2年09月23日
+  2 | Zach    | 2020-10-25   | 令和2年10月25日
+  3 | Charlie | 2020-12-05   | 令和2年12月05日
+  4 | Tom     | 2020-12-05   | 令和2年12月05日
+  5 | Ivan    | 2021-02-15   | 令和3年02月15日
+ ～～ 以下略 ～～</code></pre>
       <h2 data-number="7.12" id="現在日時と日数時間の差を計算する-授業時間外学習"><span
       class="header-section-number">7.12</span> 現在日時と日数・時間の差を計算する
       (授業時間外学習)</h2>
-      <p>現在の日時を取得するには <code>CURRENT_TIMESTAMP</code>、現在の日付
-      (<strong>時刻を含まない</strong>) を取得するには <code>CURRENT_DATE</code> を使用します。</p>
+      <p>現在の日時を取得するには <code>CURRENT_TIMESTAMP</code> (<code>TIMESTAMP</code>型)
+      を使用します。また、現在の日付 (<strong>時刻を含まない</strong>) を取得するには
+      <code>CURRENT_DATE</code> (<code>DATE</code>型) を使用します。</p>
       <ul>
       <li>PostgreSQL では <code>CURRENT_TIMESTAMP</code> を <code>NOW()</code>
       のように書くことができます。</li>
       </ul>
-      <p>例えば、登録日 (<code>created_on</code>) から本日までの経過日数を得たいときに、次の
-      <strong>第05行目</strong> ように利用します。DATE型同士の減算 (<code>DATE - DATE</code>)
-      では、結果は <span class="masked">整数型 (日数差)</span> となります。</p>
+      <p>例えば、登録日 (<code>created_on</code>) から本日までの経過日数を得たいとき、以下の
+      <strong>第05行目</strong> のように <code>CURRENT_DATE</code> を使用します。<code>DATE</code>
+      型同士の減算 (<code>DATE - DATE</code>) の結果は <span class="masked">整数型 (日数差)</span>
+      となります。</p>
       <div class="sourceCode" id="cb68" data-caption="登録日からの経過日数の取得"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb68-1"><a href="#cb68-1"></a><span class="kw">SELECT</span></span>
 <span id="cb68-2"><a href="#cb68-2"></a>  <span class="kw">id</span>,</span>
@@ -1395,8 +1411,10 @@ INSERT 0 2
 <span id="cb68-5"><a href="#cb68-5"></a>  <span class="fu">CURRENT_DATE</span> <span class="op">-</span> created_on <span class="kw">AS</span> <span class="ot">&quot;Days Since Created&quot;</span></span>
 <span id="cb68-6"><a href="#cb68-6"></a><span class="kw">FROM</span></span>
 <span id="cb68-7"><a href="#cb68-7"></a>  s_characters;</span></code></pre></div>
-      <p>また、最終ログイン (<code>created_on</code>) から現在までの経過時間を得たい場合は、次の
-      <strong>第05行目</strong> のように利用します。</p>
+      <p>また、最終ログイン (<code>last_login_at</code>)
+      から現在日時までの経過時間を得たいとき、以下の <strong>第05行目</strong> のように
+      <code>CURRENT_TIMESTAMP</code> を使用します。<code>TIMESTAMP</code> 同士の減算
+      (<code>TIMESTAMP - TIMESTAMP</code>) の結果は <code>INTERVAL</code> 型になります。</p>
       <div class="sourceCode" id="cb69" data-caption="最終ログインからの経過時間"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb69-1"><a href="#cb69-1"></a><span class="kw">SELECT</span></span>
 <span id="cb69-2"><a href="#cb69-2"></a>  <span class="kw">id</span>,</span>
@@ -1404,18 +1422,54 @@ INSERT 0 2
 <span id="cb69-4"><a href="#cb69-4"></a>  last_login_at,</span>
 <span id="cb69-5"><a href="#cb69-5"></a>  <span class="fu">CURRENT_TIMESTAMP</span> <span class="op">-</span> last_login_at <span class="kw">AS</span> <span class="ot">&quot;Elapsed Time Since Last Login&quot;</span></span>
 <span id="cb69-6"><a href="#cb69-6"></a><span class="kw">FROM</span></span>
-<span id="cb69-7"><a href="#cb69-7"></a>  s_charact</span>
-<span id="cb69-8"><a href="#cb69-8"></a>  ers;</span></code></pre></div>
-      <p>TIMESTAMP同士の減算 (<code>TIMESTAMP - TIMESTAMP</code>) の結果は、INTERVAL型
-      になります。INTERVAL型については、DATE型やTIMESTAMP型と同様に <code>DATE_PART</code> や
-      <code>TO_CHAR</code> を使って特定の情報の抽出や整形が可能です。</p>
-      <!-- - TIMESTAMP型は、::DATE で、DATE型に -->
+<span id="cb69-7"><a href="#cb69-7"></a>  s_characters;</span></code></pre></div>
+      <p><code>INTERVAL</code> 型は、<code>DATE</code> 型や <code>TIMESTAMP</code>
+      型と同様に、<code>DATE_PART</code> 関数や <code>TO_CHAR</code>
+      関数と組みあわせて利用することができます。</p>
+      <hr />
+      <p><code>TIMESTAMP</code> 型は、次のように <code>DATE</code> 型にキャスト (型変換)
+      することができます。</p>
+      <div class="sourceCode" id="cb70" data-caption="TIMESTAMPをDATEに変換"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb70-1"><a href="#cb70-1"></a><span class="kw">SELECT</span></span>
+<span id="cb70-2"><a href="#cb70-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb70-3"><a href="#cb70-3"></a>  name,</span>
+<span id="cb70-4"><a href="#cb70-4"></a>  last_login_at,</span>
+<span id="cb70-5"><a href="#cb70-5"></a>  <span class="fu">CAST</span>(last_login_at <span class="kw">AS</span> <span class="dt">DATE</span>) <span class="kw">AS</span> <span class="ot">&quot;last_login_at(DATE型)&quot;</span></span>
+<span id="cb70-6"><a href="#cb70-6"></a><span class="kw">FROM</span></span>
+<span id="cb70-7"><a href="#cb70-7"></a>  s_characters;</span></code></pre></div>
+      <ul>
+      <li>PostgreSQL では <code>CAST(last_login_at AS DATE)</code> を <span
+      class="masked"><code>last_login_at::DATE</code></span> のように記述することができます
+      (標準SQL構文ではない)。</li>
+      </ul>
+      <p>なお、<code>DATE</code> 型や <code>TIMESTAMP</code>
+      型の値を直接指定したい場合は、<code>CAST</code>
+      関数を使って文字列から型を明示的に変換します。たとえば、<code>DATE</code> 型のリテラルは
+      <code>CAST('2025-04-01' AS DATE)</code>、<code>TIMESTAMP</code> 型のリテラルは
+      <code>CAST('2025-04-01 13:05:59' AS TIMESTAMP)</code> のように記述します。</p>
+      <div class="sourceCode" id="cb71" data-caption="DATEリテラル"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb71-1"><a href="#cb71-1"></a><span class="kw">SELECT</span></span>
+<span id="cb71-2"><a href="#cb71-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb71-3"><a href="#cb71-3"></a>  name,</span>
+<span id="cb71-4"><a href="#cb71-4"></a>  <span class="fu">CAST</span>(<span class="st">&#39;2026-03-31&#39;</span> <span class="kw">AS</span> <span class="dt">DATE</span>) <span class="op">-</span> <span class="fu">CURRENT_DATE</span> <span class="op">||</span> <span class="st">&#39;日&#39;</span> <span class="kw">AS</span> <span class="ot">&quot;卒業まであと&quot;</span></span>
+<span id="cb71-5"><a href="#cb71-5"></a><span class="kw">FROM</span></span>
+<span id="cb71-6"><a href="#cb71-6"></a>  s_users;</span></code></pre></div>
       <h3 data-number="7.12.1" id="sqlドリル-8"><span class="header-section-number">7.12.1</span>
       SQLドリル💻</h3>
       <ul>
-      <li><code>ex-09_1.sql</code> 👉</li>
+      <li><code>ex-09_1.sql</code> 👉 <strong>s_characters</strong>
+      テーブルのレコードについて、次に示すようなカラムを出力する SQL
+      を記述せよ。ただし、<strong>最終ログイン</strong>
+      は「2025年10月15日」を基準として計算すること。</li>
       </ul>
-      <pre><code> </code></pre>
+      <pre><code> id |  name   |    last_login_at    | 最終ログイン 
+----+---------+---------------------+--------------
+  1 | Marvin  | 2025-07-24 13:31:00 | 83日前
+  2 | Zach    | 2025-07-30 18:33:00 | 77日前
+  3 | Charlie | 2025-07-29 20:37:00 | 78日前
+  4 | Tom     |                     |
+  5 | Ivan    | 2025-07-18 19:29:00 | 89日前
+ ～～ 以下略 ～～</code></pre>
       <h1 data-number="8" id="授業時間外学習の指示-宿題"><span
       class="header-section-number">8</span> 授業時間外学習の指示 (宿題)</h1>
       <p>🚨<strong>本科目は「学修単位科目」であり、1回の講義あたり、4時間相当の授業時間外学習が求められる科目です</strong>🏃</p>
