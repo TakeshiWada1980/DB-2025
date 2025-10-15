@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>第03回 4I-データベース工学</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#連絡" id="toc-連絡"><span class="toc-section-number">1</span> 連絡</a></li>
+<li><a href="#sql演習環境の構築" id="toc-sql演習環境の構築"><span
+class="toc-section-number">2</span> SQL演習環境の構築</a>
+<ul>
+<li><a href="#リポジトリのクローン" id="toc-リポジトリのクローン"><span
+class="toc-section-number">2.1</span> リポジトリのクローン</a></li>
+<li><a href="#依存関係のインストール" id="toc-依存関係のインストール"><span
+class="toc-section-number">2.2</span> 依存関係のインストール</a></li>
+<li><a href="#環境変数の設定" id="toc-環境変数の設定"><span class="toc-section-number">2.3</span>
+環境変数の設定</a></li>
+<li><a href="#リモートリポジトリの作成" id="toc-リモートリポジトリの作成"><span
+class="toc-section-number">2.4</span> リモートリポジトリの作成</a></li>
+<li><a href="#リモートリポジトリの設定変更" id="toc-リモートリポジトリの設定変更"><span
+class="toc-section-number">2.5</span> リモートリポジトリの設定変更</a></li>
+</ul></li>
+<li><a href="#sql整形のための-vscode-の拡張機能の追加"
+id="toc-sql整形のための-vscode-の拡張機能の追加"><span class="toc-section-number">3</span>
+SQL整形のための VSCode の拡張機能の追加</a>
+<ul>
+<li><a href="#任意-code-spell-checker-拡張機能のインストール"
+id="toc-任意-code-spell-checker-拡張機能のインストール"><span class="toc-section-number">3.1</span>
+任意： Code Spell Checker 拡張機能のインストール</a></li>
+</ul></li>
+<li><a href="#docker-コンテナの起動と終了" id="toc-docker-コンテナの起動と終了"><span
+class="toc-section-number">4</span> Docker コンテナの起動と終了</a>
+<ul>
+<li><a href="#準備-docker-desktop-の起動確認" id="toc-準備-docker-desktop-の起動確認"><span
+class="toc-section-number">4.1</span> 準備: Docker Desktop の起動確認</a></li>
+<li><a href="#準備-コンテナの確認と削除-初回のみ" id="toc-準備-コンテナの確認と削除-初回のみ"><span
+class="toc-section-number">4.2</span> 準備: コンテナの確認と削除 (初回のみ)</a></li>
+<li><a href="#コンテナの起動" id="toc-コンテナの起動"><span class="toc-section-number">4.3</span>
+コンテナの起動</a></li>
+<li><a href="#コンテナの停止" id="toc-コンテナの停止"><span class="toc-section-number">4.4</span>
+コンテナの停止</a></li>
+</ul></li>
+<li><a href="#sqlファイルの実行" id="toc-sqlファイルの実行"><span
+class="toc-section-number">5</span> SQLファイルの実行</a>
+<ul>
+<li><a href="#sqlファイルの作成" id="toc-sqlファイルの作成"><span
+class="toc-section-number">5.1</span> SQLファイルの作成</a></li>
+<li><a href="#sqlファイルの実行-1" id="toc-sqlファイルの実行-1"><span
+class="toc-section-number">5.2</span> SQLファイルの実行</a></li>
+<li><a href="#github-copilot-の設定" id="toc-github-copilot-の設定"><span
+class="toc-section-number">5.3</span> GitHub Copilot の設定</a></li>
+</ul></li>
+<li><a href="#typescriptファイルの実行" id="toc-typescriptファイルの実行"><span
+class="toc-section-number">6</span> TypeScriptファイルの実行</a></li>
+<li><a href="#レコードの抽出" id="toc-レコードの抽出"><span class="toc-section-number">7</span>
+レコードの抽出</a>
+<ul>
+<li><a href="#準備-テーブルの作成とレコードの挿入"
+id="toc-準備-テーブルの作成とレコードの挿入"><span class="toc-section-number">7.1</span> 準備:
+テーブルの作成とレコードの挿入</a></li>
+<li><a href="#select文" id="toc-select文"><span class="toc-section-number">7.2</span>
+SELECT文</a></li>
+<li><a href="#任意のカラムのみを取得-射影" id="toc-任意のカラムのみを取得-射影"><span
+class="toc-section-number">7.3</span> 任意のカラムのみを取得 (射影)</a></li>
+<li><a href="#カラムに別名-エイリアス-をつける" id="toc-カラムに別名-エイリアス-をつける"><span
+class="toc-section-number">7.4</span> カラムに別名 (エイリアス) をつける</a></li>
+<li><a href="#sqlの文法上の注意" id="toc-sqlの文法上の注意"><span
+class="toc-section-number">7.5</span> SQLの文法上の注意</a></li>
+<li><a href="#定数値カラムを付加する" id="toc-定数値カラムを付加する"><span
+class="toc-section-number">7.6</span> 定数値カラムを付加する</a></li>
+<li><a href="#カラム値に文字列演算と算術演算を適用する"
+id="toc-カラム値に文字列演算と算術演算を適用する"><span class="toc-section-number">7.7</span>
+カラム値に文字列演算と算術演算を適用する</a></li>
+<li><a href="#case式を利用する" id="toc-case式を利用する"><span
+class="toc-section-number">7.8</span> CASE式を利用する</a></li>
+<li><a href="#nullを別の値に変換する" id="toc-nullを別の値に変換する"><span
+class="toc-section-number">7.9</span> NULLを別の値に変換する</a></li>
+<li><a href="#レコードの重複を省く" id="toc-レコードの重複を省く"><span
+class="toc-section-number">7.10</span> レコードの重複を省く</a></li>
+<li><a href="#日付時刻関数を利用する-授業時間外学習"
+id="toc-日付時刻関数を利用する-授業時間外学習"><span class="toc-section-number">7.11</span>
+日付・時刻関数を利用する (授業時間外学習)</a></li>
+<li><a href="#現在日時と日数時間の差を計算する-授業時間外学習"
+id="toc-現在日時と日数時間の差を計算する-授業時間外学習"><span
+class="toc-section-number">7.12</span> 現在日時と日数・時間の差を計算する (授業時間外学習)</a></li>
+</ul></li>
+<li><a href="#授業時間外学習の指示-宿題" id="toc-授業時間外学習の指示-宿題"><span
+class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>2025-4I データベース工学 第03回 講義資料</p>
+      <p>2025年10月16日 (木) 3-4時限</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="連絡"><span class="header-section-number">1</span> 連絡</h1>
+      <ul>
+      <li>小テスト❷ を実施します。
+      <ul>
+      <li>遅刻・欠席等により追試験を希望する場合は<a
+      href="lecture01.html#成績評価法と履修条の注意">前回講義で案内した手続き</a>をしてください。</li>
+      </ul></li>
+      </ul>
+      <h1 data-number="2" id="sql演習環境の構築"><span class="header-section-number">2</span>
+      SQL演習環境の構築</h1>
+      <p>前回の<a href="lecture02.html">第02回講義</a>では、PostgreSQLの
+      <strong>Dockerコンテナ</strong> を作成・起動し、<code>docker ontainer exec</code> コマンドで
+      <code>psql</code> を呼び出しました。そして、<code>psql</code> の対話モード
+      (コマンドライン入力)
+      で「<strong>テーブル作成</strong>」や「<strong>レコード抽出</strong>」などのSQLが実行できることを確認しました。</p>
+      <ul>
+      <li><a
+      href="lecture02.html#テーブルの作成-create-table">テーブルの作成</a><code>CREATE</code></li>
+      <li><a href="lecture02.html#レコードの挿入-insert">レコードの挿入</a><code>INSERT</code></li>
+      <li><a href="lecture02.html#レコードの抽出-select">レコードの抽出</a><code>SELECT</code></li>
+      </ul>
+      <p>しかし、今後、ハンズオン形式で SQL を学んでいくにあたって、コマンドラインから直接 SQL
+      を打ち込んで実行する方法は効率が悪くなります。そこで、VSCode で SQL を書いて、それを
+      PostgreSQLコンテナ に対して簡単に発行できるように <strong>SQL演習用の環境</strong>
+      を構築していきます。また、同時に TypeScriptプログラムから PostgreSQLコンテナ
+      に接続できるようにも環境を整えていきます。</p>
+      <h2 data-number="2.1" id="リポジトリのクローン"><span class="header-section-number">2.1</span>
+      リポジトリのクローン</h2>
+      <p>ターミナル (PowerShell) を開いて「<strong>SQL演習用の環境</strong>」を置きたいフォルダ
+      (例えば <code>C:\Users\xxxx\Documents</code> など) に移動してください。</p>
+      <ul>
+      <li>OneDriveで同期しているフォルダはトラブルの原因になるため避けてください。</li>
+      <li>パスに日本語が含まれているフォルダもトラブルの原因になるため避けてください。</li>
+      </ul>
+      <p>次のコマンドで、SQL演習用環境 (教材) のリポジトリをクローンしてください。</p>
+      <pre><code>git clone https://github.com/TakeshiWada1980/DB-2025-PostgreSQL.git DB-PostgreSQL</code></pre>
+      <p>クローンが完了すると、カレントフォルダのなかに <code>DB-PostgreSQL</code>
+      というフォルダが作成されます。次のコマンドでフォルダ内に移動して VSCode
+      を起動してください。</p>
+      <pre><code>cd DB-PostgreSQL
+code .</code></pre>
+      <h2 data-number="2.2" id="依存関係のインストール"><span
+      class="header-section-number">2.2</span> 依存関係のインストール</h2>
+      <p>VSCode で <code>[Ctrl]+[J]</code>
+      を押下してターミナルを開き、プロジェクトの実行に必要なパッケージをインストールしてください。</p>
+      <pre><code>npm i</code></pre>
+      <p><a
+      href="https://takeshiwada1980.github.io/Programming3-2024/">プログラミング3</a>で学んだように、<code>npm i</code>
+      は <code>package-lock.json</code> あるいは <code>package.json</code>
+      に書かれた情報をもとに、プロジェクトが依存するライブラリを自動でインストールするコマンドです。</p>
+      <ul>
+      <li><code>npm install</code> と入力しても同じ意味になります。</li>
+      </ul>
+      <h2 data-number="2.3" id="環境変数の設定"><span class="header-section-number">2.3</span>
+      環境変数の設定</h2>
+      <p>プロジェクトのルートフォルダに <code>.env</code> (環境変数の設定ファイル)
+      を新規作成してください。そして、<code>.env.dummy</code> ファイルを参考に、次のように
+      PostgreSQL への接続文字列を記述してください。</p>
+      <pre class="env"><code>DATABASE_URL=&quot;postgresql://student:secret123@localhost:5432/playground?schema=public&quot;</code></pre>
+      <p>上記の <strong>データベース接続文字列</strong> (DB Connection String) は
+      <code>docker/docker-compose.yaml</code> のデフォルト設定に対応しています。</p>
+      <div class="sourceCode" id="cb5" data-caption="docker/docker-compose.yaml (抜粋)"
+      data-startFrom="6"><pre class="sourceCode numberSource yaml numberLines"><code class="sourceCode yaml" style="counter-reset: source-line 5;"><span id="cb5-6"><a href="#cb5-6"></a><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="at">  </span><span class="fu">POSTGRES_USER</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;student&quot;</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="at">  </span><span class="fu">POSTGRES_PASSWORD</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;secret123&quot;</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="at">  </span><span class="fu">POSTGRES_DB</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;playground&quot;</span></span></code></pre></div>
+      <ul>
+      <li><code>docker-compose.yaml</code> は、複数の Docker
+      コンテナの起動方法や接続設定をまとめて管理するための設定ファイルです。</li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>次の docker-compose.yaml を解説してください。<br />
+      (ここに、プロジェクトのなかの docker/docker-compose.yaml の内容を貼り付ける)</p>
+      </blockquote>
+      <h2 data-number="2.4" id="リモートリポジトリの作成"><span
+      class="header-section-number">2.4</span> リモートリポジトリの作成</h2>
+      <p>ウェブブラウザから自分の<a
+      href="https://github.com/">GitHub</a>にアクセスして、<code>DB-PostgreSQL</code>
+      という名前で「空」の <strong>パブリックリポジトリ</strong>
+      を作成してください。この際、以下のように
+      <code>README.md</code>、<code>.gitignore</code>、<code>LICENSE</code>
+      などは含めずに、<strong>完全に空の状態で作成</strong>するようにしてください。</p>
+      <figure>
+      <img src="figs/03/github-01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>作成したリポジトリのURL <code>https://github.com/xxxx/DB-PostgreSQL.git</code>
+      をメモしおいてください。</p>
+      <h2 data-number="2.5" id="リモートリポジトリの設定変更"><span
+      class="header-section-number">2.5</span> リモートリポジトリの設定変更</h2>
+      <p>VSCode のターミナルから、次のコマンドを使って、教員が教材として提供したリモートリポジトリを
+      <code>upstream</code> という名前に変更します。</p>
+      <pre><code>git remote rename origin upstream</code></pre>
+      <p>つづいて、先ほど作成した <strong>自分のリモートリポジトリ</strong>
+      (<code>https://github.com/xxxx/DB-PostgreSQL.git</code>) を <code>origin</code>
+      という名前で追加し、初回の <code>push</code> を実行してください。</p>
+      <pre><code>git remote add origin https://github.com/xxxx/DB-PostgreSQL.git
+git push -u origin main</code></pre>
+      <p>ウェブブラウザから <code>https://github.com/xxxx/DB-PostgreSQL.git</code>
+      にアクセスして、プッシュが成功していることを確認してください。</p>
+      <hr />
+      <p>ここまで適切に作業できていれば、<code>git remote -v</code>
+      コマンドの応答が次のようになります。</p>
+      <pre><code>origin  https://github.com/xxxx/DB-PostgreSQL.git (fetch)
+origin  https://github.com/xxxx/DB-PostgreSQL.git (push)
+upstream  https://github.com/TakeshiWada1980/DB-2025-PostgreSQL.git (fetch)
+upstream  https://github.com/TakeshiWada1980/DB-2025-PostgreSQL.git (push)</code></pre>
+      <p>上記は、現在のローカルリポジトリ (PCのプロジェクトフォルダ)
+      が、<strong>2つのリモートリポジトリ</strong> と接続していることを示しています。</p>
+      <p><code>origin</code> は <strong>自分のGitHubアカウント上にあるリポジトリ</strong>
+      を指し、<code>upstream</code> は <span
+      class="masked">教員が公開している元の教材配付リポジトリ</span>
+      を指しています。教材が更新されたときは <code>upstream</code> から <code>fetch</code>
+      で変更を取り込み、自分の作業内容 (＝<strong>演習や課題の取り組み</strong>) は
+      <code>origin</code> に <code>push</code> します。</p>
+      <div class="note type-senior">
+      <p><strong>upstream に対するプッシュを無効化する設定</strong></p>
+      <p>皆さんが誤って <code>upstream</code> に対してプッシュ操作しても、GitHub
+      側の権限設定によって操作は拒否されます
+      (教材が書き換えられることはないので安心してください)。</p>
+      <p>より安全のために、次のコマンドで、ローカル側で <code>upstream</code>
+      に対するプッシュを無効化することもできます。</p>
+      <pre><code>git remote set-url --push upstream DISABLED</code></pre>
+      <p>この設定を行うと、<code>git remote -v</code> コマンドの出力は次のようになります。</p>
+      <pre><code>origin  https://github.com/xxxx/DB-PostgreSQL.git (fetch)
+origin  https://github.com/xxxx/DB-PostgreSQL.git (push)
+upstream  https://github.com/TakeshiWada1980/DB-2025-PostgreSQL.git (fetch)
+upstream  DISABLED (push)</code></pre>
+      </div>
+      <h3 data-number="2.5.1" id="教材の更新を取得するとき"><span
+      class="header-section-number">2.5.1</span> 教材の更新を取得するとき</h3>
+      <p>教材リポジトリ (<code>upstream</code>)
+      に更新されたときは、次の手順で自分のローカルリポジトリに最新の変更を取り込みます。</p>
+      <pre><code>git fetch upstream
+git switch main
+git merge upstream/main</code></pre>
+      <p>最後の <code>git merge upstream/main</code> コマンドを実行すると、以下のように VSCode
+      が自動的にエディタを開き、マージコミットのメッセージを表示します。内容を確認して「続行」ボタンを押してください。</p>
+      <figure>
+      <img src="figs/03/git-01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>マージが完了したら、<code>MERGE_MSG</code>
+      のタブは閉じて問題ありません。その後、VSCodeの「変更の同期」のボタンを押下して、自分のリモートリポジトリ
+      (<code>origin</code>) に変更を反映させます。</p>
+      <h3 data-number="2.5.2"
+      id="演習や課題の取り組みを自分のリモートリポジトリに保存するとき"><span
+      class="header-section-number">2.5.2</span>
+      演習や課題の取り組みを自分のリモートリポジトリに保存するとき</h3>
+      <p>演習や課題の取り組みを、自分のリモートリポジトリに保存するときは、次のコマンドを実行してください。</p>
+      <pre><code>git add .
+git commit -m &quot;任意のコミットメッセージ&quot;
+git push</code></pre>
+      <p>VSCode の GUI から実行しても問題ありません。</p>
+      <h1 data-number="3" id="sql整形のための-vscode-の拡張機能の追加"><span
+      class="header-section-number">3</span> SQL整形のための VSCode の拡張機能の追加</h1>
+      <p>SQL の整形 (フォーマット) のために <strong>SQL Formatter VSCode</strong> (識別子:
+      <code>renesaarsoo.sql-formatter-vsc</code>) という拡張機能を追加してください。</p>
+      <figure>
+      <img src="figs/03/vscode-01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>この拡張機能と <code>.vscode\settings.json</code> の設定により、<code>.sql</code>
+      ファイルの保存時に SQL が自動整形されるようになります。</p>
+      <div class="sourceCode" id="cb13" data-caption=".vscode\settings.json (抜粋)"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb13-1"><a href="#cb13-1"></a><span class="er">&quot;</span><span class="ot">[</span><span class="er">sql</span><span class="ot">]</span><span class="er">&quot;:</span> <span class="fu">{</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="dt">&quot;editor.defaultFormatter&quot;</span><span class="fu">:</span> <span class="st">&quot;ReneSaarsoo.sql-formatter-vsc&quot;</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="fu">}</span><span class="er">,</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="er">&quot;SQL-Formatter-VSCode.keywordCase&quot;:</span> <span class="er">&quot;upper&quot;,</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="er">&quot;SQL-Formatter-VSCode.denseOperators&quot;:</span> <span class="er">false,</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="er">&quot;SQL-Formatter-VSCode.linesBetweenQueries&quot;:</span> <span class="er">1,</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="er">&quot;SQL-Formatter-VSCode.expressionWidth&quot;:</span> <span class="er">80,</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="er">&quot;SQL-Formatter-VSCode.functionCase&quot;:</span> <span class="er">&quot;upper&quot;,</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="er">&quot;SQL-Formatter-VSCode.logicalOperatorNewline&quot;:</span> <span class="er">&quot;after&quot;,</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="er">&quot;SQL-Formatter-VSCode.dialect&quot;:</span> <span class="er">&quot;postgresql&quot;</span></span></code></pre></div>
+      <h2 data-number="3.1" id="任意-code-spell-checker-拡張機能のインストール"><span
+      class="header-section-number">3.1</span> 任意： Code Spell Checker 拡張機能のインストール</h2>
+      <p>SQLの演習に際して<a
+      href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker">Code
+      Spell Checker</a>(識別子:
+      <code>streetsidesoftware.code-spell-checker</code>)をインストールしておくことをお勧めします。</p>
+      <p>この拡張機能は、コード内の<strong>英単語のスペルミス</strong>を検出して、控えめな下線表示で警告してくれるものです。テーブル名やカラム名は、原則として英語で記述するため、スペルミスを防ぐ目的でスペルチェッカを導入しておくと便利です。</p>
+      <figure>
+      <img src="figs/03/vscode-05.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>なお、<strong>Code Spell Checker</strong>
+      が専門用語や略語を誤って「スペルミス」と判断しないようにするには
+      <code>.vscode/settings.json</code> に単語を登録してチェック対象外に設定します。</p>
+      <ul>
+      <li><i class="fa-brands fa-github"></i><a
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL/blob/main/.vscode/settings.json">.vscode
+      /settings.json</a>@ GitHub</li>
+      </ul>
+      <h1 data-number="4" id="docker-コンテナの起動と終了"><span
+      class="header-section-number">4</span> Docker コンテナの起動と終了</h1>
+      <h2 data-number="4.1" id="準備-docker-desktop-の起動確認"><span
+      class="header-section-number">4.1</span> 準備: Docker Desktop の起動確認</h2>
+      <p>はじめに Docker Desktop
+      が起動済みで、ステータスが「<strong>Running</strong>」となっていることを確認してください。タスクトレイにアイコンが見つからない場合はスタートメニューから「Docker
+      Desktop」を探して手動で起動してください。</p>
+      <figure>
+      <img src="figs/01/docker-01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="4.2" id="準備-コンテナの確認と削除-初回のみ"><span
+      class="header-section-number">4.2</span> 準備: コンテナの確認と削除 (初回のみ)</h2>
+      <p>前回講義で手動で作成した <code>pg17</code>
+      というコンテナが残っていると、以降の作業に影響するので (コンテナの名前が衝突するので)
+      削除しておきます。</p>
+      <p>次のコマンドで、停止中のものを含めて全てのコンテナを表示します。</p>
+      <pre><code>docker ps --all</code></pre>
+      <p><strong>NAMES</strong> が <code>pg17</code>
+      のコンテナがあれば、次のコマンドで削除してください。</p>
+      <pre><code>docker container rm pg17</code></pre>
+      <h2 data-number="4.3" id="コンテナの起動"><span class="header-section-number">4.3</span>
+      コンテナの起動</h2>
+      <p>次のコマンドで <strong>PostgreSQL</strong> と <strong>DbGate</strong>
+      のコンテナを起動します。</p>
+      <pre><code>npm run db:up</code></pre>
+      <p>これは <code>package.json</code> の <code>scripts</code>
+      に定義されたコマンドで、実際には次のような <code>docker compose</code>
+      コマンドが実行されます。Docker Compose とは <span
+      class="masked">複数のコンテナを協調して動かすための仕組み</span> です。</p>
+      <pre><code>docker compose -f docker/docker-compose.yaml -p pg17dev up -d --wait</code></pre>
+      <ul>
+      <li><i class="fa-brands fa-github"></i><a
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL/blob/main/package.json">package.json</a>@
+      GitHub</li>
+      <li><i class="fa-brands fa-github"></i><a
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL/blob/main/docker/docker-compose.yaml">docker/docker-compose.yaml</a>@
+      GitHub</li>
+      </ul>
+      <p><code>docker ps</code> で起動中のコンテナを確認すると、次のように表示されます (紙面の都合で
+      COMMAND、CREATED、STATUS の3項目は省略しています)。</p>
+      <pre><code>CONTAINER ID   IMAGE                 PORTS                                         NAMES
+5f43ab3cb20a   dbgate/dbgate:6.6.3   0.0.0.0:8080-&gt;3000/tcp, [::]:8080-&gt;3000/tcp   dbgate
+9f1ae6c1a832   pg17dev-postgres      0.0.0.0:5432-&gt;5432/tcp, [::]:5432-&gt;5432/tcp   pg17</code></pre>
+      <p>この表示から、<strong>DbGate</strong> (<code>dbgate</code>) と <strong>PostgreSQL</strong>
+      (<code>pg17</code>) の2つのコンテナが起動したことが分かります。なお、<strong>PORTS</strong>
+      には、割り当てられているポート番号が <code>ホストのポート番号-&gt;コンテナのポート番号</code>
+      の形式の形式で表示されます。すなわち、ホストOS (Windows) の <span class="masked">8080</span>
+      番ポートから、DbGate コンテナの 3000番ポートにマッピングされていることが分かります。</p>
+      <p>Docker Desktop からも、次のように2つのコンテナが起動していることが確認できます。</p>
+      <figure>
+      <img src="figs/03/docker-desktop-01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>Docker Desktop では、<code>pg17dev</code> という <strong>Compose Project</strong>
+      (コンポーズプロジェクト) のなかで、<code>dbgate</code> と <code>pg17</code>
+      の2つのコンテナが起動していることが確認できます。</p>
+      <h3 data-number="4.3.1" id="定着確認"><span class="header-section-number">4.3.1</span>
+      定着確認</h3>
+      <ul>
+      <li><code>docker ps</code> コマンドを実行した結果、あるコンテナの <strong>PORTS</strong>
+      の項目が <code>0.0.0.0:8001-&gt;80/tcp</code> と表示された。これは、コンテナの
+      <code>8001</code> 番ポートが、ホストの <code>80</code>
+      番ポートにマッピングされていることを示す。この説明は「適切である」か「適切ではない」か答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない</span></li>
+      </ul></li>
+      </ul>
+      <h3 data-number="4.3.2" id="演習"><span class="header-section-number">4.3.2</span> 演習</h3>
+      <p>既にコンテナが起動しているとき、再度 <code>npm run db:up</code>
+      コマンドを実行するとどうなるか確認してください。</p>
+      <h2 data-number="4.4" id="コンテナの停止"><span class="header-section-number">4.4</span>
+      コンテナの停止</h2>
+      <p>次のコマンドで <strong>PostgreSQL</strong> と <strong>DbGate</strong> の2つのコンテナ
+      (Compose Project <code>pg17dev</code> 配下の全てのコンテナ) を停止することができます。</p>
+      <pre><code>npm run db:down</code></pre>
+      <p>これも <code>package.json</code> の <code>scripts</code>
+      に定義されたコマンドで、実際には次のような <code>docker compose</code>
+      コマンドが実行されます。</p>
+      <pre><code>docker compose -f docker/docker-compose.yaml -p pg17dev down</code></pre>
+      <p>なお、コンテナを停止しても、データベースに保存された情報は <span class="masked">&gt;Docker
+      のボリュームに永続化されているため、そのまま保持されます</span>。そのため、再び
+      <code>npm run db:up</code>
+      でコンテナを起動すれば、前回の状態を引き継いで利用することができます。</p>
+      <p>一方で、<strong>データベースを初期状態に戻したい場合</strong> (＝Docker
+      ボリュームを含めてすべて削除したい場合) は、次のコマンドを実行してください。</p>
+      <pre><code>npm run db:reset</code></pre>
+      <ul>
+      <li><code>npm run db:reset</code>
+      を実行すると、これまでに作成したテーブルやレコードがすべて消去されます。完全にゼロから演習をやり直したいときや、データベースを初期状態に戻したい場合に使用してください。</li>
+      <li>コンテナを削除 (≠停止) しても、<strong>Docker
+      ボリュームを削除しない限り、データベースの内容は永続化されて残ります</strong>。そのため、同じボリュームを指定して新たにコンテナを作成すれば、以前と同じデータを引き続き利用することができます。</li>
+      <li>Docker ボリュームの一覧は <code>docker volume ls</code>
+      コマンドで確認ができます。また、Docker Desktop からも確認ができます。</li>
+      </ul>
+      <figure>
+      <img src="figs/03/docker-desktop-02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <div class="note type-senior">
+      <p><strong>Docker Volume について</strong></p>
+      <p>本科目では、Docker Volume については詳しく扱いませんが、実務で Docker
+      を利用する場合、ボリュームは非常に重要な概念となります。関心のある学生は、YouTubeやAIなどを利用して概要だけでも把握しておくことをお勧めします。</p>
+      </div>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>「Docker
+      ではコンテナを削除しても、ボリュームを削除しない限り、データは永続化されて残り、同じボリュームを指定して再度コンテナを作成すれば、以前と同じデータを引き続き利用することができる」と聞きました。これは、どういうことですか。詳しく説明してください
+      (&gt;_&lt;)/</p>
+      </blockquote>
+      <h1 data-number="5" id="sqlファイルの実行"><span class="header-section-number">5</span>
+      SQLファイルの実行</h1>
+      <p>前のセクションでコンテナを停止させている場合は、再度、<code>npm run db:up</code>
+      でコンテナを起動しておいてください。</p>
+      <p>前回講義では、PostgreSQL の CLI クライアントツールである <code>psql</code> に、直接 SQL文
+      を打ち込んで (またはコピー＆ペーストして) クエリを実行しました (<a
+      href="lecture02.html#psql-の対話モードで-postgresql-を操作">参照</a>)。しかし、このような方法は
+      SQL の <span class="masked">再利用や修正がしづらく、実行内容の記録や共有にも適さない</span>
+      ため、ここでは <strong>SQL をファイルに記述</strong> して、それを <code>psql</code>
+      に流し込む方法をとります。※ Python
+      にも対話モードがありますが、それを使って開発することはありませんよね？それと同じです。</p>
+      <h2 data-number="5.1" id="sqlファイルの作成"><span class="header-section-number">5.1</span>
+      SQLファイルの作成</h2>
+      <p>SQLファイルは、<strong>拡張子を</strong> <code>.sql</code>
+      <strong>として、原則として</strong> <code>sql</code>
+      <strong>フォルダのなかに配置してください</strong>。</p>
+      <p>ファイル整理の観点から、第03回講義なら <code>03</code>、第04回講義なら <code>04</code>
+      のようなサブフォルダを作成し、そこに配置することを推奨します
+      (フォルダやファイルの名前に日本語を使用すると予期せぬ不具合が生じる可能性があるので注意してください)。</p>
+      <p>実際に、試してみましょう。SQL演習環境 (プロジェクトフォルダ) のなかに
+      <code>sql/03/init-s_users.sql</code> を新規作成して…</p>
+      <figure>
+      <img src="figs/03/vscode-02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>次の SQL を記述して保存してください。このファイルは、4つのSQL文から構成されています
+      (文の区切りは <code>;</code> で判断してください)。</p>
+      <div class="sourceCode" id="cb22" data-caption="sql/03/init-s_users.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb22-1"><a href="#cb22-1"></a><span class="co">-- 既に同名のテーブルがあれば削除する</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> s_users;</span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="co">-- ユーザ情報を保持するテーブルを作成する</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> s_users (<span class="kw">id</span> <span class="dt">INT</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, name TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>, age <span class="dt">INT</span>);</span>
+<span id="cb22-6"><a href="#cb22-6"></a></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="co">-- テーブルにレコード（ユーザ情報）を挿入する</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a>  s_users (<span class="kw">id</span>, name, age)</span>
+<span id="cb22-10"><a href="#cb22-10"></a><span class="kw">VALUES</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a>  (<span class="dv">1</span>, <span class="st">&#39;Alice&#39;</span>, <span class="dv">20</span>),</span>
+<span id="cb22-12"><a href="#cb22-12"></a>  (<span class="dv">2</span>, <span class="st">&#39;Bob&#39;</span>, <span class="dv">25</span>);</span>
+<span id="cb22-13"><a href="#cb22-13"></a></span>
+<span id="cb22-14"><a href="#cb22-14"></a><span class="co">-- すべてのレコードを抽出する</span></span>
+<span id="cb22-15"><a href="#cb22-15"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> s_users;</span></code></pre></div>
+      <p>保存の際、VSCode拡張機能の<a
+      href="https://www.google.com/search?q=SQL+Formatter+VSCode">SQL Formatter
+      VSCode</a>が有効に機能していれば、<code>SELECT</code>
+      文が以下のように自動整形されるはずです。</p>
+      <div class="sourceCode" id="cb23" data-caption="sql/03/init-s_users.sql（抜粋・自動整形後）"
+      data-startFrom="14"><pre class="sourceCode numberSource sql numberLines"><code class="sourceCode sql" style="counter-reset: source-line 13;"><span id="cb23-14"><a href="#cb23-14"></a><span class="co">-- すべてのレコードを抽出する</span></span>
+<span id="cb23-15"><a href="#cb23-15"></a><span class="kw">SELECT</span></span>
+<span id="cb23-16"><a href="#cb23-16"></a>  <span class="op">*</span></span>
+<span id="cb23-17"><a href="#cb23-17"></a><span class="kw">FROM</span></span>
+<span id="cb23-18"><a href="#cb23-18"></a>  s_users;</span></code></pre></div>
+      <p>SQL Formatter VSCode の細かな挙動は、以下のファイルで設定 (カスタマイズ) が可能です。</p>
+      <ul>
+      <li><i class="fa-brands fa-github"></i><a
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL/blob/main/.vscode/settings.json">.vscode
+      /settings.json</a>@ GitHub</li>
+      </ul>
+      <h2 data-number="5.2" id="sqlファイルの実行-1"><span class="header-section-number">5.2</span>
+      SQLファイルの実行</h2>
+      <p>この SQL演習環境 において <code>sql/03/init-s_users.sql</code> (SQLファイル)
+      は、次のコマンドで実行可能です (実行可能なように環境を構成しています)。</p>
+      <pre><code>npm run sql sql/03/init-s_users.sql</code></pre>
+      <ul>
+      <li>パスは <strong>プロジェクトのルート</strong>を基準に指定してください。</li>
+      <li>区切り文字 (パスセパレータ) には <code>\</code> と <code>/</code>
+      のどちらも使用できます。</li>
+      </ul>
+      <p>また、<code>.vscode/tasks.json</code>
+      にビルドタスクを定義しているので、<code>init-s_users.sql</code>
+      のエディタタブがアクティブな状態で <code>[Ctrl]+[Shift]+[B]</code>
+      を押下することで、上記コマンドを実行することもできます
+      (実行できるように環境を構成しています)。</p>
+      <ul>
+      <li><code>[B]</code> は <span class="masked">ビルド (Build)</span> の B です。</li>
+      <li><i class="fa-brands fa-github"></i><a
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL/blob/main/.vscode/tasks.json">.vscode
+      /tasks.json</a>@ GitHub</li>
+      </ul>
+      <figure>
+      <img src="figs/03/vscode-03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>正常に実行できると、次のような応答が返ってきます。</p>
+      <pre><code>DROP TABLE
+CREATE TABLE
+INSERT 0 2
+ id | name  | age
+----+-------+-----
+  1 | Alice |  20
+  2 | Bob   |  25
+(2 行)</code></pre>
+      <h3 data-number="5.2.1" id="演習-1"><span class="header-section-number">5.2.1</span> 演習</h3>
+      <ul>
+      <li>誤ったファイルパスを引数に <code>npm run sql ...</code>
+      を実行するとどうなるか確認してください。</li>
+      <li>コンテナが起動していない状態 (だだし、Doker Desktop は起動している状態) で
+      <code>npm run sql ...</code> を実行すると (<code>[Ctrl]+[Shift]+[B]</code>
+      のショートカットを実行すると) どうなるか確認してください。</li>
+      <li>Doker Desktop が起動していない状態で <code>npm run sql ...</code> を実行すると
+      (<code>[Ctrl]+[Shift]+[B]</code> のショートカットを実行すると)
+      どうなるか確認してください。</li>
+      </ul>
+      <h2 data-number="5.3" id="github-copilot-の設定"><span
+      class="header-section-number">5.3</span> GitHub Copilot の設定</h2>
+      <p>SQLの構文理解やクエリ設計力を身につけるため、学習段階では SQL についての「GitHub Copilot
+      の補完機能」を <strong><em>OFF</em></strong> にしておくことを推奨します。</p>
+      <figure>
+      <img src="figs/03/vscode-04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h1 data-number="6" id="typescriptファイルの実行"><span class="header-section-number">6</span>
+      TypeScriptファイルの実行</h1>
+      <p>この SQL演習環境 において <strong>TypeScriptファイル</strong> は、基本的に <code>src</code>
+      フォルダのなかに、必要に応じてサブフォルダを作成して配置してください。</p>
+      <p>例えば、<code>src/samples/helloWorld.ts</code>
+      というファイルは、次のコマンドで実行できるようになっています。</p>
+      <pre><code>npx tsx src/samples/helloWorld.ts</code></pre>
+      <p>また、<strong>ファイルの変更を検知して自動的に再実行したい場合</strong>
+      (＝ホットリロードを利用する場合)
+      は、次のコマンドを使用してください。停止する場合は、ターミナル上で <code>[Ctrl]+[C]</code>
+      を入力してください。</p>
+      <pre><code>npx tsx watch src/samples/helloWorld.ts</code></pre>
+      <p>または、次のように npm スクリプト (<code>package.json</code>で定義しているスクリプト)
+      経由で実行もできます。</p>
+      <pre><code>npm run dev src/samples/helloWorld.ts</code></pre>
+      <h3 data-number="6.0.1" id="演習-授業時間外学習"><span
+      class="header-section-number">6.0.1</span> 演習 (授業時間外学習)</h3>
+      <p>この演習については <strong>授業時間外学習</strong>
+      として取り組んでください。授業時間中は、次のセクションに進んでください。</p>
+      <ul>
+      <li>プロジェクトフォルダのなかの <code>src/samples/pgSample.ts</code> は、PostgreSQL と
+      Node.js を接続するための公式ドライバである <strong>pg</strong> を利用した TypeScript
+      の実装例です。実際に、実行してみてください。また、生成AIを活用してプログラムの読解にも挑戦してみてください。
+      <ul>
+      <li><i class="fa-brands fa-github"></i><a
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL/blob/main/src/samples/pgSample.ts">pgSample.ts</a>@
+      GitHub</li>
+      </ul></li>
+      <li>プロジェクトフォルダのなかの <code>src/samples/drizzleSample.ts</code>
+      は、<strong>Drizzle</strong> という ORM を使って PostgreSQL と接続するTypeScript
+      の実装例です。実際に、実行してみてください。また、生成AIを活用してプログラムの読解にも挑戦してみてください。
+      <ul>
+      <li><i class="fa-brands fa-github"></i><a
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL/blob/main/src/samples/drizzleSample.ts">drizzleSample.ts</a>@
+      GitHub</li>
+      </ul></li>
+      <li>プロジェクトフォルダのなかの <code>src/samples/prismaSample.ts</code> は、Prisma (ORM)
+      を使って PostgreSQL と接続するTypeScript の実装例です。実際に、実行してみてください
+      (事前処理が必要です、ファイル内の説明をよく読んでから実行してください)。また、生成AIを活用してプログラムの読解にも挑戦してみてください。
+      <ul>
+      <li><i class="fa-brands fa-github"></i><a
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL/blob/main/src/samples/prismaSample.ts">prismaSample.ts</a>@
+      GitHub</li>
+      </ul></li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>以前、TypeScript において「Prisma」という ORM
+      を使用したことがあります。きょう、授業のなかで「Drizzle」という ORM
+      もあることを知りました。両者の違いや、使い分けについて分かりやすく教えてください。</p>
+      </blockquote>
+      <h1 data-number="7" id="レコードの抽出"><span class="header-section-number">7</span>
+      レコードの抽出</h1>
+      <p>ここからはRDB に対する各種操作 (クエリ) のなかでも、利用頻度の最も高い
+      <strong>レコードの抽出操作</strong> (<code>SELCT</code> 文) について学んでいきます。</p>
+      <ul>
+      <li>RDB に関する文脈において <strong>クエリ</strong> (<strong>Query</strong>)
+      とは、データベースに対する <span class="masked">「要求」「操作」問い合わせ」</span> を SQL
+      (＝Structured <strong>Query</strong> Language) で記述したものを意味します。</li>
+      </ul>
+      <h2 data-number="7.1" id="準備-テーブルの作成とレコードの挿入"><span
+      class="header-section-number">7.1</span> 準備: テーブルの作成とレコードの挿入</h2>
+      <p>プロジェクトフォルダ内の <code>from-teacher/03/init-s_characters.sql</code>
+      を、<code>sql/03/init-s_characters.sql</code> にコピーしてください。</p>
+      <p>その後、ターミナルから次のコマンドを実行、もしくは当該ファイルをエディタで開いている状態で
+      <code>[Ctrl]+[Shift]+[B]</code> を押下して、SQL を実行してください。</p>
+      <pre><code>npm run sql sql/03/init-s_characters.sql</code></pre>
+      <ul>
+      <li>コマンドの応答を確認し、エラーが発生していないことを確かめてください。正常に実行処理できていれば
+      <code>CREATE TABLE</code>、<code>INSERT 0 xx</code> のような応答が返ってきます。</li>
+      <li>PostgreSQL からのエラーメッセージを英語表示にしたい場合は
+      <code>npm run sql:en (ファイル名)</code> のようにコマンドを実行してください。</li>
+      </ul>
+      <p>この <code>init-s_characters.sql</code> のなかには、<strong>s_characters</strong>
+      というテーブルを作成する <code>CREATE</code> 文と、そのテーブルにレコードを挿入する
+      <code>INSERT</code> 文が記述されています。これら <code>CREATE</code> 文や、<code>INSERT</code>
+      文についての詳しい解説は、次週以降の授業で扱っていきます。現段階では、簡単に目を通しておくだけで大丈夫です。</p>
+      <p>この <strong>s_characters</strong> (キャラクタ)
+      テーブルは、次のような「8つのカラム」で構成されています。このあと、このテーブルに対してSQL文を書くので概要は把握しておいてください。</p>
+      <ul>
+      <li><code>id</code>: <strong>レコードを一意に識別するID</strong>。整数型。主キー。自動採番され
+      <code>NULL</code> は不可。</li>
+      <li><code>name</code>:
+      <strong>キャラクタ名</strong>。最大16文字の可変長文字列型。<code>NULL</code> は不可。
+      <ul>
+      <li>標準 SQL において、格納可能な最大文字数が決められた可変長文字列型を <span
+      class="masked">VARCHAR型</span> といいます。</li>
+      </ul></li>
+      <li><code>job</code>: <strong>ジョブ
+      (職業)</strong>。最大16文字の可変長文字列型。<code>NULL</code> は不可。</li>
+      <li><code>level</code>: <strong>レベル</strong>。整数型で、1〜99
+      の範囲に制約。<code>NULL</code> は不可。</li>
+      <li><code>buff</code>:
+      <strong>バフ（能力補正係数）</strong>。全体3桁、小数部2桁の実数型。<code>NULL</code> は不可。
+      <ul>
+      <li>具体的には <code>-9.99</code> 〜 <code>9.99</code> が格納可能。</li>
+      </ul></li>
+      <li><code>guild</code>: <strong>所属ギルド名</strong>。最大 32 文字の可変長文字列型。</li>
+      <li><code>last_login_at</code>: <strong>最終ログイン日時</strong>。日時型。
+      <ul>
+      <li>標準 SQL において、年・月・日と時刻 (時・分・秒) を格納するデータ型を <span
+      class="masked">TIMESTAMP型</span> といいます。</li>
+      <li>PostgreSQL では、さらに <span class="masked">タイムゾーン情報</span> も格納する
+      <strong>TIMESTAMPTZ型</strong> も存在します。<code>TIMESTAMPTZ</code> は、標準 SQL の
+      <code>TIMESTAMP WITH TIME ZONE</code> の別名 (エイリアス) となっています。</li>
+      </ul></li>
+      <li><code>created_on</code>: <strong>キャラクタ作成日</strong>。日付型 (時刻情報を含まない)。
+      <ul>
+      <li>標準 SQL において、時刻を含まず「年月日」を格納するデータ型を <strong>DATE型</strong>
+      といいます。</li>
+      </ul></li>
+      </ul>
+      <p><a href="http://localhost:8080/">http://localhost:8080/</a>もしくは<a
+      href="http://127.0.0.1:8080/">http://127.0.0.1:8080/</a>から「<strong>DbGateコンテナ</strong>」にアクセスして、<strong>s_characters</strong>
+      テーブルの内容を確認してみてください。</p>
+      <figure>
+      <img src="figs/03/dbgate-01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>PostgreSQL の <code>psql</code> で SQL
+      を実行したところ、<code>CREATE TABLE</code>、<code>INSERT 0 19</code>
+      のようなレスポンスが返ってきました。これらの意味を解説してください。</p>
+      </blockquote>
+      <h3 data-number="7.1.1" id="定着確認-1"><span class="header-section-number">7.1.1</span>
+      定着確認</h3>
+      <ul>
+      <li>標準 SQL において、タイムゾーン情報を含まず日付 (年・月・日) と時刻 (時・分・秒)
+      を格納するデータ型を答えよ。大文字で答えること。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">TIMESTAMP。TIMESTAMP WITHOUT TIME ZONE
+      でも可。</span></li>
+      </ul></li>
+      <li>標準 SQL
+      において、時刻を含まず、「年月日」を格納するデータ型を答えよ。大文字で答えること。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">DATE</span></li>
+      </ul></li>
+      <li>標準 SQL
+      において、格納可能な最大文字数が決められた可変長文字列型を答えよ。大文字で答えること。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">VARCHAR</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="7.2" id="select文"><span class="header-section-number">7.2</span>
+      SELECT文</h2>
+      <p>テーブルから任意のレコード (行) を取り出す操作を、RDB では <strong><em>抽出</em></strong>
+      (<strong>Selection</strong>) を呼びます。また、任意のカラム (列) だけを取り出す操作を
+      <strong><em>射影</em></strong> (<strong>Projection</strong>) と呼びます。これらの操作は
+      <strong>SQL</strong> (=Structured Query Language) では <code>SELECT</code>
+      キーワードによって指示します。</p>
+      <p><strong>s_characters</strong> テーブルに格納されたすべての情報 (すべてのレコードとカラム)
+      を取得するには、次のような <code>SELECT</code> 文 (SQLクエリ) を使用します。</p>
+      <div class="sourceCode" id="cb30"
+      data-caption="s_charactersのすべてのレコードとカラムを取得"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> s_characters;</span></code></pre></div>
+      <p>この <code>SELECT</code> 文
+      は、次のように「改行」や「インデント」で整形して記述することもできます。</p>
+      <div class="sourceCode" id="cb31"
+      data-caption="s_charactersのすべてのレコードとカラム全情報を取得 (整形)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw">SELECT</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>  <span class="op">*</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="kw">FROM</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a>  s_characters;</span></code></pre></div>
+      <ul>
+      <li><code>sql/03/tmp.sql</code>
+      を作成し、上記のコードを貼り付け、実際に実行してみてください。</li>
+      </ul>
+      <p>本科目の演習環境では、拡張機能<a
+      href="https://marketplace.visualstudio.com/items?itemName=ReneSaarsoo.sql-formatter-vsc">SQL
+      Formatter VSCode</a>により、ファイル保存時に改行形式に自動整形されます。</p>
+      <h3 data-number="7.2.1" id="定着確認-2"><span class="header-section-number">7.2.1</span>
+      定着確認</h3>
+      <ul>
+      <li>テーブルから必要なレコード (行) を取り出す操作を何というか。漢字2文字で答えよ。
+      <ul>
+      <li>答え: <span class="masked">抽出。英語では Selection</span></li>
+      </ul></li>
+      <li>テーブルから必要なカラム (列) を取り出す操作を何というか。漢字2文字で答えよ。
+      <ul>
+      <li>答え: <span class="masked">射影。英語では Projection</span></li>
+      </ul></li>
+      <li>テーブルから必要なレコードを取得する際に使用する SQL の命令 (キーワード)
+      を答えよ。大文字のアルファベットで答えること。
+      <ul>
+      <li>答え: <span class="masked">SELECT</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="7.3" id="任意のカラムのみを取得-射影"><span
+      class="header-section-number">7.3</span> 任意のカラムのみを取得 (射影)</h2>
+      <p><code>SELECT</code> 文では、テーブルに含まれるカラムのうち「<strong>どのカラムを取り出すか
+      (射影するか<code>SELECT</code>
+      文により)</strong>」を明示的に指定することができます。これは、先ほど <code>*</code>
+      を書いていた位置に
+      <strong>カンマで区切って「カラム名」を並べる</strong>ことで可能になります。</p>
+      <p>例えば、<code>id</code> と <code>name</code> と <code>guild</code>
+      の3つのカラムについてのみレコードを取得したいときには、次のような <code>SELECT</code> 文
+      (SQLクエリ) を使用します。</p>
+      <div class="sourceCode" id="cb32" data-caption="任意のカラムだけを取得(1)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">SELECT</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb32-3"><a href="#cb32-3"></a>  name,</span>
+<span id="cb32-4"><a href="#cb32-4"></a>  guild</span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="kw">FROM</span></span>
+<span id="cb32-6"><a href="#cb32-6"></a>  s_characters;</span></code></pre></div>
+      <p>また、次のように <span class="masked">同じカラムを2回以上指定</span>
+      したり、表示順を自由に指定したりすることも可能です。</p>
+      <div class="sourceCode" id="cb33" data-caption="任意のカラムだけを取得(2)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb33-1"><a href="#cb33-1"></a><span class="kw">SELECT</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>  name,</span>
+<span id="cb33-3"><a href="#cb33-3"></a>  guild,</span>
+<span id="cb33-4"><a href="#cb33-4"></a>  job,</span>
+<span id="cb33-5"><a href="#cb33-5"></a>  name</span>
+<span id="cb33-6"><a href="#cb33-6"></a><span class="kw">FROM</span></span>
+<span id="cb33-7"><a href="#cb33-7"></a>  s_characters;</span></code></pre></div>
+      <p>なお、<code>SELECT name, job, FROM s_characters;</code> のように、<span
+      class="masked">最後のカラム名のあとにカンマを付けてしまうと</span>、<strong>構文エラー</strong>
+      (Syntax Error) となるので注意してください。</p>
+      <h3 data-number="7.3.1" id="sqlドリル"><span class="header-section-number">7.3.1</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-01_1.sql</code> 👉 <strong>s_characters</strong>
+      テーブルのすべてのレコードについて
+      <code>id</code>、<code>name</code>、<code>level</code>、<code>created_on</code> を取得する SQL
+      文を記述し、実行せよ。なお、問題文に示した順番でカラムが並ぶようにすること。</li>
+      <li><code>ex-01_2.sql</code> 👉 <strong>s_characters</strong>
+      テーブルのすべてのレコードについて
+      <code>id</code>、<code>last_login_at</code>、<code>created_on</code>, <code>id</code>
+      を取得する SQL
+      文を記述し、実行せよ。なお、問題文に示した順番でカラムが並ぶようにすること。</li>
+      </ul>
+      <p><strong>SQLドリル</strong>💻は、プロジェクトのなかに <code>sql/03/drill/ex-01_1.sql</code>
+      のようなファイルを作成して取り組むことを推奨します。解答例 (参考) は <code>from-teacher</code>
+      フォルダのなかに配置しています。</p>
+      <ul>
+      <li>SQLドリルについては、<strong>文法や構文を体で覚える観点から</strong>、GitHub Copilot
+      のコード補完を切って、コピペも使用せず、コピペも避けて SQL を手入力することを推奨します。</li>
+      </ul>
+      <h2 data-number="7.4" id="カラムに別名-エイリアス-をつける"><span
+      class="header-section-number">7.4</span> カラムに別名 (エイリアス) をつける</h2>
+      <p>次のように <code>SELECT</code> 句において、カラム名のあとに <code>AS "xxxx"</code>
+      をつけることで、その<strong>カラムに別名 (エイリアス)
+      を付けること</strong>ができます。この別名は <span
+      class="masked">クエリ結果として表示されるカラムのヘッダ (ラベル)</span>
+      としても使用されます。</p>
+      <p>カラム名に記号やスペースが含まれない場合はダブルクォートを省略可能ですが、本科目
+      (小テストや試験を含む) のなかでは安全のため常にダブルクォートで囲むようにしてください。</p>
+      <div class="sourceCode" id="cb34" data-caption="カラムにエイリアスを設定"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb34-1"><a href="#cb34-1"></a><span class="kw">SELECT</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb34-3"><a href="#cb34-3"></a>  name <span class="kw">AS</span> <span class="ot">&quot;名前&quot;</span>, <span class="co">-- ◀◀ ここに注目</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a>  guild <span class="kw">AS</span> <span class="ot">&quot;所属ギルド&quot;</span> <span class="co">-- ◀◀ ここに注目</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="kw">FROM</span></span>
+<span id="cb34-6"><a href="#cb34-6"></a>  s_characters;</span></code></pre></div>
+      <p>実行結果 (上位5件のみ抜粋) は、次のようになります。</p>
+      <pre><code> id |  名前   | 所属ギルド 
+----+---------+------------
+  1 | Marvin  | Yamato
+  2 | Zach    | D.D.D
+  3 | Charlie |
+  4 | Tom     |
+  5 | Ivan    |</code></pre>
+      <ul>
+      <li><code>AS</code> につづく文字列を <strong>ダブルクォート</strong> ではなく
+      <strong>シングルクォート</strong>
+      で囲んで実行した場合、どのようになるかを確認してください。</li>
+      </ul>
+      <h3 data-number="7.4.1" id="sqlドリル-1"><span class="header-section-number">7.4.1</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-02_1.sql</code> 👉 <strong>s_characters</strong>
+      テーブルのすべてのレコードについて
+      <code>id</code>、<code>name</code>、<code>level</code>、<code>job</code> を取得する SQL
+      文を記述し、実行せよ。なお、カラムは問題文に示した順序で並ぶようにし、それぞれのカラムのヘッダ
+      (ラベル) が「ID」「名前」「レベル」「ジョブ」となるようにせよ。</li>
+      <li><code>ex-02_2.sql</code> 👉 <strong>s_users</strong> テーブルのすべてのレコードについて
+      <code>id</code>、<code>name</code>、<code>age</code> を取得する SQL
+      文を記述し、実行せよ。なお、カラムは問題文に示した順序で並ぶようにし、それぞれのカラムのヘッダ
+      (ラベル) が「出席番号」「氏名」「年齢」となるようにせよ。</li>
+      </ul>
+      <h2 data-number="7.5" id="sqlの文法上の注意"><span class="header-section-number">7.5</span>
+      SQLの文法上の注意</h2>
+      <p>SQL では、<code>--</code> を使って <strong>コメント</strong>
+      を記述します。また、<code>/*    */</code> で囲んで複数行のコメントアウトができます。VSCode
+      では <span class="masked"><code>[Ctrl]+[/]</code></span>
+      のショートカットでコメントの設定と解除ができます。</p>
+      <p>SQL では、<strong>1つの文の終わり</strong>を示すためにセミコロン <code>;</code>
+      使用します。実行環境によってはセミコロンを省略できることもありますが、<strong>本科目の小テストや試験のなかでは、必ずセミコロンをつけるようにしてください</strong>
+      (セミコロン抜けは誤答や減点とします)。</p>
+      <p>PostgreSQL において <code>SELECT</code> や <code>FROM</code>
+      などの「<strong>キーワード</strong>」は <span
+      class="masked">大文字と小文字を区別しません</span>。また、テーブル名やカラム名などの「<strong>識別子</strong>
+      (例えば <code>s_characters</code> や <code>id</code>
+      など)」も<strong>大文字と小文字を区別しません</strong>。</p>
+      <ul>
+      <li>ただし、<strong>識別子</strong>はダブルクォート <code>"</code>
+      で囲んだ場合のみ、大文字と小文字が「<strong>区別される</strong>」ので注意してください。</li>
+      </ul>
+      <div class="note type-tips">
+      <p><strong>SQLの「文」と「句」について</strong></p>
+      <p>次のような SQL
+      があるとき、これ全体を「<strong>SELECT文</strong>」と言います。また、文を構成している
+      <code>SELECT id, name, age</code>
+      の部分を「<strong>SELECT句</strong>」といい、<code>FROM s_users</code>
+      の部分を「<strong>FROM句</strong>」といいます。</p>
+      <div class="sourceCode" id="cb36" data-caption="SQL: SELECT文"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">SELECT</span> <span class="kw">id</span>, name, age <span class="kw">FROM</span> s_users;</span></code></pre></div>
+      <p>同様に、次のような SQL があるとき、全体を「<strong>INSERT文</strong>」と言います。また
+      <code>INSERT INTO s_users (id, name, age)</code> を「<strong>INSERT
+      INTO句</strong>」といい、<code>VALUES (1, 'Alice', 20), (2, 'Bob', 25)</code>
+      を「<strong>VALUES句</strong>」といいます。</p>
+      <div class="sourceCode" id="cb37" data-caption="SQL: INSERT文"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb37-1"><a href="#cb37-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>  s_users (<span class="kw">id</span>, name, age)</span>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="kw">VALUES</span></span>
+<span id="cb37-4"><a href="#cb37-4"></a>  (<span class="dv">1</span>, <span class="st">&#39;Alice&#39;</span>, <span class="dv">20</span>),</span>
+<span id="cb37-5"><a href="#cb37-5"></a>  (<span class="dv">2</span>, <span class="st">&#39;Bob&#39;</span>, <span class="dv">25</span>);</span></code></pre></div>
+      </div>
+      <h3 data-number="7.5.1" id="定着確認-3"><span class="header-section-number">7.5.1</span>
+      定着確認</h3>
+      <p>いま、<code>s_users</code> というテーブルに
+      <code>id</code>、<code>name</code>、<code>age</code> というカラムが存在している。</p>
+      <ul>
+      <li>このとき <code>select id, name form s_users;</code> という SQL
+      は「構文エラーになる」か「構文エラーにならない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">構文エラーになる。<code>form</code> ではなく
+      <code>from</code> が正しい。&lt;/span&gt;</li>
+      </ul></li>
+      <li>このとき <code>select id, name, age, from s_users;</code> という SQL
+      は「構文エラーになる」か「構文エラーにならない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">構文エラーになる。<code>age</code>
+      のあとのカンマが不要。</span></li>
+      </ul></li>
+      <li>このとき <code>select NAME, AGE, ID from S_users;</code> という SQL
+      は「構文エラーになる」か「構文エラーにならない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked">構文エラーにならない。テーブル名やカラム名などの「識別子」は大文字と小文字を区別しない。</span></li>
+      </ul></li>
+      <li>このとき <code>SELECT "name", "age" FROM "s_users";</code> という SQL
+      は「構文エラーになる」か「構文エラーにならない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">構文エラーにならない。</span></li>
+      </ul></li>
+      <li>このとき <code>SELECT "Name", age FROM s_users;</code> という SQL
+      は「構文エラーになる」か「構文エラーにならない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked">構文エラーになる。識別子をダブルクォートで囲むと大文字と小文字が区別される。</span></li>
+      </ul></li>
+      <li>このとき <code>SELECT 'name', 'age' FROM s_users;</code> という SQL
+      は「構文エラーになる」か「構文エラーにならない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">構文エラーにならない。ただし
+      <code>SELECT name, age FROM s_users;</code>
+      とは大きく結果が変わってくるので注意すること。後述の定数値カラムの扱いになる。&lt;/span&gt;</li>
+      </ul></li>
+      <li>このとき <code>SELECT * FROM 's_users';</code> という SQL
+      は「構文エラーになる」か「構文エラーにならない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">構文エラーになる。</span></li>
+      </ul></li>
+      </ul>
+      <p>いずれのケースも、実際に SQL を実行して結果を確認してみてください
+      (＝どのようなエラーメッセージが表表示されるのか把握しておいてください)。</p>
+      <h2 data-number="7.6" id="定数値カラムを付加する"><span
+      class="header-section-number">7.6</span> 定数値カラムを付加する</h2>
+      <p><code>SELECT</code>
+      文では、<strong>実際のテーブルには存在しない「定数値」をカラムとして追加して出力</strong>することもできます。</p>
+      <p>このとき、定数値として「<strong>文字列</strong>」を使うときは
+      <strong>シングルクォート</strong> <code>'</code> で囲んでください。一方で、<code>AS</code>
+      によるカラムのエイリアス指定では <strong>ダブルクォート</strong> <code>"</code>
+      を用いる点も注意してください。</p>
+      <div class="sourceCode" id="cb38" data-caption="定数値カラムを付加"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">SELECT</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>  <span class="dv">8</span> <span class="kw">AS</span> <span class="ot">&quot;RegionID&quot;</span>, <span class="co">-- 定数値のカラム</span></span>
+<span id="cb38-3"><a href="#cb38-3"></a>  <span class="st">&#39;Zipangu&#39;</span> <span class="kw">AS</span> <span class="ot">&quot;World&quot;</span>, <span class="co">-- 定数値のカラム</span></span>
+<span id="cb38-4"><a href="#cb38-4"></a>  <span class="kw">id</span> <span class="kw">AS</span> <span class="ot">&quot;ID&quot;</span>,</span>
+<span id="cb38-5"><a href="#cb38-5"></a>  name <span class="kw">AS</span> <span class="ot">&quot;名前&quot;</span></span>
+<span id="cb38-6"><a href="#cb38-6"></a><span class="kw">FROM</span></span>
+<span id="cb38-7"><a href="#cb38-7"></a>  s_characters;</span></code></pre></div>
+      <p>実際に実行して結果を確認してください。</p>
+      <div class="note type-tips">
+      <p><strong>注意</strong></p>
+      <p><strong>SELECT句</strong> において…</p>
+      <ul>
+      <li><strong>シングルクォート</strong>で囲んだ <code>'Zipangu'</code> は、文字列リテラル
+      (固定値) を表します。
+      <ul>
+      <li>「Zipangu」という「<strong>文字列そのもの</strong>」を意味します。</li>
+      </ul></li>
+      <li><strong>ダブルクォート</strong>で囲んだ <code>"Zipangu"</code> は <span
+      class="masked">識別子 (カラム名やテーブル名など)</span> を表します。
+      <ul>
+      <li>「Zipangu」という名前の「カラム」を意味します。</li>
+      </ul></li>
+      </ul>
+      </div>
+      <h3 data-number="7.6.1" id="sqlドリル-2"><span class="header-section-number">7.6.1</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-03_1.sql</code> 👉 <strong>s_characters</strong>
+      テーブルのすべてのレコードについて、次に示すようなチェックリストを出力する SQL
+      を記述せよ。</li>
+      </ul>
+      <pre><code> id |  name   | level | buff  |  不正行為の疑い?  
+----+---------+-------+-------+-------------------
+  1 | Marvin  |    35 | -0.15 | 要調査 / 問題なし
+  2 | Zach    |    62 |  0.10 | 要調査 / 問題なし
+  3 | Charlie |    57 |  0.00 | 要調査 / 問題なし
+  4 | Tom     |     1 |  0.00 | 要調査 / 問題なし
+  5 | Ivan    |    39 | -0.07 | 要調査 / 問題なし
+ ～～ 以下略 ～～</code></pre>
+      <ul>
+      <li><code>ex-03_2.sql</code> 👉 <strong>s_users</strong>
+      テーブルのすべてのレコードについて、次に示すようなカラムを出力する SQL を記述せよ。
+      <ul>
+      <li>age カラムの出力 (<code>XX歳</code>)
+      には、次のセクションで解説する「<strong>文字列の結合</strong>」を使用する必要があります。</li>
+      </ul></li>
+      </ul>
+      <pre><code> grade | course | name  | age  
+-------+--------+-------+------
+     4 | M      | Alice | 20歳
+     4 | M      | Bob   | 25歳</code></pre>
+      <h2 data-number="7.7" id="カラム値に文字列演算と算術演算を適用する"><span
+      class="header-section-number">7.7</span> カラム値に文字列演算と算術演算を適用する</h2>
+      <p>次に示すように、<code>SELECT</code> 句では <code>||</code>
+      演算子を使用して「<strong>文字列の結合
+      (連結)</strong>」ができます。これにより、複数のカラム値や文字列リテラルを組み合わせて、ひとつの文字列として出力することができます。</p>
+      <div class="sourceCode" id="cb41" data-caption="文字列演算"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb41-1"><a href="#cb41-1"></a><span class="kw">SELECT</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a>  name <span class="op">||</span> <span class="st">&#39; (&#39;</span> <span class="op">||</span> Job <span class="op">||</span> <span class="st">&#39;)&#39;</span> <span class="kw">AS</span> <span class="ot">&quot;Name(Job)&quot;</span>,</span>
+<span id="cb41-3"><a href="#cb41-3"></a>  <span class="st">&#39;Lv.&#39;</span> <span class="op">||</span> <span class="kw">level</span> <span class="kw">AS</span> <span class="ot">&quot;Level&quot;</span></span>
+<span id="cb41-4"><a href="#cb41-4"></a><span class="kw">FROM</span></span>
+<span id="cb41-5"><a href="#cb41-5"></a>  s_characters;</span></code></pre></div>
+      <p>実行結果 (上位5件のみ抜粋) は、次のようになります。</p>
+      <pre><code>    Name(Job)     | Level 
+------------------+-------
+ Marvin (Priest)  | Lv.35
+ Zach (Ninja)     | Lv.62
+ Charlie (Wizard) | Lv.57
+ Tom (Fighter)    | Lv.1
+ Ivan (Monk)      | Lv.39</code></pre>
+      <p>また、<strong>数値型のカラム</strong>については基本的な算術演算も可能です。</p>
+      <div class="sourceCode" id="cb43" data-caption="算術演算"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb43-1"><a href="#cb43-1"></a><span class="kw">SELECT</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a>  <span class="kw">id</span> <span class="kw">AS</span> <span class="ot">&quot;ID&quot;</span>, </span>
+<span id="cb43-3"><a href="#cb43-3"></a>  name <span class="kw">AS</span> <span class="ot">&quot;Name&quot;</span>,</span>
+<span id="cb43-4"><a href="#cb43-4"></a>  buff <span class="kw">AS</span> <span class="ot">&quot;Buff&quot;</span>,</span>
+<span id="cb43-5"><a href="#cb43-5"></a>  (buff <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> <span class="dv">100</span> <span class="op">||</span> <span class="st">&#39;%&#39;</span> <span class="kw">AS</span> <span class="ot">&quot;BuffApplied(%)&quot;</span></span>
+<span id="cb43-6"><a href="#cb43-6"></a><span class="kw">FROM</span></span>
+<span id="cb43-7"><a href="#cb43-7"></a>  s_characters;</span></code></pre></div>
+      <p>実行結果 (上位5件のみ抜粋) は、次のようになります。</p>
+      <pre><code> ID |  Name   | Buff  | BuffApplied(%) 
+----+---------+-------+----------------
+  1 | Marvin  | -0.15 | 85.00%
+  2 | Zach    |  0.10 | 110.00%
+  3 | Charlie |  0.00 | 100.00%
+  4 | Tom     |  0.00 | 100.00%
+  5 | Ivan    | -0.07 | 93.00%</code></pre>
+      <p><code>ROUND()</code>
+      関数を使えば、桁数を指定しての四捨五入ができます。例えば、<code>BuffApplied(%)</code>
+      を「<strong>整数値%</strong>」で出力したい場合は、次のようにします。</p>
+      <div class="sourceCode" id="cb45" data-caption="ROUND()による四捨五入"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb45-1"><a href="#cb45-1"></a><span class="kw">SELECT</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a>  <span class="kw">id</span> <span class="kw">AS</span> <span class="ot">&quot;ID&quot;</span>, </span>
+<span id="cb45-3"><a href="#cb45-3"></a>  name <span class="kw">AS</span> <span class="ot">&quot;Name&quot;</span>,</span>
+<span id="cb45-4"><a href="#cb45-4"></a>  <span class="fu">ROUND</span>((buff <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> <span class="dv">100</span>, <span class="dv">0</span>) <span class="op">||</span> <span class="st">&#39;%&#39;</span> <span class="kw">AS</span> <span class="ot">&quot;BuffApplied(%)&quot;</span></span>
+<span id="cb45-5"><a href="#cb45-5"></a><span class="kw">FROM</span></span>
+<span id="cb45-6"><a href="#cb45-6"></a>  s_characters;</span></code></pre></div>
+      <p>その他、切り上げ <code>CEIL()</code>、切り捨て <code>FLOOR()</code>
+      などの関数が利用できます。詳しくは、PostgreSQL の公式ドキュメント (リファレンス)
+      を参照してください。</p>
+      <ul>
+      <li><a
+      href="https://www.postgresql.org/docs/current/functions-math.html#FUNCTIONS-MATH-OP-TABLE">Table
+      9.4. Mathematical Operators</a></li>
+      <li><a
+      href="https://www.postgresql.org/docs/current/functions-math.html#FUNCTIONS-MATH-FUNC-TABLE">Table
+      9.5. Mathematical Functions</a></li>
+      </ul>
+      <h3 data-number="7.7.1" id="sqlドリル-3"><span class="header-section-number">7.7.1</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex_04-1.sql</code> 👉 <strong>s_characters</strong>
+      テーブルのすべてのレコードについて、次に示すようなカラムを出力する SQL を記述せよ。</li>
+      </ul>
+      <pre><code> id |        summary
+----+------------------------
+  1 | Marvin (Priest Lv.35)
+  2 | Zach (Ninja Lv.62)
+  3 | Charlie (Wizard Lv.57)
+  4 | Tom (Fighter Lv.1)
+  5 | Ivan (Monk Lv.39)
+ ～～ 以下略 ～～</code></pre>
+      <ul>
+      <li><code>ex_04-2.sql</code> 👉 <strong>s_characters</strong>
+      テーブルのすべてのレコードについて、次に示すようなカラムを出力する SQL
+      を記述せよ。ただし、<strong>Boosted Level</strong> は <strong>level</strong>
+      を「1.2倍」にして切り上げた値とすること。</li>
+      </ul>
+      <pre><code> id | Level | Boosted Level 
+----+-------+---------------
+  1 |    35 |            42
+  2 |    62 |            75
+  3 |    57 |            69
+  4 |     1 |             2
+  5 |    39 |            47</code></pre>
+      <h3 data-number="7.7.2" id="定着確認-4"><span class="header-section-number">7.7.2</span>
+      定着確認</h3>
+      <ul>
+      <li><strong>products</strong> というテーブルに <strong>value</strong>
+      という数値型のカラムがある。このカラムの値を
+      <strong>小数第3位</strong>で四捨五入して、<strong>小数第2位</strong>までを取得する
+      <code>SELECT</code> 文として、以下のSQLを完成させたい。<code>【 X 】</code>
+      に記述すべき語を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked"><code>ROUND(value, 2)</code></span></li>
+      </ul></li>
+      </ul>
+      <div class="sourceCode" id="cb48" data-caption="SQL"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb48-1"><a href="#cb48-1"></a><span class="kw">SELECT</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a>  <span class="fu">value</span>,</span>
+<span id="cb48-3"><a href="#cb48-3"></a>  【 X 】AS <span class="ot">&quot;Rounded Value&quot;</span></span>
+<span id="cb48-4"><a href="#cb48-4"></a><span class="kw">FROM</span></span>
+<span id="cb48-5"><a href="#cb48-5"></a>  products;</span></code></pre></div>
+      <h2 data-number="7.8" id="case式を利用する"><span class="header-section-number">7.8</span>
+      CASE式を利用する</h2>
+      <p><code>SELECT</code> 句では「<strong>CASE式</strong>」というものを利用して <span
+      class="masked">条件に応じて異なる値を出力すること</span>
+      ができます。この「<strong>CASE式</strong>」は <code>SELECT</code> 句に限らず、SQL
+      のなかで<strong>条件分岐を実現するための強力な仕組み</strong>で、実務でも頻繁に利用されています。</p>
+      <div class="sourceCode" id="cb49" data-caption="CASE式による条件分岐"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb49-1"><a href="#cb49-1"></a><span class="kw">SELECT</span></span>
+<span id="cb49-2"><a href="#cb49-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb49-3"><a href="#cb49-3"></a>  name,</span>
+<span id="cb49-4"><a href="#cb49-4"></a>  <span class="kw">level</span>,</span>
+<span id="cb49-5"><a href="#cb49-5"></a>  <span class="cf">CASE</span></span>
+<span id="cb49-6"><a href="#cb49-6"></a>    <span class="cf">WHEN</span> <span class="kw">level</span> <span class="op">&gt;=</span> <span class="dv">80</span> <span class="cf">THEN</span> <span class="st">&#39;SS&#39;</span></span>
+<span id="cb49-7"><a href="#cb49-7"></a>    <span class="cf">WHEN</span> <span class="kw">level</span> <span class="op">&gt;=</span> <span class="dv">60</span> <span class="cf">THEN</span> <span class="st">&#39;S&#39;</span></span>
+<span id="cb49-8"><a href="#cb49-8"></a>    <span class="cf">WHEN</span> <span class="kw">level</span> <span class="op">&gt;=</span> <span class="dv">40</span> <span class="cf">THEN</span> <span class="st">&#39;A&#39;</span></span>
+<span id="cb49-9"><a href="#cb49-9"></a>    <span class="cf">ELSE</span> <span class="st">&#39;B&#39;</span></span>
+<span id="cb49-10"><a href="#cb49-10"></a>  <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">&quot;class&quot;</span></span>
+<span id="cb49-11"><a href="#cb49-11"></a><span class="kw">FROM</span></span>
+<span id="cb49-12"><a href="#cb49-12"></a>  s_characters;</span></code></pre></div>
+      <p>実行結果 (上位5件のみ抜粋) は、次のようになります。</p>
+      <pre><code> id |  name   | level | class 
+----+---------+-------+-------
+  1 | Marvin  |    35 | B
+  2 | Zach    |    62 | S
+  3 | Charlie |    57 | A
+  4 | Tom     |     1 | B
+  5 | Ivan    |    39 | B</code></pre>
+      <p><code>WHEN</code> 句の「評価式」では <strong>値の等価比較</strong> に <code>==</code>
+      ではなく <code>=</code>
+      使用する点に注意してください。一般的なプログラミング言語とは異なり、SQL では <code>=</code>
+      が「等しい」を意味します。一方で「等しくない」ことを判定したいとき、PostgreSQL では
+      <code>!=</code> または <code>&lt;&gt;</code> が使用できます (標準SQLでは <code>&lt;&gt;</code>
+      が正式な記法とされています)。また、評価式では <code>AND</code> や <code>OR</code>
+      を利用することができます。</p>
+      <p>なお、「<strong>値が</strong> <code>NULL</code>
+      <strong>かどうか</strong>」を評価するためには、以下のように <code>ISNULL</code>
+      を使用します。<code>hege = NULL</code>
+      のように評価することはできないので十分に注意してください。</p>
+      <div class="sourceCode" id="cb51" data-caption="NULL判定の評価式"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb51-1"><a href="#cb51-1"></a><span class="kw">SELECT</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb51-3"><a href="#cb51-3"></a>  name,</span>
+<span id="cb51-4"><a href="#cb51-4"></a>  <span class="cf">CASE</span></span>
+<span id="cb51-5"><a href="#cb51-5"></a>    <span class="cf">WHEN</span> guild ISNULL <span class="cf">THEN</span> <span class="st">&#39;(無所属)&#39;</span> <span class="co">-- NULL判定には ISNULL を使用</span></span>
+<span id="cb51-6"><a href="#cb51-6"></a>    <span class="cf">ELSE</span> guild</span>
+<span id="cb51-7"><a href="#cb51-7"></a>  <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">&quot;guild&quot;</span></span>
+<span id="cb51-8"><a href="#cb51-8"></a><span class="kw">FROM</span></span>
+<span id="cb51-9"><a href="#cb51-9"></a>  s_characters;</span></code></pre></div>
+      <p>実行結果 (上位5件のみ抜粋) は、次のようになります。</p>
+      <pre><code> id |  name   |  guild   
+----+---------+----------
+  1 | Marvin  | Yamato
+  2 | Zach    | D.D.D
+  3 | Charlie | (無所属)
+  4 | Tom     | (無所属)
+  5 | Ivan    | (無所属)</code></pre>
+      <h3 data-number="7.8.1" id="sqlドリル-4"><span class="header-section-number">7.8.1</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-05_1.sql</code> 👉 <strong>s_characters</strong>
+      テーブルのすべてのレコードについて、次に示すようなカラムを出力する SQL
+      を記述せよ。なお、<strong>battle_position</strong> は <strong>job</strong>
+      が「Fighter」「Samurai」「Monk」「Ninja」のときに「frontline」、それ以外のときに「backline」となるようにすること。</li>
+      </ul>
+      <pre><code> id |  name   |   job   | battle_position 
+----+---------+---------+-----------------
+  1 | Marvin  | Priest  | backline
+  2 | Zach    | Ninja   | frontline
+  3 | Charlie | Wizard  | backline
+  4 | Tom     | Fighter | frontline
+  5 | Ivan    | Monk    | frontline
+ ～～ 以下略 ～～</code></pre>
+      <ul>
+      <li><code>ex-05_2.sql</code> 👉 <strong>s_characters</strong>
+      テーブルのレコードについて、次に示すようなカラムを出力する SQL
+      を記述せよ。なお、<strong>status</strong> は <strong>buff</strong> が、0.0
+      のときは「–」、負数の場合は「debuff」、正数の場合は「buff」となるようにすること。</li>
+      </ul>
+      <pre><code> id |  name   | buff  | status 
+----+---------+-------+--------
+  1 | Marvin  | -0.15 | debuff
+  2 | Zach    |  0.10 | buff
+  3 | Charlie |  0.00 | --
+  4 | Tom     |  0.00 | --
+  5 | Ivan    | -0.07 | debuff
+ ～～ 以下略 ～～</code></pre>
+      <ul>
+      <li><code>ex-05_3.sql</code> 👉 <strong>s_characters</strong>
+      テーブルのレコードについて、次に示すようなカラムを出力する SQL
+      を記述せよ。なお、<strong>class</strong> は以下の条件により決定すること。
+      <ul>
+      <li><code>Master</code> : <strong>level</strong>
+      が「50」以上、かつ、<strong>created_on</strong> が「2022/12/31」以前</li>
+      <li><code>Veteran</code> : <code>Master</code> の条件を満たさず、<strong>level</strong>
+      が「30」以上、かつ、<strong>created_on</strong> が「2023/12/31」以前</li>
+      <li><code>Rookie</code> : <code>Master</code> の条件も、<code>Veteran</code>
+      の条件も満たさない</li>
+      </ul></li>
+      </ul>
+      <pre><code> id |  name   | level | created_on |  class  
+----+---------+-------+------------+---------
+  1 | Marvin  |    35 | 2020-09-23 | Veteran
+  2 | Zach    |    62 | 2020-10-25 | Master
+  3 | Charlie |    57 | 2020-12-05 | Master
+  4 | Tom     |     1 | 2020-12-05 | Rookie
+  5 | Ivan    |    39 | 2021-02-15 | Veteran
+ ～～ 以下略 ～～</code></pre>
+      <h2 data-number="7.9" id="nullを別の値に変換する"><span
+      class="header-section-number">7.9</span> NULLを別の値に変換する</h2>
+      <p>前のセクションで説明したように「CASE式」を利用して <code>NULL</code>
+      を任意の値に置き換えることができました。これと同じ処理は <code>COALESCE</code> (コアレス)
+      という関数でシンプルに行なうことができます。</p>
+      <p><code>COALESCE</code> は <span class="masked">引数のなかから、最初に見つかった
+      <code>NULL</code> ではない値を返す関数</span>
+      となります。引数を左から順に評価し、<code>NULL</code>
+      ではない値が見つかった時点で、それを結果として返します。</p>
+      <p>たとえば、次のように書くと、<strong>guild</strong> の値が <code>NULL</code> の場合にだけ
+      <code>(無所属)</code> が表示されるようになります。</p>
+      <div class="sourceCode" id="cb56" data-caption="COALESCE関数によるNULLの変換"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb56-1"><a href="#cb56-1"></a><span class="kw">SELECT</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb56-3"><a href="#cb56-3"></a>  name,</span>
+<span id="cb56-4"><a href="#cb56-4"></a>  guild,</span>
+<span id="cb56-5"><a href="#cb56-5"></a>  <span class="fu">COALESCE</span>(guild, <span class="st">&#39;(無所属)&#39;</span>) <span class="kw">AS</span> <span class="ot">&quot;所属&quot;</span></span>
+<span id="cb56-6"><a href="#cb56-6"></a><span class="kw">FROM</span></span>
+<span id="cb56-7"><a href="#cb56-7"></a>  s_characters;</span></code></pre></div>
+      <p>実行結果 (上位5件のみ抜粋) は、次のようになります。</p>
+      <pre><code> id |  name   | guild  |   所属   
+----+---------+--------+----------
+  1 | Marvin  | Yamato | Yamato
+  2 | Zach    | D.D.D  | D.D.D
+  3 | Charlie |        | (無所属)
+  4 | Tom     |        | (無所属)
+  5 | Ivan    |        | (無所属)</code></pre>
+      <h3 data-number="7.9.1" id="sqlドリル-5"><span class="header-section-number">7.9.1</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-06_1.sql</code> 👉 <strong>s_characters</strong>
+      テーブルのレコードについて、次に示すようなカラムを出力する SQL を記述せよ。なお、<strong>guild
+      or (name)</strong> の値は、次の条件に従って決定すること。<code>CASE</code>
+      式は使用せず、<code>COALESCE</code> 関数を用いること。
+      <ul>
+      <li><strong>guild</strong> が <code>NULL</code> でない場合は、その値 (<strong>guild</strong>)
+      を表示する。</li>
+      <li><strong>guild</strong> が <code>NULL</code> の場合は、<strong>name</strong>
+      を括弧で囲んで表示する。</li>
+      </ul></li>
+      </ul>
+      <pre><code> id |  name   | guild  | guild or (name) 
+----+---------+--------+---------------
+  1 | Marvin  | Yamato | Yamato
+  2 | Zach    | D.D.D  | D.D.D
+  3 | Charlie |        | (Charlie)
+  4 | Tom     |        | (Tom)
+  5 | Ivan    |        | (Ivan)
+ ～～ 以下略 ～～</code></pre>
+      <h2 data-number="7.10" id="レコードの重複を省く"><span
+      class="header-section-number">7.10</span> レコードの重複を省く</h2>
+      <p>次の SQL を実行すると、<strong>s_characters</strong> テーブルのすべてのレコードの
+      <code>job</code> カラムの値を取得することができます。</p>
+      <div class="sourceCode" id="cb59" data-caption="jobカラムのみの出力"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb59-1"><a href="#cb59-1"></a><span class="kw">SELECT</span></span>
+<span id="cb59-2"><a href="#cb59-2"></a>  job</span>
+<span id="cb59-3"><a href="#cb59-3"></a><span class="kw">FROM</span></span>
+<span id="cb59-4"><a href="#cb59-4"></a>  s_characters;</span></code></pre></div>
+      <p>具体的な実行結果は、次のようになります。</p>
+      <pre><code>   job   
+---------
+ Priest
+ Ninja
+ Wizard
+ Fighter
+ Monk
+ Priest
+ Fighter
+ Monk
+ Samurai
+ Fighter
+ Wizard
+ Samurai
+ Wizard
+ Ninja
+ Priest
+ Samurai
+ Fighter
+ Priest
+ Wizard
+(19 行)</code></pre>
+      <p>ここで、<code>SELECT</code> 句に <code>DISTINCT</code> (ディスティンクト)
+      キーワードを使うと <span class="masked">重複するレコードを省いて結果を取得すること</span>
+      ができます。</p>
+      <div class="sourceCode" id="cb61" data-caption="DISTINCTによる重複の除外"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb61-1"><a href="#cb61-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> <span class="co">-- ◀◀ ここに注目</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a>  job</span>
+<span id="cb61-3"><a href="#cb61-3"></a><span class="kw">FROM</span></span>
+<span id="cb61-4"><a href="#cb61-4"></a>  s_characters;</span></code></pre></div>
+      <p>この場合の実行結果は次のようになります。</p>
+      <pre><code>   job   
+---------
+ Samurai
+ Ninja
+ Wizard
+ Fighter
+ Monk
+ Priest
+(6 行)</code></pre>
+      <h3 data-number="7.10.1" id="sqlドリル-6"><span class="header-section-number">7.10.1</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-07_1.sql</code> 👉 <strong>s_characters</strong>
+      テーブルから、キャラクタが所属しているギルドの一覧を取得する SQL
+      を記述せよ。なお、<code>NULL</code> は「未所属」として出力すること。</li>
+      </ul>
+      <pre><code> ギルド 
+--------
+ 未所属
+ Yamato
+ hameln
+ D.D.D</code></pre>
+      <ul>
+      <li><code>ex-07_2.sql</code> 👉 <strong>s_characters</strong>
+      テーブルから、次のように各ギルドに所属しているジョブを重複を除いて取得する SQL
+      を記述せよ。なお、ギルドが <code>NULL</code> のときは「未所属」として出力すること。</li>
+      </ul>
+      <pre><code> ギルド | ジョブ  
+--------+---------
+ 未所属 | Wizard
+ D.D.D  | Wizard
+ D.D.D  | Ninja
+ hameln | Fighter
+ hameln | Monk
+ Yamato | Priest
+ hameln | Wizard
+ 未所属 | Priest
+ D.D.D  | Fighter
+ 未所属 | Fighter
+ Yamato | Samurai
+ Yamato | Fighter
+ hameln | Samurai
+ 未所属 | Monk
+ 未所属 | Samurai
+(15 行)</code></pre>
+      <h2 data-number="7.11" id="日付時刻関数を利用する-授業時間外学習"><span
+      class="header-section-number">7.11</span> 日付・時刻関数を利用する (授業時間外学習)</h2>
+      <p>TIMESTAMP型のデータから「年」「月」「日」「時」「分」「秒」を「<strong>数値</strong>」として得たいときは
+      <code>DATE_PART</code> 関数を使用します。</p>
+      <div class="sourceCode" id="cb65" data-caption="日付と時刻の分解"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb65-1"><a href="#cb65-1"></a><span class="kw">SELECT</span></span>
+<span id="cb65-2"><a href="#cb65-2"></a>  name,</span>
+<span id="cb65-3"><a href="#cb65-3"></a>  last_login_at,</span>
+<span id="cb65-4"><a href="#cb65-4"></a>  DATE_PART(<span class="st">&#39;year&#39;</span>, last_login_at) <span class="kw">AS</span> <span class="ot">&quot;year&quot;</span>,</span>
+<span id="cb65-5"><a href="#cb65-5"></a>  DATE_PART(<span class="st">&#39;month&#39;</span>, last_login_at) <span class="kw">AS</span> <span class="ot">&quot;month&quot;</span>,</span>
+<span id="cb65-6"><a href="#cb65-6"></a>  DATE_PART(<span class="st">&#39;day&#39;</span>, last_login_at) <span class="kw">AS</span> <span class="ot">&quot;day&quot;</span>,</span>
+<span id="cb65-7"><a href="#cb65-7"></a>  DATE_PART(<span class="st">&#39;hour&#39;</span>, last_login_at) <span class="kw">AS</span> <span class="ot">&quot;hour&quot;</span>,</span>
+<span id="cb65-8"><a href="#cb65-8"></a>  DATE_PART(<span class="st">&#39;minute&#39;</span>, last_login_at) <span class="kw">AS</span> <span class="ot">&quot;minute&quot;</span>,</span>
+<span id="cb65-9"><a href="#cb65-9"></a>  DATE_PART(<span class="st">&#39;second&#39;</span>, last_login_at) <span class="kw">AS</span> <span class="ot">&quot;second&quot;</span></span>
+<span id="cb65-10"><a href="#cb65-10"></a><span class="kw">FROM</span></span>
+<span id="cb65-11"><a href="#cb65-11"></a>  s_characters;</span></code></pre></div>
+      <ul>
+      <li><code>DATE_PART</code> 関数は、標準SQLに含まれない PostgreSQL 独自の関数です。</li>
+      <li><code>DATE_PART</code> 関数は、<code>DATE</code>
+      型のデータから「年」「月」「日」を取得するときにも使用できます。</li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>標準SQLを使って、TIMESTAMP型のカラム (<code>last_login_at</code>)
+      から「年」「月」「日」「時」「分」「秒」を個別に数値として取得したいです。どのような SQL
+      を書けばよいですか。</p>
+      </blockquote>
+      <p>一方で、TIMESTAMP型のデータから「年」「月」「日」「時」「分」「秒」を「<strong>文字列</strong>」として得たいときは
+      <code>TO_CHAR</code> 関数を使用します。DATE型のデータについても使用することができます。</p>
+      <div class="sourceCode" id="cb66" data-caption="日時のフォーマット(文字列整形)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb66-1"><a href="#cb66-1"></a><span class="kw">SELECT</span></span>
+<span id="cb66-2"><a href="#cb66-2"></a>  name,</span>
+<span id="cb66-3"><a href="#cb66-3"></a>  last_login_at,</span>
+<span id="cb66-4"><a href="#cb66-4"></a>  <span class="fu">TO_CHAR</span>(last_login_at, <span class="st">&#39;YYYY/MM/DD HH24時MI分SS秒&#39;</span>)</span>
+<span id="cb66-5"><a href="#cb66-5"></a><span class="kw">FROM</span></span>
+<span id="cb66-6"><a href="#cb66-6"></a>  s_characters;</span></code></pre></div>
+      <p>上記の <strong>第04行目</strong> で使用している <code>YYYY</code> や <code>MI</code>
+      などのフォーマット指定子は、PostgreSQL の公式ドキュメント (リファレンス)
+      を参照してください。</p>
+      <ul>
+      <li><a
+      href="https://www.postgresql.org/docs/current/functions-formatting.html#FUNCTIONS-FORMATTING-DATETIME-TABLE">Table
+      9.27. Template Patterns for Date/Time Formatting</a></li>
+      </ul>
+      <h3 data-number="7.11.1" id="sqlドリル-7"><span class="header-section-number">7.11.1</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-08_1.sql</code> 👉</li>
+      </ul>
+      <pre><code> </code></pre>
+      <h2 data-number="7.12" id="現在日時と日数時間の差を計算する-授業時間外学習"><span
+      class="header-section-number">7.12</span> 現在日時と日数・時間の差を計算する
+      (授業時間外学習)</h2>
+      <p>現在の日時を取得するには <code>CURRENT_TIMESTAMP</code>、現在の日付
+      (<strong>時刻を含まない</strong>) を取得するには <code>CURRENT_DATE</code> を使用します。</p>
+      <ul>
+      <li>PostgreSQL では <code>CURRENT_TIMESTAMP</code> を <code>NOW()</code>
+      のように書くことができます。</li>
+      </ul>
+      <p>例えば、登録日 (<code>created_on</code>) から本日までの経過日数を得たいときに、次の
+      <strong>第05行目</strong> ように利用します。DATE型同士の減算 (<code>DATE - DATE</code>)
+      では、結果は <span class="masked">整数型 (日数差)</span> となります。</p>
+      <div class="sourceCode" id="cb68" data-caption="登録日からの経過日数の取得"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb68-1"><a href="#cb68-1"></a><span class="kw">SELECT</span></span>
+<span id="cb68-2"><a href="#cb68-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb68-3"><a href="#cb68-3"></a>  name,</span>
+<span id="cb68-4"><a href="#cb68-4"></a>  created_on,</span>
+<span id="cb68-5"><a href="#cb68-5"></a>  <span class="fu">CURRENT_DATE</span> <span class="op">-</span> created_on <span class="kw">AS</span> <span class="ot">&quot;Days Since Created&quot;</span></span>
+<span id="cb68-6"><a href="#cb68-6"></a><span class="kw">FROM</span></span>
+<span id="cb68-7"><a href="#cb68-7"></a>  s_characters;</span></code></pre></div>
+      <p>また、最終ログイン (<code>created_on</code>) から現在までの経過時間を得たい場合は、次の
+      <strong>第05行目</strong> のように利用します。</p>
+      <div class="sourceCode" id="cb69" data-caption="最終ログインからの経過時間"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb69-1"><a href="#cb69-1"></a><span class="kw">SELECT</span></span>
+<span id="cb69-2"><a href="#cb69-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb69-3"><a href="#cb69-3"></a>  name,</span>
+<span id="cb69-4"><a href="#cb69-4"></a>  last_login_at,</span>
+<span id="cb69-5"><a href="#cb69-5"></a>  <span class="fu">CURRENT_TIMESTAMP</span> <span class="op">-</span> last_login_at <span class="kw">AS</span> <span class="ot">&quot;Elapsed Time Since Last Login&quot;</span></span>
+<span id="cb69-6"><a href="#cb69-6"></a><span class="kw">FROM</span></span>
+<span id="cb69-7"><a href="#cb69-7"></a>  s_charact</span>
+<span id="cb69-8"><a href="#cb69-8"></a>  ers;</span></code></pre></div>
+      <p>TIMESTAMP同士の減算 (<code>TIMESTAMP - TIMESTAMP</code>) の結果は、INTERVAL型
+      になります。INTERVAL型については、DATE型やTIMESTAMP型と同様に <code>DATE_PART</code> や
+      <code>TO_CHAR</code> を使って特定の情報の抽出や整形が可能です。</p>
+      <!-- - TIMESTAMP型は、::DATE で、DATE型に -->
+      <h3 data-number="7.12.1" id="sqlドリル-8"><span class="header-section-number">7.12.1</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-09_1.sql</code> 👉</li>
+      </ul>
+      <pre><code> </code></pre>
+      <h1 data-number="8" id="授業時間外学習の指示-宿題"><span
+      class="header-section-number">8</span> 授業時間外学習の指示 (宿題)</h1>
+      <p>🚨<strong>本科目は「学修単位科目」であり、1回の講義あたり、4時間相当の授業時間外学習が求められる科目です</strong>🏃</p>
+      <ul>
+      <li>次回の講義で「<strong>小テスト❸</strong>」を実施します。
+      <ul>
+      <li><strong>定着確認</strong> および <strong>SQLドリル</strong> から主に出題します。</li>
+      <li>講義が進行するにつれて、当然ながら小テストの内容も複雑で高度なものになっていきます。前半で、しっかりと得点をとるようにしてください。</li>
+      </ul></li>
+      </ul>
+      <hr />
+      <ul>
+      <li>この講義資料を再読・熟読し「不明な用語」や「理解が十分な用語」があればインターネットや、ChatGPTなどの生成AIを利用して解決してください。また、興味関心を持ったトピックについて、ウェブ、生成AI、YouTube動画などを利用して知識を広げ、理解を深めてください。
+      <ul>
+      <li>特に <strong>(プロンプト例)</strong>
+      を示しているものについては、実際に生成AIにプロンプトを投げ、さらに対話を重ねることで、知識の幅を広げるだけでなく、理解をより深く確かなものにしてください。</li>
+      </ul></li>
+      <li>講義資料内の「<strong>演習</strong>」や「<strong>SQLドリル</strong>」に再度取り組んでください。特に、<strong>SQLドリル</strong>
+      は、授業時間中に1回取り組むだけでは定着しないので注意してください。</li>
+      </ul>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/DB-2025/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
