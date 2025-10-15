@@ -1470,6 +1470,23 @@ INSERT 0 2
   4 | Tom     |                     |
   5 | Ivan    | 2025-07-18 19:29:00 | 89日前
  ～～ 以下略 ～～</code></pre>
+      <ul>
+      <li><code>ex-09_2.sql</code> 👉 <strong>s_characters</strong>
+      テーブルのレコードについて、次に示すようなカラムを出力する SQL
+      を記述せよ。ただし、<strong>Days Since Last Login</strong>
+      は「2025年10月15日」を基準として計算し、<strong>Is Active User?</strong>
+      は最終ログインから「50日以内か」で判断すること。</li>
+      </ul>
+      <pre><code> id |  name   | Last Login | Days Since Last Login | Is Active User? 
+----+---------+------------+-----------------------+-----------------
+  1 | Marvin  | 2025-07-24 | 83 days ago           | No
+  2 | Zach    | 2025-07-30 | 77 days ago           | No
+  3 | Charlie | 2025-07-29 | 78 days ago           | No
+  4 | Tom     |            |                       | No
+  5 | Ivan    | 2025-07-18 | 89 days ago           | No
+  6 | Alice   | 2025-09-18 | 27 days ago           | Yes
+  7 | Trudy   | 2025-09-29 | 16 days ago           | Yes
+ ～～ 以下略 ～～</code></pre>
       <h1 data-number="8" id="授業時間外学習の指示-宿題"><span
       class="header-section-number">8</span> 授業時間外学習の指示 (宿題)</h1>
       <p>🚨<strong>本科目は「学修単位科目」であり、1回の講義あたり、4時間相当の授業時間外学習が求められる科目です</strong>🏃</p>
