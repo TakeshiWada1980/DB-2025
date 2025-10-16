@@ -1424,13 +1424,13 @@ INSERT 0 2
       <li>現在の日時を取得するには <code>LOCALTIMESTAMP</code> (<code>TIMESTAMP</code>型)
       を使用します。
       <ul>
-      <li><code>CURRENT_TIMESTAMP</code> を使用するとタイムゾーン情報付きの
-      (<code>TIMESTAMPTZ</code>型) になるので注意。</li>
+      <li><code>CURRENT_TIMESTAMP</code> を使用すると <strong>タイムゾーン情報付き</strong> の
+      (<code>TIMESTAMPTZ</code>型) になるので注意してください。</li>
       </ul></li>
       <li>現在の時刻を取得するには <code>LOCALTIME</code> (<code>TIME</code>型) を使用します。
       <ul>
       <li><code>CURRENT_TIME</code> を使用するとタイムゾーン情報付きの (<code>TIMETZ</code>型)
-      になるので注意。</li>
+      になるので注意してください。</li>
       </ul></li>
       <li>現在の日付 (<strong>時刻を含まない</strong>) を取得するには <code>CURRENT_DATE</code>
       (<code>DATE</code>型) を使用します。
@@ -1441,55 +1441,81 @@ INSERT 0 2
       <p>いま、<strong>s_characters</strong> の <strong>created_on</strong>
       カラムは「タイムゾーン情報なしの <code>DATE</code> 型」、<strong>last_login_at</strong>
       カラムは「タイムゾーン情報なしの <code>TIMESTAMP</code>
-      型」でテータ型を定義しています。そのため、<strong>現在の日時を基準に日時の差分を取りたい場合</strong>は
-      <code>LOCALTIMESTAMP</code> を、<strong>日付の差分を取りたい場合</strong>は
-      <code>CURRENT_DATE</code> を用いるのが安全です。</p>
+      型」で型定義しています。そのため、<code>s_characters</code> に関して
+      <strong>現在の日時を基準に日時の差分を取りたい場合</strong>は <code>LOCALTIMESTAMP</code>
+      を、<strong>日付の差分を取りたい場合</strong>は <code>CURRENT_DATE</code>
+      を用いるのが安全です。</p>
+      <ul>
+      <li>テーブルのカラムが <strong>タイムゾーン情報付き型</strong>
+      である場合は、<code>CURRENT_TIMESTAMP</code> や <code>CURRENT_TIME</code>
+      を使用するべきです。</li>
+      </ul>
       <div class="note type-senior">
       <p><strong>datetime value function (日時値関数) について</strong></p>
       <p><code>LOCALTIMESTAMP</code>、<code>CURRENT_DATE</code>、<code>LOCALTIME</code> は
       <strong>datetime value function (日時値関数)</strong>
       というもので、通常は、括弧を付けずに呼び出す特別な形式の関数式になります。括弧は
       <code>LOCALTIME(0)</code> のように精度を指定する場合にのみ用いられ、<code>LOCALTIME()</code>
-      とすると PostgreSQLでは構文エラーになります。</p>
+      のように引数なしにすると PostgreSQLでは構文エラーになります。</p>
+      </div>
+      <div class="note type-senior">
+      <p><strong>タイムゾーン情報の扱いについて</strong></p>
+      <p>タイムゾーン情報を「含める」か「含めない」かはシステム設計において非常に重要な判断になります。また、その影響は
+      DB だけでなく、<strong>DB
+      に接続するアプリケーションの設計や挙動にも直接関わります</strong>。たとえば、サーバとクライアントが異なる地域にある場合、DB
+      側でタイムゾーンを考慮しない設計をしてしまうと、アプリで表示される時刻が「数時間ずれる」といった問題が発生します。</p>
+      <p>LOCALTIMESTAMP と CURRENT_TIMESTAMP の違いなどは <code>sql/03/tmp.sql</code>
+      に、以下のコードを貼り付け、確認してみてください。</p>
+      <div class="sourceCode" id="cb68" data-caption="日時値関数の比較"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb68-1"><a href="#cb68-1"></a><span class="kw">SELECT</span></span>
+<span id="cb68-2"><a href="#cb68-2"></a>  <span class="fu">LOCALTIMESTAMP</span>(<span class="dv">0</span>) <span class="kw">AS</span> <span class="ot">&quot;LOCALTIMESTAMP&quot;</span>,</span>
+<span id="cb68-3"><a href="#cb68-3"></a>  <span class="fu">CURRENT_TIMESTAMP</span>(<span class="dv">0</span>) <span class="kw">AS</span> <span class="ot">&quot;CURRENT_TIMESTAMP&quot;</span>;</span>
+<span id="cb68-4"><a href="#cb68-4"></a></span>
+<span id="cb68-5"><a href="#cb68-5"></a><span class="kw">SELECT</span></span>
+<span id="cb68-6"><a href="#cb68-6"></a>  LOCALTIME(<span class="dv">0</span>) <span class="kw">AS</span> <span class="ot">&quot;LOCALTIME&quot;</span>,</span>
+<span id="cb68-7"><a href="#cb68-7"></a>  CURRENT_TIME(<span class="dv">0</span>) <span class="kw">AS</span> <span class="ot">&quot;CURRENT_TIME&quot;</span>;</span>
+<span id="cb68-8"><a href="#cb68-8"></a></span>
+<span id="cb68-9"><a href="#cb68-9"></a><span class="kw">SELECT</span></span>
+<span id="cb68-10"><a href="#cb68-10"></a>  <span class="fu">CURRENT_DATE</span> <span class="kw">AS</span> <span class="ot">&quot;CURRENT_DATE&quot;</span>;</span></code></pre></div>
       </div>
       <p>例えば、登録日 (<code>created_on</code>) から本日までの経過日数を得たいとき、以下の
       <strong>第05行目</strong> のように <code>CURRENT_DATE</code> を使用します。<code>DATE</code>
       型同士の減算 (<code>DATE - DATE</code>) の結果は <span class="masked">整数型 (日数差)</span>
       となります。</p>
-      <div class="sourceCode" id="cb68" data-caption="登録日からの経過日数の取得"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb68-1"><a href="#cb68-1"></a><span class="kw">SELECT</span></span>
-<span id="cb68-2"><a href="#cb68-2"></a>  <span class="kw">id</span>,</span>
-<span id="cb68-3"><a href="#cb68-3"></a>  name,</span>
-<span id="cb68-4"><a href="#cb68-4"></a>  created_on,</span>
-<span id="cb68-5"><a href="#cb68-5"></a>  <span class="fu">CURRENT_DATE</span> <span class="op">-</span> created_on <span class="kw">AS</span> <span class="ot">&quot;Days Since Created&quot;</span></span>
-<span id="cb68-6"><a href="#cb68-6"></a><span class="kw">FROM</span></span>
-<span id="cb68-7"><a href="#cb68-7"></a>  s_characters;</span></code></pre></div>
+      <div class="sourceCode" id="cb69" data-caption="登録日からの経過日数の取得"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb69-1"><a href="#cb69-1"></a><span class="kw">SELECT</span></span>
+<span id="cb69-2"><a href="#cb69-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb69-3"><a href="#cb69-3"></a>  name,</span>
+<span id="cb69-4"><a href="#cb69-4"></a>  created_on,</span>
+<span id="cb69-5"><a href="#cb69-5"></a>  <span class="fu">CURRENT_DATE</span> <span class="op">-</span> created_on <span class="kw">AS</span> <span class="ot">&quot;Days Since Created&quot;</span></span>
+<span id="cb69-6"><a href="#cb69-6"></a><span class="kw">FROM</span></span>
+<span id="cb69-7"><a href="#cb69-7"></a>  s_characters;</span></code></pre></div>
       <p>また、最終ログイン (<code>last_login_at</code>)
       から現在日時までの経過時間を得たいとき、以下の <strong>第05行目</strong> のように
       <code>LOCALTIMESTAMP</code> を使用します。<code>TIMESTAMP</code> 同士の減算
       (<code>TIMESTAMP - TIMESTAMP</code>) の結果は <code>INTERVAL</code> 型になります。</p>
-      <div class="sourceCode" id="cb69" data-caption="最終ログインからの経過時間"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb69-1"><a href="#cb69-1"></a><span class="kw">SELECT</span></span>
-<span id="cb69-2"><a href="#cb69-2"></a>  <span class="kw">id</span>,</span>
-<span id="cb69-3"><a href="#cb69-3"></a>  name,</span>
-<span id="cb69-4"><a href="#cb69-4"></a>  last_login_at,</span>
-<span id="cb69-5"><a href="#cb69-5"></a>  <span class="fu">LOCALTIMESTAMP</span> <span class="op">-</span> last_login_at <span class="kw">AS</span> <span class="ot">&quot;Elapsed Time Since Last Login&quot;</span></span>
-<span id="cb69-6"><a href="#cb69-6"></a><span class="kw">FROM</span></span>
-<span id="cb69-7"><a href="#cb69-7"></a>  s_characters;</span></code></pre></div>
+      <div class="sourceCode" id="cb70" data-caption="最終ログインからの経過時間"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb70-1"><a href="#cb70-1"></a><span class="kw">SELECT</span></span>
+<span id="cb70-2"><a href="#cb70-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb70-3"><a href="#cb70-3"></a>  name,</span>
+<span id="cb70-4"><a href="#cb70-4"></a>  last_login_at,</span>
+<span id="cb70-5"><a href="#cb70-5"></a>  <span class="fu">LOCALTIMESTAMP</span> <span class="op">-</span> last_login_at <span class="kw">AS</span> <span class="ot">&quot;Elapsed Time Since Last Login&quot;</span></span>
+<span id="cb70-6"><a href="#cb70-6"></a><span class="kw">FROM</span></span>
+<span id="cb70-7"><a href="#cb70-7"></a>  s_characters;</span></code></pre></div>
       <p><code>INTERVAL</code> 型は、<code>DATE</code> 型や <code>TIMESTAMP</code>
       型と同様に、<code>DATE_PART</code> 関数や <code>TO_CHAR</code>
       関数と組みあわせて利用することができます。</p>
       <hr />
       <p><code>TIMESTAMP</code> 型は、次のように <code>DATE</code> 型にキャスト (型変換)
       することができます。</p>
-      <div class="sourceCode" id="cb70" data-caption="TIMESTAMPをDATEに変換"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb70-1"><a href="#cb70-1"></a><span class="kw">SELECT</span></span>
-<span id="cb70-2"><a href="#cb70-2"></a>  <span class="kw">id</span>,</span>
-<span id="cb70-3"><a href="#cb70-3"></a>  name,</span>
-<span id="cb70-4"><a href="#cb70-4"></a>  last_login_at,</span>
-<span id="cb70-5"><a href="#cb70-5"></a>  <span class="fu">CAST</span>(last_login_at <span class="kw">AS</span> <span class="dt">DATE</span>) <span class="kw">AS</span> <span class="ot">&quot;last_login_at(DATE型)&quot;</span></span>
-<span id="cb70-6"><a href="#cb70-6"></a><span class="kw">FROM</span></span>
-<span id="cb70-7"><a href="#cb70-7"></a>  s_characters;</span></code></pre></div>
+      <div class="sourceCode" id="cb71" data-caption="TIMESTAMPをDATEに変換"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb71-1"><a href="#cb71-1"></a><span class="kw">SELECT</span></span>
+<span id="cb71-2"><a href="#cb71-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb71-3"><a href="#cb71-3"></a>  name,</span>
+<span id="cb71-4"><a href="#cb71-4"></a>  last_login_at,</span>
+<span id="cb71-5"><a href="#cb71-5"></a>  <span class="fu">CAST</span>(last_login_at <span class="kw">AS</span> <span class="dt">DATE</span>) <span class="kw">AS</span> <span class="ot">&quot;last_login_at(DATE型)&quot;</span></span>
+<span id="cb71-6"><a href="#cb71-6"></a><span class="kw">FROM</span></span>
+<span id="cb71-7"><a href="#cb71-7"></a>  s_characters;</span></code></pre></div>
       <ul>
       <li>PostgreSQL では <code>CAST(last_login_at AS DATE)</code> を <span
       class="masked"><code>last_login_at::DATE</code></span> のように記述することができます
@@ -1500,13 +1526,13 @@ INSERT 0 2
       関数を使って文字列から型を明示的に変換します。たとえば、<code>DATE</code> 型のリテラルは
       <code>CAST('2025-04-01' AS DATE)</code>、<code>TIMESTAMP</code> 型のリテラルは
       <code>CAST('2025-04-01 13:05:59' AS TIMESTAMP)</code> のように記述します。</p>
-      <div class="sourceCode" id="cb71" data-caption="DATEリテラル"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb71-1"><a href="#cb71-1"></a><span class="kw">SELECT</span></span>
-<span id="cb71-2"><a href="#cb71-2"></a>  <span class="kw">id</span>,</span>
-<span id="cb71-3"><a href="#cb71-3"></a>  name,</span>
-<span id="cb71-4"><a href="#cb71-4"></a>  <span class="fu">CAST</span>(<span class="st">&#39;2026-03-31&#39;</span> <span class="kw">AS</span> <span class="dt">DATE</span>) <span class="op">-</span> <span class="fu">CURRENT_DATE</span> <span class="op">||</span> <span class="st">&#39;日&#39;</span> <span class="kw">AS</span> <span class="ot">&quot;卒業まであと&quot;</span></span>
-<span id="cb71-5"><a href="#cb71-5"></a><span class="kw">FROM</span></span>
-<span id="cb71-6"><a href="#cb71-6"></a>  s_users;</span></code></pre></div>
+      <div class="sourceCode" id="cb72" data-caption="DATEリテラル"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb72-1"><a href="#cb72-1"></a><span class="kw">SELECT</span></span>
+<span id="cb72-2"><a href="#cb72-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb72-3"><a href="#cb72-3"></a>  name,</span>
+<span id="cb72-4"><a href="#cb72-4"></a>  <span class="fu">CAST</span>(<span class="st">&#39;2026-03-31&#39;</span> <span class="kw">AS</span> <span class="dt">DATE</span>) <span class="op">-</span> <span class="fu">CURRENT_DATE</span> <span class="op">||</span> <span class="st">&#39;日&#39;</span> <span class="kw">AS</span> <span class="ot">&quot;卒業まであと&quot;</span></span>
+<span id="cb72-5"><a href="#cb72-5"></a><span class="kw">FROM</span></span>
+<span id="cb72-6"><a href="#cb72-6"></a>  s_users;</span></code></pre></div>
       <h3 data-number="7.12.1" id="sqlドリル-8"><span class="header-section-number">7.12.1</span>
       SQLドリル💻</h3>
       <ul>
@@ -1543,11 +1569,15 @@ INSERT 0 2
       <h3 data-number="7.12.2" id="定着確認-6"><span class="header-section-number">7.12.2</span>
       定着確認</h3>
       <ul>
-      <li>標準 SQL において、現在の日時を <code>TIMESTAMP</code>
+      <li>標準 SQL において、現在の日時をタイムゾーン情報なしの <code>TIMESTAMP</code>
       型の値として参照したい。どのような日時値関数を用いればよいか答えよ。
       <ul>
-      <li><strong>答え</strong>: <span class="masked"><code>CURRENT_TIMESTAMP</code>。標準SQLでは
-      <code>NOW()</code> は使用できないので注意すること</span></li>
+      <li><strong>答え</strong>: <span class="masked"><code>LOCALTIMESTAMP</code></span></li>
+      </ul></li>
+      <li>標準 SQL において、現在の日付を <code>DATE</code>
+      型の値として参照したい。どのような日時値関数を用いればよいか答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked"><code>CURRENT_DATE</code></span></li>
       </ul></li>
       </ul>
       <h1 data-number="8" id="授業時間外学習の指示-宿題"><span
