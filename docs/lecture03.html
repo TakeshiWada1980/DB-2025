@@ -1360,21 +1360,24 @@ INSERT 0 2
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb66-1"><a href="#cb66-1"></a><span class="kw">SELECT</span></span>
 <span id="cb66-2"><a href="#cb66-2"></a>  name,</span>
 <span id="cb66-3"><a href="#cb66-3"></a>  last_login_at,</span>
-<span id="cb66-4"><a href="#cb66-4"></a>  <span class="fu">TO_CHAR</span>(last_login_at, <span class="st">&#39;YYYY/MM/DD HH24時MI分SS秒&#39;</span>)</span>
+<span id="cb66-4"><a href="#cb66-4"></a>  <span class="fu">TO_CHAR</span>(last_login_at, <span class="st">&#39;YYYY&quot;/&quot;MM&quot;/&quot;DD HH24&quot;時&quot;MI&quot;分&quot;SS&quot;秒&quot;&#39;</span>)</span>
 <span id="cb66-5"><a href="#cb66-5"></a><span class="kw">FROM</span></span>
 <span id="cb66-6"><a href="#cb66-6"></a>  s_characters;</span></code></pre></div>
       <p>上記の <strong>第04行目</strong> で使用している <code>YYYY</code> や <code>MI</code>
-      などのフォーマット指定子は、PostgreSQL の公式ドキュメント (リファレンス)
+      などの「<strong>フォーマット指定子</strong>」は、PostgreSQL の公式ドキュメント (リファレンス)
       を参照してください。</p>
       <ul>
       <li><a
       href="https://www.postgresql.org/docs/current/functions-formatting.html#FUNCTIONS-FORMATTING-DATETIME-TABLE">Table
       9.27. Template Patterns for Date/Time Formatting</a></li>
       </ul>
+      <p>なお、フォーマット指定子以外の文字 (書式内でそのまま出力したい文字列) は <span
+      class="masked">ダブルクォート</span>
+      で囲むようにしてください。そのまま記述しても正しく出力される場合もありますが、確実に意図どおり表示させるためにはダブルクォートで囲むことが推奨されます。</p>
       <h3 data-number="7.11.1" id="sqlドリル-7"><span class="header-section-number">7.11.1</span>
       SQLドリル💻</h3>
       <ul>
-      <li><code>ex-08_1.sql</code> 👉 <strong>characters</strong>
+      <li><code>ex-08_1.sql</code> 👉 <strong>s_characters</strong>
       テーブルのレコードについて、次に示すようなカラムを出力する SQL
       を記述せよ。なお、<strong>created_on</strong> は <code>2020-09-01</code>
       以降の日付であることを仮定してよい。
@@ -1391,6 +1394,29 @@ INSERT 0 2
   4 | Tom     | 2020-12-05   | 令和2年12月05日
   5 | Ivan    | 2021-02-15   | 令和3年02月15日
  ～～ 以下略 ～～</code></pre>
+      <h3 data-number="7.11.2" id="定着確認-5"><span class="header-section-number">7.11.2</span>
+      定着確認</h3>
+      <ul>
+      <li>あるテーブルに <strong>created_at</strong> という <code>TIMESTAMP</code>
+      型のカラムが存在する。このカラムの値を <code>2025年10月16日</code>
+      のような書式の「文字列」として取得したい。PostgreSQL を想定し、<code>SELECT</code>
+      句にどのような関数や式を用いればよいか答えよ。
+      <ul>
+      <li><strong>答え</strong>: <code>SELECT</code> <span
+      class="masked"><code>TO_CHAR(created_at, 'YYYY"年"MM"月"DD"日"')</code></span>
+      <code>AS "created_at" FROM ...;</code><br />
+      </li>
+      </ul></li>
+      <li>あるテーブルに <strong>created_on</strong> という <code>DATE</code>
+      型のカラムが存在する。このカラムから「年」の値を「数値型」として取得したい。PostgreSQL
+      を想定し、具体的にどのような関数や式を用いればよいか答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked"><code>DATE_PART('year', created_on)</code>。なお、戻り値は
+      <code>DOUBLE PRECISION</code> 型 (実数) となるので、整数にしたい場合は
+      <code>DATE_PART('year', created_on)::INT</code> のようにキャストします。</span></li>
+      </ul></li>
+      </ul>
       <h2 data-number="7.12" id="現在日時と日数時間の差を計算する-授業時間外学習"><span
       class="header-section-number">7.12</span> 現在日時と日数・時間の差を計算する
       (授業時間外学習)</h2>
