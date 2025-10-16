@@ -272,6 +272,9 @@ upstream  DISABLED (push)</code></pre>
       class="header-section-number">2.5.1</span> 教材の更新を取得するとき</h3>
       <p>教材リポジトリ (<code>upstream</code>)
       に更新されたときは、次の手順で自分のローカルリポジトリに最新の変更を取り込みます。</p>
+      <div class="note type-caution">
+      <p><strong>以下の作業をする前に自分側のファイル変更は、全てコミットしておいてください。</strong></p>
+      </div>
       <pre><code>git fetch upstream
 git switch main
 git merge upstream/main</code></pre>
