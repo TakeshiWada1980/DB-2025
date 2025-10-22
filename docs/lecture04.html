@@ -1500,7 +1500,7 @@ git merge upstream/main</code></pre>
       <h1 data-number="6" id="insert文-超基礎編"><span class="header-section-number">6</span>
       INSERT文 (超基礎編)</h1>
       <p>テーブルにレコードを追加するときには <code>INSERT</code>
-      文を使用します。例えば、<strong>s_users</strong> テーブルが次のようなスキーマ (構造・型)
+      文を使用します。例えば、<strong>s_users</strong> テーブルが次のようなスキーマ (構造・データ型)
       のとき…</p>
       <div class="sourceCode" id="cb43" data-caption="from-teacher/03/init-s_users.sql (抜粋)"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb43-1"><a href="#cb43-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> s_users (</span>
@@ -1508,35 +1508,37 @@ git merge upstream/main</code></pre>
 <span id="cb43-3"><a href="#cb43-3"></a>  name TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>, <span class="co">-- NULL を不許可</span></span>
 <span id="cb43-4"><a href="#cb43-4"></a>  age <span class="dt">INT</span> <span class="co">-- NULL も許可</span></span>
 <span id="cb43-5"><a href="#cb43-5"></a>);</span></code></pre></div>
-      <p>このテーブルに「<strong>Carol (18歳)</strong>」を追加したい場合は、次のような
-      <code>INSERT</code> 文を記述します</p>
+      <p>このテーブルに <strong>Carol (18歳)</strong> を追加する場合は、次のような
+      <code>INSERT</code> 文を記述します。</p>
       <div class="sourceCode" id="cb44" data-caption="s_usersにレコードを追加するINSERT文"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb44-1"><a href="#cb44-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
 <span id="cb44-2"><a href="#cb44-2"></a>  s_users (<span class="kw">id</span>, name, age)</span>
 <span id="cb44-3"><a href="#cb44-3"></a><span class="kw">VALUES</span></span>
 <span id="cb44-4"><a href="#cb44-4"></a>  (<span class="dv">3</span>, <span class="st">&#39;Carol&#39;</span>, <span class="dv">18</span>);</span></code></pre></div>
-      <p>ここで、<code>3</code> は <strong>id</strong>
+      <p>ここで、<strong>第04行目</strong> の <code>3</code> は <strong>id</strong>
       を表し、既に「Alice」と「Bob」の2名が登録されているため、次の連番として <code>3</code>
       を設定しています。</p>
       <ul>
-      <li><strong>id</strong> は <code>id INT PRIMARY KEY</code> のように <strong>主キー</strong>
-      (Primary Key、プライマリキー) として設定されたカラムなので、既に使用している <code>1</code> や
+      <li><strong>id</strong> は <code>CREATE TABLE</code> 文において
+      <code>id INT PRIMARY KEY</code> のように <strong>主キー設定</strong> (Primary
+      Key、プライマリキー) しているカラムなので、既に他のレコードで使用している <code>1</code> や
       <code>2</code> を設定することはできません。</li>
       </ul>
       <p>ここで、実際にレコードの挿入を試してみたいのですが、上記の SQL (<code>INSERT</code> 文)
-      をそのまま実行すると、これまでの講義や SQL
-      ドリルの動作結果に影響を及ぼすおそれがあります。ここでは <strong>トランザクション</strong> と
-      <strong>ロールバック</strong> の仕組みを利用して、安全に挙動を確かめていきます。</p>
+      をそのまま実行すると、<span class="masked">ここまでに書いてきた <code>SELECT</code>
+      文を再実行したときの結果が変わってしまうおそれ</span> があります。そこで、ここでは
+      <strong>トランザクション</strong> と <strong>ロールバック</strong> という RDBMS
+      の仕組みを利用して、データを保護しながら <code>INSERT</code> 文の動きを確かめていきます。</p>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
-      <p>リレーショナルデータベースにおいて、主キー (Primary Key)
+      <p>リレーショナルデータベースにおける主キー (Primary Key)
       とは何ですか。主キーには同じ値を設定できないと聞いたいのですが、なぜですか。</p>
       </blockquote>
       <h2 data-number="6.1" id="トランザクションとロールバックの利用"><span
       class="header-section-number">6.1</span> トランザクションとロールバックの利用</h2>
-      <p><code>INSERT</code> の動作を安全に確認するため、ここでは
-      <strong>明示的にトランザクションを開始</strong> し、挿入処理と確認処理を行ったあとで、<span
-      class="masked">ロールバックによって変更を元に戻す</span> という手順をとります。</p>
+      <p><code>INSERT</code>
+      文の動作を実際に試しながらも、データを改変しないようにするため、ここでは<strong>明示的にトランザクションを開始</strong>し、レコードの挿入と、その確認を行った後に、<span
+      class="masked">ロールバックによって変更を取り消す</span> という手順をとります。</p>
       <p>トランザクションの詳しい仕組みは今後の授業で扱うので、いまは「<code>START TRANSACTION</code>
       <strong>から</strong> <code>ROLLBACK</code>
       <strong>のあいだに実行された処理は、すべて取り消される</strong>
