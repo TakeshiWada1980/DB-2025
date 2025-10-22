@@ -44,8 +44,49 @@
         <!-- ---------------------------------------- -->
          <ul>
 <li><a href="#連絡" id="toc-連絡"><span class="toc-section-number">1</span> 連絡</a></li>
+<li><a href="#準備" id="toc-準備"><span class="toc-section-number">2</span> 準備</a>
+<ul>
+<li><a href="#教材の更新の取得" id="toc-教材の更新の取得"><span
+class="toc-section-number">2.1</span> 教材の更新の取得</a></li>
+</ul></li>
+<li><a href="#order-by-句" id="toc-order-by-句"><span class="toc-section-number">3</span> ORDER BY
+句</a>
+<ul>
+<li><a href="#order-by-句-1" id="toc-order-by-句-1"><span class="toc-section-number">3.1</span>
+ORDER BY 句</a></li>
+<li><a href="#複数のソートキーの指定" id="toc-複数のソートキーの指定"><span
+class="toc-section-number">3.2</span> 複数のソートキーの指定</a></li>
+<li><a href="#null-値の配置を指定" id="toc-null-値の配置を指定"><span
+class="toc-section-number">3.3</span> NULL 値の配置を指定</a></li>
+<li><a href="#case式を使用したorder-by句の指定" id="toc-case式を使用したorder-by句の指定"><span
+class="toc-section-number">3.4</span> CASE式を使用したORDER BY句の指定</a></li>
+</ul></li>
+<li><a href="#limit-句" id="toc-limit-句"><span class="toc-section-number">4</span> LIMIT 句</a>
+<ul>
+<li><a href="#limitの利用上の注意点" id="toc-limitの利用上の注意点"><span
+class="toc-section-number">4.1</span> LIMITの利用上の注意点</a></li>
+<li><a href="#offset句" id="toc-offset句"><span class="toc-section-number">4.2</span>
+OFFSET句</a></li>
+</ul></li>
+<li><a href="#where-句" id="toc-where-句"><span class="toc-section-number">5</span> WHERE 句</a>
+<ul>
+<li><a href="#基本的なwhere句" id="toc-基本的なwhere句"><span class="toc-section-number">5.1</span>
+基本的なWHERE句</a></li>
+<li><a href="#sqlの3値論理" id="toc-sqlの3値論理"><span class="toc-section-number">5.2</span>
+SQLの3値論理</a></li>
+<li><a href="#where句でよく利用する述語" id="toc-where句でよく利用する述語"><span
+class="toc-section-number">5.3</span> WHERE句でよく利用する述語</a></li>
+<li><a href="#case式を使用したwhere句の指定" id="toc-case式を使用したwhere句の指定"><span
+class="toc-section-number">5.4</span> CASE式を使用したWHERE句の指定</a></li>
+</ul></li>
+<li><a href="#insert文-基礎" id="toc-insert文-基礎"><span class="toc-section-number">6</span>
+INSERT文 (基礎)</a></li>
+<li><a href="#update文-基礎" id="toc-update文-基礎"><span class="toc-section-number">7</span>
+UPDATE文 (基礎)</a></li>
+<li><a href="#delete文-基礎" id="toc-delete文-基礎"><span class="toc-section-number">8</span>
+DELETE文 (基礎)</a></li>
 <li><a href="#授業時間外学習の指示-宿題" id="toc-授業時間外学習の指示-宿題"><span
-class="toc-section-number">2</span> 授業時間外学習の指示 (宿題)</a></li>
+class="toc-section-number">9</span> 授業時間外学習の指示 (宿題)</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -60,36 +101,1361 @@ class="toc-section-number">2</span> 授業時間外学習の指示 (宿題)</a><
       <!-- ---------------------------------------- -->
       <h1 data-number="1" id="連絡"><span class="header-section-number">1</span> 連絡</h1>
       <ul>
-      <li>小テスト❷ を実施します。
+      <li>小テスト❹ を実施します。
       <ul>
+      <li>シラバス記載のように、小テストは最終評価の <span class="masked">35%</span>
+      に相当します。</li>
       <li>遅刻・欠席等により追試験を希望する場合は<a
-      href="lecture01.html#成績評価法と履修条の注意">第01回講義で案内した手続き</a>をしてください。</li>
+      href="lecture01.html#成績評価法と履修条の注意">第01回講義で案内した手続き</a>をしてください</li>
       </ul></li>
+      <li>卒業研究の仮配属のための研究室訪問
+      <ul>
+      <li>23日（木）15:00-15:30 専門棟1・1階・データ処理実験室 本日</li>
+      <li>28日（火）16:30-17:00 専門棟1・1階・データ処理実験室</li>
+      <li>上記2日程で都合が合わないときは、27日までにTeamsChatで個別連絡ください。</li>
+      <li><a
+      href="https://omunet-my.sharepoint.com/:w:/g/personal/z21707r_omu_ac_jp/ET3qqpBOO6FPlBUOo-XPRR4BbjjKThKNxgYBKJLzvCGc5g?e=IGRuVk">研究室紹介と指導方針</a>(学内のみ)
+      <font color="deeppink">10/22 14:00 Update</font></li>
+      </ul></li>
+      <li><a
+      href="https://www.youtube.com/watch?v=8qzc-e9Czqc&amp;list=PLTPqb9X7I-Lm7SDmwfmjg0oT-lvUmhRmU">第36回高専プロコン（2025年
+      松江大会）</a> YouTube配信 2025/10/11・12</li>
+      <li><a
+      href="https://www.youtube.com/playlist?list=PLTPqb9X7I-LlS8ZbJgHDC4DtaYo_DKszV">第35回高専プロコン（2024年
+      奈良大会）</a>YouTube配信 2024/10/19・20
+      <ul>
+      <li><a
+      href="https://www.procon.gr.jp/?p=79658">全国の高専生はどんなアプリやソフトを開発しているの?</a>
+      …リンク先の「<strong>予選資料</strong>」から概要が確認できます。</li>
+      </ul></li>
+      <li>今回の講義内容は、<a href="lecture03.html">前回講義</a>の内容
+      (SQLの実行、<code>SELECT</code> 文)
+      を<strong>ひととおり理解していること</strong>を前提とします。まだ、それらの内容
+      (授業時間外学習のセクションを含む)
+      を終えていない人は、まずは、そちらを終えてから取り組んでください。</li>
       </ul>
-      <h3 data-number="1.0.1" id="教材の更新を取得するとき"><span
-      class="header-section-number">1.0.1</span> 教材の更新を取得するとき</h3>
-      <p>教材リポジトリ (<code>upstream</code>)
-      に更新されたときは、次の手順で自分のローカルリポジトリに最新の変更を取り込みます。</p>
+      <h1 data-number="2" id="準備"><span class="header-section-number">2</span> 準備</h1>
+      <p>今回の講義 (授業時間外学習を含む) では、SQLの <code>ORDER BY</code> 句、<code>LIMIT</code>
+      句、<code>OFFSET</code> 句、<code>WHERE</code> 句、<code>INSERT</code> 文、<code>DELETE</code>
+      文、<code>UPDATE</code> 文 について学んでいきます。</p>
+      <p>まずは、ハンズオン演習の準備として、以下の手順で、SQL実行環境の動作確認、教材の更新取得を実行してください。</p>
+      <h3 data-number="2.0.1" id="sql演習環境の動作確認-前回復習"><span
+      class="header-section-number">2.0.1</span> SQL演習環境の動作確認 (前回復習)</h3>
+      <ul>
+      <li>タスクトレイから <strong>Docker Desktop</strong>
+      が起動していることを確認してください。</li>
+      <li>前回講義で作成したプロジェクトフォルダ (講義資料のとおりに作成していれば
+      <strong>DB-PostgreSQL</strong> ) をVSCode で開いてください。</li>
+      <li>VSCode のターミナルから <code>npm run db:up</code> を実行して
+      <strong>Dockerコンテナ</strong> を起動してください。</li>
+      <li><code>sql/04/tmp.sql</code> を新規作成して、<code>SELECT * FROM s_users;</code> という
+      SQL文 を記述して保存してください。
+      <ul>
+      <li>🚨「<strong>Docker
+      ボリュームを削除してしまった</strong>」などの理由でテーブルが存在しないときは、<code>npm run sql from-teacher/03/init-s_users.sql</code>
+      および <code>npm run sql from-teacher/03/init-s_characters.sql</code>
+      を再実行して、テーブルの作成とレコードの挿入を行なってください。</li>
+      </ul></li>
+      <li>エディタがアクティブな状態で <code>[Ctrl]+[Shift]+[B]</code> を押下して SQL
+      を実行してください。もしくは VSCode のターミナルから <code>npm run sql sql/04/tmp.sql</code>
+      を打ち込んで SQL を実行してください。</li>
+      <li>次のような結果が得られること確認してください。</li>
+      </ul>
+      <pre><code> id | name  | age 
+----+-------+-----
+  1 | Alice |  20
+  2 | Bob   |  25</code></pre>
+      <ul>
+      <li><a href="http://localhost:8080/">http://localhost:8080/</a>もしくは<a
+      href="http://127.0.01:8080/">http://127.0.01:8080/</a>から <strong>DbGate</strong>
+      に接続して、次のように <strong>s_users</strong> テーブルと <strong>characters</strong>
+      テーブルの内容が表示できることを確認してください。</li>
+      </ul>
+      <figure>
+      <img src="figs/03/dbgate-01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="2.1" id="教材の更新の取得"><span class="header-section-number">2.1</span>
+      教材の更新の取得</h2>
+      <p><a
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL">教材リポジトリ</a>(＝皆さんが演習に使用するプロジェクトの
+      <code>upstream</code>)
+      が更新されています。次の手順で各自のローカルリポジトリに最新の変更を取り込んでください。</p>
       <div class="note type-caution">
-      <p><strong>以下の作業をする前に自分側のファイル変更は、全てコミットしておいてください。</strong></p>
+      <p><strong>注意</strong></p>
+      <p>更新の取り込み作業を始める前に、現在編集中のファイルはすべて保存し、さらに
+      <strong>未コミットの変更がない状態</strong> にしておいてください。</p>
       </div>
+      <p>VSCode のターミナルから以下のコマンドを実行してください
+      (1行ずつ応答を確認しながら実行してください)。</p>
       <pre><code>git fetch upstream
 git switch main
 git merge upstream/main</code></pre>
-      <p>最後の <code>git merge upstream/main</code> コマンドを実行すると、以下のように VSCode
-      が自動的にエディタを開き、マージコミットのメッセージを表示します。内容を確認して「続行」ボタンを押してください。</p>
+      <p>最後の <code>git merge upstream/main</code>
+      を実行すると、次のようなコミットメッセージの編集画面が開くことがあります。その場合は、内容
+      (コミットメントライン) を確認して「<strong>続行</strong>」ボタンを押下してください。</p>
       <figure>
       <img src="figs/03/git-01.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>マージが完了したら、<code>MERGE_MSG</code>
-      のタブは閉じて問題ありません。その後、VSCodeの「変更の同期」のボタンを押下して、自分のリモートリポジトリ
-      (<code>origin</code>) に変更を反映させます。</p>
-      <h1 data-number="2" id="授業時間外学習の指示-宿題"><span
-      class="header-section-number">2</span> 授業時間外学習の指示 (宿題)</h1>
+      <p>マージコミットが完了したら、<code>MERGE_MSG</code> のタブは閉じて問題ありません。</p>
+      <p>以上の操作完了後、プロジェクトのなかに <code>from-teacher/04</code>
+      というフォルダと、その内容 (SQLファイルなど) が追加されていることを確認してください。</p>
+      <h1 data-number="3" id="order-by-句"><span class="header-section-number">3</span> ORDER BY
+      句</h1>
+      <p>前回講義では、SQL の <code>SELECT</code>
+      文を使用して「<strong>テーブルからレコードを取得する方法</strong>」について学びました。その際、取得結果のレコードの「ならび」は、おそらく
+      <strong>id</strong> カラムの昇順になっていたと思います。</p>
+      <p>実際に、以下の SQL を実行して確かめてみてください。</p>
+      <ul>
+      <li><strong>例</strong>: <code>sql/04/tmp.sql</code>
+      を作成して、以下のSQLをコピペして、<code>npm run sql sql/04/tmp.sql</code> を実行</li>
+      </ul>
+      <div class="sourceCode" id="cb3" data-caption="レコードの抽出"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">SELECT</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  guild <span class="kw">AS</span> <span class="ot">&quot;所属ギルド&quot;</span>,</span>
+<span id="cb3-4"><a href="#cb3-4"></a>  name <span class="kw">AS</span> <span class="ot">&quot;名前&quot;</span>,</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="kw">level</span> <span class="kw">AS</span> <span class="ot">&quot;レベル&quot;</span>,</span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="fu">TO_CHAR</span>(last_login_at, <span class="st">&#39;YYYY&quot;/&quot;MM&quot;/&quot;DD HH24&quot;:&quot;MI&#39;</span>) <span class="kw">AS</span> <span class="ot">&quot;最終ログイン&quot;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">FROM</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>  s_characters;</span></code></pre></div>
+      <p>ここで押さえておくべき「<strong>SQLの重要な特性</strong>」があります。</p>
+      <p>SQLは「<strong>集合指向</strong>」の言語であり、「idカラムの昇順」あるいは「レコードが挿入(INSERT)された順」でレコードが得られるというのは
+      <span class="masked">「たまたま」の結果</span> に過ぎません。実際には、取得結果のレコード
+      (これを一般に「<strong>結果セット</strong> (<strong>result set</strong>)」とよびます)
+      の「ならび (順序)」は <strong>不定である</strong>
+      (<strong>論理的に保証されるものではない</strong>) ということを覚えておいてください。</p>
+      <p>そこで、レコードの順序を保証する仕組みとして、<code>SELECT</code>
+      文には「<code>ORDER BY</code>句」が用意されています。</p>
+      <div class="note type-senior">
+      <p><strong>補足</strong></p>
+      <p>PostgreSQLはデータを <strong>ヒープファイル（Heap File）</strong>
+      で管理しており、新しく追加された行は、通常、テーブル内の空きページや末尾のブロックに順次追加されます。そのため、テーブルスキャン
+      (順次読み出し)
+      を行うと、挿入順に近い順序で読み込まれることがよく起こります。ただし、この順序は
+      <code>VACUUM</code> や <code>UPDATE</code>
+      にともなう再配置、インデックススキャンの使用、並列処理などによって容易に崩れます。</p>
+      <p>そのため、<code>SELECT</code> 文の結果が、<code>INSERT</code>
+      の順番に並ぶという挙動は「たまたま」そう見えているに過ぎず、<strong>結果セットのレコード順序を意図的に制御したい場合は必ず</strong>
+      <code>ORDER BY</code> <strong>句を使用</strong>する必要があります。</p>
+      <ul>
+      <li>ここでの <strong>ヒープファイル</strong> とは、アルゴリズムやデータ構造で学んだ ヒープ構造
+      (二分ヒープなど)
+      とは<strong>全く別物</strong>です。データを「積み上げる（Heap）」ことに由来する用語で、特定のデータ構造を指すものではないので注意してください。</li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>PostgreSQL における <code>VACUUM</code> とは何ですか。</p>
+      </blockquote>
+      </div>
+      <h2 data-number="3.1" id="order-by-句-1"><span class="header-section-number">3.1</span> ORDER
+      BY 句</h2>
+      <p><code>ORDER BY</code> は、<code>SELECT</code>
+      文において、結果セットのレコードの「<strong>ならび</strong>
+      (<strong>順序</strong>)」を指示するもので (＝<span class="masked">整列順・ソート順</span>
+      を指示するもので)、以下のように <code>FROM</code> 句の<strong>あと</strong>に記述します。</p>
+      <div class="sourceCode" id="cb4" data-caption="結果セットをguildカラムの値で整列"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">SELECT</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb4-3"><a href="#cb4-3"></a>  guild <span class="kw">AS</span> <span class="ot">&quot;所属ギルド&quot;</span>,</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  name <span class="kw">AS</span> <span class="ot">&quot;名前&quot;</span>,</span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="kw">level</span> <span class="kw">AS</span> <span class="ot">&quot;レベル&quot;</span>,</span>
+<span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">TO_CHAR</span>(last_login_at, <span class="st">&#39;YYYY&quot;/&quot;MM&quot;/&quot;DD HH24&quot;:&quot;MI&#39;</span>) <span class="kw">AS</span> <span class="ot">&quot;最終ログイン&quot;</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">FROM</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>  s_characters</span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="co">-- ◀ ここに注目</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>  guild;</span></code></pre></div>
+      <ul>
+      <li><code>SELECT</code> 文は、「<code>SELECT</code> 句 👉 <code>FROM</code> 句 👉
+      <code>ORDER BY</code>
+      句」という順序で記述しないと<strong>構文エラーになる</strong>ので注意してください。</li>
+      </ul>
+      <p>上記の SQL の実行結果 (<code>ORDER BY guild</code> の結果)
+      は、次のように「<strong>所属ギルド順</strong>」なっていると思います。</p>
+      <pre><code> id | 所属ギルド |  名前   | レベル |   最終ログイン   
+----+------------+---------+--------+------------------
+ 17 | D.D.D      | Wendy   |     56 | 2025/08/08 10:56
+ 13 | D.D.D      | Mallet  |     64 | 2025/08/27 18:50
+  2 | D.D.D      | Zach    |     62 | 2025/07/30 18:33
+ 14 | D.D.D      | Eve     |     46 | 2025/10/07 10:17
+ 11 | D.D.D      | Ellen   |     51 | 2025/09/25 23:55
+  1 | Yamato     | Marvin  |     35 | 2025/07/24 13:31
+ 12 | Yamato     | Dave    |     68 | 2025/08/15 16:08
+ 15 | Yamato     | Trent   |     50 | 2025/10/11 17:20
+ ～～ 以下略 ～～</code></pre>
+      <ul>
+      <li>ここでは <span class="masked">大文字と小文字を区別した昇順 (ABC順)</span>
+      になっていることに注意してください。</li>
+      </ul>
+      <p><code>ORDER BY</code> は、デフォルトで <code>ASC</code> (昇順)
+      でソートします。指定されたカラムが文字列型の場合は「ABC順」、数値型の場合は「小さい順」、日時型の場合は「古い順」でソートされます。降順にしたい場合は、<code>ORDER BY guild DESC</code>
+      のように <span class="masked"><code>DESC</code> キーワード</span> を指定します。</p>
+      <ul>
+      <li>昇順であることを明示したい場合は <code>ORDER BY guild ASC</code> のようにします。</li>
+      <li>PostgreSQL では、昇順 (<code>ASC</code>) で整列した場合、<code>NULL</code>値は <span
+      class="masked">最後に配置</span> されることに注意してください。</li>
+      <li>文字列の整列 (昇順) では、まずは「大文字の <code>A-Z</code>」、つづいて「小文字
+      <code>a-z</code>」の順にレコードが並べられるので注意してください。大文字と小文字を区別せずに整列したいときは、<code>ORDER BY LOWER(guild)</code>
+      のように小文字変換の関数を使用してください。</li>
+      </ul>
+      <h3 data-number="3.1.1" id="演習"><span class="header-section-number">3.1.1</span> 演習</h3>
+      <ul>
+      <li><code>ORDER BY guild DESC</code> としたとき、<code>NULL</code>
+      値は「最初に配置される」か「最後に配置される」かを確認してください。</li>
+      <li><code>ORDER BY LOWER(guild)</code>
+      としたとき、「D.D.D」👉「hameln」👉「Yamato」👉「(NULL)」のように整列されることを確認してください。</li>
+      <li>レベルが低いキャラから順番にレコードがならぶように (＝レベルの昇順に) SQL
+      を書き換えてください。</li>
+      <li>レベルが高いキャラから順番にレコードがならぶように (＝レベルの降順に) SQL
+      を書き換えてください。</li>
+      <li>最終ログインが最近のキャラから順番にレコードがならぶように SQL を書き換えてください。</li>
+      </ul>
+      <h3 data-number="3.1.2" id="定着確認"><span class="header-section-number">3.1.2</span>
+      定着確認</h3>
+      <p>いま、<strong>s_users</strong> というテーブルに <strong>id</strong>、<strong>name</strong>
+      (<code>VARCHAR(16)</code>) 、<strong>age</strong>
+      (<code>INTEGER</code>)、<strong>birthday</strong> (<code>DATE</code>)
+      というカラムが存在している。</p>
+      <ul>
+      <li><code>SELECT</code> 文において、<strong>name</strong> を ABC順
+      (例えば、Alice👉Bob👉Carol👉Charlie👉…のような順) にデータをならべたい。どのように
+      <code>ORDER BY</code> 句を記述すればよいか答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked"><code>ORDER BY name ASC</code> もしくは
+      <code>ORDER BY name</code></span></li>
+      </ul></li>
+      <li><code>SELECT</code> 文において、<strong>age</strong>
+      カラムを参照して年齢が高いユーザから順にデータをならべたい。どのように <code>ORDER BY</code>
+      句を記述すればよいか答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked"><code>ORDER BY age DESC</code> </span></li>
+      </ul></li>
+      <li><code>SELECT</code> 文において、誕生日順 (過去👉現在) にデータをならべたい。どのように
+      <code>ORDER BY</code> 句を記述すればよいか答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked"><code>ORDER BY birthday</code> もしくは
+      <code>ORDER BY birthday ASC</code></span></li>
+      </ul></li>
+      <li>PostgreSQL で <code>ORDER BY</code> により昇順に整列 (ソート) したとき、<code>NULL</code>
+      値は「最初に配置される」か「最後に配置される」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">最後に配置される</span></li>
+      </ul></li>
+      <li>一般に <code>ASC</code> は「昇順」と「降順」のどちらを意味するか答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">昇順</span></li>
+      </ul></li>
+      <li><code>ORDER BY</code> 句において <code>ASC</code> や <code>DESC</code>
+      を明示しないとき、デフォルト動作としては「昇順」と「降順」のどちらになるか答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">昇順</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="3.2" id="複数のソートキーの指定"><span
+      class="header-section-number">3.2</span> 複数のソートキーの指定</h2>
+      <p><code>ORDER BY</code>
+      句では、<strong>カンマで区切って</strong>、第1ソートキー、第2ソートキー、第3ソートキー…と複数のソートキーが指定できます。例えば、まず
+      <strong>所属ギルドのABC順 (昇順) で整列</strong> し、さらに
+      <strong>所属ギルドのなかでレベルが高い順 (降順) に整列</strong> したい場合は、次のように SQL
+      を記述します。</p>
+      <div class="sourceCode" id="cb6" data-caption="複数のソートキーを指定"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">SELECT</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb6-3"><a href="#cb6-3"></a>  guild <span class="kw">AS</span> <span class="ot">&quot;所属ギルド&quot;</span>,</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  name <span class="kw">AS</span> <span class="ot">&quot;名前&quot;</span>,</span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="kw">level</span> <span class="kw">AS</span> <span class="ot">&quot;レベル&quot;</span>,</span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">TO_CHAR</span>(last_login_at, <span class="st">&#39;YYYY&quot;/&quot;MM&quot;/&quot;DD HH24&quot;:&quot;MI&#39;</span>) <span class="kw">AS</span> <span class="ot">&quot;最終ログイン&quot;</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="kw">FROM</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>  s_characters</span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="co">-- ◀ ここに注目</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>  guild,</span>
+<span id="cb6-11"><a href="#cb6-11"></a>  <span class="kw">level</span> <span class="kw">DESC</span>;</span></code></pre></div>
+      <p>実際に実行して結果を確認してみてください。</p>
+      <h3 data-number="3.2.1" id="sqlドリル"><span class="header-section-number">3.2.1</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-01_1.sql</code> 👉 <strong>s_characters</strong>
+      テーブルのすべてのレコードについて、次に示すようなカラムを出力する SQL
+      を記述せよ。整列の基準は、第1キーを <strong>job</strong> (昇順)、第2キーを
+      <strong>level</strong> (降順)、第3キーを <strong>name</strong> (昇順) とすること。</li>
+      </ul>
+      <pre><code> id |   job   | level |  name   
+----+---------+-------+---------
+ 17 | Fighter |    56 | Wendy
+  7 | Fighter |    48 | Trudy
+ 10 | Fighter |    44 | Oscar
+  4 | Fighter |     1 | Tom
+  5 | Monk    |    39 | Ivan
+  8 | Monk    |    33 | Bob
+  2 | Ninja   |    62 | Zach
+ 14 | Ninja   |    46 | Eve
+ ～～ 以下略 ～～</code></pre>
+      <ul>
+      <li><code>ex-01_2.sql</code> 👉 <strong>s_characters</strong>
+      テーブルのすべてのレコードについて、次に示すようなカラムを出力する SQL
+      を記述せよ。整列の基準は、第1キーを <strong>guild</strong>
+      (昇順・大文字と小文字を区別しない)、第2キーを <strong>level</strong> (降順) とすること。</li>
+      </ul>
+      <pre><code> id | guild  | Lv. |    name (job)    
+----+--------+-----+------------------
+ 13 | D.D.D  |  64 | Mallet (Wizard)
+  2 | D.D.D  |  62 | Zach (Ninja)
+ 17 | D.D.D  |  56 | Wendy (Fighter)
+ 11 | D.D.D  |  51 | Ellen (Wizard)
+ 14 | D.D.D  |  46 | Eve (Ninja)
+ 16 | hameln |  70 | Steve (Samurai)
+ 19 | hameln |  61 | Jack (Wizard)
+ ～～ 中略 ～～
+  1 | Yamato |  35 | Marvin (Priest)
+  9 |        |  73 | Walter (Samurai)
+  3 |        |  57 | Charlie (Wizard)
+  5 |        |  39 | Ivan (Monk)
+ 18 |        |  28 | Carol (Priest)
+  4 |        |   1 | Tom (Fighter)</code></pre>
+      <h2 data-number="3.3" id="null-値の配置を指定"><span class="header-section-number">3.3</span>
+      NULL 値の配置を指定</h2>
+      <p>先のセクションで確認したように、PostgreSQL では <code>ORDER BY</code> に <code>ASC</code>
+      (昇順) を指定した場合、<code>NULL</code> 値は最後に配置されます。逆に <code>DESC</code> (降順)
+      を指定したと場合は、<code>NULL</code> 値が先頭に配置されます。ただし、これは
+      <strong>PostgreSQL 固有の仕様</strong>であり、標準 SQL では <code>NULL</code> の整列順は <span
+      class="masked">不定 (implementation-dependent)</span> と定められています。</p>
+      <p>標準 SQL (および PostgreSQL を含む多くの実装) では、<code>ORDER BY</code> による整列で
+      <code>NULL</code> の位置を明示的に指定するために <code>NULLS LAST</code> と
+      <code>NULLS FIRST</code> というキーワードが使用できます。</p>
+      <p>例えば、次のように記述することで、最終ログイン日時が新しい順 (降順 <code>DESC</code>)
+      に並べつつ、<code>NULL</code> 値のレコードを「最後」に配置することができます。</p>
+      <div class="sourceCode" id="cb9" data-caption="NULLを末尾に配置"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">SELECT</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb9-3"><a href="#cb9-3"></a>  name,</span>
+<span id="cb9-4"><a href="#cb9-4"></a>  last_login_at</span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="kw">FROM</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  s_characters</span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>  last_login_at <span class="kw">DESC</span> <span class="kw">NULLS</span> <span class="fu">LAST</span>; <span class="co">-- ◀ ここに通目</span></span></code></pre></div>
+      <ul>
+      <li>上記の <strong>第08行目</strong> を <code>last_login_at DESC;</code>
+      とすると、<code>last_login_at</code> が <code>NULL</code>
+      のレコードが先頭に配置されることを確認してください。</li>
+      </ul>
+      <h3 data-number="3.3.1" id="定着確認-1"><span class="header-section-number">3.3.1</span>
+      定着確認</h3>
+      <ul>
+      <li><code>ORDER BY</code> 句で整列順を指示する際に <code>NULL</code>
+      値を先頭に配置したい。どのようなキーワードを使用すればよいか答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked"><code>NULLS FIRST</code> (<code>NULL</code>
+      ではなく <code>NULLS</code> である点に注意)</span></li>
+      </ul></li>
+      <li><code>ORDER BY</code> 句で整列順を指示する際に <code>NULL</code>
+      値を末尾に配置したい。どのようなキーワードを使用すればよいか答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked"><code>NULLS LAST</code></span></li>
+      </ul></li>
+      </ul>
+      <h3 data-number="3.3.2" id="sqlドリル-1"><span class="header-section-number">3.3.2</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-02_1.sql</code> 👉 <strong>s_characters</strong>
+      テーブルのすべてのレコードについて、次に示すようなカラムを出力する SQL
+      を記述せよ。整列の基準は、第1キーを <strong>level</strong> (昇順)、第2キーを
+      <strong>guild</strong> (昇順・大文字と小文字を区別しない・<code>NULL</code> は先頭)
+      とすること。</li>
+      </ul>
+      <pre><code> id |  name   | level | guild  
+----+---------+-------+--------
+  4 | Tom     |     1 |
+ 18 | Carol   |    28 |
+  5 | Ivan    |    39 |
+  3 | Charlie |    57 |
+  9 | Walter  |    73 |
+ 14 | Eve     |    46 | D.D.D
+ 11 | Ellen   |    51 | D.D.D
+ 17 | Wendy   |    56 | D.D.D
+  2 | Zach    |    62 | D.D.D
+ 13 | Mallet  |    64 | D.D.D
+  8 | Bob     |    33 | hameln
+ 10 | Oscar   |    44 | hameln
+ ～～以下略～～</code></pre>
+      <ul>
+      <li><code>ex-02_2.sql</code> 👉 <strong>s_characters</strong>
+      テーブルのすべてのレコードについて、次に示すようなカラムを出力する SQL
+      を記述せよ。なお、並び順は <strong>last_login_at</strong> が新しい順 (降順・<code>NULL</code>
+      は末尾) となるようにし、<strong>Days Since Last Login</strong>
+      カラムは「2025/10/15」を基準日として、最終ログインが何日前かを出力すること。
+      <ul>
+      <li>ヒント: 前回講義 <a
+      href="lecture03.html#現在日時と日数時間の差を計算する-授業時間外学習">現在日時と日数・時間の差を計算する</a></li>
+      </ul></li>
+      </ul>
+      <pre><code> id |  name   |    last_login_at    | Days Since Last Login 
+----+---------+---------------------+-----------------------
+ 15 | Trent   | 2025-10-11 17:20:00 | 4 days ago
+ 14 | Eve     | 2025-10-07 10:17:00 | 8 days ago
+ 16 | Steve   | 2025-10-06 09:14:00 | 9 days ago
+ 18 | Carol   | 2025-10-03 11:42:00 | 12 days ago
+  7 | Trudy   | 2025-09-29 12:37:00 | 16 days ago
+ 11 | Ellen   | 2025-09-25 23:55:00 | 20 days ago
+  6 | Alice   | 2025-09-18 14:22:00 | 27 days ago
+ ～～ 中略 ～～
+  3 | Charlie | 2025-07-29 20:37:00 | 78 days ago
+  1 | Marvin  | 2025-07-24 13:31:00 | 83 days ago
+  5 | Ivan    | 2025-07-18 19:29:00 | 89 days ago
+  4 | Tom     |                     |</code></pre>
+      <h2 data-number="3.4" id="case式を使用したorder-by句の指定"><span
+      class="header-section-number">3.4</span> CASE式を使用したORDER BY句の指定</h2>
+      <p>前回講義では、<code>SELECT</code> 句のなかで<a
+      href="lecture03.html#case式を利用する">CASE式</a>を利用する方法を紹介しましたが、CASE式は
+      <code>ORDER BY</code> 句のなかでも使用することができます。</p>
+      <ul>
+      <li>式を記述できる場所であれば、どこでも「CASE式」を利用可能です</li>
+      </ul>
+      <p>例えば、<strong>job</strong>カラムについて、後衛職👉前衛職の順にならべ、さらに、それぞれのなかでは「ABC順」にジョブ
+      (職業) をならべ、さらにレベル (降順) でならべたい場合は、次のようにSQLを記述します。</p>
+      <ul>
+      <li>後衛職: <code>Priest</code>、<code>Wizard</code></li>
+      <li>前衛職:
+      <code>Fighter</code>、<code>Monk</code>、<code>Ninja</code>、<code>Samurai</code></li>
+      </ul>
+      <div class="sourceCode" id="cb12" data-caption="CASE式を利用した整列"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">SELECT</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb12-3"><a href="#cb12-3"></a>  name,</span>
+<span id="cb12-4"><a href="#cb12-4"></a>  job,</span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="kw">level</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="kw">FROM</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>  s_characters</span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>  <span class="cf">CASE</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>    <span class="cf">WHEN</span> job <span class="op">=</span> <span class="st">&#39;Priest&#39;</span> <span class="kw">OR</span> job <span class="op">=</span> <span class="st">&#39;Wizard&#39;</span> <span class="cf">THEN</span> <span class="dv">1</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>    <span class="cf">ELSE</span> <span class="dv">2</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a>  <span class="cf">END</span> <span class="kw">ASC</span>, <span class="co">-- CASE式による第1キー</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a>  job, <span class="co">-- 第2キー</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a>  <span class="kw">level</span> <span class="kw">DESC</span>; <span class="co">-- 第3キー</span></span></code></pre></div>
+      <p>ここでは、<strong>第09行目</strong> から <strong>第12行目</strong>
+      にかけての「CASE式」で後衛職に数値の「<strong>1</strong>」、それ以外 (前衛職)
+      に数値の「<strong>2</strong>」を割り当て、それを第1キーとして昇順 (<code>ASC</code>)
+      に並べています。つまり、ジョブ (文字列型)
+      を数値型にマッピングして、それを整列のキーに使用しています。</p>
+      <ul>
+      <li><strong>第10行目</strong> は、<code>IN</code> キーワードを使用して
+      <code>WHEN job IN ('Priest', 'Wizard') THEN 1</code> のように記述することもできます。</li>
+      </ul>
+      <p>実行結果は、次のようになります。</p>
+      <pre><code> id |  name   |   job   | level 
+----+---------+---------+-------
+ 15 | Trent   | Priest  |    50
+  6 | Alice   | Priest  |    42
+  1 | Marvin  | Priest  |    35
+ 18 | Carol   | Priest  |    28
+ 13 | Mallet  | Wizard  |    64
+ 19 | Jack    | Wizard  |    61
+  3 | Charlie | Wizard  |    57
+ 11 | Ellen   | Wizard  |    51
+ 17 | Wendy   | Fighter |    56
+  7 | Trudy   | Fighter |    48
+  ～～ 中略 ～～
+ 16 | Steve   | Samurai |    70
+ 12 | Dave    | Samurai |    68</code></pre>
+      <h3 data-number="3.4.1" id="sqlドリル-2"><span class="header-section-number">3.4.1</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-03_1.sql</code> 👉 <strong>s_characters</strong>
+      テーブルのすべてのレコードについて、次に示すようなカラムを出力する SQL
+      を記述せよ。なお、ギルドのならびが「Yamato」、「<code>NULL</code>(無所属)」、それ以降は大文字と小文字を区別しない昇順
+      (ABC順) となるようにすること。また、各ギルド内ではレベルの降順で並ぶようにすること。
+      <ul>
+      <li>ヒント: <code>NULL</code> を <code>(無所属)</code> という文字列で出力するためには、<a
+      href="lecture03.html#nullを別の値に変換する">前回講義</a> で紹介した <span
+      class="masked"><code>COALESCE</code></span> を利用する。</li>
+      </ul></li>
+      </ul>
+      <pre><code> id |  name   | level |  guild   
+----+---------+-------+----------
+ 12 | Dave    |    68 | Yamato
+ 15 | Trent   |    50 | Yamato
+  7 | Trudy   |    48 | Yamato
+  6 | Alice   |    42 | Yamato
+  1 | Marvin  |    35 | Yamato
+  9 | Walter  |    73 | (無所属)
+  3 | Charlie |    57 | (無所属)
+  5 | Ivan    |    39 | (無所属)
+ 18 | Carol   |    28 | (無所属)
+  4 | Tom     |     1 | (無所属)
+ 13 | Mallet  |    64 | D.D.D
+  2 | Zach    |    62 | D.D.D
+ 17 | Wendy   |    56 | D.D.D
+ 11 | Ellen   |    51 | D.D.D
+ 14 | Eve     |    46 | D.D.D
+ 16 | Steve   |    70 | hameln
+ 19 | Jack    |    61 | hameln
+ 10 | Oscar   |    44 | hameln
+  8 | Bob     |    33 | hameln</code></pre>
+      <ul>
+      <li><code>ex-03_2.sql</code> 👉 <strong>s_characters</strong>
+      テーブルのすべてのレコードについて、次に示すようなカラムを出力する SQL
+      を記述せよ。なお、第1キーを <strong>job</strong> (カスタム順:
+      Samurai、Ninja、Fighter、Monk、Priest、Wizard の順)、第2キーを <strong>level</strong> (降順)
+      とすること。</li>
+      </ul>
+      <pre><code> id |  name   | level |   job   
+----+---------+-------+---------
+  9 | Walter  |    73 | Samurai
+ 16 | Steve   |    70 | Samurai
+ 12 | Dave    |    68 | Samurai
+  2 | Zach    |    62 | Ninja
+ 14 | Eve     |    46 | Ninja
+ 17 | Wendy   |    56 | Fighter
+ ～～ 中略 ～～
+ 18 | Carol   |    28 | Priest
+ 13 | Mallet  |    64 | Wizard
+ 19 | Jack    |    61 | Wizard
+  3 | Charlie |    57 | Wizard
+ 11 | Ellen   |    51 | Wizard</code></pre>
+      <h1 data-number="4" id="limit-句"><span class="header-section-number">4</span> LIMIT 句</h1>
+      <p>SQL では、<code>LIMIT</code> を使用して <span class="masked">取得するレコードの上限</span>
+      を設定することができます。</p>
+      <ul>
+      <li><code>SELECT</code> 文は、「<code>SELECT</code> 句 👉 <code>FROM</code> 句 👉
+      <code>ORDER BY</code> 句 👉 <code>LIMIT</code>
+      句」という順で記述しないと構文エラーになるので注意してください。</li>
+      </ul>
+      <p>例えば、レベルの高い順に整列して「<strong>上位5件</strong>」のレコードを取得する場合、次のように
+      SQL を記述します。</p>
+      <div class="sourceCode" id="cb16" data-caption="LIMITの活用"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">SELECT</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb16-3"><a href="#cb16-3"></a>  name,</span>
+<span id="cb16-4"><a href="#cb16-4"></a>  <span class="kw">level</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="kw">FROM</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a>  s_characters</span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a>  <span class="kw">level</span> <span class="kw">DESC</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="kw">LIMIT</span> <span class="co">-- ◀ ここに注目</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a>  <span class="dv">5</span>;</span></code></pre></div>
+      <p><code>LIMIT 30</code>
+      のように、全レコード数よりも大きな値を指定するとどのようになるか、実際に確認してください。</p>
+      <h2 data-number="4.1" id="limitの利用上の注意点"><span
+      class="header-section-number">4.1</span> LIMITの利用上の注意点</h2>
+      <p><code>LIMIT</code> 句は単独でも使用できますが、実務では <code>ORDER BY</code>
+      句と組み合わせて使うことが基本となります。<code>ORDER BY</code> 句なしで <code>LIMIT</code>
+      句を使用すると、その結果セットの内容は「<strong>不定</strong>」となります。</p>
+      <ul>
+      <li><code>ORDER BY</code>
+      なしでも毎回同じ結果セットが得られるように見えることがありますが、それは <span
+      class="masked">偶然にすぎず、保証された動作ではありません</span>。</li>
+      </ul>
+      <p>実運用では、<code>VACUUM</code> や <code>UPDATE</code>
+      によるデータの再配置、インデックスの利用状況、<strong>並列実行の影響</strong>などで、<strong>取得されるレコードの順序が変化する可能性があり</strong>、そこから上位
+      N 件分を取得する <code>LIMIT</code> の結果も変わります。</p>
+      <p>一方で、意図的に「<strong>N
+      件のレコードをランダムに取得したい</strong>」という場合には、次のように
+      <code>ORDER BY RANDOM()</code> と <code>LIMIT</code>
+      を併用します。これにより、ランダムに5件のレコードを取得することができます。</p>
+      <div class="sourceCode" id="cb17" data-caption="ランダムに5件のレコードを取得"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">SELECT</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb17-3"><a href="#cb17-3"></a>  name,</span>
+<span id="cb17-4"><a href="#cb17-4"></a>  <span class="kw">level</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="kw">FROM</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a>  s_characters</span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a>  <span class="kw">RANDOM</span>() <span class="co">-- ◀ ここに注目</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a><span class="kw">LIMIT</span></span>
+<span id="cb17-10"><a href="#cb17-10"></a>  <span class="dv">5</span>;</span></code></pre></div>
+      <h2 data-number="4.2" id="offset句"><span class="header-section-number">4.2</span>
+      OFFSET句</h2>
+      <p><code>LIMIT</code> と <code>OFFSET</code>
+      を組み合わせて使用することで「<strong>ページング処理</strong>
+      (<strong>ページネーション</strong>)」を行なうことができます。たとえば、ある結果セットについて「<strong>101件目から150件目</strong>」だけを取得したいとき、<code>LIMIT 50 OFFSET 100</code>
+      のように利用することができます。ただし、<code>OFFSET</code>
+      でデータをスキップしても、内部的には <span
+      class="masked">スキップする行も含めて先頭から順次読み取り、指定された位置に到達してから結果を返す</span>
+      ため、オフセット値が大きくなるほど<strong>計算コストが増大</strong>し、<strong>レスポンスタイムが悪化</strong>するという問題があります。</p>
+      <ul>
+      <li>例えば <code>LIMIT 50 OFFSET 100</code> と <code>LIMIT 50 OFFSET 10000</code>
+      では、明らかに後者のほうがコストが大きく、パフォーマンスが悪くなります。</li>
+      </ul>
+      <p>このようなことから、レコード数が数千、数万を超えるようなケースでは「<strong>カーソルページネーション</strong>
+      (<strong>キーセットページネーション</strong>)」という手法が使用されます。これは
+      <code>WHERE id &lt;【最後に表示したID】ORDER BY id LIMIT 50</code>
+      のようにレコードを取得する手法になります。</p>
+      <p>この手法では、インデックス (👈詳細は次回以降に説明)
+      を利用して条件に一致する行から直接データを取得できるため、<strong>オフセット値に依存しない安定したパフォーマンスを実現</strong>できます。つまり「101件目から150件目」を取得する場合も、「10,001件目から10,050件目」を取得する場合も、ほぼ同じコストとなります。ただし、カーソルページネーションは
+      <span class="masked">特定のページ番号に直接ジャンプすることができない</span>
+      というデメリットがあります。</p>
+      <p>以下に「レベルの降順で整列して、11件目から15件目にあたるレコードを取得する
+      SQL」を示します。</p>
+      <div class="sourceCode" id="cb18" data-caption="OFFSETとLIMITの利用"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">SELECT</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb18-3"><a href="#cb18-3"></a>  name,</span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="kw">level</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="kw">FROM</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a>  s_characters</span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a>  <span class="kw">level</span> <span class="kw">DESC</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="kw">LIMIT</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a>  <span class="dv">5</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a>OFFSET <span class="co">-- ◀ ここに注目</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a>  <span class="dv">10</span>;</span></code></pre></div>
+      <ul>
+      <li><code>LIMIT 5 OFFSET 10</code> は、順番を入れ替えて <code>OFFSET 10 LIMIT 5</code>
+      としても問題ありません (構文エラーにはなりません)。ただし、一般的には
+      <code>LIMIT ... OFFSET ...</code> で記述します。PostgreSQL
+      の公式ドキュメントでも、この順序で記載されています。</li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>ウェブアプリに関する文脈で「ページング処理」とはなんですか。</p>
+      </blockquote>
+      <blockquote>
+      <p>RDBに関する文脈で「カーソルページネーション」とは何ですか。</p>
+      </blockquote>
+      <h3 data-number="4.2.1" id="sqlドリル-3"><span class="header-section-number">4.2.1</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><p><code>ex-04_1.sql</code> 👉 <strong>s_characters</strong>
+      テーブルから、<strong>id</strong>、<strong>name</strong>、<strong>job</strong>、<strong>level</strong>
+      の 4 つカラムを持つレコードをランダムに3件取得する SQL を記述せよ。</p></li>
+      <li><p><code>ex-04_2.sql</code> 👉 <strong>s_characters</strong>
+      テーブルから、<strong>last_login_at</strong>
+      が古い順に5件のレコードについて、以下のようなカラムを取得する SQL
+      を記述せよ。なお、<strong>last_login_at</strong> が <code>NULL</code> であるレコード
+      (＝アカウント作成後、一度もログインされていないもの) も含めて、先頭に配置すること。</p></li>
+      </ul>
+      <pre><code> id |  name   |    last_login_at    
+----+---------+---------------------
+  4 | Tom     |
+  5 | Ivan    | 2025-07-18 19:29:00
+  1 | Marvin  | 2025-07-24 13:31:00
+  3 | Charlie | 2025-07-29 20:37:00
+  2 | Zach    | 2025-07-30 18:33:00</code></pre>
+      <ul>
+      <li><code>ex-04_3.sql</code> 👉 <strong>s_characters</strong>
+      テーブルから、<strong>created_on</strong>
+      を古い順にならべて「11件目から15件目」にあたるレコードを、以下のようなカラムで取得する SQL
+      を記述せよ。</li>
+      </ul>
+      <pre><code> id |  name  | created_on 
+----+--------+------------
+ 11 | Ellen  | 2022-08-30
+ 12 | Dave   | 2023-01-19
+ 13 | Mallet | 2023-02-02
+ 14 | Eve    | 2023-09-07
+ 15 | Trent  | 2023-10-04</code></pre>
+      <h3 data-number="4.2.2" id="定着確認-2"><span class="header-section-number">4.2.2</span>
+      定着確認</h3>
+      <ul>
+      <li>あるテーブルにおいて、<strong>updated_at</strong>
+      カラムを降順でソートしたとき、251件目から300件目のレコードだけを取得したい。<code>LIMIT</code>
+      句 と <code>OFFSET</code> 句をどのように与えればよいか答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked"><code>LIMIT 50 OFFSET 250</code></span></li>
+      </ul></li>
+      <li>大量のデータを一度にすべて表示するのではなく、<code>LIMIT</code> 句と <code>OFFSET</code>
+      句を組み合わせて「1ページ目」「2ページ目」のように小分けにして取得・表示する処理を何というか。
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked">「ページング処理」または「ページネーション」</span></li>
+      </ul></li>
+      <li><code>LIMIT 50 OFFSET 100</code> と <code>LIMIT 50 OFFSET 10000</code>
+      を比較したとき、そのレスポンスタイムは、一般的に【　　　】。括弧にあてはまる語を「変わらない」「前者のほうが大きい」「後者のほうが大きい」から選び答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">後者のほうが大きい</span></li>
+      </ul></li>
+      </ul>
+      <h1 data-number="5" id="where-句"><span class="header-section-number">5</span> WHERE 句</h1>
+      <p><code>SELECT</code> 文では、<code>WHERE</code> 句を使うことで <span
+      class="masked">指定した条件に一致するレコードだけ</span>
+      を取り出すことが可能となります。<code>WHERE</code> 句には、<strong>3値論理</strong> (＝
+      <code>TRUE</code> / <code>FALSE</code> / <code>UNKNOWN</code> のいずれか)
+      を返す「式」や「関数」を設定します。そして、<code>WHERE</code> 句の評価結果が <span
+      class="masked">TRUE</span> となったレコードだけが抽出されます。</p>
+      <p>例えば、<strong>レベルが20以上</strong> かつ <strong>ギルドに所属している</strong>
+      (＝<strong>guild</strong> カラムが <code>NULL</code> ではない)
+      という条件に一致するレコードを取得する SQL は、次のように記述することができます。</p>
+      <div class="sourceCode" id="cb21" data-caption="WHEREの活用"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">SELECT</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb21-3"><a href="#cb21-3"></a>  name,</span>
+<span id="cb21-4"><a href="#cb21-4"></a>  <span class="kw">level</span>,</span>
+<span id="cb21-5"><a href="#cb21-5"></a>  guild</span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="kw">FROM</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a>  s_characters</span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="kw">WHERE</span> <span class="co">-- ◀ ここに注目</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a>  <span class="kw">level</span> <span class="op">&gt;=</span> <span class="dv">20</span> <span class="kw">AND</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a>  guild <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb21-12"><a href="#cb21-12"></a>  <span class="kw">level</span> <span class="kw">DESC</span>;</span></code></pre></div>
+      <p>なお、<code>SELECT</code> 文は、<code>SELECT</code> 句 👉 <code>FROM</code> 句 👉
+      <code>WHERE</code> 句 👉 <code>ORDER BY</code> 句 👉 (<code>LIMIT</code> 句 /
+      <code>OFFSET</code> 句) という順で記述しないと構文エラーになるので注意してください。</p>
+      <h2 data-number="5.1" id="基本的なwhere句"><span class="header-section-number">5.1</span>
+      基本的なWHERE句</h2>
+      <p><strong>id</strong> (<code>INTEGER</code>型)
+      が「<strong>3</strong>」に一致するレコードを取得する <code>SELECT</code>
+      文は次のようになります。SQL において等価比較演算子には <code>==</code> ではなく <code>=</code>
+      を使用するので注意してください。</p>
+      <div class="sourceCode" id="cb22" data-caption="WHERE句の基本(数値型の扱い)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> s_characters <span class="kw">WHERE</span> <span class="kw">id</span> <span class="op">=</span> <span class="dv">3</span>;</span></code></pre></div>
+      <ul>
+      <li><code>id == 3</code> のように <code>==</code>
+      を使用した場合、どのようになるか予測し、実際に結果を確認してください。</li>
+      <li><code>id = '3'</code>
+      のようにシングルクォートで囲んだ場合、どのようになるか予測し、実際に結果を確認してください。</li>
+      </ul>
+      <hr />
+      <p><strong>name</strong> (<code>VARCHAR</code>型)
+      が「<strong>Alice</strong>」に一致するレコードを取得する <code>SELECT</code>
+      文は次のようになります。文字列は <strong>シングルクォート</strong> <code>'</code>
+      で囲むことに注意してください。</p>
+      <div class="sourceCode" id="cb23" data-caption="WHERE句の基本(文字列型の扱い)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> s_characters <span class="kw">WHERE</span> name <span class="op">=</span> <span class="st">&#39;Alice&#39;</span>;</span></code></pre></div>
+      <ul>
+      <li><code>name = Alice</code>
+      のようにシングルクォートで囲まなかった場合、どのようになるか予測し、実際に結果を確認してください。</li>
+      </ul>
+      <hr />
+      <p><strong>created_on</strong> (<code>DATE</code>型)
+      が「<strong>2022-03-22</strong>」に一致するレコードを取得する <code>SELECT</code>
+      文は次のようになります。日付は <strong>シングルクォート</strong> <code>'</code>
+      で囲み、<code>YYYY-MM-DD</code> の形式で記述してください。</p>
+      <div class="sourceCode" id="cb24" data-caption="WHERE句の基本(日付型の扱い)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> s_characters <span class="kw">WHERE</span> created_on <span class="op">=</span> <span class="st">&#39;2022-03-22&#39;</span>;</span></code></pre></div>
+      <ul>
+      <li><code>created_on = '2022-3-22'</code>
+      のようにゼロ埋めなしの場合、どのようになるか予測し、実際に結果を確認してください。</li>
+      <li><code>created_on = '2022/03/22'</code> のように <code>/</code>
+      区切りの場合、どのようになるか予測し、実際に結果を確認してください。</li>
+      <li><code>created_on = '2022-03-22 12:30:00'</code>
+      のように時刻を含めたとき、どのようになるか予測し、実際に結果を確認してください。</li>
+      </ul>
+      <hr />
+      <p><strong>last_login_at</strong> (<code>TIMESTAMP</code>型) が「<strong>2025-10-03
+      11:42:00</strong>」に一致するレコードを取得する <code>WHERE</code>
+      句は次のようになります。日付は <strong>シングルクォート</strong> <code>'</code>
+      で囲み、<code>YYYY-MM-DD HH24:MI:SS</code> の形式で記述してください。</p>
+      <div class="sourceCode" id="cb25" data-caption="WHERE句の基本(日時型の扱い)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> s_characters <span class="kw">WHERE</span> last_login_at <span class="op">=</span> <span class="st">&#39;2025-10-03 11:42:00&#39;</span>;</span></code></pre></div>
+      <ul>
+      <li><code>last_login_at = '2025-10-03'</code>
+      のように時刻を含めない場合、どのようになるか予測し、実際に結果を確認してください。</li>
+      <li><code>last_login_at = '2025-10-03 11:42'</code> のように <strong>00秒</strong>
+      の部分を省略した場合、どのようになるか予測し、実際に結果を確認してください。</li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>PostgreSQLに関する質問です。いま <code>s_characters</code> テーブルの <code>id</code>
+      カラムは <code>INTEGER</code> 型で定義されています。このとき、<code>id</code>
+      が「3」に一致するレコードを抽出したいです。これは
+      <code>SELECT * FROM s_characters WHERE id = 3</code>
+      というSQLで実行可能なことを確認しました。しかし、これを <code>id = '3'</code>
+      のように「文字列リテラル」で指定しても (予想に反して) 実行可能でした。これは、なぜですか。他の
+      RDBMS でも同様なことが起きますか？ <code>id = 3</code> と <code>id = '3'</code>
+      のどちらが適切ですか？</p>
+      </blockquote>
+      <blockquote>
+      <p>PostgreSQLに関する質問です。いま <code>s_characters</code> テーブルの
+      <code>created_on</code> カラムは <code>DATE</code>
+      型で定義されています。このとき、<code>created_on</code>
+      が「2022年3月22日」に一致するレコードを抽出したいです。これは
+      <code>SELECT * FROM s_characters WHERE created_on = '2022-03-22'</code>
+      というSQLで実行可能なことを確認しました。しかし、これを <code>created_on = '2022/3/22'</code>
+      のような書式で指定しても (予想に反して) 実行可能でした。これは、なぜですか。他の RDBMS
+      でも同様なことが起きますか？ <code>2022-03-22</code> と <code>2022/3/22</code>
+      のどちらが適切ですか？</p>
+      </blockquote>
+      <h3 data-number="5.1.1" id="定着確認-3"><span class="header-section-number">5.1.1</span>
+      定着確認</h3>
+      <ul>
+      <li><strong>users</strong> テーブルから、<strong>id</strong> カラム（<code>INTEGER</code>
+      型で定義）が「7」に一致するレコードについて、すべてのカラムを取得するような
+      <code>SELECT</code>
+      文を記述せよ。なお、比較の際は、カラムのデータ型に適したリテラルを使用すること。
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked"><code>SELECT * FROM users WHERE id = 7;</code>。<code>id = '7'</code>
+      は不正解。</span></li>
+      </ul></li>
+      <li><strong>users</strong> テーブルから、<strong>name</strong> カラム（<code>VARCHAR</code>
+      型で定義）が「Bob」に一致するレコードについて、すべてのカラムを取得するような
+      <code>SELECT</code>
+      文を記述せよ。なお、比較の際は、カラムのデータ型に適したリテラルを使用すること。
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked"><code>SELECT * FROM users WHERE name = 'Bob';</code></span></li>
+      </ul></li>
+      <li><strong>users</strong> テーブルから、<strong>created_on</strong> カラム（<code>DATE</code>
+      型で定義）が「令和7年5月1日」に一致するレコードについて、すべてのカラムを取得するような
+      <code>SELECT</code>
+      文を記述せよ。なお、比較の際は、カラムのデータ型に適したリテラルを使用すること。なお、令和元年は、西暦2019年である。
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked"><code>SELECT * FROM users WHERE created_on = '2025-05-01';</code></span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="5.2" id="sqlの3値論理"><span class="header-section-number">5.2</span>
+      SQLの3値論理</h2>
+      <p>SQL では <code>TRUE</code> と <code>FALSE</code>
+      に加えて、「<strong>不明</strong>・<strong>未知</strong>」を表す <code>UNKNOWN</code> を扱う
+      <strong>3値論理</strong> (<strong>Three-Valued Logic</strong>、<strong>3VL</strong>)
+      が採用されています。<code>UNKNOWN</code> は、<code>NULL</code>
+      <strong>を含む式の評価結果が判定不能となった場合</strong>に返される値となります。</p>
+      <p>たとえば <span class="masked"><code>level + NULL</code></span> や <span
+      class="masked"><code>last_login_at = NULL</code></span> などの式を評価すると、結果は
+      <code>UNKNOWN</code> となります。</p>
+      <ul>
+      <li><code>IS NULL</code> や <code>IS NOT NULL</code>
+      は<strong>特別に真偽を判定できる例外的な存在</strong>です。</li>
+      </ul>
+      <p>この <code>UNKNOWN</code> が混ざると、<strong>論理演算</strong>
+      (<code>AND</code>・<code>OR</code>・<code>NOT</code>）の結果も <code>UNKNOWN</code>
+      を含む形で評価されることに十分に注意してください。</p>
+      <h3 data-number="5.2.1" id="sqlの3値論理の論理否定-not"><span
+      class="header-section-number">5.2.1</span> SQLの3値論理の論理否定 (NOT)</h3>
+      <p>3値論理の「<strong>論理否定</strong>」は次のようになります。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;">A</th>
+      <th style="text-align: center;">NOT A</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">TRUE</td>
+      <td style="text-align: center;">FALSE</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">FALSE</td>
+      <td style="text-align: center;">TRUE</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      </tr>
+      </tbody>
+      </table>
+      <p>実際に、この関係を確認するためには、次のような SQL を実行します。</p>
+      <ul>
+      <li>SQL では <code>UNKNOWN</code> を明示的に記述することはできず、<code>NULL</code> がその値
+      (<code>UNKNOWN</code>) を表します。</li>
+      <li>結果セットにおいては、<code>TRUE</code> は「<strong>t</strong>」、<code>FALSE</code>
+      は「<strong>f</strong>」、<code>UNKNOWN</code>（＝<code>NULL</code>）は「<strong>空欄</strong>」として表示されます。</li>
+      <li>SQLでは真偽値も <span class="masked">大文字と小文字を区別しません</span>。そのため
+      <code>TRUE</code> も <code>True</code> も <code>true</code> も同じです。以下の SQL
+      では、見やすさを重視して <code>True</code>、<code>False</code>、<code>Null</code>
+      の表記を使用しています。</li>
+      </ul>
+      <div class="sourceCode" id="cb26" data-caption="UNKNOWNを含む論理否定"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">SELECT</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="kw">NOT</span> <span class="kw">True</span> <span class="kw">AS</span> <span class="ot">&quot;NOT Ture&quot;</span>,</span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="kw">NOT</span> <span class="kw">False</span> <span class="kw">AS</span> <span class="ot">&quot;NOT False&quot;</span>,</span>
+<span id="cb26-4"><a href="#cb26-4"></a>  <span class="kw">NOT</span> <span class="kw">Null</span> <span class="kw">AS</span> <span class="ot">&quot;NOT Unknown&quot;</span>; </span></code></pre></div>
+      <ul>
+      <li>実際に、実行して結果を確かめてみてください。</li>
+      </ul>
+      <h3 data-number="5.2.2" id="sqlの3値論理の論理積-and"><span
+      class="header-section-number">5.2.2</span> SQLの3値論理の論理積 (AND)</h3>
+      <p>3値論理の「<strong>論理積 (AND)</strong>」は次のようになります。</p>
+      <table>
+      <colgroup>
+      <col style="width: 34%" />
+      <col style="width: 34%" />
+      <col style="width: 31%" />
+      </colgroup>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;">A</th>
+      <th style="text-align: center;">B</th>
+      <th style="text-align: center;">A AND B</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">TRUE</td>
+      <td style="text-align: center;">TRUE</td>
+      <td style="text-align: center;">TRUE</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">TRUE</td>
+      <td style="text-align: center;">FALSE</td>
+      <td style="text-align: center;">FALSE</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">TRUE</td>
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">FALSE</td>
+      <td style="text-align: center;">TRUE</td>
+      <td style="text-align: center;">FALSE</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">FALSE</td>
+      <td style="text-align: center;">FALSE</td>
+      <td style="text-align: center;">FALSE</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">FALSE</td>
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      <td style="text-align: center;">FALSE</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      <td style="text-align: center;">TRUE</td>
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      <td style="text-align: center;">FALSE</td>
+      <td style="text-align: center;">FALSE</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      </tr>
+      </tbody>
+      </table>
+      <p><code>UNKNOWN</code> を含まないときは、従来の2値論理 (<code>TRUE</code>/<code>FALSE</code>)
+      の <strong>論理積</strong> (<strong>AND</strong>)
+      と同じ結果となります。一方、<code>UNKNOWN</code> が含まれる場合は、次のように考えます。</p>
+      <ul>
+      <li><code>TRUE AND UNKNOWN</code>
+      の演算結果は、以下のように<strong>どちらの結果にもなり得るため</strong>、<code>UNKNOWN</code>
+      と考えます。
+      <ul>
+      <li>仮に <code>UNKNOWN</code> が <code>TRUE</code> であれば
+      <code>TRUE AND (TRUE) 👉 TRUE</code></li>
+      <li>仮に <code>UNKNOWN</code> が <code>FALSE</code> であれば
+      <code>TRUE AND (FALSE) 👉 FALSE</code></li>
+      </ul></li>
+      <li><code>FALSE AND UNKNOWN</code> の演算結果は、以下のように常に <code>FALSE</code>
+      になるため、<code>FALSE</code> と考えます。
+      <ul>
+      <li>仮に <code>UNKNOWN</code> が <code>TRUE</code> であれば
+      <code>FALSE AND (TRUE) 👉 FALSE</code></li>
+      <li>仮に <code>UNKNOWN</code> が <code>FALSE</code> であれば
+      <code>FALSE AND (FALSE) 👉 FALSE</code></li>
+      </ul></li>
+      </ul>
+      <p>次の SQL を実行して実際に確認してみてください。</p>
+      <div class="sourceCode" id="cb27" data-caption="UNKNOWNを含む論理積 (AND)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">SELECT</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="kw">True</span> <span class="kw">AND</span> <span class="kw">Null</span> <span class="kw">AS</span> <span class="ot">&quot;Ture AND Unknown&quot;</span>,</span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="kw">False</span> <span class="kw">AND</span> <span class="kw">Null</span> <span class="kw">AS</span> <span class="ot">&quot;False AND Unknown&quot;</span>,</span>
+<span id="cb27-4"><a href="#cb27-4"></a>  <span class="kw">Null</span> <span class="kw">AND</span> <span class="kw">Null</span> <span class="kw">AS</span> <span class="ot">&quot;Unknown AND Unknown&quot;</span>; </span></code></pre></div>
+      <h3 data-number="5.2.3" id="sqlの3値論理の論理和-or"><span
+      class="header-section-number">5.2.3</span> SQLの3値論理の論理和 (OR)</h3>
+      <p>3値論理の「<strong>論理和 (OR)</strong>」は次のようになります。</p>
+      <table>
+      <colgroup>
+      <col style="width: 34%" />
+      <col style="width: 34%" />
+      <col style="width: 31%" />
+      </colgroup>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;">A</th>
+      <th style="text-align: center;">B</th>
+      <th style="text-align: center;">A OR B</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">TRUE</td>
+      <td style="text-align: center;">TRUE</td>
+      <td style="text-align: center;">TRUE</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">TRUE</td>
+      <td style="text-align: center;">FALSE</td>
+      <td style="text-align: center;">TRUE</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">TRUE</td>
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      <td style="text-align: center;">TRUE</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">FALSE</td>
+      <td style="text-align: center;">TRUE</td>
+      <td style="text-align: center;">TRUE</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">FALSE</td>
+      <td style="text-align: center;">FALSE</td>
+      <td style="text-align: center;">FALSE</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">FALSE</td>
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      <td style="text-align: center;">TRUE</td>
+      <td style="text-align: center;">TRUE</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      <td style="text-align: center;">FALSE</td>
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      <td style="text-align: center;"><font color="deeppink">UNKNOWN</font></td>
+      </tr>
+      </tbody>
+      </table>
+      <p><code>UNKNOWN</code> を含まないときは、従来の2値論理 (<code>TRUE</code>/<code>FALSE</code>)
+      の <strong>論理和</strong> (<strong>OR</strong>)
+      と同じ結果となります。一方、<code>UNKNOWN</code> が含まれる場合は、次のように考えます。</p>
+      <ul>
+      <li><code>TRUE OR UNKNOWN</code> の演算結果は、以下のように常に <code>TRUE</code>
+      になるため、<code>TRUE</code> と考えます。
+      <ul>
+      <li>仮に <code>UNKNOWN</code> が <code>TRUE</code> であれば
+      <code>TRUE OR (TRUE) 👉 TRUE</code></li>
+      <li>仮に <code>UNKNOWN</code> が <code>FALSE</code> であれば
+      <code>TRUE OR (FALSE) 👉 TRUE</code></li>
+      </ul></li>
+      <li><code>FALSE OR UNKNOWN</code>
+      の演算結果は、以下のように<strong>どちらの結果にもなり得るため</strong>、<code>UNKNOWN</code>
+      と考えます。
+      <ul>
+      <li>仮に <code>UNKNOWN</code> が <code>TRUE</code> であれば
+      <code>FALSE OR (TRUE) 👉 TRUE</code></li>
+      <li>仮に <code>UNKNOWN</code> が <code>FALSE</code> であれば
+      <code>FALSE OR (FALSE) 👉 FALSE</code></li>
+      </ul></li>
+      </ul>
+      <p>次の SQL を実行して実際に確認してみてください。</p>
+      <div class="sourceCode" id="cb28" data-caption="UNKNOWNを含む論理和 (OR)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">SELECT</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>  <span class="kw">True</span> <span class="kw">OR</span> <span class="kw">Null</span> <span class="kw">AS</span> <span class="ot">&quot;Ture OR Unknown&quot;</span>,</span>
+<span id="cb28-3"><a href="#cb28-3"></a>  <span class="kw">False</span> <span class="kw">OR</span> <span class="kw">Null</span> <span class="kw">AS</span> <span class="ot">&quot;False OR Unknown&quot;</span>,</span>
+<span id="cb28-4"><a href="#cb28-4"></a>  <span class="kw">Null</span> <span class="kw">OR</span> <span class="kw">Null</span> <span class="kw">AS</span> <span class="ot">&quot;Unknown OR Unknown&quot;</span>; </span></code></pre></div>
+      <h2 data-number="5.3" id="where句でよく利用する述語"><span
+      class="header-section-number">5.3</span> WHERE句でよく利用する述語</h2>
+      <p>SQLにおいて <strong>3値論理</strong> を返す「式」を <strong>述語</strong>
+      (<strong>Predicate</strong>) といいます。代表的なものとして…</p>
+      <ul>
+      <li>比較述語 (<strong>比較演算子</strong>)</li>
+      <li>NULL判定述語</li>
+      <li>IN述語 (<strong>IN演算子</strong>)</li>
+      <li>LIKE述語 (<strong>LIKE条件</strong>、<strong>パターンマッチ演算子</strong>)</li>
+      <li>BETWEEN述語 (<strong>BETWEEN条件</strong>、<strong>範囲演算子</strong>)</li>
+      </ul>
+      <p>…があります。実務では、括弧内の表記で呼ばれることが多いです。</p>
+      <hr />
+      <ul>
+      <li><strong>比較演算子</strong>:
+      <code>=</code>（等しい）、<code>&lt;</code>（より小さい）、<code>&lt;=</code>（以下）、<code>&gt;</code>（より大きい）、<code>&gt;=</code>（以上）、<code>&lt;&gt;</code>（等しくない）など。
+      <ul>
+      <li>PostgreSQL のほか、様々な RDBMS で <code>&lt;&gt;</code> の代わりに <code>!=</code>
+      を不等価演算子として使用することができます。ただし、標準 SQL で定められているのは
+      <code>&lt;&gt;</code> のほうなので、原則として <span
+      class="masked"><code>&lt;&gt;</code></span> を使用してください。</li>
+      </ul></li>
+      <li><strong>NULL判定述語</strong>: <code>IS NULL</code>、<code>IS NOT NULL</code> など。
+      <ul>
+      <li>NULL判定には <span class="masked"><code>= NULL</code></span> ではなく、必ず
+      <code>IS NULL</code> を使用してください。<code>= NULL</code> の評価結果は、常に
+      <code>UNKNOWN</code> となります。</li>
+      <li>PostgreSQL では、<code>ISNULL</code> と <code>NOTNULL</code>
+      を使用することもできます。</li>
+      </ul></li>
+      </ul>
+      <h3 data-number="5.3.1" id="in述語-in演算子"><span class="header-section-number">5.3.1</span>
+      IN述語 (IN演算子)</h3>
+      <p>ジョブが「Priest」または「Wizard」のレコードを抽出する SQL は、<strong>IN演算子</strong>
+      を使用して次のように記述することができます。条件としては
+      <code>job = 'Priest' OR job = 'Wizard'</code> と同じですが <span
+      class="masked">より簡潔に記述できるメリット</span> があります。</p>
+      <div class="sourceCode" id="cb29" data-caption="IN演算子"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw">SELECT</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="op">*</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="kw">FROM</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a>  s_characters</span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="kw">WHERE</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a>  job <span class="kw">IN</span> (<span class="st">&#39;Priest&#39;</span>, <span class="st">&#39;Wizard&#39;</span>);</span></code></pre></div>
+      <p>なお、文字列の比較は、大文字と小文字を<strong>区別する</strong>ので注意してください。<code>job IN ('priest', 'wizard')</code>
+      のようにすると、<span class="masked">抽出されるレコードは「0件」</span> になります。</p>
+      <p>また、<code>IN</code> は、論理否定の <code>NOT</code>
+      と組み合わせることができます。たとえば、Priest と Wizard 以外のジョブ
+      (つまり、Fighter、Monk、Ninja、Samurai) を抽出する SQL は次のように記述できます。</p>
+      <div class="sourceCode" id="cb30" data-caption="IN演算子(NOTと組合わせ)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">SELECT</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="op">*</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="kw">FROM</span></span>
+<span id="cb30-4"><a href="#cb30-4"></a>  s_characters</span>
+<span id="cb30-5"><a href="#cb30-5"></a><span class="kw">WHERE</span></span>
+<span id="cb30-6"><a href="#cb30-6"></a>  job <span class="kw">NOT</span> <span class="kw">IN</span> (<span class="st">&#39;Priest&#39;</span>, <span class="st">&#39;Wizard&#39;</span>);</span></code></pre></div>
+      <p>ここでは <code>NOT job IN ('Priest', 'Wizard')</code>
+      のように記述しても同じ結果が得られますが、一般には推奨されません。本科目でも、<code>NOT IN</code>
+      の記法を使用してください。</p>
+      <p>なお、<code>WHRER</code> 句で <code>NOT IN</code> を使用するとき、リストに <span
+      class="masked"><code>NULL</code></span> を含むと、評価結果は常に
+      <code>UNKNOWN</code>となり、1件のレコードも抽出されなくなるので注意してください。例えば、ギルドが、Yamato、無所属
+      (<code>NULL</code>) <strong>以外</strong> のレコードを抽出したいとき、次の SQL
+      では意図した結果が得られません。実際に確認してみてください。</p>
+      <div class="sourceCode" id="cb31" data-caption="意図した結果が得られないSQL"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw">SELECT</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>  <span class="op">*</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="kw">FROM</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a>  s_characters</span>
+<span id="cb31-5"><a href="#cb31-5"></a><span class="kw">WHERE</span></span>
+<span id="cb31-6"><a href="#cb31-6"></a>  guild <span class="kw">NOT</span> <span class="kw">IN</span> (<span class="st">&#39;Yamato&#39;</span>, <span class="kw">NULL</span>); <span class="co">-- Yamato と NULL 以外を抽出したい</span></span></code></pre></div>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>SQL の WHERE では、<code>NOT job IN ('Priest', 'Wizard')</code> よりも
+      <code>job NOT IN ('Priest', 'Wizard')</code>
+      のように記述することが推奨されると言われました。なぜですか。</p>
+      </blockquote>
+      <blockquote>
+      <p>SQLに関する質問です。あるテーブルにギルドというカラムがあります。いま、ギルドのカラム値が
+      <code>Yamato</code> または <code>NULL</code> 以外のレコードを抽出したいです。そのために
+      <code>guild NOT IN ('Yamato', NULL)</code>
+      のように、WHERE句を書いたのですが、意図した結果がえられません。なぜ、このようなことが起きますか。</p>
+      </blockquote>
+      <h3 data-number="5.3.2" id="like述語-like条件パターンマッチ演算子"><span
+      class="header-section-number">5.3.2</span> LIKE述語 (LIKE条件、パターンマッチ演算子)</h3>
+      <p>キャラクタの名前が「<strong>C</strong>」から始まるようなレコードを抽出したいときは、<code>LIKE</code>
+      条件を使用し、次のように SQL を記述します。</p>
+      <div class="sourceCode" id="cb32" data-caption="LIKE条件"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">SELECT</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>  <span class="op">*</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="kw">FROM</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a>  s_characters</span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="kw">WHERE</span></span>
+<span id="cb32-6"><a href="#cb32-6"></a>  name <span class="kw">LIKE</span> <span class="st">&#39;C%&#39;</span>;</span></code></pre></div>
+      <p>ここで <code>%</code> (＝<strong>ワイルドカード</strong>) は <span
+      class="masked">0文字以上の任意文字</span> を表し、<code>C%</code>
+      は、大文字の「C」から始まる任意の文字列 (<strong>「C」だけの1文字の文字列を含む</strong>)
+      を表現しています。そのため、<code>WHERE name LIKE 'C%'</code> では、<strong>name</strong>
+      カラムが「<strong>C</strong>harlie」「<strong>C</strong>arol」「<strong>C</strong>haplin」のようなレコードだけが抽出されます。</p>
+      <p>なお、大文字と小文字を区別するので、<strong>name</strong>
+      が「chris」のレコードは抽出されません。小文字を含めて抽出したいときは <span
+      class="masked"><code>UPPER(name) LIKE 'C%'</code></span> のようにします。</p>
+      <ul>
+      <li>特定の文字で終わるレコードを抽出したいとき (後方一致検索)
+      は、<strong>ワイルドカード</strong> <code>%</code>
+      を前に置きます。例えば「セルゲエ<strong>ビッチ</strong>」「ミハイロ<strong>ビッチ</strong>」「ペトロ<strong>ビッチ</strong>」のように「ビッチ
+      (<strong>vich</strong>) 」で終わる名前のレコードを抽出したいときは <span
+      class="masked"><code>name LIKE '%vich'</code></span> のようにします。</li>
+      <li>特定の文字を含むレコードを抽出したいとき (中間一致検索)
+      は、<strong>ワイルドカード</strong> <code>%</code>
+      を検索文字列の前後に配置します。たとえば、<strong>dra</strong> を含む名前を抽出したいときは
+      <code>LOWER(name) LIKE '%dra%'</code> のようにします。
+      <ul>
+      <li><strong>Dra</strong>cula (<strong>ドラ</strong>キュラ)、Cen<strong>dra</strong>l
+      (セン<strong>ドラ</strong>ル)、Hy<strong>dra</strong> (ハイ<strong>ドラ</strong>)
+      などがマッチします。</li>
+      </ul></li>
+      </ul>
+      <h3 data-number="5.3.3" id="between述語-between条件範囲演算子"><span
+      class="header-section-number">5.3.3</span> BETWEEN述語 (BETWEEN条件、範囲演算子)</h3>
+      <p>「<strong>XX 以上 YY
+      以下</strong>」のような<strong>範囲条件</strong>でレコードを抽出したいときは、<code>BETWEEN</code>
+      を使うことで簡潔に <code>WHERE</code> 句を記述することができます。</p>
+      <p>例えば、<strong>level</strong> が <strong>20以上39以下</strong>
+      のレコードを抽出したい場合、次のように SQL を記述することができます。</p>
+      <div class="sourceCode" id="cb33" data-caption="BETWEENを使用した範囲条件の指定"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb33-1"><a href="#cb33-1"></a><span class="kw">SELECT</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>  <span class="op">*</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a><span class="kw">FROM</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a>  s_characters</span>
+<span id="cb33-5"><a href="#cb33-5"></a><span class="kw">WHERE</span></span>
+<span id="cb33-6"><a href="#cb33-6"></a>  <span class="kw">level</span> <span class="kw">BETWEEN</span> <span class="dv">20</span> <span class="kw">AND</span> <span class="dv">39</span>;</span></code></pre></div>
+      <p>この条件は <code>WHERE level &gt;= 20 AND level &lt;= 39</code>
+      と同じ意味になりますが、<code>BETWEEN</code>
+      を使うほうが可読性に優れています。なお、<code>BETWEEN</code> は <span
+      class="masked">両端の値を含むこと</span> に注意してください。上記の例では、レベルが
+      <code>39</code> のレコードも <strong>含まれます</strong>。</p>
+      <ul>
+      <li>Python の <code>range(20,39)</code>
+      のように上限を除外する仕様とは<strong>異なる</strong>ため、混同しないように注意してください。</li>
+      </ul>
+      <p><code>BETWEEN</code> は、特に <code>DATE</code> 型や <code>TIMESTAMP</code>
+      型のカラムでよく使用されます。例えば、最終ログイン日時 (<code>TIMESTAMP</code>型)
+      が「2025-07-01」から「2025-07-31」までの範囲にあるレコードを抽出したいときは次のように記述します。</p>
+      <div class="sourceCode" id="cb34" data-caption="BETWEENによる日付範囲の抽出"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb34-1"><a href="#cb34-1"></a><span class="kw">SELECT</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb34-3"><a href="#cb34-3"></a>  name,</span>
+<span id="cb34-4"><a href="#cb34-4"></a>  last_login_at</span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="kw">FROM</span></span>
+<span id="cb34-6"><a href="#cb34-6"></a>  s_characters</span>
+<span id="cb34-7"><a href="#cb34-7"></a><span class="kw">WHERE</span></span>
+<span id="cb34-8"><a href="#cb34-8"></a>  last_login_at <span class="kw">BETWEEN</span> <span class="st">&#39;2025-07-01&#39;</span> <span class="kw">AND</span> <span class="st">&#39;2025-07-31&#39;</span></span>
+<span id="cb34-9"><a href="#cb34-9"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb34-10"><a href="#cb34-10"></a>  last_login_at;</span></code></pre></div>
+      <p>さらに、<a
+      href="lecture03.html#日付時刻関数を利用する-授業時間外学習">前回講義</a>で紹介した
+      <code>DATE_PART</code>
+      関数と組み合わせることで、最終ログインが「<strong>9時から17時</strong>」のレコードを抽出するようなことにもできます。</p>
+      <div class="sourceCode" id="cb35"
+      data-caption="9時〜17時にログインしているレコードを取得"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb35-1"><a href="#cb35-1"></a><span class="kw">SELECT</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb35-3"><a href="#cb35-3"></a>  name,</span>
+<span id="cb35-4"><a href="#cb35-4"></a>  last_login_at</span>
+<span id="cb35-5"><a href="#cb35-5"></a><span class="kw">FROM</span></span>
+<span id="cb35-6"><a href="#cb35-6"></a>  s_characters</span>
+<span id="cb35-7"><a href="#cb35-7"></a><span class="kw">WHERE</span></span>
+<span id="cb35-8"><a href="#cb35-8"></a>  DATE_PART(<span class="st">&#39;hour&#39;</span>, last_login_at) <span class="kw">BETWEEN</span> <span class="dv">9</span> <span class="kw">AND</span> <span class="dv">17</span></span>
+<span id="cb35-9"><a href="#cb35-9"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb35-10"><a href="#cb35-10"></a>  <span class="fu">CAST</span>(last_login_at <span class="kw">AS</span> <span class="dt">TIME</span>); <span class="co">-- 時刻で整列</span></span></code></pre></div>
+      <ul>
+      <li><code>DATE_PART('hour', last_login_at)</code> は 0〜23
+      の整数を返すため、<code>BETWEEN 9 AND 17</code>は「<strong>9時台〜17時台の間</strong>」を意味します
+      (<strong>17:59 までを含む</strong>ことに注意してください)。</li>
+      </ul>
+      <h2 data-number="5.4" id="case式を使用したwhere句の指定"><span
+      class="header-section-number">5.4</span> CASE式を使用したWHERE句の指定</h2>
+      <p>CASE式は、<code>WHERE</code> 句でも利用することができます
+      (先にも述べましたが、式を記述できる場所であれば、どこでもCASE式を利用することができます)。</p>
+      <p>たとえば、<strong>ギルドに所属している場合はレベル60以上</strong>、<strong>未所属の場合はレベル30以上</strong>
+      のレコードを抽出したいとき、次のように SQL を記述することができます。</p>
+      <div class="sourceCode" id="cb36" data-caption="WHERE句におけるCASE式の利用1"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">SELECT</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb36-3"><a href="#cb36-3"></a>  name,</span>
+<span id="cb36-4"><a href="#cb36-4"></a>  guild,</span>
+<span id="cb36-5"><a href="#cb36-5"></a>  <span class="kw">level</span></span>
+<span id="cb36-6"><a href="#cb36-6"></a><span class="kw">FROM</span></span>
+<span id="cb36-7"><a href="#cb36-7"></a>  s_characters</span>
+<span id="cb36-8"><a href="#cb36-8"></a><span class="kw">WHERE</span> <span class="co">-- ◀ ここに注目</span></span>
+<span id="cb36-9"><a href="#cb36-9"></a>  <span class="kw">level</span> <span class="op">&gt;=</span> <span class="cf">CASE</span></span>
+<span id="cb36-10"><a href="#cb36-10"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="dv">60</span></span>
+<span id="cb36-11"><a href="#cb36-11"></a>    <span class="cf">ELSE</span> <span class="dv">30</span></span>
+<span id="cb36-12"><a href="#cb36-12"></a>  <span class="cf">END</span></span>
+<span id="cb36-13"><a href="#cb36-13"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb36-14"><a href="#cb36-14"></a>  <span class="kw">level</span> <span class="kw">DESC</span>;</span></code></pre></div>
+      <p>これは、次のように記述することもできます。</p>
+      <div class="sourceCode" id="cb37" data-caption="WHERE句におけるCASE式の利用2"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb37-1"><a href="#cb37-1"></a><span class="kw">SELECT</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb37-3"><a href="#cb37-3"></a>  name,</span>
+<span id="cb37-4"><a href="#cb37-4"></a>  guild,</span>
+<span id="cb37-5"><a href="#cb37-5"></a>  <span class="kw">level</span></span>
+<span id="cb37-6"><a href="#cb37-6"></a><span class="kw">FROM</span></span>
+<span id="cb37-7"><a href="#cb37-7"></a>  s_characters</span>
+<span id="cb37-8"><a href="#cb37-8"></a><span class="kw">WHERE</span></span>
+<span id="cb37-9"><a href="#cb37-9"></a>  <span class="cf">CASE</span></span>
+<span id="cb37-10"><a href="#cb37-10"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">AND</span> <span class="kw">level</span> <span class="op">&gt;=</span> <span class="dv">60</span> <span class="cf">THEN</span> <span class="kw">TRUE</span></span>
+<span id="cb37-11"><a href="#cb37-11"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">AND</span> <span class="kw">level</span> <span class="op">&gt;=</span> <span class="dv">30</span> <span class="cf">THEN</span> <span class="kw">TRUE</span></span>
+<span id="cb37-12"><a href="#cb37-12"></a>    <span class="cf">ELSE</span> <span class="kw">FALSE</span></span>
+<span id="cb37-13"><a href="#cb37-13"></a>  <span class="cf">END</span></span>
+<span id="cb37-14"><a href="#cb37-14"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb37-15"><a href="#cb37-15"></a>  <span class="kw">level</span> <span class="kw">DESC</span>;</span></code></pre></div>
+      <p>また、<strong>CASE式</strong>を使用せずに、次のように記述することもできます。</p>
+      <div class="sourceCode" id="cb38" data-caption="CASE式を使用しない例"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">SELECT</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>  <span class="kw">id</span>,</span>
+<span id="cb38-3"><a href="#cb38-3"></a>  name,</span>
+<span id="cb38-4"><a href="#cb38-4"></a>  guild,</span>
+<span id="cb38-5"><a href="#cb38-5"></a>  <span class="kw">level</span></span>
+<span id="cb38-6"><a href="#cb38-6"></a><span class="kw">FROM</span></span>
+<span id="cb38-7"><a href="#cb38-7"></a>  s_characters</span>
+<span id="cb38-8"><a href="#cb38-8"></a><span class="kw">WHERE</span></span>
+<span id="cb38-9"><a href="#cb38-9"></a>  (guild <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">AND</span> <span class="kw">level</span> <span class="op">&gt;=</span> <span class="dv">60</span> ) <span class="kw">OR</span></span>
+<span id="cb38-10"><a href="#cb38-10"></a>  (guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">AND</span> <span class="kw">level</span> <span class="op">&gt;=</span> <span class="dv">30</span> )</span>
+<span id="cb38-11"><a href="#cb38-11"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb38-12"><a href="#cb38-12"></a>  <span class="kw">level</span> <span class="kw">DESC</span>;</span></code></pre></div>
+      <h3 data-number="5.4.1" id="sqlドリル-4"><span class="header-section-number">5.4.1</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-05_1.sql</code> 👉 <strong>s_characters</strong>
+      テーブルから、<strong>buff</strong> が <code>0.00</code> 以外のレコードを抽出して、第1キーを
+      <strong>buff</strong> (降順)、第2キーを <strong>level</strong> (降順) でソートするような SQL
+      を記述せよ。なお、id、name、level、buff のカラムを出力すること。</li>
+      </ul>
+      <pre><code> id |  name  | level | buff  
+----+--------+-------+-------
+ 13 | Mallet |    64 |  0.10
+  2 | Zach   |    62 |  0.10
+ 17 | Wendy  |    56 |  0.10
+ 11 | Ellen  |    51 |  0.10
+ 14 | Eve    |    46 |  0.10
+ 16 | Steve  |    70 |  0.05
+ 19 | Jack   |    61 |  0.05
+ 10 | Oscar  |    44 |  0.05
+  8 | Bob    |    33 |  0.05
+  5 | Ivan   |    39 | -0.07
+  1 | Marvin |    35 | -0.15
+ 18 | Carol  |    28 | -0.20</code></pre>
+      <h3 data-number="5.4.2" id="定着確認-4"><span class="header-section-number">5.4.2</span>
+      定着確認</h3>
+      <ul>
+      <li>次の真理値表の空欄を埋めよ。ただし、SQL の 3
+      値論理に従い、<code>TRUE</code>、<code>FALSE</code>、<code>UNKNOWN</code>
+      のいずれかを答えること。
+      <ul>
+      <li><strong>答え</strong>:【1-1】<span class="masked">UNKNOWN</span></li>
+      <li><strong>答え</strong>:【1-2】<span class="masked">TRUE</span></li>
+      <li><strong>答え</strong>:【2-1】<span class="masked">FALSE</span></li>
+      <li><strong>答え</strong>:【2-2】<span class="masked">UNKNOWN</span></li>
+      </ul></li>
+      </ul>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;">A</th>
+      <th style="text-align: center;">B</th>
+      <th style="text-align: center;">A AND B</th>
+      <th style="text-align: center;">A OR B</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">UNKNOWN</td>
+      <td style="text-align: center;">TRUE</td>
+      <td style="text-align: center;">【1-1】</td>
+      <td style="text-align: center;">【1-2】</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">UNKNOWN</td>
+      <td style="text-align: center;">FALSE</td>
+      <td style="text-align: center;">【2-1】</td>
+      <td style="text-align: center;">【2-2】</td>
+      </tr>
+      </tbody>
+      </table>
+      <ul>
+      <li><code>SELECT</code> 文において、<strong>guild</strong>カラムが <code>NULL</code>
+      ではないレコードのみを取得したい。どのように <code>WHERE</code>
+      句を記述すればよいか。<code>WHERE</code> キーワードを含めて答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked"><code>WHERE guild IS NOT NULL</code></span></li>
+      </ul></li>
+      <li><code>SELECT</code> 文において、<strong>guild</strong>カラムが <code>Yamato</code>
+      ではないレコードを取得したい (<strong>guild</strong>カラムが <code>NULL</code>
+      であるレコードも含めて取得したい)。どのように <code>WHERE</code>
+      句を記述すればよいか。<code>WHERE</code> キーワードを含めて答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked"><code>guild &lt;&gt; 'Yamato' OR guild IS NULL</code></span></li>
+      </ul></li>
+      </ul>
+      <h1 data-number="6" id="insert文-基礎"><span class="header-section-number">6</span> INSERT文
+      (基礎)</h1>
+      <h1 data-number="7" id="update文-基礎"><span class="header-section-number">7</span> UPDATE文
+      (基礎)</h1>
+      <h1 data-number="8" id="delete文-基礎"><span class="header-section-number">8</span> DELETE文
+      (基礎)</h1>
+      <h1 data-number="9" id="授業時間外学習の指示-宿題"><span
+      class="header-section-number">9</span> 授業時間外学習の指示 (宿題)</h1>
       <p>🚨<strong>本科目は「学修単位科目」であり、1回の講義あたり「4時間相当」の授業時間外学習が求められる科目です</strong>🏃</p>
       <ul>
-      <li>次回の講義で「<strong>小テスト❸</strong>」を実施します。
+      <li>次回の講義で「<strong>小テスト❹</strong>」を実施します。
       <ul>
       <li><strong>定着確認</strong> および <strong>SQLドリル</strong> から主に出題します。</li>
       <li>講義が進行するにつれて、当然ながら小テストの内容も複雑で高度なものになっていきます。前半で、しっかりと得点をとるようにしてください。</li>

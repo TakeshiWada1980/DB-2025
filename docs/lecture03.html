@@ -1123,15 +1123,15 @@ INSERT 0 2
       が正式な記法とされています)。また、評価式では <code>AND</code> や <code>OR</code>
       を利用することができます。</p>
       <p>なお、「<strong>値が</strong> <code>NULL</code>
-      <strong>かどうか</strong>」を評価するためには、以下のように <code>ISNULL</code>
-      を使用します。<code>guild = NULL</code>
+      <strong>かどうか</strong>」を評価するためには、以下のように <code>IS NULL</code> を使用します
+      (<code>ISNULL</code>も可)。<code>guild = NULL</code>
       のように評価することはできないので十分に注意してください。</p>
       <div class="sourceCode" id="cb51" data-caption="NULL判定の評価式"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb51-1"><a href="#cb51-1"></a><span class="kw">SELECT</span></span>
 <span id="cb51-2"><a href="#cb51-2"></a>  <span class="kw">id</span>,</span>
 <span id="cb51-3"><a href="#cb51-3"></a>  name,</span>
 <span id="cb51-4"><a href="#cb51-4"></a>  <span class="cf">CASE</span></span>
-<span id="cb51-5"><a href="#cb51-5"></a>    <span class="cf">WHEN</span> guild ISNULL <span class="cf">THEN</span> <span class="st">&#39;(無所属)&#39;</span> <span class="co">-- NULL判定には ISNULL を使用</span></span>
+<span id="cb51-5"><a href="#cb51-5"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="st">&#39;(無所属)&#39;</span> <span class="co">-- NULL判定には IS NULL を使用</span></span>
 <span id="cb51-6"><a href="#cb51-6"></a>    <span class="cf">ELSE</span> guild</span>
 <span id="cb51-7"><a href="#cb51-7"></a>  <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">&quot;guild&quot;</span></span>
 <span id="cb51-8"><a href="#cb51-8"></a><span class="kw">FROM</span></span>
