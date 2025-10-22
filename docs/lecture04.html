@@ -79,14 +79,17 @@ class="toc-section-number">5.3</span> WHERE句でよく利用する述語</a></l
 <li><a href="#case式を使用したwhere句の指定" id="toc-case式を使用したwhere句の指定"><span
 class="toc-section-number">5.4</span> CASE式を使用したWHERE句の指定</a></li>
 </ul></li>
-<li><a href="#insert文-基礎" id="toc-insert文-基礎"><span class="toc-section-number">6</span>
-INSERT文 (基礎)</a></li>
-<li><a href="#update文-基礎" id="toc-update文-基礎"><span class="toc-section-number">7</span>
-UPDATE文 (基礎)</a></li>
-<li><a href="#delete文-基礎" id="toc-delete文-基礎"><span class="toc-section-number">8</span>
-DELETE文 (基礎)</a></li>
+<li><a href="#insert文-超基礎編" id="toc-insert文-超基礎編"><span
+class="toc-section-number">6</span> INSERT文 (超基礎編)</a>
+<ul>
+<li><a href="#トランザクションとロールバックの利用"
+id="toc-トランザクションとロールバックの利用"><span class="toc-section-number">6.1</span>
+トランザクションとロールバックの利用</a></li>
+<li><a href="#複数レコードの挿入" id="toc-複数レコードの挿入"><span
+class="toc-section-number">6.2</span> 複数レコードの挿入</a></li>
+</ul></li>
 <li><a href="#授業時間外学習の指示-宿題" id="toc-授業時間外学習の指示-宿題"><span
-class="toc-section-number">9</span> 授業時間外学習の指示 (宿題)</a></li>
+class="toc-section-number">7</span> 授業時間外学習の指示 (宿題)</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -136,8 +139,8 @@ class="toc-section-number">9</span> 授業時間外学習の指示 (宿題)</a><
       </ul>
       <h1 data-number="2" id="準備"><span class="header-section-number">2</span> 準備</h1>
       <p>今回の講義 (授業時間外学習を含む) では、SQLの <code>ORDER BY</code> 句、<code>LIMIT</code>
-      句、<code>OFFSET</code> 句、<code>WHERE</code> 句、<code>INSERT</code> 文、<code>DELETE</code>
-      文、<code>UPDATE</code> 文 について学んでいきます。</p>
+      句、<code>OFFSET</code> 句、<code>WHERE</code> 句、<code>INSERT</code> 文
+      について学んでいきます。</p>
       <p>まずは、ハンズオン演習の準備として、以下の手順で、SQL実行環境の動作確認、教材の更新取得を実行してください。</p>
       <h3 data-number="2.0.1" id="sql演習環境の動作確認-前回復習"><span
       class="header-section-number">2.0.1</span> SQL演習環境の動作確認 (前回復習)</h3>
@@ -1391,6 +1394,55 @@ git merge upstream/main</code></pre>
   5 | Ivan   |    39 | -0.07
   1 | Marvin |    35 | -0.15
  18 | Carol  |    28 | -0.20</code></pre>
+      <ul>
+      <li><code>ex-05_2.sql</code> 👉 <strong>s_characters</strong>
+      テーブルから、<strong>name</strong> が「T」からはじまるレコードについて、以下のようなカラムを
+      <strong>name</strong> の昇順で取得する SQL を記述せよ。</li>
+      </ul>
+      <pre><code> id | name  | level | created_on 
+----+-------+-------+------------
+  4 | Tom   |     1 | 2020-12-05
+ 15 | Trent |    50 | 2023-10-04
+  7 | Trudy |    48 | 2021-11-28</code></pre>
+      <ul>
+      <li><code>ex-05_3.sql</code> 👉 <strong>s_characters</strong>
+      テーブルから、<strong>created_on</strong>
+      が「2021年」と「2022年」のレコードについて、以下のようなカラムを <strong>created_on</strong>
+      の昇順で取得する SQL を記述せよ。ここでは、BETWEEN述語を使用することを期待している。</li>
+      </ul>
+      <pre><code> id |  name  | level | created_on 
+----+--------+-------+------------
+  5 | Ivan   |    39 | 2021-02-15
+  6 | Alice  |    42 | 2021-06-14
+  7 | Trudy  |    48 | 2021-11-28
+  8 | Bob    |    33 | 2022-03-22
+  9 | Walter |    73 | 2022-04-06
+ 11 | Ellen  |    51 | 2022-08-30
+ 10 | Oscar  |    44 | 2022-11-10</code></pre>
+      <ul>
+      <li><code>ex-05_4.sql</code> 👉 <strong>s_characters</strong>
+      テーブルから、<strong>created_on</strong>
+      が「2021年」と「2022年」<strong>以外</strong>のレコードについて、以下のようなカラムを
+      <strong>created_on</strong> の昇順で取得する SQL
+      を記述せよ。ここでは、BETWEEN述語を使用することを期待している。
+      <ul>
+      <li><strong>ヒント</strong>: <span class="masked"><code>NOT</code>を利用する</span></li>
+      </ul></li>
+      </ul>
+      <pre><code> id |  name   | level | created_on 
+----+---------+-------+------------
+  1 | Marvin  |    35 | 2020-09-23
+  2 | Zach    |    62 | 2020-10-25
+  3 | Charlie |    57 | 2020-12-05
+  4 | Tom     |     1 | 2020-12-05
+ 12 | Dave    |    68 | 2023-01-19
+ 13 | Mallet  |    64 | 2023-02-02
+ 14 | Eve     |    46 | 2023-09-07
+ 15 | Trent   |    50 | 2023-10-04
+ 16 | Steve   |    70 | 2024-01-27
+ 17 | Wendy   |    56 | 2024-03-18
+ 18 | Carol   |    28 | 2024-05-11
+ 19 | Jack    |    61 | 2024-07-12</code></pre>
       <h3 data-number="5.4.2" id="定着確認-4"><span class="header-section-number">5.4.2</span>
       定着確認</h3>
       <ul>
@@ -1445,14 +1497,144 @@ git merge upstream/main</code></pre>
       class="masked"><code>guild &lt;&gt; 'Yamato' OR guild IS NULL</code></span></li>
       </ul></li>
       </ul>
-      <h1 data-number="6" id="insert文-基礎"><span class="header-section-number">6</span> INSERT文
-      (基礎)</h1>
-      <h1 data-number="7" id="update文-基礎"><span class="header-section-number">7</span> UPDATE文
-      (基礎)</h1>
-      <h1 data-number="8" id="delete文-基礎"><span class="header-section-number">8</span> DELETE文
-      (基礎)</h1>
-      <h1 data-number="9" id="授業時間外学習の指示-宿題"><span
-      class="header-section-number">9</span> 授業時間外学習の指示 (宿題)</h1>
+      <h1 data-number="6" id="insert文-超基礎編"><span class="header-section-number">6</span>
+      INSERT文 (超基礎編)</h1>
+      <p>テーブルにレコードを追加するときには <code>INSERT</code>
+      文を使用します。例えば、<strong>s_users</strong> テーブルが次のようなスキーマ (構造・型)
+      のとき…</p>
+      <div class="sourceCode" id="cb43" data-caption="from-teacher/03/init-s_users.sql (抜粋)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb43-1"><a href="#cb43-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> s_users (</span>
+<span id="cb43-2"><a href="#cb43-2"></a>  <span class="kw">id</span> <span class="dt">INT</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, <span class="co">-- 主キー (Primary Key) 設定</span></span>
+<span id="cb43-3"><a href="#cb43-3"></a>  name TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>, <span class="co">-- NULL を不許可</span></span>
+<span id="cb43-4"><a href="#cb43-4"></a>  age <span class="dt">INT</span> <span class="co">-- NULL も許可</span></span>
+<span id="cb43-5"><a href="#cb43-5"></a>);</span></code></pre></div>
+      <p>このテーブルに「<strong>Carol (18歳)</strong>」を追加したい場合は、次のような
+      <code>INSERT</code> 文を記述します</p>
+      <div class="sourceCode" id="cb44" data-caption="s_usersにレコードを追加するINSERT文"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb44-1"><a href="#cb44-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a>  s_users (<span class="kw">id</span>, name, age)</span>
+<span id="cb44-3"><a href="#cb44-3"></a><span class="kw">VALUES</span></span>
+<span id="cb44-4"><a href="#cb44-4"></a>  (<span class="dv">3</span>, <span class="st">&#39;Carol&#39;</span>, <span class="dv">18</span>);</span></code></pre></div>
+      <p>ここで、<code>3</code> は <strong>id</strong>
+      を表し、既に「Alice」と「Bob」の2名が登録されているため、次の連番として <code>3</code>
+      を設定しています。</p>
+      <ul>
+      <li><strong>id</strong> は <code>id INT PRIMARY KEY</code> のように <strong>主キー</strong>
+      (Primary Key、プライマリキー) として設定されたカラムなので、既に使用している <code>1</code> や
+      <code>2</code> を設定することはできません。</li>
+      </ul>
+      <p>ここで、実際にレコードの挿入を試してみたいのですが、上記の SQL (<code>INSERT</code> 文)
+      をそのまま実行すると、これまでの講義や SQL
+      ドリルの動作結果に影響を及ぼすおそれがあります。ここでは <strong>トランザクション</strong> と
+      <strong>ロールバック</strong> の仕組みを利用して、安全に挙動を確かめていきます。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>リレーショナルデータベースにおいて、主キー (Primary Key)
+      とは何ですか。主キーには同じ値を設定できないと聞いたいのですが、なぜですか。</p>
+      </blockquote>
+      <h2 data-number="6.1" id="トランザクションとロールバックの利用"><span
+      class="header-section-number">6.1</span> トランザクションとロールバックの利用</h2>
+      <p><code>INSERT</code> の動作を安全に確認するため、ここでは
+      <strong>明示的にトランザクションを開始</strong> し、挿入処理と確認処理を行ったあとで、<span
+      class="masked">ロールバックによって変更を元に戻す</span> という手順をとります。</p>
+      <p>トランザクションの詳しい仕組みは今後の授業で扱うので、いまは「<code>START TRANSACTION</code>
+      <strong>から</strong> <code>ROLLBACK</code>
+      <strong>のあいだに実行された処理は、すべて取り消される</strong>
+      (＝<strong>実際のデータベースには反映されない</strong>)」という点だけを押さえておいてください。</p>
+      <div class="sourceCode" id="cb45"
+      data-caption="トランザクションとロールバックによるINSERTの検証"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb45-1"><a href="#cb45-1"></a><span class="co">-- トランザクションを開始</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb45-3"><a href="#cb45-3"></a></span>
+<span id="cb45-4"><a href="#cb45-4"></a><span class="co">-- レコードの挿入</span></span>
+<span id="cb45-5"><a href="#cb45-5"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb45-6"><a href="#cb45-6"></a>  s_users (<span class="kw">id</span>, name, age)</span>
+<span id="cb45-7"><a href="#cb45-7"></a><span class="kw">VALUES</span></span>
+<span id="cb45-8"><a href="#cb45-8"></a>  (<span class="dv">3</span>, <span class="st">&#39;Carol&#39;</span>, <span class="dv">18</span>);</span>
+<span id="cb45-9"><a href="#cb45-9"></a></span>
+<span id="cb45-10"><a href="#cb45-10"></a><span class="co">-- 挿入結果の確認</span></span>
+<span id="cb45-11"><a href="#cb45-11"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> s_users;</span>
+<span id="cb45-12"><a href="#cb45-12"></a></span>
+<span id="cb45-13"><a href="#cb45-13"></a><span class="co">-- トランザクション開始からここまでの処理を全て取り消し (ロールバック)</span></span>
+<span id="cb45-14"><a href="#cb45-14"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <p>上記の SQL を実行してみてください。次のような結果が得られるはずです。</p>
+      <pre><code> id | name  | age
+----+-------+-----
+  1 | Alice |  20
+  2 | Bob   |  25
+  3 | Carol |  18</code></pre>
+      <p>つづいて実際のデータベースには変更 (＝レコードの挿入)
+      が反映されていないことを確認してみます。</p>
+      <p>(<code>START TRANSACTION</code> ～ <code>ROLLBACK</code> で囲まずに)
+      <code>SELECT * FROM s_users;</code> を実行してみてください。<code>ROLLBACK</code>
+      を行ったことで
+      「Carol」のレコードの挿入は取り消され、<strong>データは元の2件に戻っているはず</strong>
+      です。</p>
+      <pre><code> id | name  | age 
+----+-------+-----
+  1 | Alice |  20
+  2 | Bob   |  25</code></pre>
+      <p>今後しばらくは、レコードを挿入する <code>INSERT</code> 文、レコードを削除する
+      <code>DELETE</code> 文、レコードを更新する <code>UPDATE</code> 文などは、すべて
+      <code>START TRANSACTION</code> ～ <code>ROLLBACK</code> の範囲内で試すようにしてください。</p>
+      <p>なお、最後の <code>ROLLBACK</code> を <span class="masked"><code>COMMIT</code></span>
+      に置き換えると、<strong>変更内容が確定して実際のデータベースに反映されます</strong>（今回はあくまで練習なので、最後は
+      <code>ROLLBACK</code> にしてください）。</p>
+      <div class="note type-tips">
+      <p><strong><code>START TRANSACTION</code> ～ <code>ROLLBACK</code>
+      で囲まずに実行してしまったときは…</strong></p>
+      <p>次のコマンドで <strong>s_users</strong> テーブルと <strong>s_characters</strong>
+      テーブルを初期化してください。</p>
+      <pre><code>npm run sql from-teacher/03/init-s_users.sql
+npm run sql from-teacher/03/init-s_characters.sql</code></pre>
+      </div>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>リレーショナルデータベースにおいて、トランザクションおよびロールバックとは何ですか。先生から「繰り返し演習するために、INSERT文やDELETE文は
+      <code>START TRANSACTION</code> ～ <code>ROLLBACK</code>
+      で囲んで実行するように」と指示されました。これはどういう意味でしょうか。</p>
+      </blockquote>
+      <h2 data-number="6.2" id="複数レコードの挿入"><span class="header-section-number">6.2</span>
+      複数レコードの挿入</h2>
+      <p>2件以上のレコードを挿入するときは、次のように <code>VALUES</code>
+      句内でカンマ区切りで記述します。実際に実行して確認してください。</p>
+      <div class="sourceCode" id="cb49" data-caption="2件以上のレコードを同時に挿入"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb49-1"><a href="#cb49-1"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb49-2"><a href="#cb49-2"></a></span>
+<span id="cb49-3"><a href="#cb49-3"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb49-4"><a href="#cb49-4"></a>  s_users (<span class="kw">id</span>, name, age)</span>
+<span id="cb49-5"><a href="#cb49-5"></a><span class="kw">VALUES</span></span>
+<span id="cb49-6"><a href="#cb49-6"></a>  (<span class="dv">3</span>, <span class="st">&#39;Carol&#39;</span>, <span class="dv">18</span>),</span>
+<span id="cb49-7"><a href="#cb49-7"></a>  (<span class="dv">4</span>, <span class="st">&#39;Dave&#39;</span>, <span class="kw">NULL</span>),</span>
+<span id="cb49-8"><a href="#cb49-8"></a>  (<span class="dv">5</span>, <span class="st">&#39;Elen&#39;</span>, <span class="dv">17</span>);</span>
+<span id="cb49-9"><a href="#cb49-9"></a></span>
+<span id="cb49-10"><a href="#cb49-10"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> s_users; <span class="co">-- 確認</span></span>
+<span id="cb49-11"><a href="#cb49-11"></a></span>
+<span id="cb49-12"><a href="#cb49-12"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <ul>
+      <li><strong>age</strong> カラムには、<code>NOT NULL</code> 制約がないので
+      <strong>第07行目</strong> のように <code>NULL</code> を設定することができます。</li>
+      <li><strong>第08行目</strong> を <code>(1, 'Elen', 17)</code> のように <strong>id</strong>
+      が重複するようにすると、どのようになるか確認してください。</li>
+      </ul>
+      <h3 data-number="6.2.1" id="sqlドリル-5"><span class="header-section-number">6.2.1</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-06_1.sql</code> 👉 <strong>s_characters</strong>
+      テーブルに、以下に示すような2件のレコードを挿入する SQL を記述せよ。
+      <ul>
+      <li><i class="fa-brands fa-github"></i><a
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL/blob/main/from-teacher/03/init-s_characters.sql">from-teacher/03/init-s_characters.sql</a>
+      の <code>INSERT</code> 文を参考にすること。</li>
+      <li><code>START TRANSACTION</code> ～ <code>ROLLBACK</code> で囲んで実行すること。</li>
+      </ul></li>
+      </ul>
+      <pre><code>  name   |   job   | level | buff  | guild  |    last_login_at    | created_on
+---------+---------+-------+-------+--------+---------------------+------------
+ Justin  | Archer  |     2 |  0.50 |        | 2025-10-23 11:28:00 | 2025-10-23
+ Zoe     | Paladin |    11 |  0.00 | W.Wind | 2025-10-20 15:48:00 | 2025-10-12</code></pre>
+      <h1 data-number="7" id="授業時間外学習の指示-宿題"><span
+      class="header-section-number">7</span> 授業時間外学習の指示 (宿題)</h1>
       <p>🚨<strong>本科目は「学修単位科目」であり、1回の講義あたり「4時間相当」の授業時間外学習が求められる科目です</strong>🏃</p>
       <ul>
       <li>次回の講義で「<strong>小テスト❹</strong>」を実施します。
