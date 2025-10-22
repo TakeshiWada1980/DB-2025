@@ -422,8 +422,8 @@ git merge upstream/main</code></pre>
       class="header-section-number">3.3</span> NULL 値のソート位置を指定</h2>
       <p>先のセクションで確認したように、PostgreSQL では <code>ORDER BY</code> に <code>ASC</code>
       (昇順) を指定した場合、<code>NULL</code> 値は最後に配置されます。逆に <code>DESC</code> (降順)
-      を指定したと場合は、<code>NULL</code> 値が先頭に配置されます。ただし、これは
-      <strong>PostgreSQL 固有の仕様</strong>であり、標準 SQL では <code>NULL</code> の整列順は <span
+      を指定した場合は、<code>NULL</code> 値が先頭に配置されます。ただし、これは <strong>PostgreSQL
+      固有の仕様</strong>であり、標準 SQL では <code>NULL</code> の整列順は <span
       class="masked">不定 (implementation-dependent)</span> と定められています。</p>
       <p>標準 SQL (および PostgreSQL を含む多くの実装) では、<code>ORDER BY</code> による整列で
       <code>NULL</code> の位置を明示的に指定するために <code>NULLS LAST</code> と
@@ -438,7 +438,7 @@ git merge upstream/main</code></pre>
 <span id="cb9-5"><a href="#cb9-5"></a><span class="kw">FROM</span></span>
 <span id="cb9-6"><a href="#cb9-6"></a>  s_characters</span>
 <span id="cb9-7"><a href="#cb9-7"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a>  last_login_at <span class="kw">DESC</span> <span class="kw">NULLS</span> <span class="fu">LAST</span>; <span class="co">-- ◀ ここに通目</span></span></code></pre></div>
+<span id="cb9-8"><a href="#cb9-8"></a>  last_login_at <span class="kw">DESC</span> <span class="kw">NULLS</span> <span class="fu">LAST</span>; <span class="co">-- ◀ ここに注目</span></span></code></pre></div>
       <ul>
       <li>上記の <strong>第08行目</strong> を <code>last_login_at DESC;</code>
       とすると、<code>last_login_at</code> が <code>NULL</code>
