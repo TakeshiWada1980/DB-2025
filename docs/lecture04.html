@@ -111,7 +111,7 @@ class="toc-section-number">7</span> 授業時間外学習の指示 (宿題)</a><
       <li>シラバス記載のように、小テストは最終評価の <span class="masked">35%</span>
       に相当します。</li>
       <li>遅刻・欠席等により追試験を希望する場合は<a
-      href="lecture01.html#成績評価法と履修条の注意">第01回講義で案内した手続き</a>をしてください</li>
+      href="lecture01.html#成績評価法と履修上の注意">第01回講義で案内した手続き</a>をしてください</li>
       </ul></li>
       <li>卒業研究の仮配属のための研究室訪問
       <ul>
@@ -172,7 +172,7 @@ class="toc-section-number">7</span> 授業時間外学習の指示 (宿題)</a><
   2 | Bob   |  25</code></pre>
       <ul>
       <li><a href="http://localhost:8080/">http://localhost:8080/</a>もしくは<a
-      href="http://127.0.01:8080/">http://127.0.01:8080/</a>から <strong>DbGate</strong>
+      href="http://127.0.0.1:8080/">http://127.0.0.1:8080/</a>から <strong>DbGate</strong>
       に接続して、次のように <strong>s_users</strong> テーブルと <strong>characters</strong>
       テーブルの内容が表示できることを確認してください。</li>
       </ul>
@@ -198,7 +198,7 @@ git switch main
 git merge upstream/main</code></pre>
       <p>最後の <code>git merge upstream/main</code>
       を実行すると、次のようなコミットメッセージの編集画面が開くことがあります。その場合は、内容
-      (コミットメントライン) を確認して「<strong>続行</strong>」ボタンを押下してください。</p>
+      (コミットメッセージ) を確認して「<strong>続行</strong>」ボタンを押下してください。</p>
       <figure>
       <img src="figs/03/git-01.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -956,7 +956,7 @@ git merge upstream/main</code></pre>
       </ul>
       <div class="sourceCode" id="cb26" data-caption="UNKNOWNを含む論理否定"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">SELECT</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a>  <span class="kw">NOT</span> <span class="kw">True</span> <span class="kw">AS</span> <span class="ot">&quot;NOT Ture&quot;</span>,</span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="kw">NOT</span> <span class="kw">True</span> <span class="kw">AS</span> <span class="ot">&quot;NOT True&quot;</span>,</span>
 <span id="cb26-3"><a href="#cb26-3"></a>  <span class="kw">NOT</span> <span class="kw">False</span> <span class="kw">AS</span> <span class="ot">&quot;NOT False&quot;</span>,</span>
 <span id="cb26-4"><a href="#cb26-4"></a>  <span class="kw">NOT</span> <span class="kw">Null</span> <span class="kw">AS</span> <span class="ot">&quot;NOT Unknown&quot;</span>; </span></code></pre></div>
       <ul>
@@ -1051,7 +1051,7 @@ git merge upstream/main</code></pre>
       <p>次の SQL を実行して実際に確認してみてください。</p>
       <div class="sourceCode" id="cb27" data-caption="UNKNOWNを含む論理積 (AND)"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">SELECT</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a>  <span class="kw">True</span> <span class="kw">AND</span> <span class="kw">Null</span> <span class="kw">AS</span> <span class="ot">&quot;Ture AND Unknown&quot;</span>,</span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="kw">True</span> <span class="kw">AND</span> <span class="kw">Null</span> <span class="kw">AS</span> <span class="ot">&quot;True AND Unknown&quot;</span>,</span>
 <span id="cb27-3"><a href="#cb27-3"></a>  <span class="kw">False</span> <span class="kw">AND</span> <span class="kw">Null</span> <span class="kw">AS</span> <span class="ot">&quot;False AND Unknown&quot;</span>,</span>
 <span id="cb27-4"><a href="#cb27-4"></a>  <span class="kw">Null</span> <span class="kw">AND</span> <span class="kw">Null</span> <span class="kw">AS</span> <span class="ot">&quot;Unknown AND Unknown&quot;</span>; </span></code></pre></div>
       <h3 data-number="5.2.3" id="sqlの3値論理の論理和-or"><span
@@ -1143,7 +1143,7 @@ git merge upstream/main</code></pre>
       <p>次の SQL を実行して実際に確認してみてください。</p>
       <div class="sourceCode" id="cb28" data-caption="UNKNOWNを含む論理和 (OR)"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">SELECT</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>  <span class="kw">True</span> <span class="kw">OR</span> <span class="kw">Null</span> <span class="kw">AS</span> <span class="ot">&quot;Ture OR Unknown&quot;</span>,</span>
+<span id="cb28-2"><a href="#cb28-2"></a>  <span class="kw">True</span> <span class="kw">OR</span> <span class="kw">Null</span> <span class="kw">AS</span> <span class="ot">&quot;True OR Unknown&quot;</span>,</span>
 <span id="cb28-3"><a href="#cb28-3"></a>  <span class="kw">False</span> <span class="kw">OR</span> <span class="kw">Null</span> <span class="kw">AS</span> <span class="ot">&quot;False OR Unknown&quot;</span>,</span>
 <span id="cb28-4"><a href="#cb28-4"></a>  <span class="kw">Null</span> <span class="kw">OR</span> <span class="kw">Null</span> <span class="kw">AS</span> <span class="ot">&quot;Unknown OR Unknown&quot;</span>; </span></code></pre></div>
       <h2 data-number="5.3" id="where句でよく利用する述語"><span
@@ -1673,7 +1673,7 @@ npm run sql from-teacher/03/init-s_characters.sql</code></pre>
       </ul>
       <hr />
       <ul>
-      <li>この講義資料を再読・熟読し「不明な用語」や「理解が十分な用語」があればインターネットや、ChatGPTなどの生成AIを利用して解決してください。また、興味関心を持ったトピックについて、ウェブ、生成AI、YouTube動画などを利用して知識を広げ、理解を深めてください。
+      <li>この講義資料を再読・熟読し「不明な用語」や「理解が不十分な用語」があればインターネットや、ChatGPTなどの生成AIを利用して解決してください。また、興味関心を持ったトピックについて、ウェブ、生成AI、YouTube動画などを利用して知識を広げ、理解を深めてください。
       <ul>
       <li>特に <strong>(プロンプト例)</strong>
       を示しているものについては、実際に生成AIにプロンプトを投げ、さらに対話を重ねることで、知識の幅を広げるだけでなく、理解をより深く確かなものにしてください。</li>
