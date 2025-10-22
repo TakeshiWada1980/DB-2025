@@ -56,8 +56,8 @@ class="toc-section-number">2.1</span> 教材の更新の取得</a></li>
 ORDER BY 句</a></li>
 <li><a href="#複数のソートキーの指定" id="toc-複数のソートキーの指定"><span
 class="toc-section-number">3.2</span> 複数のソートキーの指定</a></li>
-<li><a href="#null-値の配置を指定" id="toc-null-値の配置を指定"><span
-class="toc-section-number">3.3</span> NULL 値の配置を指定</a></li>
+<li><a href="#null-値のソート位置を指定" id="toc-null-値のソート位置を指定"><span
+class="toc-section-number">3.3</span> NULL 値のソート位置を指定</a></li>
 <li><a href="#case式を使用したorder-by句の指定" id="toc-case式を使用したorder-by句の指定"><span
 class="toc-section-number">3.4</span> CASE式を使用したORDER BY句の指定</a></li>
 </ul></li>
@@ -87,6 +87,8 @@ id="toc-トランザクションとロールバックの利用"><span class="toc
 トランザクションとロールバックの利用</a></li>
 <li><a href="#複数レコードの挿入" id="toc-複数レコードの挿入"><span
 class="toc-section-number">6.2</span> 複数レコードの挿入</a></li>
+<li><a href="#カラム指定の順序と省略" id="toc-カラム指定の順序と省略"><span
+class="toc-section-number">6.3</span> カラム指定の順序と省略</a></li>
 </ul></li>
 <li><a href="#授業時間外学習の指示-宿題" id="toc-授業時間外学習の指示-宿題"><span
 class="toc-section-number">7</span> 授業時間外学習の指示 (宿題)</a></li>
@@ -416,8 +418,8 @@ git merge upstream/main</code></pre>
   5 |        |  39 | Ivan (Monk)
  18 |        |  28 | Carol (Priest)
   4 |        |   1 | Tom (Fighter)</code></pre>
-      <h2 data-number="3.3" id="null-値の配置を指定"><span class="header-section-number">3.3</span>
-      NULL 値の配置を指定</h2>
+      <h2 data-number="3.3" id="null-値のソート位置を指定"><span
+      class="header-section-number">3.3</span> NULL 値のソート位置を指定</h2>
       <p>先のセクションで確認したように、PostgreSQL では <code>ORDER BY</code> に <code>ASC</code>
       (昇順) を指定した場合、<code>NULL</code> 値は最後に配置されます。逆に <code>DESC</code> (降順)
       を指定したと場合は、<code>NULL</code> 値が先頭に配置されます。ただし、これは
@@ -1543,6 +1545,8 @@ git merge upstream/main</code></pre>
       <strong>から</strong> <code>ROLLBACK</code>
       <strong>のあいだに実行された処理は、すべて取り消される</strong>
       (＝<strong>実際のデータベースには反映されない</strong>)」という点だけを押さえておいてください。</p>
+      <p>具体的には、次の SQL
+      によってレコードの挿入を試しつつ、<strong>最後にロールバックによって元のデータベース状態に戻す</strong>ことができます。</p>
       <div class="sourceCode" id="cb45"
       data-caption="トランザクションとロールバックによるINSERTの検証"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb45-1"><a href="#cb45-1"></a><span class="co">-- トランザクションを開始</span></span>
@@ -1554,10 +1558,10 @@ git merge upstream/main</code></pre>
 <span id="cb45-7"><a href="#cb45-7"></a><span class="kw">VALUES</span></span>
 <span id="cb45-8"><a href="#cb45-8"></a>  (<span class="dv">3</span>, <span class="st">&#39;Carol&#39;</span>, <span class="dv">18</span>);</span>
 <span id="cb45-9"><a href="#cb45-9"></a></span>
-<span id="cb45-10"><a href="#cb45-10"></a><span class="co">-- 挿入結果の確認</span></span>
+<span id="cb45-10"><a href="#cb45-10"></a><span class="co">-- 結果の確認</span></span>
 <span id="cb45-11"><a href="#cb45-11"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> s_users;</span>
 <span id="cb45-12"><a href="#cb45-12"></a></span>
-<span id="cb45-13"><a href="#cb45-13"></a><span class="co">-- トランザクション開始からここまでの処理を全て取り消し (ロールバック)</span></span>
+<span id="cb45-13"><a href="#cb45-13"></a><span class="co">-- トランザクション開始からここまでの全処理を取り消し (ロールバック)</span></span>
 <span id="cb45-14"><a href="#cb45-14"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
       <p>上記の SQL を実行してみてください。次のような結果が得られるはずです。</p>
       <pre><code> id | name  | age
@@ -1568,19 +1572,19 @@ git merge upstream/main</code></pre>
       <p>つづいて実際のデータベースには変更 (＝レコードの挿入)
       が反映されていないことを確認してみます。</p>
       <p>(<code>START TRANSACTION</code> ～ <code>ROLLBACK</code> で囲まずに)
-      <code>SELECT * FROM s_users;</code> を実行してみてください。<code>ROLLBACK</code>
-      を行ったことで
-      「Carol」のレコードの挿入は取り消され、<strong>データは元の2件に戻っているはず</strong>
+      <code>SELECT * FROM s_users;</code>
+      を実行してみてください。ロールバックにより、「Carol」のレコードの挿入は取り消され、<strong>テーブルのレコードは元の2件に戻っているはず</strong>
       です。</p>
       <pre><code> id | name  | age 
 ----+-------+-----
   1 | Alice |  20
   2 | Bob   |  25</code></pre>
       <p>今後しばらくは、レコードを挿入する <code>INSERT</code> 文、レコードを削除する
-      <code>DELETE</code> 文、レコードを更新する <code>UPDATE</code> 文などは、すべて
+      <code>DELETE</code> 文、レコードを更新する <code>UPDATE</code> 文などは
       <code>START TRANSACTION</code> ～ <code>ROLLBACK</code> の範囲内で試すようにしてください。</p>
-      <p>なお、最後の <code>ROLLBACK</code> を <span class="masked"><code>COMMIT</code></span>
-      に置き換えると、<strong>変更内容が確定して実際のデータベースに反映されます</strong>（今回はあくまで練習なので、最後は
+      <p>なお、<strong>第14行目</strong>の <code>ROLLBACK</code> を <span
+      class="masked"><code>COMMIT</code></span>
+      に置き換えると、<strong>変更内容が確定して実際のデータベースに変更が反映されます</strong>（今回はあくまで練習なので、最後は
       <code>ROLLBACK</code> にしてください）。</p>
       <div class="note type-tips">
       <p><strong><code>START TRANSACTION</code> ～ <code>ROLLBACK</code>
@@ -1598,8 +1602,8 @@ npm run sql from-teacher/03/init-s_characters.sql</code></pre>
       </blockquote>
       <h2 data-number="6.2" id="複数レコードの挿入"><span class="header-section-number">6.2</span>
       複数レコードの挿入</h2>
-      <p>2件以上のレコードを挿入するときは、次のように <code>VALUES</code>
-      句内でカンマ区切りで記述します。実際に実行して確認してください。</p>
+      <p>2件以上のレコードを同時に挿入したいときは、次のように <code>VALUES</code> 句内で
+      <strong>カンマ区切り</strong> でデータを記述します。実際に実行して確認してください。</p>
       <div class="sourceCode" id="cb49" data-caption="2件以上のレコードを同時に挿入"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb49-1"><a href="#cb49-1"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
 <span id="cb49-2"><a href="#cb49-2"></a></span>
@@ -1616,10 +1620,32 @@ npm run sql from-teacher/03/init-s_characters.sql</code></pre>
       <ul>
       <li><strong>age</strong> カラムには、<code>NOT NULL</code> 制約がないので
       <strong>第07行目</strong> のように <code>NULL</code> を設定することができます。</li>
+      <li><strong>第07行目</strong> で、<code>'Dave'</code> を <code>NULL</code>
+      にすると、どのようになるか確認してください。</li>
       <li><strong>第08行目</strong> を <code>(1, 'Elen', 17)</code> のように <strong>id</strong>
       が重複するようにすると、どのようになるか確認してください。</li>
       </ul>
-      <h3 data-number="6.2.1" id="sqlドリル-5"><span class="header-section-number">6.2.1</span>
+      <h2 data-number="6.3" id="カラム指定の順序と省略"><span
+      class="header-section-number">6.3</span> カラム指定の順序と省略</h2>
+      <p>次のように <code>INSERT INTO</code>
+      句では、<strong>カラムの指定順序を任意に変更すること</strong> ができます。
+      また、「NULLを許容するカラム」や「デフォルト値が設定されているカラム」については、指定を省略することも可能です。</p>
+      <div class="sourceCode" id="cb50" data-caption="カラム指定の順序と省略"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb50-2"><a href="#cb50-2"></a></span>
+<span id="cb50-3"><a href="#cb50-3"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb50-4"><a href="#cb50-4"></a>  s_users (name, <span class="kw">id</span>) <span class="co">-- カラムの順序に注目</span></span>
+<span id="cb50-5"><a href="#cb50-5"></a><span class="kw">VALUES</span></span>
+<span id="cb50-6"><a href="#cb50-6"></a>  (<span class="st">&#39;Carol&#39;</span>, <span class="dv">3</span>), <span class="co">-- 指定したカラム順に対応して値を記述</span></span>
+<span id="cb50-7"><a href="#cb50-7"></a>  (<span class="st">&#39;Dave&#39;</span>, <span class="dv">4</span>),</span>
+<span id="cb50-8"><a href="#cb50-8"></a>  (<span class="st">&#39;Elen&#39;</span>, <span class="dv">5</span>);</span>
+<span id="cb50-9"><a href="#cb50-9"></a></span>
+<span id="cb50-10"><a href="#cb50-10"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> s_users; <span class="co">-- 確認</span></span>
+<span id="cb50-11"><a href="#cb50-11"></a></span>
+<span id="cb50-12"><a href="#cb50-12"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <p>実際に実行して、省略された <strong>age</strong>
+      がどのような値になっているかを確認してください。</p>
+      <h3 data-number="6.3.1" id="sqlドリル-5"><span class="header-section-number">6.3.1</span>
       SQLドリル💻</h3>
       <ul>
       <li><code>ex-06_1.sql</code> 👉 <strong>s_characters</strong>
