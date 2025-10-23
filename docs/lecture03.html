@@ -705,11 +705,14 @@ INSERT 0 2
       </ul>
       <h2 data-number="7.2" id="select文"><span class="header-section-number">7.2</span>
       SELECT文</h2>
-      <p>テーブルから任意のレコード (行) を取り出す操作を、RDB では <strong><em>抽出</em></strong>
+      <p>テーブルから任意のレコード (行) を取り出す操作を、RDB では <strong><em>選択</em></strong>
       (<strong>Selection</strong>) を呼びます。また、任意のカラム (列) だけを取り出す操作を
       <strong><em>射影</em></strong> (<strong>Projection</strong>) と呼びます。これらの操作は
       <strong>SQL</strong> (=Structured Query Language) では <code>SELECT</code>
       キーワードによって指示します。</p>
+      <div class="note type-caution">
+      <p><strong>第1稿で、上記の「選択」を、誤って「抽出」と書いていました。訂正します。</strong></p>
+      </div>
       <p><strong>s_characters</strong> テーブルに格納されたすべての情報 (すべてのレコードとカラム)
       を取得するには、次のような <code>SELECT</code> 文 (SQLクエリ) を使用します。</p>
       <div class="sourceCode" id="cb30"
@@ -735,7 +738,8 @@ INSERT 0 2
       <ul>
       <li>テーブルから必要なレコード (行) を取り出す操作を何というか。漢字2文字で答えよ。
       <ul>
-      <li>答え: <span class="masked">抽出。英語では Selection</span></li>
+      <li>答え: <span class="masked">選択。英語では
+      Selection。※第1稿では誤って「抽出」としていましたが、「選択」が正しいです。</span></li>
       </ul></li>
       <li>テーブルから必要なカラム (列) を取り出す操作を何というか。漢字2文字で答えよ。
       <ul>
