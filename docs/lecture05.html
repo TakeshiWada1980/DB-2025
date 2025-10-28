@@ -251,11 +251,11 @@ class="toc-section-number">10</span> 授業時間外学習の指示 (宿題)</a>
 <span id="cb2-13"><a href="#cb2-13"></a><span class="kw">VALUES</span></span>
 <span id="cb2-14"><a href="#cb2-14"></a>  (<span class="dv">4</span>, <span class="st">&#39;Dave&#39;</span>, <span class="kw">NULL</span>);</span>
 <span id="cb2-15"><a href="#cb2-15"></a></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="co">-- 操作3 Elen の登録 (成功)</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co">-- 操作3 Ellen の登録 (成功)</span></span>
 <span id="cb2-17"><a href="#cb2-17"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
 <span id="cb2-18"><a href="#cb2-18"></a>  s_users (<span class="kw">id</span>, name, age)</span>
 <span id="cb2-19"><a href="#cb2-19"></a><span class="kw">VALUES</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a>  (<span class="dv">5</span>, <span class="st">&#39;Elen&#39;</span>, <span class="dv">17</span>);</span>
+<span id="cb2-20"><a href="#cb2-20"></a>  (<span class="dv">5</span>, <span class="st">&#39;Ellen&#39;</span>, <span class="dv">17</span>);</span>
 <span id="cb2-21"><a href="#cb2-21"></a></span>
 <span id="cb2-22"><a href="#cb2-22"></a><span class="co">-- START TRANSACTION 以降の全ての操作が成功していれば「確定」</span></span>
 <span id="cb2-23"><a href="#cb2-23"></a><span class="kw">COMMIT</span>;</span>
@@ -278,7 +278,7 @@ COMMIT
   2 | Bob   |  25
   3 | Carol |  18
   4 | Dave  |
-  5 | Elen  |  17
+  5 | Ellen |  17
 (5 行)  </code></pre>
       <p>ここで、上記の <strong>第2行目</strong> から <strong>第4行目</strong> の
       <code>INSERT 0 1</code> は <span class="masked">各操作で1件のレコードが挿入されたこと</span>
@@ -315,11 +315,11 @@ COMMIT
 <span id="cb5-13"><a href="#cb5-13"></a><span class="kw">VALUES</span></span>
 <span id="cb5-14"><a href="#cb5-14"></a>  (<span class="dv">4</span>, <span class="st">&#39;Dave&#39;</span>, <span class="kw">NULL</span>);</span>
 <span id="cb5-15"><a href="#cb5-15"></a></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="co">-- 操作3 Elen の登録 (❌失敗 id=4 が重複) </span></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="co">-- 操作3 Ellen の登録 (❌失敗 id=4 が重複) </span></span>
 <span id="cb5-17"><a href="#cb5-17"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
 <span id="cb5-18"><a href="#cb5-18"></a>  s_users (<span class="kw">id</span>, name, age)</span>
 <span id="cb5-19"><a href="#cb5-19"></a><span class="kw">VALUES</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a>  (<span class="dv">4</span>, <span class="st">&#39;Elen&#39;</span>, <span class="dv">17</span>);</span>
+<span id="cb5-20"><a href="#cb5-20"></a>  (<span class="dv">4</span>, <span class="st">&#39;Ellen&#39;</span>, <span class="dv">17</span>);</span>
 <span id="cb5-21"><a href="#cb5-21"></a></span>
 <span id="cb5-22"><a href="#cb5-22"></a><span class="co">-- START TRANSACTION 以降の全ての操作が成功していれば「確定」</span></span>
 <span id="cb5-23"><a href="#cb5-23"></a><span class="kw">COMMIT</span>;</span>
@@ -417,7 +417,7 @@ DETAIL:  キー (id)=(4) はすでに存在します。</code></pre>
       のターミナルから次のコマンドを実行してください。コマンドのなかの <code>pg17</code>
       は<i class="fa-brands fa-github"></i><a
       href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL/blob/main/docker/docker-compose.yaml">docker/docker-compose.yaml</a>の
-      <strong>第04行目</strong> で指定している PostgresSQL コンテナの「名前」になります。</p>
+      <strong>第04行目</strong> で指定している PostgreSQL コンテナの「名前」になります。</p>
       <pre><code>docker cp from-teacher/05/insert-s_users.csv pg17:/tmp/</code></pre>
       <p>ファイルのコピーに成功すると、次のようなメッセージが返ってきます。</p>
       <pre><code>Successfully copied 2.05kB to pg17:/tmp/</code></pre>
@@ -648,6 +648,10 @@ ROLLBACK</code></pre>
       <p><code>UPDATE</code> 文では <span class="masked">現在のカラム値</span>
       を参照した更新も可能です。たとえば、<strong>level</strong> を <code>現在値+2</code>
       にするには、次のように SQL を記述します。</p>
+      <ul>
+      <li>実際に実行するときは <code>START TRANSACTION</code> ～ <code>ROLLBACK</code>
+      の内部で実行してください。</li>
+      </ul>
       <div class="sourceCode" id="cb18" data-caption="levelを2だけ増加させる更新"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">UPDATE</span> s_characters</span>
 <span id="cb18-2"><a href="#cb18-2"></a><span class="kw">SET</span></span>
@@ -933,7 +937,7 @@ ROLLBACK</code></pre>
 <span id="cb32-5"><a href="#cb32-5"></a><span class="kw">VALUES</span></span>
 <span id="cb32-6"><a href="#cb32-6"></a>  (<span class="dv">3</span>, <span class="st">&#39;Carol&#39;</span>, <span class="dv">18</span>),</span>
 <span id="cb32-7"><a href="#cb32-7"></a>  (<span class="dv">4</span>, <span class="st">&#39;Dave&#39;</span>, <span class="kw">NULL</span>),</span>
-<span id="cb32-8"><a href="#cb32-8"></a>  (<span class="dv">5</span>, <span class="st">&#39;Elen&#39;</span>, <span class="dv">17</span>);</span>
+<span id="cb32-8"><a href="#cb32-8"></a>  (<span class="dv">5</span>, <span class="st">&#39;Ellen&#39;</span>, <span class="dv">17</span>);</span>
 <span id="cb32-9"><a href="#cb32-9"></a></span>
 <span id="cb32-10"><a href="#cb32-10"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> s_users;</span>
 <span id="cb32-11"><a href="#cb32-11"></a></span>
@@ -955,7 +959,7 @@ INSERT 0 3
   2 | Bob   |  25
   3 | Carol |  18
   4 | Dave  |
-  5 | Elen  |  17
+  5 | Ellen  |  17
 (5 行)
 
  sum | sum_with_default | avg  | avg_with_default
@@ -1019,7 +1023,7 @@ ROLLBACK</code></pre>
 <span id="cb36-7"><a href="#cb36-7"></a>  s_characters;</span>
 <span id="cb36-8"><a href="#cb36-8"></a></span>
 <span id="cb36-9"><a href="#cb36-9"></a><span class="kw">SELECT</span></span>
-<span id="cb36-10"><a href="#cb36-10"></a>  <span class="fu">MIN</span>(created_on) <span class="kw">AS</span> <span class="ot">&quot;max_created_on&quot;</span>,</span>
+<span id="cb36-10"><a href="#cb36-10"></a>  <span class="fu">MIN</span>(created_on) <span class="kw">AS</span> <span class="ot">&quot;min_created_on&quot;</span>,</span>
 <span id="cb36-11"><a href="#cb36-11"></a>  <span class="fu">MAX</span>(created_on) <span class="kw">AS</span> <span class="ot">&quot;max_created_on&quot;</span></span>
 <span id="cb36-12"><a href="#cb36-12"></a><span class="kw">FROM</span></span>
 <span id="cb36-13"><a href="#cb36-13"></a>  s_characters;</span></code></pre></div>
@@ -1029,7 +1033,7 @@ ROLLBACK</code></pre>
       1 |     73 | Alice    | Zach
 (1 行)
 
- max_created_on | max_created_on
+ min_created_on | max_created_on
 ----------------+----------------
  2020-09-23     | 2024-07-12
 (1 行)</code></pre>
@@ -1231,7 +1235,7 @@ ROLLBACK</code></pre>
       <p>英語環境では次のようになります。</p>
       <pre><code>psql:&lt;stdin&gt;:7: ERROR:  column &quot;s_characters.level&quot; must appear in the GROUP BY clause or be used in an aggregate function</code></pre>
       <p><strong>第03行目</strong> の <code>level</code> を、集約関数を適用した形 (たとえば
-      <code>MAX(level)</code> や <code>AGV(level)</code>)
+      <code>MAX(level)</code> や <code>AVG(level)</code>)
       にすると問題なく実行できることを確認してください。</p>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
@@ -1548,9 +1552,7 @@ ROLLBACK</code></pre>
       <h2 data-number="9.1" id="where句とhaving句の使い分けについて"><span
       class="header-section-number">9.1</span> WHERE句とHAVING句の使い分けについて</h2>
       <p><code>HAVING</code> 句は、<code>GROUP BY</code> による <span
-      class="masked">集約結果に対して条件を使った絞り込みをするため</span>
-      に使用します。そのため、<code>GROUP BY</code> 句を持たない <code>SELECT</code>
-      文に使用すると構文エラーとなります。</p>
+      class="masked">集約結果に対して条件を使った絞り込みをするため</span> に使用します。</p>
       <p>また、<code>HAVING</code> 句では、集約キー以外のカラムは <code>COUNT</code> や
       <code>MAX</code>
       などの<strong>集約関数を適用したうえで参照する必要</strong>があります。例えば、<code>GROUP BY guild</code>
