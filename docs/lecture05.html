@@ -87,6 +87,8 @@ class="toc-section-number">6.2</span> 特定のレコードのみを更新</a></
 class="toc-section-number">6.3</span> 現在の値を利用した更新</a></li>
 <li><a href="#case式による同時置換処理" id="toc-case式による同時置換処理"><span
 class="toc-section-number">6.4</span> CASE式による同時置換処理</a></li>
+<li><a href="#補足-returning句" id="toc-補足-returning句"><span
+class="toc-section-number">6.5</span> 補足: RETURNING句</a></li>
 </ul></li>
 <li><a href="#集約関数-aggregate-function" id="toc-集約関数-aggregate-function"><span
 class="toc-section-number">7</span> 集約関数 (Aggregate Function)</a>
@@ -811,6 +813,41 @@ ROLLBACK</code></pre>
       <li>Ninja を Fighter に変更</li>
       </ul></li>
       </ul>
+      <h2 data-number="6.5" id="補足-returning句"><span class="header-section-number">6.5</span>
+      補足: RETURNING句</h2>
+      <p>PostgreSQL では、<code>UPDATE</code> 文や <code>DELETE</code> 文を実行した際、変更後
+      (または削除した) レコードの内容を即座に取得できる <code>RETURNING</code>
+      句という構文があります。通常の <code>UPDATE</code> 文は、<code>UPDATE 2</code>
+      のように<strong>件数だけ</strong>を返しますが、<code>RETURNING</code> を使うと <span
+      class="masked">変更後のレコードを受け取り、任意のカラムを出力すること</span> ができます。</p>
+      <div class="sourceCode" id="cb24" data-caption="RETURNING句の利用"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb24-2"><a href="#cb24-2"></a></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="kw">UPDATE</span> s_characters</span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="kw">SET</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a>  buff <span class="op">=</span> <span class="fl">0.3</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a><span class="kw">WHERE</span></span>
+<span id="cb24-7"><a href="#cb24-7"></a>  <span class="kw">level</span> <span class="op">&lt;</span> <span class="dv">40</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a><span class="kw">RETURNING</span> <span class="co">-- ◀ ここに注目</span></span>
+<span id="cb24-9"><a href="#cb24-9"></a>  <span class="kw">id</span>,</span>
+<span id="cb24-10"><a href="#cb24-10"></a>  name,</span>
+<span id="cb24-11"><a href="#cb24-11"></a>  <span class="kw">level</span>,</span>
+<span id="cb24-12"><a href="#cb24-12"></a>  buff;</span>
+<span id="cb24-13"><a href="#cb24-13"></a></span>
+<span id="cb24-14"><a href="#cb24-14"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <p>実行結果は次のようになります。</p>
+      <pre><code>START TRANSACTION
+ id |  name  | level | buff
+----+--------+-------+------
+  1 | Marvin |    35 | 0.30
+  4 | Tom    |     1 | 0.30
+  5 | Ivan   |    39 | 0.30
+  8 | Bob    |    33 | 0.30
+ 18 | Carol  |    28 | 0.30
+(5 行)
+
+UPDATE 5
+ROLLBACK</code></pre>
       <h1 data-number="7" id="集約関数-aggregate-function"><span
       class="header-section-number">7</span> 集約関数 (Aggregate Function)</h1>
       <p>SQL
@@ -828,14 +865,14 @@ ROLLBACK</code></pre>
       (このとき、すべてのカラムが <code>NULL</code>
       のレコードがあっても、それを「1」とカウントします)。</p>
       <p>次の SQL の実行結果を予想し、その後、実際に実行して結果を確認してください。</p>
-      <div class="sourceCode" id="cb24" data-caption="COUNT関数の利用例"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">SELECT</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num_record&quot;</span>,</span>
-<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">COUNT</span>(name) <span class="kw">AS</span> <span class="ot">&quot;num_name&quot;</span>, </span>
-<span id="cb24-4"><a href="#cb24-4"></a>  <span class="fu">COUNT</span>(guild) <span class="kw">AS</span> <span class="ot">&quot;num_guild&quot;</span>,</span>
-<span id="cb24-5"><a href="#cb24-5"></a>  <span class="fu">COUNT</span>(last_login_at) <span class="kw">AS</span> <span class="ot">&quot;num_last_login_at&quot;</span></span>
-<span id="cb24-6"><a href="#cb24-6"></a><span class="kw">FROM</span></span>
-<span id="cb24-7"><a href="#cb24-7"></a>  s_characters;</span></code></pre></div>
+      <div class="sourceCode" id="cb26" data-caption="COUNT関数の利用例"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">SELECT</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num_record&quot;</span>,</span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">COUNT</span>(name) <span class="kw">AS</span> <span class="ot">&quot;num_name&quot;</span>, </span>
+<span id="cb26-4"><a href="#cb26-4"></a>  <span class="fu">COUNT</span>(guild) <span class="kw">AS</span> <span class="ot">&quot;num_guild&quot;</span>,</span>
+<span id="cb26-5"><a href="#cb26-5"></a>  <span class="fu">COUNT</span>(last_login_at) <span class="kw">AS</span> <span class="ot">&quot;num_last_login_at&quot;</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="kw">FROM</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a>  s_characters;</span></code></pre></div>
       <p>実際の実行結果は次のようになります。</p>
       <pre><code> num_record | num_name | num_guild | num_last_login_at 
 ------------+----------+-----------+-------------------      
@@ -856,13 +893,13 @@ ROLLBACK</code></pre>
       class="masked">重複を省く</span> ためのキーワードであり、<code>COUNT</code>
       関数のなかで使用することで、<strong>重複を除いた値の件数</strong> を数えることができます。</p>
       <p>次の SQL の実行結果を予想し、その後、実際に実行して結果を確認してください。</p>
-      <div class="sourceCode" id="cb26" data-caption="COUNT関数の利用例(DISTINCT付き)"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">SELECT</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num_record&quot;</span>,</span>
-<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> job) <span class="kw">AS</span> <span class="ot">&quot;num_job_distinct&quot;</span>,</span>
-<span id="cb26-4"><a href="#cb26-4"></a>  <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> guild) <span class="kw">AS</span> <span class="ot">&quot;num_guild_distinct&quot;</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a><span class="kw">FROM</span></span>
-<span id="cb26-6"><a href="#cb26-6"></a>  s_characters;</span></code></pre></div>
+      <div class="sourceCode" id="cb28" data-caption="COUNT関数の利用例(DISTINCT付き)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">SELECT</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num_record&quot;</span>,</span>
+<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> job) <span class="kw">AS</span> <span class="ot">&quot;num_job_distinct&quot;</span>,</span>
+<span id="cb28-4"><a href="#cb28-4"></a>  <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> guild) <span class="kw">AS</span> <span class="ot">&quot;num_guild_distinct&quot;</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="kw">FROM</span></span>
+<span id="cb28-6"><a href="#cb28-6"></a>  s_characters;</span></code></pre></div>
       <p>実際の実行結果は次のようになります。</p>
       <pre><code> num_record | num_job_distinct | num_guild_distinct 
 ------------+------------------+--------------------
@@ -910,12 +947,12 @@ ROLLBACK</code></pre>
       となります。</li>
       </ul>
       <p>次の SQL の実行結果を予想し、その後、実際に実行して結果を確認してください。</p>
-      <div class="sourceCode" id="cb30" data-caption="SUM関数とAVG関数の利用例"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">SELECT</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>),<span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_level&quot;</span>,</span>
-<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">SUM</span>(<span class="kw">level</span>) <span class="kw">AS</span> <span class="ot">&quot;sum_level&quot;</span></span>
-<span id="cb30-4"><a href="#cb30-4"></a><span class="kw">FROM</span></span>
-<span id="cb30-5"><a href="#cb30-5"></a>  s_characters;</span></code></pre></div>
+      <div class="sourceCode" id="cb32" data-caption="SUM関数とAVG関数の利用例"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">SELECT</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>),<span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_level&quot;</span>,</span>
+<span id="cb32-3"><a href="#cb32-3"></a>  <span class="fu">SUM</span>(<span class="kw">level</span>) <span class="kw">AS</span> <span class="ot">&quot;sum_level&quot;</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="kw">FROM</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a>  s_characters;</span></code></pre></div>
       <p>実際の実行結果は次のようになります。なお、上記の<strong>第02行目</strong>の
       <code>ROUND</code> は<a
       href="lecture03.html#カラム値に文字列演算と算術演算を適用する">第03回講義</a>で紹介したように四捨五入を適用する関数になります。</p>
@@ -929,27 +966,27 @@ ROLLBACK</code></pre>
       関数を適用したい場合、<code>COALESCE</code> 関数を組み合わせます。</p>
       <p>次の SQL は、<strong>age</strong> カラムが <code>NULL</code> のとき、それを <code>16</code>
       に置き換えて合計と平均を適用するものです。実行結果を予想し、その後、実際に実行して結果を確認してください。</p>
-      <div class="sourceCode" id="cb32" data-caption="SUM関数とAVG関数の利用例"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
-<span id="cb32-2"><a href="#cb32-2"></a></span>
-<span id="cb32-3"><a href="#cb32-3"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
-<span id="cb32-4"><a href="#cb32-4"></a>  s_users (<span class="kw">id</span>, name, age)</span>
-<span id="cb32-5"><a href="#cb32-5"></a><span class="kw">VALUES</span></span>
-<span id="cb32-6"><a href="#cb32-6"></a>  (<span class="dv">3</span>, <span class="st">&#39;Carol&#39;</span>, <span class="dv">18</span>),</span>
-<span id="cb32-7"><a href="#cb32-7"></a>  (<span class="dv">4</span>, <span class="st">&#39;Dave&#39;</span>, <span class="kw">NULL</span>),</span>
-<span id="cb32-8"><a href="#cb32-8"></a>  (<span class="dv">5</span>, <span class="st">&#39;Ellen&#39;</span>, <span class="dv">17</span>);</span>
-<span id="cb32-9"><a href="#cb32-9"></a></span>
-<span id="cb32-10"><a href="#cb32-10"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> s_users;</span>
-<span id="cb32-11"><a href="#cb32-11"></a></span>
-<span id="cb32-12"><a href="#cb32-12"></a><span class="kw">SELECT</span></span>
-<span id="cb32-13"><a href="#cb32-13"></a>  <span class="fu">SUM</span>(age) <span class="kw">AS</span> <span class="ot">&quot;sum&quot;</span>,</span>
-<span id="cb32-14"><a href="#cb32-14"></a>  <span class="fu">SUM</span>(<span class="fu">COALESCE</span>(age, <span class="dv">16</span>)) <span class="kw">AS</span> <span class="ot">&quot;sum_with_default&quot;</span>,</span>
-<span id="cb32-15"><a href="#cb32-15"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(age), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg&quot;</span>,</span>
-<span id="cb32-16"><a href="#cb32-16"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="fu">COALESCE</span>(age, <span class="dv">16</span>)), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_with_default&quot;</span></span>
-<span id="cb32-17"><a href="#cb32-17"></a><span class="kw">FROM</span></span>
-<span id="cb32-18"><a href="#cb32-18"></a>  s_users;</span>
-<span id="cb32-19"><a href="#cb32-19"></a></span>
-<span id="cb32-20"><a href="#cb32-20"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <div class="sourceCode" id="cb34" data-caption="SUM関数とAVG関数の利用例"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb34-1"><a href="#cb34-1"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb34-2"><a href="#cb34-2"></a></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a>  s_users (<span class="kw">id</span>, name, age)</span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="kw">VALUES</span></span>
+<span id="cb34-6"><a href="#cb34-6"></a>  (<span class="dv">3</span>, <span class="st">&#39;Carol&#39;</span>, <span class="dv">18</span>),</span>
+<span id="cb34-7"><a href="#cb34-7"></a>  (<span class="dv">4</span>, <span class="st">&#39;Dave&#39;</span>, <span class="kw">NULL</span>),</span>
+<span id="cb34-8"><a href="#cb34-8"></a>  (<span class="dv">5</span>, <span class="st">&#39;Ellen&#39;</span>, <span class="dv">17</span>);</span>
+<span id="cb34-9"><a href="#cb34-9"></a></span>
+<span id="cb34-10"><a href="#cb34-10"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> s_users;</span>
+<span id="cb34-11"><a href="#cb34-11"></a></span>
+<span id="cb34-12"><a href="#cb34-12"></a><span class="kw">SELECT</span></span>
+<span id="cb34-13"><a href="#cb34-13"></a>  <span class="fu">SUM</span>(age) <span class="kw">AS</span> <span class="ot">&quot;sum&quot;</span>,</span>
+<span id="cb34-14"><a href="#cb34-14"></a>  <span class="fu">SUM</span>(<span class="fu">COALESCE</span>(age, <span class="dv">16</span>)) <span class="kw">AS</span> <span class="ot">&quot;sum_with_default&quot;</span>,</span>
+<span id="cb34-15"><a href="#cb34-15"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(age), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg&quot;</span>,</span>
+<span id="cb34-16"><a href="#cb34-16"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="fu">COALESCE</span>(age, <span class="dv">16</span>)), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_with_default&quot;</span></span>
+<span id="cb34-17"><a href="#cb34-17"></a><span class="kw">FROM</span></span>
+<span id="cb34-18"><a href="#cb34-18"></a>  s_users;</span>
+<span id="cb34-19"><a href="#cb34-19"></a></span>
+<span id="cb34-20"><a href="#cb34-20"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
       <p>実際の実行結果は次のようになります。</p>
       <pre><code>START TRANSACTION
 INSERT 0 3
@@ -1013,20 +1050,20 @@ ROLLBACK</code></pre>
       の値を、<code>MIN</code> は辞書順の最初 (＝昇順に並べたときの先頭) の値を返します。</li>
       </ul>
       <p>次の SQL の実行結果を予想し、その後、実際に実行して結果を確認してください。</p>
-      <div class="sourceCode" id="cb36" data-caption="MAX関数とMIN関数の利用例"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">SELECT</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a>  <span class="fu">MIN</span>(<span class="kw">level</span>) <span class="kw">AS</span> <span class="ot">&quot;min_lv.&quot;</span>,</span>
-<span id="cb36-3"><a href="#cb36-3"></a>  <span class="fu">MAX</span>(<span class="kw">level</span>) <span class="kw">AS</span> <span class="ot">&quot;max_lv.&quot;</span>,</span>
-<span id="cb36-4"><a href="#cb36-4"></a>  <span class="fu">MIN</span>(name) <span class="kw">AS</span> <span class="ot">&quot;min_name&quot;</span>,</span>
-<span id="cb36-5"><a href="#cb36-5"></a>  <span class="fu">MAX</span>(name) <span class="kw">AS</span> <span class="ot">&quot;max_name&quot;</span></span>
-<span id="cb36-6"><a href="#cb36-6"></a><span class="kw">FROM</span></span>
-<span id="cb36-7"><a href="#cb36-7"></a>  s_characters;</span>
-<span id="cb36-8"><a href="#cb36-8"></a></span>
-<span id="cb36-9"><a href="#cb36-9"></a><span class="kw">SELECT</span></span>
-<span id="cb36-10"><a href="#cb36-10"></a>  <span class="fu">MIN</span>(created_on) <span class="kw">AS</span> <span class="ot">&quot;min_created_on&quot;</span>,</span>
-<span id="cb36-11"><a href="#cb36-11"></a>  <span class="fu">MAX</span>(created_on) <span class="kw">AS</span> <span class="ot">&quot;max_created_on&quot;</span></span>
-<span id="cb36-12"><a href="#cb36-12"></a><span class="kw">FROM</span></span>
-<span id="cb36-13"><a href="#cb36-13"></a>  s_characters;</span></code></pre></div>
+      <div class="sourceCode" id="cb38" data-caption="MAX関数とMIN関数の利用例"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">SELECT</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>  <span class="fu">MIN</span>(<span class="kw">level</span>) <span class="kw">AS</span> <span class="ot">&quot;min_lv.&quot;</span>,</span>
+<span id="cb38-3"><a href="#cb38-3"></a>  <span class="fu">MAX</span>(<span class="kw">level</span>) <span class="kw">AS</span> <span class="ot">&quot;max_lv.&quot;</span>,</span>
+<span id="cb38-4"><a href="#cb38-4"></a>  <span class="fu">MIN</span>(name) <span class="kw">AS</span> <span class="ot">&quot;min_name&quot;</span>,</span>
+<span id="cb38-5"><a href="#cb38-5"></a>  <span class="fu">MAX</span>(name) <span class="kw">AS</span> <span class="ot">&quot;max_name&quot;</span></span>
+<span id="cb38-6"><a href="#cb38-6"></a><span class="kw">FROM</span></span>
+<span id="cb38-7"><a href="#cb38-7"></a>  s_characters;</span>
+<span id="cb38-8"><a href="#cb38-8"></a></span>
+<span id="cb38-9"><a href="#cb38-9"></a><span class="kw">SELECT</span></span>
+<span id="cb38-10"><a href="#cb38-10"></a>  <span class="fu">MIN</span>(created_on) <span class="kw">AS</span> <span class="ot">&quot;min_created_on&quot;</span>,</span>
+<span id="cb38-11"><a href="#cb38-11"></a>  <span class="fu">MAX</span>(created_on) <span class="kw">AS</span> <span class="ot">&quot;max_created_on&quot;</span></span>
+<span id="cb38-12"><a href="#cb38-12"></a><span class="kw">FROM</span></span>
+<span id="cb38-13"><a href="#cb38-13"></a>  s_characters;</span></code></pre></div>
       <p>実際の実行結果は次のようになります。</p>
       <pre><code> min_lv | max_lv | min_name | max_name 
 --------+--------+----------+----------
@@ -1042,12 +1079,12 @@ ROLLBACK</code></pre>
       <p>文字列型に対して、<strong>文字数をカウントしたい場合</strong> は <code>LENGTH</code>
       関数を使用します。次の SQL
       の実行結果を予想し、その後、実際に実行して結果を確認してください。</p>
-      <div class="sourceCode" id="cb38" data-caption="最小文字数と最大文字数を求める例"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">SELECT</span></span>
-<span id="cb38-2"><a href="#cb38-2"></a>  <span class="fu">MIN</span>(<span class="fu">LENGTH</span>(name)) <span class="kw">AS</span> <span class="ot">&quot;min_len_name&quot;</span>,</span>
-<span id="cb38-3"><a href="#cb38-3"></a>  <span class="fu">MAX</span>(<span class="fu">LENGTH</span>(name)) <span class="kw">AS</span> <span class="ot">&quot;max_len_name&quot;</span></span>
-<span id="cb38-4"><a href="#cb38-4"></a><span class="kw">FROM</span></span>
-<span id="cb38-5"><a href="#cb38-5"></a>  s_characters;</span></code></pre></div>
+      <div class="sourceCode" id="cb40" data-caption="最小文字数と最大文字数を求める例"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb40-1"><a href="#cb40-1"></a><span class="kw">SELECT</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a>  <span class="fu">MIN</span>(<span class="fu">LENGTH</span>(name)) <span class="kw">AS</span> <span class="ot">&quot;min_len_name&quot;</span>,</span>
+<span id="cb40-3"><a href="#cb40-3"></a>  <span class="fu">MAX</span>(<span class="fu">LENGTH</span>(name)) <span class="kw">AS</span> <span class="ot">&quot;max_len_name&quot;</span></span>
+<span id="cb40-4"><a href="#cb40-4"></a><span class="kw">FROM</span></span>
+<span id="cb40-5"><a href="#cb40-5"></a>  s_characters;</span></code></pre></div>
       <p>実際の実行結果は次のようになります。</p>
       <pre><code> min_len_name | max_len_name 
 --------------+--------------
@@ -1055,31 +1092,31 @@ ROLLBACK</code></pre>
       <div class="note type-senior">
       <p><strong>EX: 最も短い名前と最も長い名前を取得する</strong></p>
       <p>今後の講義で学ぶ「<strong>サブクエリ</strong>」というものを利用すると、テーブルのなかから「最も短い名前」や「最も長い名前」を抽出することができます。</p>
-      <div class="sourceCode" id="cb40"
+      <div class="sourceCode" id="cb42"
       data-caption="「最も短い名前」と「最も長い名前」を取得する"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb40-1"><a href="#cb40-1"></a><span class="kw">SELECT</span></span>
-<span id="cb40-2"><a href="#cb40-2"></a>  name <span class="kw">AS</span> <span class="ot">&quot;最も短い名前&quot;</span></span>
-<span id="cb40-3"><a href="#cb40-3"></a><span class="kw">FROM</span></span>
-<span id="cb40-4"><a href="#cb40-4"></a>  s_characters</span>
-<span id="cb40-5"><a href="#cb40-5"></a><span class="kw">WHERE</span></span>
-<span id="cb40-6"><a href="#cb40-6"></a>  <span class="fu">LENGTH</span>(name) <span class="op">=</span> (</span>
-<span id="cb40-7"><a href="#cb40-7"></a>    <span class="kw">SELECT</span></span>
-<span id="cb40-8"><a href="#cb40-8"></a>      <span class="fu">MIN</span>(<span class="fu">LENGTH</span>(name))</span>
-<span id="cb40-9"><a href="#cb40-9"></a>    <span class="kw">FROM</span></span>
-<span id="cb40-10"><a href="#cb40-10"></a>      s_characters</span>
-<span id="cb40-11"><a href="#cb40-11"></a>  );</span>
-<span id="cb40-12"><a href="#cb40-12"></a></span>
-<span id="cb40-13"><a href="#cb40-13"></a><span class="kw">SELECT</span></span>
-<span id="cb40-14"><a href="#cb40-14"></a>  name <span class="kw">AS</span> <span class="ot">&quot;最も長い名前&quot;</span></span>
-<span id="cb40-15"><a href="#cb40-15"></a><span class="kw">FROM</span></span>
-<span id="cb40-16"><a href="#cb40-16"></a>  s_characters</span>
-<span id="cb40-17"><a href="#cb40-17"></a><span class="kw">WHERE</span></span>
-<span id="cb40-18"><a href="#cb40-18"></a>  <span class="fu">LENGTH</span>(name) <span class="op">=</span> (</span>
-<span id="cb40-19"><a href="#cb40-19"></a>    <span class="kw">SELECT</span></span>
-<span id="cb40-20"><a href="#cb40-20"></a>      <span class="fu">MAX</span>(<span class="fu">LENGTH</span>(name))</span>
-<span id="cb40-21"><a href="#cb40-21"></a>    <span class="kw">FROM</span></span>
-<span id="cb40-22"><a href="#cb40-22"></a>      s_characters</span>
-<span id="cb40-23"><a href="#cb40-23"></a>  );</span></code></pre></div>
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb42-1"><a href="#cb42-1"></a><span class="kw">SELECT</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>  name <span class="kw">AS</span> <span class="ot">&quot;最も短い名前&quot;</span></span>
+<span id="cb42-3"><a href="#cb42-3"></a><span class="kw">FROM</span></span>
+<span id="cb42-4"><a href="#cb42-4"></a>  s_characters</span>
+<span id="cb42-5"><a href="#cb42-5"></a><span class="kw">WHERE</span></span>
+<span id="cb42-6"><a href="#cb42-6"></a>  <span class="fu">LENGTH</span>(name) <span class="op">=</span> (</span>
+<span id="cb42-7"><a href="#cb42-7"></a>    <span class="kw">SELECT</span></span>
+<span id="cb42-8"><a href="#cb42-8"></a>      <span class="fu">MIN</span>(<span class="fu">LENGTH</span>(name))</span>
+<span id="cb42-9"><a href="#cb42-9"></a>    <span class="kw">FROM</span></span>
+<span id="cb42-10"><a href="#cb42-10"></a>      s_characters</span>
+<span id="cb42-11"><a href="#cb42-11"></a>  );</span>
+<span id="cb42-12"><a href="#cb42-12"></a></span>
+<span id="cb42-13"><a href="#cb42-13"></a><span class="kw">SELECT</span></span>
+<span id="cb42-14"><a href="#cb42-14"></a>  name <span class="kw">AS</span> <span class="ot">&quot;最も長い名前&quot;</span></span>
+<span id="cb42-15"><a href="#cb42-15"></a><span class="kw">FROM</span></span>
+<span id="cb42-16"><a href="#cb42-16"></a>  s_characters</span>
+<span id="cb42-17"><a href="#cb42-17"></a><span class="kw">WHERE</span></span>
+<span id="cb42-18"><a href="#cb42-18"></a>  <span class="fu">LENGTH</span>(name) <span class="op">=</span> (</span>
+<span id="cb42-19"><a href="#cb42-19"></a>    <span class="kw">SELECT</span></span>
+<span id="cb42-20"><a href="#cb42-20"></a>      <span class="fu">MAX</span>(<span class="fu">LENGTH</span>(name))</span>
+<span id="cb42-21"><a href="#cb42-21"></a>    <span class="kw">FROM</span></span>
+<span id="cb42-22"><a href="#cb42-22"></a>      s_characters</span>
+<span id="cb42-23"><a href="#cb42-23"></a>  );</span></code></pre></div>
       <p>実行結果は次のようになります。</p>
       <pre><code> 最も短い名前
 --------------
@@ -1116,18 +1153,18 @@ ROLLBACK</code></pre>
       <p>例えば、<strong>job</strong> ごとに「人数」「最大レベル」「平均レベル」を求める SQL
       は次のようになります。なお、<code>GROUP BY</code> 句に指定するカラムのことを <span
       class="masked">集約キー</span> と言います。</p>
-      <div class="sourceCode" id="cb43" data-caption="GROUP BY句の利用"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb43-1"><a href="#cb43-1"></a><span class="kw">SELECT</span></span>
-<span id="cb43-2"><a href="#cb43-2"></a>  job,</span>
-<span id="cb43-3"><a href="#cb43-3"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span>,</span>
-<span id="cb43-4"><a href="#cb43-4"></a>  <span class="fu">MAX</span>(<span class="kw">level</span>) <span class="kw">AS</span> <span class="ot">&quot;max_lv&quot;</span>,</span>
-<span id="cb43-5"><a href="#cb43-5"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>),<span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span></span>
-<span id="cb43-6"><a href="#cb43-6"></a><span class="kw">FROM</span></span>
-<span id="cb43-7"><a href="#cb43-7"></a>  s_characters</span>
-<span id="cb43-8"><a href="#cb43-8"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
-<span id="cb43-9"><a href="#cb43-9"></a>  job <span class="co">-- ◀ job でグループ化処理</span></span>
-<span id="cb43-10"><a href="#cb43-10"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
-<span id="cb43-11"><a href="#cb43-11"></a>  job;</span></code></pre></div>
+      <div class="sourceCode" id="cb45" data-caption="GROUP BY句の利用"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb45-1"><a href="#cb45-1"></a><span class="kw">SELECT</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a>  job,</span>
+<span id="cb45-3"><a href="#cb45-3"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span>,</span>
+<span id="cb45-4"><a href="#cb45-4"></a>  <span class="fu">MAX</span>(<span class="kw">level</span>) <span class="kw">AS</span> <span class="ot">&quot;max_lv&quot;</span>,</span>
+<span id="cb45-5"><a href="#cb45-5"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>),<span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span></span>
+<span id="cb45-6"><a href="#cb45-6"></a><span class="kw">FROM</span></span>
+<span id="cb45-7"><a href="#cb45-7"></a>  s_characters</span>
+<span id="cb45-8"><a href="#cb45-8"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb45-9"><a href="#cb45-9"></a>  job <span class="co">-- ◀ job でグループ化処理</span></span>
+<span id="cb45-10"><a href="#cb45-10"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb45-11"><a href="#cb45-11"></a>  job;</span></code></pre></div>
       <p>実行結果は、次のようになります。</p>
       <pre><code>   job   | num | max_lv | avg_lv 
 ---------+-----+--------+--------
@@ -1147,18 +1184,18 @@ ROLLBACK</code></pre>
       が含まれる場合、<code>NULL</code>
       も「ひとつのグループ」として扱われます。これも、実際に実行結果をみたほうが分かりやすいと思います。</p>
       <p>値に <code>NULL</code> を含む <strong>guild</strong> カラムを「集約キー」に使用します。</p>
-      <div class="sourceCode" id="cb45" data-caption="GROUP BY句の集約キーにNULLが含まれる場合"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb45-1"><a href="#cb45-1"></a><span class="kw">SELECT</span></span>
-<span id="cb45-2"><a href="#cb45-2"></a>  guild,</span>
-<span id="cb45-3"><a href="#cb45-3"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span>,</span>
-<span id="cb45-4"><a href="#cb45-4"></a>  <span class="fu">MAX</span>(<span class="kw">level</span>) <span class="kw">AS</span> <span class="ot">&quot;max_lv&quot;</span>,</span>
-<span id="cb45-5"><a href="#cb45-5"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>),<span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span></span>
-<span id="cb45-6"><a href="#cb45-6"></a><span class="kw">FROM</span></span>
-<span id="cb45-7"><a href="#cb45-7"></a>  s_characters</span>
-<span id="cb45-8"><a href="#cb45-8"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
-<span id="cb45-9"><a href="#cb45-9"></a>  guild <span class="co">-- ◀ guild を集約キーに指定</span></span>
-<span id="cb45-10"><a href="#cb45-10"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
-<span id="cb45-11"><a href="#cb45-11"></a>  <span class="fu">LOWER</span>(guild); <span class="co">-- ◀ 大文字と小文字を区別せずに整列</span></span></code></pre></div>
+      <div class="sourceCode" id="cb47" data-caption="GROUP BY句の集約キーにNULLが含まれる場合"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb47-1"><a href="#cb47-1"></a><span class="kw">SELECT</span></span>
+<span id="cb47-2"><a href="#cb47-2"></a>  guild,</span>
+<span id="cb47-3"><a href="#cb47-3"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span>,</span>
+<span id="cb47-4"><a href="#cb47-4"></a>  <span class="fu">MAX</span>(<span class="kw">level</span>) <span class="kw">AS</span> <span class="ot">&quot;max_lv&quot;</span>,</span>
+<span id="cb47-5"><a href="#cb47-5"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>),<span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span></span>
+<span id="cb47-6"><a href="#cb47-6"></a><span class="kw">FROM</span></span>
+<span id="cb47-7"><a href="#cb47-7"></a>  s_characters</span>
+<span id="cb47-8"><a href="#cb47-8"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb47-9"><a href="#cb47-9"></a>  guild <span class="co">-- ◀ guild を集約キーに指定</span></span>
+<span id="cb47-10"><a href="#cb47-10"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb47-11"><a href="#cb47-11"></a>  <span class="fu">LOWER</span>(guild); <span class="co">-- ◀ 大文字と小文字を区別せずに整列</span></span></code></pre></div>
       <p>実行結果は、次のようになります。</p>
       <pre><code> guild  | num | max_lv | avg_lv 
 --------+-----+--------+--------
@@ -1222,14 +1259,14 @@ ROLLBACK</code></pre>
       <code>AVG(level)</code> のように集約関数 (グループごとに計算する関数)
       を適用する必要があります。</p>
       <p>実際に、次の SQL が「<strong>エラーになること</strong>」を確認してください。</p>
-      <div class="sourceCode" id="cb50" data-caption="集約キー以外のカラムをSELECT句に指定"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">SELECT</span></span>
-<span id="cb50-2"><a href="#cb50-2"></a>  job,</span>
-<span id="cb50-3"><a href="#cb50-3"></a>  <span class="kw">level</span> <span class="co">-- 集約キー以外のカラムを指定</span></span>
-<span id="cb50-4"><a href="#cb50-4"></a><span class="kw">FROM</span></span>
-<span id="cb50-5"><a href="#cb50-5"></a>  s_characters</span>
-<span id="cb50-6"><a href="#cb50-6"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
-<span id="cb50-7"><a href="#cb50-7"></a>  job; <span class="co">-- 集約キーは job</span></span></code></pre></div>
+      <div class="sourceCode" id="cb52" data-caption="集約キー以外のカラムをSELECT句に指定"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb52-1"><a href="#cb52-1"></a><span class="kw">SELECT</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a>  job,</span>
+<span id="cb52-3"><a href="#cb52-3"></a>  <span class="kw">level</span> <span class="co">-- 集約キー以外のカラムを指定</span></span>
+<span id="cb52-4"><a href="#cb52-4"></a><span class="kw">FROM</span></span>
+<span id="cb52-5"><a href="#cb52-5"></a>  s_characters</span>
+<span id="cb52-6"><a href="#cb52-6"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb52-7"><a href="#cb52-7"></a>  job; <span class="co">-- 集約キーは job</span></span></code></pre></div>
       <p>実行結果は、次のようになります。</p>
       <pre><code>psql:&lt;stdin&gt;:7: ERROR:  列&quot;s_characters.level&quot;はGROUP BY句で指定するか、集約関数内で使用しなければなりません</code></pre>
       <p>英語環境では次のようになります。</p>
@@ -1246,19 +1283,19 @@ ROLLBACK</code></pre>
       <h2 data-number="8.2" id="group-by句に複数の集約キーを指定"><span
       class="header-section-number">8.2</span> GROUP BY句に複数の集約キーを指定</h2>
       <p>GROUP BY句には、以下のように <strong>複数のカラム</strong> を指定することができます。</p>
-      <div class="sourceCode" id="cb53" data-caption="GROUP BY句に複数の集約キーを指定"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb53-1"><a href="#cb53-1"></a><span class="kw">SELECT</span></span>
-<span id="cb53-2"><a href="#cb53-2"></a>  <span class="fu">COALESCE</span>(guild, <span class="st">&#39;(Freelancer)&#39;</span>) <span class="kw">AS</span> <span class="ot">&quot;guild&quot;</span>,</span>
-<span id="cb53-3"><a href="#cb53-3"></a>  job,</span>
-<span id="cb53-4"><a href="#cb53-4"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>)</span>
-<span id="cb53-5"><a href="#cb53-5"></a><span class="kw">FROM</span></span>
-<span id="cb53-6"><a href="#cb53-6"></a>  s_characters</span>
-<span id="cb53-7"><a href="#cb53-7"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
-<span id="cb53-8"><a href="#cb53-8"></a>  guild,</span>
-<span id="cb53-9"><a href="#cb53-9"></a>  job</span>
-<span id="cb53-10"><a href="#cb53-10"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
-<span id="cb53-11"><a href="#cb53-11"></a>  guild,</span>
-<span id="cb53-12"><a href="#cb53-12"></a>  job;</span></code></pre></div>
+      <div class="sourceCode" id="cb55" data-caption="GROUP BY句に複数の集約キーを指定"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb55-1"><a href="#cb55-1"></a><span class="kw">SELECT</span></span>
+<span id="cb55-2"><a href="#cb55-2"></a>  <span class="fu">COALESCE</span>(guild, <span class="st">&#39;(Freelancer)&#39;</span>) <span class="kw">AS</span> <span class="ot">&quot;guild&quot;</span>,</span>
+<span id="cb55-3"><a href="#cb55-3"></a>  job,</span>
+<span id="cb55-4"><a href="#cb55-4"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>)</span>
+<span id="cb55-5"><a href="#cb55-5"></a><span class="kw">FROM</span></span>
+<span id="cb55-6"><a href="#cb55-6"></a>  s_characters</span>
+<span id="cb55-7"><a href="#cb55-7"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb55-8"><a href="#cb55-8"></a>  guild,</span>
+<span id="cb55-9"><a href="#cb55-9"></a>  job</span>
+<span id="cb55-10"><a href="#cb55-10"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb55-11"><a href="#cb55-11"></a>  guild,</span>
+<span id="cb55-12"><a href="#cb55-12"></a>  job;</span></code></pre></div>
       <p>実行結果は次のようになります。実行結果からわかるように、まず <strong>guild</strong>
       ごとにグループ化され、その内部でさらに <strong>job</strong>
       ごとにグループ化されています。つまり、2つのカラムを組み合わせて「ギルド×ジョブ」単位で件数を集計できていることが確認できます。</p>
@@ -1315,17 +1352,17 @@ ROLLBACK</code></pre>
       という <code>GROUP BY</code>
       句の拡張構文を使用します。たとえば、以下のようにすると「<code>job</code>
       ごとの集計」に「全体の集計」を加えた結果セットを取得することができます。</p>
-      <div class="sourceCode" id="cb56" data-caption="ROLLUPの利用"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb56-1"><a href="#cb56-1"></a><span class="kw">SELECT</span></span>
-<span id="cb56-2"><a href="#cb56-2"></a>  guild,</span>
-<span id="cb56-3"><a href="#cb56-3"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span>,</span>
-<span id="cb56-4"><a href="#cb56-4"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span></span>
-<span id="cb56-5"><a href="#cb56-5"></a><span class="kw">FROM</span></span>
-<span id="cb56-6"><a href="#cb56-6"></a>  s_characters</span>
-<span id="cb56-7"><a href="#cb56-7"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
-<span id="cb56-8"><a href="#cb56-8"></a>  <span class="kw">ROLLUP</span> (guild) <span class="co">-- ◀ ここに注目</span></span>
-<span id="cb56-9"><a href="#cb56-9"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
-<span id="cb56-10"><a href="#cb56-10"></a>  guild;</span></code></pre></div>
+      <div class="sourceCode" id="cb58" data-caption="ROLLUPの利用"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb58-1"><a href="#cb58-1"></a><span class="kw">SELECT</span></span>
+<span id="cb58-2"><a href="#cb58-2"></a>  guild,</span>
+<span id="cb58-3"><a href="#cb58-3"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span>,</span>
+<span id="cb58-4"><a href="#cb58-4"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span></span>
+<span id="cb58-5"><a href="#cb58-5"></a><span class="kw">FROM</span></span>
+<span id="cb58-6"><a href="#cb58-6"></a>  s_characters</span>
+<span id="cb58-7"><a href="#cb58-7"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb58-8"><a href="#cb58-8"></a>  <span class="kw">ROLLUP</span> (guild) <span class="co">-- ◀ ここに注目</span></span>
+<span id="cb58-9"><a href="#cb58-9"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb58-10"><a href="#cb58-10"></a>  guild;</span></code></pre></div>
       <p>実行結果は、次のようになります。結果セットの<strong>第5行目</strong> ( num が
       <code>5</code> の行) が <strong>guild</strong> が <code>NULL</code>
       のキャラクタの集計、<strong>第4行目</strong> ( num が <code>19</code> の行)
@@ -1340,33 +1377,6 @@ ROLLBACK</code></pre>
       <p>空欄を別の文字に置き換えたいときは、次のように <code>GROUPING</code> 関数と
       <strong>CASE式</strong> を組み合わせて利用します。ここで <code>GROUPING(guild)</code>
       は、集計行なら<code>1</code>、通常行なら <code>0</code> を返す特殊関数です。</p>
-      <div class="sourceCode" id="cb58" data-caption="GROUPING関数の利用"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb58-1"><a href="#cb58-1"></a><span class="kw">SELECT</span></span>
-<span id="cb58-2"><a href="#cb58-2"></a>  <span class="cf">CASE</span></span>
-<span id="cb58-3"><a href="#cb58-3"></a>    <span class="cf">WHEN</span> <span class="fu">GROUPING</span>(guild) <span class="op">=</span> <span class="dv">1</span> <span class="cf">THEN</span> <span class="st">&#39;(Total)&#39;</span></span>
-<span id="cb58-4"><a href="#cb58-4"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="st">&#39;(Freelancer)&#39;</span></span>
-<span id="cb58-5"><a href="#cb58-5"></a>    <span class="cf">ELSE</span> guild</span>
-<span id="cb58-6"><a href="#cb58-6"></a>  <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">&quot;guild&quot;</span>,</span>
-<span id="cb58-7"><a href="#cb58-7"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span>,</span>
-<span id="cb58-8"><a href="#cb58-8"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span></span>
-<span id="cb58-9"><a href="#cb58-9"></a><span class="kw">FROM</span></span>
-<span id="cb58-10"><a href="#cb58-10"></a>  s_characters</span>
-<span id="cb58-11"><a href="#cb58-11"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
-<span id="cb58-12"><a href="#cb58-12"></a>  <span class="kw">ROLLUP</span> (guild)</span>
-<span id="cb58-13"><a href="#cb58-13"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
-<span id="cb58-14"><a href="#cb58-14"></a>  guild;</span></code></pre></div>
-      <p>実行結果は次のようになります。</p>
-      <pre><code>    guild     | avg_lv | num 
---------------+--------+-----
- (Freelancer) |   39.6 |   5
- (Total)      |   48.8 |  19
- D.D.D        |   55.8 |   5
- Yamato       |   48.6 |   5
- hameln       |   52.0 |   4</code></pre>
-      <div class="note type-senior">
-      <p><strong>EX: 並び順も厳密に制御したいときは…</strong></p>
-      <p>次のように <code>ORDER BY</code> 句のなかで、<code>GROUPING</code> 関数と
-      <strong>CASE式</strong> を組み合わせて利用します。</p>
       <div class="sourceCode" id="cb60" data-caption="GROUPING関数の利用"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb60-1"><a href="#cb60-1"></a><span class="kw">SELECT</span></span>
 <span id="cb60-2"><a href="#cb60-2"></a>  <span class="cf">CASE</span></span>
@@ -1381,12 +1391,39 @@ ROLLBACK</code></pre>
 <span id="cb60-11"><a href="#cb60-11"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
 <span id="cb60-12"><a href="#cb60-12"></a>  <span class="kw">ROLLUP</span> (guild)</span>
 <span id="cb60-13"><a href="#cb60-13"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
-<span id="cb60-14"><a href="#cb60-14"></a>  <span class="cf">CASE</span> <span class="co">-- ◀ ここからを注目</span></span>
-<span id="cb60-15"><a href="#cb60-15"></a>    <span class="cf">WHEN</span> <span class="fu">GROUPING</span>(guild) <span class="op">=</span> <span class="dv">1</span> <span class="cf">THEN</span> <span class="dv">3</span> <span class="co">-- 整列順第3位</span></span>
-<span id="cb60-16"><a href="#cb60-16"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="dv">2</span> <span class="co">-- 整列順第2位</span></span>
-<span id="cb60-17"><a href="#cb60-17"></a>    <span class="cf">ELSE</span> <span class="dv">1</span> <span class="co">-- 整列順第1位</span></span>
-<span id="cb60-18"><a href="#cb60-18"></a>  <span class="cf">END</span>,</span>
-<span id="cb60-19"><a href="#cb60-19"></a>  <span class="fu">LOWER</span>(guild); <span class="co">-- 整列順第1位のなかで大文字と小文字を区別せず昇順</span></span></code></pre></div>
+<span id="cb60-14"><a href="#cb60-14"></a>  guild;</span></code></pre></div>
+      <p>実行結果は次のようになります。</p>
+      <pre><code>    guild     | avg_lv | num 
+--------------+--------+-----
+ (Freelancer) |   39.6 |   5
+ (Total)      |   48.8 |  19
+ D.D.D        |   55.8 |   5
+ Yamato       |   48.6 |   5
+ hameln       |   52.0 |   4</code></pre>
+      <div class="note type-senior">
+      <p><strong>EX: 並び順も厳密に制御したいときは…</strong></p>
+      <p>次のように <code>ORDER BY</code> 句のなかで、<code>GROUPING</code> 関数と
+      <strong>CASE式</strong> を組み合わせて利用します。</p>
+      <div class="sourceCode" id="cb62" data-caption="GROUPING関数の利用"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb62-1"><a href="#cb62-1"></a><span class="kw">SELECT</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a>  <span class="cf">CASE</span></span>
+<span id="cb62-3"><a href="#cb62-3"></a>    <span class="cf">WHEN</span> <span class="fu">GROUPING</span>(guild) <span class="op">=</span> <span class="dv">1</span> <span class="cf">THEN</span> <span class="st">&#39;(Total)&#39;</span></span>
+<span id="cb62-4"><a href="#cb62-4"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="st">&#39;(Freelancer)&#39;</span></span>
+<span id="cb62-5"><a href="#cb62-5"></a>    <span class="cf">ELSE</span> guild</span>
+<span id="cb62-6"><a href="#cb62-6"></a>  <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">&quot;guild&quot;</span>,</span>
+<span id="cb62-7"><a href="#cb62-7"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span>,</span>
+<span id="cb62-8"><a href="#cb62-8"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span></span>
+<span id="cb62-9"><a href="#cb62-9"></a><span class="kw">FROM</span></span>
+<span id="cb62-10"><a href="#cb62-10"></a>  s_characters</span>
+<span id="cb62-11"><a href="#cb62-11"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb62-12"><a href="#cb62-12"></a>  <span class="kw">ROLLUP</span> (guild)</span>
+<span id="cb62-13"><a href="#cb62-13"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb62-14"><a href="#cb62-14"></a>  <span class="cf">CASE</span> <span class="co">-- ◀ ここからを注目</span></span>
+<span id="cb62-15"><a href="#cb62-15"></a>    <span class="cf">WHEN</span> <span class="fu">GROUPING</span>(guild) <span class="op">=</span> <span class="dv">1</span> <span class="cf">THEN</span> <span class="dv">3</span> <span class="co">-- 整列順第3位</span></span>
+<span id="cb62-16"><a href="#cb62-16"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="dv">2</span> <span class="co">-- 整列順第2位</span></span>
+<span id="cb62-17"><a href="#cb62-17"></a>    <span class="cf">ELSE</span> <span class="dv">1</span> <span class="co">-- 整列順第1位</span></span>
+<span id="cb62-18"><a href="#cb62-18"></a>  <span class="cf">END</span>,</span>
+<span id="cb62-19"><a href="#cb62-19"></a>  <span class="fu">LOWER</span>(guild); <span class="co">-- 整列順第1位のなかで大文字と小文字を区別せず昇順</span></span></code></pre></div>
       <p>実行結果は次のようになります。</p>
       <pre><code>    guild     | avg_lv | num 
 --------------+--------+-----
@@ -1422,21 +1459,21 @@ ROLLBACK</code></pre>
       <p><code>GROUP BY</code> 句に <strong>CASE式</strong>
       を利用することで、<strong>より柔軟にグループを定義して</strong>集計処理をすることが可能となります。たとえば「ギルド所属者」と「無所属者」でグループを分けて集計処理をしたい場合は、次のように
       SQL を記述します。</p>
-      <div class="sourceCode" id="cb63" data-caption="GROUP BY句 に CASE式 を利用"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb63-1"><a href="#cb63-1"></a><span class="kw">SELECT</span></span>
-<span id="cb63-2"><a href="#cb63-2"></a>  <span class="cf">CASE</span></span>
-<span id="cb63-3"><a href="#cb63-3"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="st">&#39;無所属&#39;</span></span>
-<span id="cb63-4"><a href="#cb63-4"></a>    <span class="cf">ELSE</span> <span class="st">&#39;ギルド所属&#39;</span></span>
-<span id="cb63-5"><a href="#cb63-5"></a>  <span class="cf">END</span> <span class="ot">&quot;カテゴリ&quot;</span>,</span>
-<span id="cb63-6"><a href="#cb63-6"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span>,</span>
-<span id="cb63-7"><a href="#cb63-7"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span></span>
-<span id="cb63-8"><a href="#cb63-8"></a><span class="kw">FROM</span></span>
-<span id="cb63-9"><a href="#cb63-9"></a>  s_characters</span>
-<span id="cb63-10"><a href="#cb63-10"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
-<span id="cb63-11"><a href="#cb63-11"></a>  <span class="cf">CASE</span></span>
-<span id="cb63-12"><a href="#cb63-12"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="st">&#39;無所属&#39;</span></span>
-<span id="cb63-13"><a href="#cb63-13"></a>    <span class="cf">ELSE</span> <span class="st">&#39;ギルド所属&#39;</span></span>
-<span id="cb63-14"><a href="#cb63-14"></a>  <span class="cf">END</span>;</span></code></pre></div>
+      <div class="sourceCode" id="cb65" data-caption="GROUP BY句 に CASE式 を利用"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb65-1"><a href="#cb65-1"></a><span class="kw">SELECT</span></span>
+<span id="cb65-2"><a href="#cb65-2"></a>  <span class="cf">CASE</span></span>
+<span id="cb65-3"><a href="#cb65-3"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="st">&#39;無所属&#39;</span></span>
+<span id="cb65-4"><a href="#cb65-4"></a>    <span class="cf">ELSE</span> <span class="st">&#39;ギルド所属&#39;</span></span>
+<span id="cb65-5"><a href="#cb65-5"></a>  <span class="cf">END</span> <span class="ot">&quot;カテゴリ&quot;</span>,</span>
+<span id="cb65-6"><a href="#cb65-6"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span>,</span>
+<span id="cb65-7"><a href="#cb65-7"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span></span>
+<span id="cb65-8"><a href="#cb65-8"></a><span class="kw">FROM</span></span>
+<span id="cb65-9"><a href="#cb65-9"></a>  s_characters</span>
+<span id="cb65-10"><a href="#cb65-10"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb65-11"><a href="#cb65-11"></a>  <span class="cf">CASE</span></span>
+<span id="cb65-12"><a href="#cb65-12"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="st">&#39;無所属&#39;</span></span>
+<span id="cb65-13"><a href="#cb65-13"></a>    <span class="cf">ELSE</span> <span class="st">&#39;ギルド所属&#39;</span></span>
+<span id="cb65-14"><a href="#cb65-14"></a>  <span class="cf">END</span>;</span></code></pre></div>
       <p>ここで、<code>SELECT</code> 句には <span class="masked"><code>GROUP BY</code> 句で指定した
       CASE式 と同じ結果を返す式を記述する必要</span> があります。 - <code>GROUP BY</code>
       に指定していない式やカラムを (集約関数を適用せずに) <code>SELECT</code>
@@ -1451,34 +1488,34 @@ ROLLBACK</code></pre>
       <p><strong>EX: 整列順も厳密に制御したい場合は…</strong></p>
       <p><code>GROUP BY</code> 句に <strong>CASE式</strong>
       を使用したとき、整列順も厳密に制御したい場合は、次のようにします。</p>
-      <div class="sourceCode" id="cb65" data-caption="整列順を制御する例"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb65-1"><a href="#cb65-1"></a><span class="kw">SELECT</span></span>
-<span id="cb65-2"><a href="#cb65-2"></a>  <span class="cf">CASE</span></span>
-<span id="cb65-3"><a href="#cb65-3"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="dv">2</span></span>
-<span id="cb65-4"><a href="#cb65-4"></a>    <span class="cf">ELSE</span> <span class="dv">1</span></span>
-<span id="cb65-5"><a href="#cb65-5"></a>  <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">&quot;ID&quot;</span>, </span>
-<span id="cb65-6"><a href="#cb65-6"></a>  <span class="cf">CASE</span></span>
-<span id="cb65-7"><a href="#cb65-7"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="st">&#39;無所属&#39;</span></span>
-<span id="cb65-8"><a href="#cb65-8"></a>    <span class="cf">ELSE</span> <span class="st">&#39;ギルド所属&#39;</span></span>
-<span id="cb65-9"><a href="#cb65-9"></a>  <span class="cf">END</span> <span class="ot">&quot;カテゴリ&quot;</span>,</span>
-<span id="cb65-10"><a href="#cb65-10"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span>,</span>
-<span id="cb65-11"><a href="#cb65-11"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span></span>
-<span id="cb65-12"><a href="#cb65-12"></a><span class="kw">FROM</span></span>
-<span id="cb65-13"><a href="#cb65-13"></a>  s_characters</span>
-<span id="cb65-14"><a href="#cb65-14"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
-<span id="cb65-15"><a href="#cb65-15"></a>  <span class="cf">CASE</span></span>
-<span id="cb65-16"><a href="#cb65-16"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="st">&#39;無所属&#39;</span></span>
-<span id="cb65-17"><a href="#cb65-17"></a>    <span class="cf">ELSE</span> <span class="st">&#39;ギルド所属&#39;</span></span>
-<span id="cb65-18"><a href="#cb65-18"></a>  <span class="cf">END</span>,</span>
-<span id="cb65-19"><a href="#cb65-19"></a>  <span class="cf">CASE</span></span>
-<span id="cb65-20"><a href="#cb65-20"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="dv">2</span></span>
-<span id="cb65-21"><a href="#cb65-21"></a>    <span class="cf">ELSE</span> <span class="dv">1</span></span>
-<span id="cb65-22"><a href="#cb65-22"></a>  <span class="cf">END</span></span>
-<span id="cb65-23"><a href="#cb65-23"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
-<span id="cb65-24"><a href="#cb65-24"></a>  <span class="cf">CASE</span></span>
-<span id="cb65-25"><a href="#cb65-25"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="dv">2</span></span>
-<span id="cb65-26"><a href="#cb65-26"></a>    <span class="cf">ELSE</span> <span class="dv">1</span></span>
-<span id="cb65-27"><a href="#cb65-27"></a>  <span class="cf">END</span>;</span></code></pre></div>
+      <div class="sourceCode" id="cb67" data-caption="整列順を制御する例"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb67-1"><a href="#cb67-1"></a><span class="kw">SELECT</span></span>
+<span id="cb67-2"><a href="#cb67-2"></a>  <span class="cf">CASE</span></span>
+<span id="cb67-3"><a href="#cb67-3"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="dv">2</span></span>
+<span id="cb67-4"><a href="#cb67-4"></a>    <span class="cf">ELSE</span> <span class="dv">1</span></span>
+<span id="cb67-5"><a href="#cb67-5"></a>  <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">&quot;ID&quot;</span>, </span>
+<span id="cb67-6"><a href="#cb67-6"></a>  <span class="cf">CASE</span></span>
+<span id="cb67-7"><a href="#cb67-7"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="st">&#39;無所属&#39;</span></span>
+<span id="cb67-8"><a href="#cb67-8"></a>    <span class="cf">ELSE</span> <span class="st">&#39;ギルド所属&#39;</span></span>
+<span id="cb67-9"><a href="#cb67-9"></a>  <span class="cf">END</span> <span class="ot">&quot;カテゴリ&quot;</span>,</span>
+<span id="cb67-10"><a href="#cb67-10"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span>,</span>
+<span id="cb67-11"><a href="#cb67-11"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span></span>
+<span id="cb67-12"><a href="#cb67-12"></a><span class="kw">FROM</span></span>
+<span id="cb67-13"><a href="#cb67-13"></a>  s_characters</span>
+<span id="cb67-14"><a href="#cb67-14"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb67-15"><a href="#cb67-15"></a>  <span class="cf">CASE</span></span>
+<span id="cb67-16"><a href="#cb67-16"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="st">&#39;無所属&#39;</span></span>
+<span id="cb67-17"><a href="#cb67-17"></a>    <span class="cf">ELSE</span> <span class="st">&#39;ギルド所属&#39;</span></span>
+<span id="cb67-18"><a href="#cb67-18"></a>  <span class="cf">END</span>,</span>
+<span id="cb67-19"><a href="#cb67-19"></a>  <span class="cf">CASE</span></span>
+<span id="cb67-20"><a href="#cb67-20"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="dv">2</span></span>
+<span id="cb67-21"><a href="#cb67-21"></a>    <span class="cf">ELSE</span> <span class="dv">1</span></span>
+<span id="cb67-22"><a href="#cb67-22"></a>  <span class="cf">END</span></span>
+<span id="cb67-23"><a href="#cb67-23"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb67-24"><a href="#cb67-24"></a>  <span class="cf">CASE</span></span>
+<span id="cb67-25"><a href="#cb67-25"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="dv">2</span></span>
+<span id="cb67-26"><a href="#cb67-26"></a>    <span class="cf">ELSE</span> <span class="dv">1</span></span>
+<span id="cb67-27"><a href="#cb67-27"></a>  <span class="cf">END</span>;</span></code></pre></div>
       <p>実行結果は次のようになります。</p>
       <pre><code> ID |  カテゴリ  | avg_lv | num 
 ----+------------+--------+-----
@@ -1512,19 +1549,19 @@ ROLLBACK</code></pre>
       <code>buff &gt; 0.0</code> のような条件式は <code>HAVING</code> ではなく <code>WHERE</code>
       句で指定します。</li>
       </ul>
-      <div class="sourceCode" id="cb68" data-caption="HAVING句の使用例"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb68-1"><a href="#cb68-1"></a><span class="kw">SELECT</span></span>
-<span id="cb68-2"><a href="#cb68-2"></a>  <span class="fu">COALESCE</span>(guild,<span class="st">&#39;Freelancer&#39;</span>) <span class="kw">AS</span> <span class="ot">&quot;guild&quot;</span>,</span>
-<span id="cb68-3"><a href="#cb68-3"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span>,</span>
-<span id="cb68-4"><a href="#cb68-4"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span></span>
-<span id="cb68-5"><a href="#cb68-5"></a><span class="kw">FROM</span></span>
-<span id="cb68-6"><a href="#cb68-6"></a>  s_characters</span>
-<span id="cb68-7"><a href="#cb68-7"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
-<span id="cb68-8"><a href="#cb68-8"></a>  guild</span>
-<span id="cb68-9"><a href="#cb68-9"></a><span class="kw">HAVING</span></span>
-<span id="cb68-10"><a href="#cb68-10"></a>  <span class="fu">AVG</span>(<span class="kw">level</span>) <span class="op">&gt;=</span> <span class="dv">50</span></span>
-<span id="cb68-11"><a href="#cb68-11"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
-<span id="cb68-12"><a href="#cb68-12"></a>  <span class="fu">AVG</span>(<span class="kw">level</span>) <span class="kw">DESC</span>;</span></code></pre></div>
+      <div class="sourceCode" id="cb70" data-caption="HAVING句の使用例"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb70-1"><a href="#cb70-1"></a><span class="kw">SELECT</span></span>
+<span id="cb70-2"><a href="#cb70-2"></a>  <span class="fu">COALESCE</span>(guild,<span class="st">&#39;Freelancer&#39;</span>) <span class="kw">AS</span> <span class="ot">&quot;guild&quot;</span>,</span>
+<span id="cb70-3"><a href="#cb70-3"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span>,</span>
+<span id="cb70-4"><a href="#cb70-4"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span></span>
+<span id="cb70-5"><a href="#cb70-5"></a><span class="kw">FROM</span></span>
+<span id="cb70-6"><a href="#cb70-6"></a>  s_characters</span>
+<span id="cb70-7"><a href="#cb70-7"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb70-8"><a href="#cb70-8"></a>  guild</span>
+<span id="cb70-9"><a href="#cb70-9"></a><span class="kw">HAVING</span></span>
+<span id="cb70-10"><a href="#cb70-10"></a>  <span class="fu">AVG</span>(<span class="kw">level</span>) <span class="op">&gt;=</span> <span class="dv">50</span></span>
+<span id="cb70-11"><a href="#cb70-11"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb70-12"><a href="#cb70-12"></a>  <span class="fu">AVG</span>(<span class="kw">level</span>) <span class="kw">DESC</span>;</span></code></pre></div>
       <p>実行結果は、次のようになります。</p>
       <pre><code> guild  | num | avg_lv 
 --------+-----+--------
