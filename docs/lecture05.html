@@ -1652,9 +1652,10 @@ ROLLBACK</code></pre>
       <p><strong>日時の取り扱いに関する注意</strong></p>
       <p><strong>last_login_at</strong>
       がTIMESTAMP型のとき、<code>last_login_at BETWEEN DATE '2025-07-01' AND DATE '2025-07-31'</code>
-      という条件は、2025年07月31日の <strong>00時00分00秒ちょうど</strong>
-      までしか含みません。これは <span class="masked"><code>DATE '2025-07-31'</code> が
-      <code>2025-07-31 00:00:00</code></span> に変換されるためです。</p>
+      のような条件を記述すると、2025年07月31日の <strong>00時00分00秒ちょうど</strong>
+      までしか含まれなくなるので注意してください。これは <span
+      class="masked"><code>DATE '2025-07-31'</code> が <code>2025-07-31 00:00:00</code></span>
+      に変換されるためです。</p>
       <p>そのため、<strong>last_login_at</strong> が <span
       class="masked"><code>2025-07-31 01:00:00</code></span> のときは、その条件は
       <strong>真にはならない</strong> ので注意してください。</p>
