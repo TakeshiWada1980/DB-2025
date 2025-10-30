@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>第06回 4I-データベース工学</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#連絡" id="toc-連絡"><span class="toc-section-number">1</span> 連絡</a></li>
+<li><a href="#準備と前回の復習" id="toc-準備と前回の復習"><span class="toc-section-number">2</span>
+準備と前回の復習</a>
+<ul>
+<li><a href="#ハンズオン学習の準備" id="toc-ハンズオン学習の準備"><span
+class="toc-section-number">2.1</span> ハンズオン学習の準備</a></li>
+</ul></li>
+<li><a href="#データベースの設計" id="toc-データベースの設計"><span
+class="toc-section-number">3</span> データベースの設計</a>
+<ul>
+<li><a href="#概念設計" id="toc-概念設計"><span class="toc-section-number">3.1</span>
+概念設計</a></li>
+<li><a href="#論理設計" id="toc-論理設計"><span class="toc-section-number">3.2</span>
+論理設計</a></li>
+<li><a href="#物理設計" id="toc-物理設計"><span class="toc-section-number">3.3</span>
+物理設計</a></li>
+<li><a href="#正規化" id="toc-正規化"><span class="toc-section-number">3.4</span> 正規化</a></li>
+</ul></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>2025-4I データベース工学 第06回 講義資料</p>
+      <p>2025年11月13日 (木) 3-4時限</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="連絡"><span class="header-section-number">1</span> 連絡</h1>
+      <ul>
+      <li>小テスト❺ を実施します。
+      <ul>
+      <li>シラバス記載のように、小テストは最終評価の <span class="masked">35%</span>
+      に相当します。</li>
+      <li>遅刻・欠席等により追試験を希望する場合は<a
+      href="lecture01.html#成績評価法と履修上の注意">第01回講義で案内した手続き</a>をしてください。</li>
+      </ul></li>
+      <li>今回の講義内容は、<a
+      href="lecture04.html">前回講義</a>の内容を<strong>ひととおり理解していること</strong>を前提とします。まだ、前回の内容
+      (授業時間外学習のセクションを含む)
+      を終えていない人は、まずは、そちらから取り組んでください。</li>
+      </ul>
+      <h1 data-number="2" id="準備と前回の復習"><span class="header-section-number">2</span>
+      準備と前回の復習</h1>
+      <h2 data-number="2.1" id="ハンズオン学習の準備"><span class="header-section-number">2.1</span>
+      ハンズオン学習の準備</h2>
+      <p>次の手順でSQL演習環境の立ち上げと、教材の更新を取得してください。</p>
+      <ul>
+      <li><a href="lecture04.html#sql演習環境の動作確認-前回復習">SQL演習環境の動作確認</a>@
+      第04回講義</li>
+      <li><a href="lecture04.html#教材の更新の取得">教材の更新の取得</a>@ 第04回講義</li>
+      </ul>
+      <h1 data-number="3" id="データベースの設計"><span class="header-section-number">3</span>
+      データベースの設計</h1>
+      <p>データベース設計は、①<strong>概念設計</strong> (Conceptual
+      Design)、②<strong>論理設計</strong> (Logical Design)、③<strong>物理設計</strong> (Physical
+      Design) の3段階に分けて進めることが一般的な手順 (教科書的・設計理論的な作法)
+      とされています。</p>
+      <p>以下、専門用語が多数でてきますが、随時、解説していきます。気になる用語は生成AIを使って概要を理解してください。</p>
+      <h2 data-number="3.1" id="概念設計"><span class="header-section-number">3.1</span>
+      概念設計</h2>
+      <p>まず、<strong>概念設計</strong>
+      は、現実世界の情報構造を理解・把握し、関係者間で共有することを目的とするプロセスとなります。このプロセスでは「リレーショナル」や「ドキュメント指向」といった
+      <span class="masked">特定のデータモデルに依存せず</span>
+      情報構造そのものをモデルします。主なアウトプットとして、<strong>ER図</strong> (Entity
+      Relationship Diagram) や <strong>UMLクラス図</strong> (UML Class Diagram) が挙げられます。</p>
+      <p>次に、概念設計の成果やシステム要件を踏まえて、データベースモデルを選定します。ここでの「モデルの選定」とは、PostgreSQL
+      や MySQL
+      のような具体的な実装ではなく、「リレーショナルモデル」や「ドキュメント指向モデル」「キーバリューストアモデル」といった
+      <strong>アーキテクチャの選定</strong> を意味します。大規模システムでは「この部分は
+      RDB」「この部分は KV
+      ストア」といった複数モデルの併用（＝<strong>ポリグロット永続化</strong>）を行うこともあります。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>ソフトウェア開発の文脈で、ポリグロット永続化とは何ですか。</p>
+      </blockquote>
+      <blockquote>
+
+      </blockquote>
+      <h2 data-number="3.2" id="論理設計"><span class="header-section-number">3.2</span>
+      論理設計</h2>
+      <p><strong>論理設計</strong>では、概念設計で得られたモデルをもとに、選定したデータベースモデルへと落とし込んでいきます。リレーショナルモデルを採用する場合は、テーブルやカラムの定義、主キー・外部キーの設定など、<strong>スキーマ</strong>
+      (<strong>構造</strong>)
+      を具体化する作業を行ないます。このとき、冗長性の排除やデータ整合性の維持 を目的として、正規化
+      (Normalization)
+      の考え方が重要になります。第1正規形から第3正規形、場合によってはボイス・コッド正規形 (BCNF)
+      までを検討し、重複や不整合を防ぐスキーマ構成 に整理していきます。</p>
+      <h2 data-number="3.3" id="物理設計"><span class="header-section-number">3.3</span>
+      物理設計</h2>
+      <p><strong>論理設計</strong> では、PostgreSQL や MySQL
+      などの具体的なソフトウェアおよび、その運用環境 (ハードウェア構成)
+      を意識した設計を行ないます。具体的には、インデックス定義
+      (<code>CREATE INDEX</code>)、外部キー制約や検査制約
+      (<code>FOREIGN KEY</code>、<code>CHECK</code>）、ストレージ構成・冗長化・バックアップ方針・負荷分散設計
+      など、性能・可用性・保守性を意識したチューニングを含みます。</p>
+      <p>三層モデル（概念設計 → 論理設計 → 物理設計）実務ではほとんどの場合、ER
+      図を描いた段階で論理・物理が半ば融合した設計プロセスになっています。</p>
+      <p>概念設計、現実世界の情報構造を抽象化（
+      論理設計、仮にデータベースモデルとして「リレーショナル」を選択したとして、PostgreSQL や MySQL
+      なの具体的な RDBMS に非依存のスキーマ設計。リレーショナルモデルを意識。E
+      物理設計、具体的なRDBMSや、ハードウェア構成を意識してのトレージ最適化・インデックス・パーティションなど。</p>
+      <p><strong>概念設計</strong> (Conceptual Design)
+      は、現実世界の情報構造のモデル化、その目的は理解や把握・共有が目的であり、教科書的・設計理論的にはデータベースモデルに非依存の設計となります。具体的には「リレーショナル」「オブジェクト指向」「ドキュメント指向」「グラフ」など、どのようなデータベースタイプでも成り立つ抽象的な構造を用いた設計となります。</p>
+      <p>概念モデルを RDB の構造に落とし込む</p>
+      <p>「論理設計でリレーショナルモデルを意識し、物理設計でDB製品を意識する」 しかし実務的には：
+      「ER図を書いた時点で RDB を想定しており、CREATE文を書き始めた時点で PostgreSQL
+      を意識している」</p>
+      <p><strong>論理設計</strong></p>
+      <p>具体的には、 - どんな<strong>実体（エンティティ）</strong>が存在するか -
+      それらの間にどんな<strong>関係（リレーションシップ）</strong>があるか -
+      どんな<strong>属性（アトリビュート）</strong>を持つか -
+      現実世界の制約（1対多、多対多、必須／任意など）</p>
+      <p>現場で「概念設計図を描け」と言われると、多くの人は ER 図（Entity–Relationship Diagram）
+      を描きます。
+      この時点で、すでに「リレーショナル・データベース的な世界観」を前提にしています。現在広く使われている「ER
+      図」は、実質的にはリレーショナルデータベース（RDB）を前提とした記法・発想に強く結びついています。</p>
+      <p>ER図を概念設計と論理設計の中間くらいの扱い</p>
+      <p>仮に、ドキュメント指向データベースを</p>
+      <p>実際の世界</p>
+      <p>ER 図を描く段階、概念設計＋論理設計が混在
+      「多対多は中間テーブルだな」「主キーはIDで良いな」「created_at は TIMESTAMP で」など、すでに
+      RDB 前提で考えている</p>
+      <p>CREATE文を書く段階、論理設計＋物理設計が混在 PostgreSQLの型（SERIAL, BOOLEAN, JSONB
+      など）を選びながら実験。CHECK制約や ON DELETE CASCADEも同時に検討。だって製品依存だもん</p>
+      <p>性能検証・チューニング段階、純粋に物理設計 実データを流して EXPLAIN ANALYZE、INDEX、VACUUM
+      設定を確認。概念的な思考はほぼ消える</p>
+      <h2 data-number="3.4" id="正規化"><span class="header-section-number">3.4</span> 正規化</h2>
+      <p>以下の表は <strong>第1正規形（1NF）を満たしていません</strong>。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>名前</th>
+      <th>魔法</th>
+      <th>アイテム1</th>
+      <th>数1</th>
+      <th>アイテム2</th>
+      <th>数2</th>
+      <th>アイテム3</th>
+      <th>数3</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>アリス</td>
+      <td>ファイア, アイス</td>
+      <td>ダガー</td>
+      <td>1</td>
+      <td>毒消し</td>
+      <td>2</td>
+      <td></td>
+      <td></td>
+      </tr>
+      <tr class="even">
+      <td>ボブ</td>
+      <td>サンダー, ヒール, テレポート</td>
+      <td>棍棒</td>
+      <td>1</td>
+      <td>ポーション</td>
+      <td>5</td>
+      <td>地図</td>
+      <td>1</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>NGポイント（1NF違反の理由）</strong> -
+      <code>魔法</code>：<strong>カンマ区切りで複数値</strong>を1セルに格納（多値属性） -
+      <code>位置</code>：<code>(x, y)</code>
+      の<strong>複合値</strong>を1セルに格納（スカラーでない） -
+      <code>アイテム1/2/3, 数1/2/3</code>：<strong>繰り返し列（リピーティンググループ）</strong>で可変個数を列方向に表現<br />
+      → ボブのように「魔法やアイテムが増えると列を増やす必要」が生じ、表構造が可変になってしまう</p>
+      <p>第2正規形 (2NF) とは、部分関数従属している列を切り出した形</p>
+      <p>以下は <strong>第2正規形（2NF）を満たしていません</strong>。<br />
+      想定：この表の主キーは <strong>(名前, アイテム)</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>名前</th>
+      <th>アイテム</th>
+      <th>数</th>
+      <th style="text-align: right;">単価</th>
+      <th style="text-align: right;">単位重量</th>
+      <th>カテゴリ</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>アリス</td>
+      <td>ダガー</td>
+      <td>1</td>
+      <td style="text-align: right;">120</td>
+      <td style="text-align: right;">2.0</td>
+      <td>武器</td>
+      </tr>
+      <tr class="even">
+      <td>アリス</td>
+      <td>毒消し</td>
+      <td>2</td>
+      <td style="text-align: right;">50</td>
+      <td style="text-align: right;">0.2</td>
+      <td>消耗品</td>
+      </tr>
+      <tr class="odd">
+      <td>ボブ</td>
+      <td>棍棒</td>
+      <td>1</td>
+      <td style="text-align: right;">80</td>
+      <td style="text-align: right;">3.5</td>
+      <td>武器</td>
+      </tr>
+      <tr class="even">
+      <td>ボブ</td>
+      <td>ポーション</td>
+      <td>5</td>
+      <td style="text-align: right;">60</td>
+      <td style="text-align: right;">0.3</td>
+      <td>消耗品</td>
+      </tr>
+      <tr class="odd">
+      <td>ボブ</td>
+      <td>地図</td>
+      <td>1</td>
+      <td style="text-align: right;">200</td>
+      <td style="text-align: right;">0.1</td>
+      <td>道具</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>なぜ2NF違反か？（部分関数従属）</strong> - 主キーは <strong>(名前,
+      アイテム)</strong>（＝キャラごとの所持アイテムで一意） - <code>数</code> は (名前, アイテム)
+      に依存（OK） - しかし <code>単価</code>・<code>単位重量</code>・<code>カテゴリ</code> は
+      <strong>アイテム</strong>の性質であり、<strong>(名前, アイテム)</strong> ではなく
+      <strong>アイテム</strong>のみに依存<br />
+      → <strong>部分関数従属</strong>（複合キーの一部にだけ依存） → <strong>2NF違反</strong></p>
+      <p><strong>正規化の方向性（参考）</strong> -
+      アイテム基本情報：<code>アイテム(アイテム, 単価, 単位重量, カテゴリ, …)</code><br />
+      - 所持関係：<code>所持(名前, アイテム, 数)</code>（主キーは (名前, アイテム)）</p>
+      <p>主キー (複合キーでも可) が決まれば、列の値が一意に定まる関係を関数従属と呼びます。</p>
+      <p>複合キーの一部 の項目だけで、列の値が一意に決まる関係を、部分関数従属という。</p>
+      <p>主キーの一部分に対して関数従属する項目を、部分関数従属。</p>
+      <p>第3正規形 (3NF) とは、主キー以外に関数従属している列を切り出した形</p>
+      <p>ボイス・コッド正規形。</p>
+      <p>第4正規形、第5正規形は実務では使われない。</p>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/DB-2025/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
