@@ -194,16 +194,17 @@ class="toc-section-number">10</span> 授業時間外学習の指示 (宿題)</a>
       class="masked">論理的にまとめて実行されるべき一連の操作や処理のかたまり</span>
       を意味します。そして、RDBMS では、トランザクションに対して…</p>
       <ul>
-      <li><strong>すべての処理を成功として確定させる</strong> 👉
+      <li><strong>すべての処理を「成功」として確定させる</strong> 👉
       <strong><em>コミット</em></strong></li>
-      <li><strong>すべての処理を失敗として取り消して元に戻す</strong> 👉
+      <li><strong>すべての処理を「失敗」として操作を取り消して元に戻す</strong> 👉
       <strong><em>ロールバック</em></strong></li>
       </ul>
       <p>…の「<strong>いずれかの結果のみ</strong>」を保証します。</p>
       <p>例えば、トランザクションのなかに <code>SQL-1</code>、<code>SQL-2</code>、<code>SQL-3</code>
       という3つの SQL 文が含まれているとき…</p>
       <ul>
-      <li><code>SQL-1</code> と <code>SQL-2</code> は成功して、<code>SQL-3</code> は失敗する</li>
+      <li><code>SQL-1</code> と <code>SQL-2</code> は<strong>成功</strong>し、<code>SQL-3</code>
+      は<strong>失敗</strong>した</li>
       </ul>
       <p>…といった <strong>中途半端な結果が生じないように保証</strong>
       する機能を持ちます。具体的には <code>SQL-3</code> が失敗した時点で、RDBMS は
@@ -289,8 +290,12 @@ COMMIT
 (5 行)  </code></pre>
       <p>ここで、上記の <strong>第2行目</strong> から <strong>第4行目</strong> の
       <code>INSERT 0 1</code> は <span class="masked">各操作で1件のレコードが挿入されたこと</span>
-      を表す応答です。<code>0</code> は OID (Object Identifier)
+      を表す応答です。<code>0</code> は、 OID (Object Identifier)
       を表しています、気になる人は生成AIを使って調べてください。</p>
+      <ul>
+      <li>厳密には、挿入先テーブルが OID を持つなら OID、そうでなければ <code>0</code>
+      の応答を持ちます。</li>
+      </ul>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
       <p>PostgreSQL 17 で、テーブルに1件のレコード挿入したとき、<code>INSERT 0 1</code>
@@ -513,9 +518,8 @@ DETAIL:  キー (id)=(4) はすでに存在します。</code></pre>
       <p>すべてのレコードが削除されたことが確認できます。</p>
       <p>一方で、「<strong>特定の条件を満たすレコードだけ</strong>」を削除したいような場合は <span
       class="masked"><code>WHERE</code>句</span>
-      を使用します。例えば、<strong>last_login_at</strong> が、2025月7月31日以前
-      (<code>NULL</code>を含む)
-      のレコード<strong>だけ</strong>を削除したい場合、次のようにします。</p>
+      を使用します。例えば、<strong>last_login_at</strong> が、2025月7月31日以前 (<code>NULL</code>
+      を含む) のレコード<strong>だけ</strong>を削除したい場合、次のようにします。</p>
       <div class="sourceCode" id="cb13"
       data-caption="WHERE句を指定して条件に一致するレコードだけを削除"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
@@ -1357,7 +1361,7 @@ ROLLBACK</code></pre>
       <p><code>GROUP BY</code>
       でカテゴリ別に集計したときに、「<strong>レコード全体の集計</strong>」も同時に出力したいときは、<code>ROLLUP</code>
       という <code>GROUP BY</code>
-      句の拡張構文を使用します。たとえば、以下のようにすると「<code>job</code>
+      句の拡張構文を使用します。たとえば、以下のようにすると「<code>guild</code>
       ごとの集計」に「全体の集計」を加えた結果セットを取得することができます。</p>
       <div class="sourceCode" id="cb58" data-caption="ROLLUPの利用"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb58-1"><a href="#cb58-1"></a><span class="kw">SELECT</span></span>
@@ -1615,27 +1619,46 @@ ROLLBACK</code></pre>
       data-caption="最終ログイン日時の月別集計(DATE_TRUNC関数を不使用)"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb74-1"><a href="#cb74-1"></a><span class="kw">SELECT</span></span>
 <span id="cb74-2"><a href="#cb74-2"></a>  <span class="cf">CASE</span></span>
-<span id="cb74-3"><a href="#cb74-3"></a>    <span class="cf">WHEN</span> last_login_at <span class="kw">BETWEEN</span> <span class="dt">DATE</span> <span class="st">&#39;2025-07-01&#39;</span> <span class="kw">AND</span> <span class="dt">DATE</span>  <span class="st">&#39;2025-07-31&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/07&#39;</span></span>
-<span id="cb74-4"><a href="#cb74-4"></a>    <span class="cf">WHEN</span> last_login_at <span class="kw">BETWEEN</span> <span class="dt">DATE</span> <span class="st">&#39;2025-08-01&#39;</span> <span class="kw">AND</span> <span class="dt">DATE</span>  <span class="st">&#39;2025-08-31&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/08&#39;</span></span>
-<span id="cb74-5"><a href="#cb74-5"></a>    <span class="cf">WHEN</span> last_login_at <span class="kw">BETWEEN</span> <span class="dt">DATE</span> <span class="st">&#39;2025-09-01&#39;</span> <span class="kw">AND</span> <span class="dt">DATE</span>  <span class="st">&#39;2025-09-30&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/09&#39;</span></span>
-<span id="cb74-6"><a href="#cb74-6"></a>    <span class="cf">WHEN</span> last_login_at <span class="kw">BETWEEN</span> <span class="dt">DATE</span> <span class="st">&#39;2025-10-01&#39;</span> <span class="kw">AND</span> <span class="dt">DATE</span>  <span class="st">&#39;2025-10-31&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/10&#39;</span></span>
-<span id="cb74-7"><a href="#cb74-7"></a>    <span class="cf">ELSE</span> <span class="st">&#39;(その他)&#39;</span></span>
-<span id="cb74-8"><a href="#cb74-8"></a>  <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">&quot;date&quot;</span>,</span>
-<span id="cb74-9"><a href="#cb74-9"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span></span>
-<span id="cb74-10"><a href="#cb74-10"></a><span class="kw">FROM</span></span>
-<span id="cb74-11"><a href="#cb74-11"></a>  s_characters</span>
-<span id="cb74-12"><a href="#cb74-12"></a><span class="kw">WHERE</span></span>
-<span id="cb74-13"><a href="#cb74-13"></a>  last_login_at <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
-<span id="cb74-14"><a href="#cb74-14"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
-<span id="cb74-15"><a href="#cb74-15"></a>  <span class="cf">CASE</span></span>
-<span id="cb74-16"><a href="#cb74-16"></a>    <span class="cf">WHEN</span> last_login_at <span class="kw">BETWEEN</span> <span class="dt">DATE</span> <span class="st">&#39;2025-07-01&#39;</span> <span class="kw">AND</span> <span class="dt">DATE</span>  <span class="st">&#39;2025-07-31&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/07&#39;</span></span>
-<span id="cb74-17"><a href="#cb74-17"></a>    <span class="cf">WHEN</span> last_login_at <span class="kw">BETWEEN</span> <span class="dt">DATE</span> <span class="st">&#39;2025-08-01&#39;</span> <span class="kw">AND</span> <span class="dt">DATE</span>  <span class="st">&#39;2025-08-31&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/08&#39;</span></span>
-<span id="cb74-18"><a href="#cb74-18"></a>    <span class="cf">WHEN</span> last_login_at <span class="kw">BETWEEN</span> <span class="dt">DATE</span> <span class="st">&#39;2025-09-01&#39;</span> <span class="kw">AND</span> <span class="dt">DATE</span>  <span class="st">&#39;2025-09-30&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/09&#39;</span></span>
-<span id="cb74-19"><a href="#cb74-19"></a>    <span class="cf">WHEN</span> last_login_at <span class="kw">BETWEEN</span> <span class="dt">DATE</span> <span class="st">&#39;2025-10-01&#39;</span> <span class="kw">AND</span> <span class="dt">DATE</span>  <span class="st">&#39;2025-10-31&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/10&#39;</span></span>
-<span id="cb74-20"><a href="#cb74-20"></a>    <span class="cf">ELSE</span> <span class="st">&#39;(その他)&#39;</span></span>
-<span id="cb74-21"><a href="#cb74-21"></a>  <span class="cf">END</span></span>
-<span id="cb74-22"><a href="#cb74-22"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
-<span id="cb74-23"><a href="#cb74-23"></a>  <span class="ot">&quot;date&quot;</span>;</span></code></pre></div>
+<span id="cb74-3"><a href="#cb74-3"></a>    <span class="cf">WHEN</span> last_login_at <span class="op">&gt;=</span> <span class="dt">DATE</span> <span class="st">&#39;2025-07-01&#39;</span> <span class="kw">AND</span></span>
+<span id="cb74-4"><a href="#cb74-4"></a>    last_login_at <span class="op">&lt;</span> <span class="dt">DATE</span> <span class="st">&#39;2025-08-01&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/07&#39;</span></span>
+<span id="cb74-5"><a href="#cb74-5"></a>    <span class="cf">WHEN</span> last_login_at <span class="op">&gt;=</span> <span class="dt">DATE</span> <span class="st">&#39;2025-08-01&#39;</span> <span class="kw">AND</span></span>
+<span id="cb74-6"><a href="#cb74-6"></a>    last_login_at <span class="op">&lt;</span> <span class="dt">DATE</span> <span class="st">&#39;2025-09-01&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/08&#39;</span></span>
+<span id="cb74-7"><a href="#cb74-7"></a>    <span class="cf">WHEN</span> last_login_at <span class="op">&gt;=</span> <span class="dt">DATE</span> <span class="st">&#39;2025-09-01&#39;</span> <span class="kw">AND</span></span>
+<span id="cb74-8"><a href="#cb74-8"></a>    last_login_at <span class="op">&lt;</span> <span class="dt">DATE</span> <span class="st">&#39;2025-10-01&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/09&#39;</span></span>
+<span id="cb74-9"><a href="#cb74-9"></a>    <span class="cf">WHEN</span> last_login_at <span class="op">&gt;=</span> <span class="dt">DATE</span> <span class="st">&#39;2025-10-01&#39;</span> <span class="kw">AND</span></span>
+<span id="cb74-10"><a href="#cb74-10"></a>    last_login_at <span class="op">&lt;</span> <span class="dt">DATE</span> <span class="st">&#39;2025-11-01&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/10&#39;</span></span>
+<span id="cb74-11"><a href="#cb74-11"></a>    <span class="cf">ELSE</span> <span class="st">&#39;(その他)&#39;</span></span>
+<span id="cb74-12"><a href="#cb74-12"></a>  <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">&quot;date&quot;</span>,</span>
+<span id="cb74-13"><a href="#cb74-13"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span></span>
+<span id="cb74-14"><a href="#cb74-14"></a><span class="kw">FROM</span></span>
+<span id="cb74-15"><a href="#cb74-15"></a>  s_characters</span>
+<span id="cb74-16"><a href="#cb74-16"></a><span class="kw">WHERE</span></span>
+<span id="cb74-17"><a href="#cb74-17"></a>  last_login_at <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb74-18"><a href="#cb74-18"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb74-19"><a href="#cb74-19"></a>  <span class="cf">CASE</span></span>
+<span id="cb74-20"><a href="#cb74-20"></a>    <span class="cf">WHEN</span> last_login_at <span class="op">&gt;=</span> <span class="dt">DATE</span> <span class="st">&#39;2025-07-01&#39;</span> <span class="kw">AND</span></span>
+<span id="cb74-21"><a href="#cb74-21"></a>    last_login_at <span class="op">&lt;</span> <span class="dt">DATE</span> <span class="st">&#39;2025-08-01&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/07&#39;</span></span>
+<span id="cb74-22"><a href="#cb74-22"></a>    <span class="cf">WHEN</span> last_login_at <span class="op">&gt;=</span> <span class="dt">DATE</span> <span class="st">&#39;2025-08-01&#39;</span> <span class="kw">AND</span></span>
+<span id="cb74-23"><a href="#cb74-23"></a>    last_login_at <span class="op">&lt;</span> <span class="dt">DATE</span> <span class="st">&#39;2025-09-01&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/08&#39;</span></span>
+<span id="cb74-24"><a href="#cb74-24"></a>    <span class="cf">WHEN</span> last_login_at <span class="op">&gt;=</span> <span class="dt">DATE</span> <span class="st">&#39;2025-09-01&#39;</span> <span class="kw">AND</span></span>
+<span id="cb74-25"><a href="#cb74-25"></a>    last_login_at <span class="op">&lt;</span> <span class="dt">DATE</span> <span class="st">&#39;2025-10-01&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/09&#39;</span></span>
+<span id="cb74-26"><a href="#cb74-26"></a>    <span class="cf">WHEN</span> last_login_at <span class="op">&gt;=</span> <span class="dt">DATE</span> <span class="st">&#39;2025-10-01&#39;</span> <span class="kw">AND</span></span>
+<span id="cb74-27"><a href="#cb74-27"></a>    last_login_at <span class="op">&lt;</span> <span class="dt">DATE</span> <span class="st">&#39;2025-11-01&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/10&#39;</span></span>
+<span id="cb74-28"><a href="#cb74-28"></a>    <span class="cf">ELSE</span> <span class="st">&#39;(その他)&#39;</span></span>
+<span id="cb74-29"><a href="#cb74-29"></a>  <span class="cf">END</span></span>
+<span id="cb74-30"><a href="#cb74-30"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb74-31"><a href="#cb74-31"></a>  <span class="ot">&quot;date&quot;</span>;</span></code></pre></div>
+      <div class="note type-caution">
+      <p><strong>日時の取り扱いに関する注意</strong></p>
+      <p><strong>last_login_at</strong>
+      がTIMESTAMP型のとき、<code>last_login_at BETWEEN DATE '2025-07-01' AND DATE '2025-07-31'</code>
+      という条件は、2025年07月31日の <strong>00時00分00秒ちょうど</strong>
+      までしか含みません。これは <span class="masked"><code>DATE '2025-07-31'</code> が
+      <code>2025-07-31 00:00:00</code></span> に変換されるためです。</p>
+      <p>そのため、<strong>last_login_at</strong> が <span
+      class="masked"><code>2025-07-31 01:00:00</code></span> のときは、その条件は
+      <strong>真にはならない</strong> ので注意してください。</p>
+      </div>
       <h3 data-number="8.5.2" id="sqlドリル-12"><span class="header-section-number">8.5.2</span>
       SQLドリル💻</h3>
       <ul>
