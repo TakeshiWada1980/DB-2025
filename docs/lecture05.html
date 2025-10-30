@@ -102,14 +102,18 @@ class="toc-section-number">7.3</span> MAX関数とMIN関数</a></li>
 </ul></li>
 <li><a href="#group-by" id="toc-group-by"><span class="toc-section-number">8</span> GROUP BY</a>
 <ul>
-<li><a href="#group-by句の使用時にselect句で指定可能な値"
-id="toc-group-by句の使用時にselect句で指定可能な値"><span class="toc-section-number">8.1</span>
-GROUP BY句の使用時にSELECT句で指定可能な値</a></li>
+<li><a href="#group-by句の使用時にselect句で指定可能な値-重要"
+id="toc-group-by句の使用時にselect句で指定可能な値-重要"><span class="toc-section-number">8.1</span>
+GROUP BY句の使用時にSELECT句で指定可能な値 (重要🚨)</a></li>
 <li><a href="#group-by句に複数の集約キーを指定" id="toc-group-by句に複数の集約キーを指定"><span
 class="toc-section-number">8.2</span> GROUP BY句に複数の集約キーを指定</a></li>
-<li><a href="#rollup" id="toc-rollup"><span class="toc-section-number">8.3</span> ROLLUP</a></li>
+<li><a href="#rollupによる全体集計" id="toc-rollupによる全体集計"><span
+class="toc-section-number">8.3</span> ROLLUPによる全体集計</a></li>
 <li><a href="#group-by句にcase式を利用" id="toc-group-by句にcase式を利用"><span
 class="toc-section-number">8.4</span> GROUP BY句にCASE式を利用</a></li>
+<li><a href="#date_trunc関数を利用した時間軸に沿った集計処理"
+id="toc-date_trunc関数を利用した時間軸に沿った集計処理"><span class="toc-section-number">8.5</span>
+DATE_TRUNC関数を利用した時間軸に沿った集計処理</a></li>
 </ul></li>
 <li><a href="#having-句" id="toc-having-句"><span class="toc-section-number">9</span> HAVING 句</a>
 <ul>
@@ -1247,8 +1251,9 @@ ROLLBACK</code></pre>
  Priest  |   4 |   38.8
  Fighter |   4 |   37.3
  Monk    |   2 |   36.0</code></pre>
-      <h2 data-number="8.1" id="group-by句の使用時にselect句で指定可能な値"><span
-      class="header-section-number">8.1</span> GROUP BY句の使用時にSELECT句で指定可能な値</h2>
+      <h2 data-number="8.1" id="group-by句の使用時にselect句で指定可能な値-重要"><span
+      class="header-section-number">8.1</span> GROUP BY句の使用時にSELECT句で指定可能な値
+      (重要🚨)</h2>
       <p><code>GROUP BY</code> 句を使用したとき、<code>SELECT</code>
       句に記述可能なカラムは「<code>GROUP BY</code> <strong>で指定したカラム (＝集約キー)
       に限られる</strong>」というルールがあります。たとえば、<code>GROUP BY job</code>
@@ -1346,7 +1351,8 @@ ROLLBACK</code></pre>
  Wizard | D.D.D  |     2 |   57.5
  Wizard | hameln |     1 |   61.0
  Wizard |        |     1 |   57.0</code></pre>
-      <h2 data-number="8.3" id="rollup"><span class="header-section-number">8.3</span> ROLLUP</h2>
+      <h2 data-number="8.3" id="rollupによる全体集計"><span class="header-section-number">8.3</span>
+      ROLLUPによる全体集計</h2>
       <p><code>GROUP BY</code>
       でカテゴリ別に集計したときに、「<strong>レコード全体の集計</strong>」も同時に出力したいときは、<code>ROLLUP</code>
       という <code>GROUP BY</code>
@@ -1433,7 +1439,7 @@ ROLLBACK</code></pre>
  (Freelancer) |   39.6 |   5
  (Total)      |   48.8 |  19</code></pre>
       <p>なお、<code>ROLLUP</code>
-      の結果を含めた並び順や表示体裁の細かい制御は、SQLでも実現は可能ですが、<strong>複雑になりやすい処理</strong>です。可読性や保守性を考えると、最終的な表示順や体裁はアプリケーション側で調整するほうが実用的であることを覚えておいてください。</p>
+      の結果を含めた並び順や表示体裁の細かい制御は、SQLでも実現は可能ですが、<strong>複雑になりやすい処理</strong>です。可読性や保守性を考えると、最終的な表示順や体裁はアプリケーション側で調整するほうが実用的なケースも多いことを覚えておいてください。</p>
       </div>
       <h3 data-number="8.3.1" id="sqlドリル-10"><span class="header-section-number">8.3.1</span>
       SQLドリル💻</h3>
@@ -1533,6 +1539,116 @@ ROLLBACK</code></pre>
 -----------------+--------+--------+-----
  backline        |     64 |   48.5 |   8
  frontline       |     73 |   49.1 |  11</code></pre>
+      <h2 data-number="8.5" id="date_trunc関数を利用した時間軸に沿った集計処理"><span
+      class="header-section-number">8.5</span> DATE_TRUNC関数を利用した時間軸に沿った集計処理</h2>
+      <p><code>GROUP BY</code> 句は、<strong>時間軸に沿って集計処理</strong>
+      (日時でグループ化して集計処理) をしたい場面でも用いられます。この際、PostgreSQL では
+      <code>DATE_TRUNC</code> 関数を利用することで SQL
+      をシンプルに記述することができます。この関数は <span
+      class="masked">指定した単位で日時を切り捨てる関数</span> で、次のように動作します。</p>
+      <ul>
+      <li><code>DATE_TRUNC('hour', TIMESTAMP '2025-10-30 15:30:58')</code> 👉
+      <code>2025-10-01 00:00:00</code> (TIMESTAMP型)</li>
+      <li><code>DATE_TRUNC('month', TIMESTAMP '2025-10-30 15:30:58')</code> 👉
+      <code>2025-10-30 15:00:00</code> ( 〃 )</li>
+      <li><code>DATE_TRUNC('year', TIMESTAMP '2025-10-30 15:30:58')</code> 👉
+      <code>2025-01-01 00:00:00</code> ( 〃 )
+      <ul>
+      <li>第1引数に指定可能な値 (文字列リテラル) は<a
+      href="https://www.postgresql.org/docs/current/functions-datetime.html#FUNCTIONS-DATETIME-TRUNC">公式ドキュメント</a>
+      を参照してください。</li>
+      <li><code>DATE_TRUNC</code> は <span class="masked">標準SQLではなくPostgreSQL の独自関数
+      (拡張)</span> です。</li>
+      <li>第2引数には <code>DATE</code> 型や <code>INTERVAL</code> 型をとることもできます。</li>
+      </ul></li>
+      </ul>
+      <p>たとえば、<strong>最終ログイン日時</strong> (<code>last_login_at</code>)
+      を、月単位でまとめて、その件数を求めたいとき、<code>DATE_TRUNC</code> を利用すれば以下のように
+      SQL を書くことができます。</p>
+      <div class="sourceCode" id="cb70" data-caption="最終ログイン日時の月別集計(1)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb70-1"><a href="#cb70-1"></a><span class="kw">SELECT</span></span>
+<span id="cb70-2"><a href="#cb70-2"></a>  DATE_TRUNC(<span class="st">&#39;month&#39;</span>, last_login_at) <span class="kw">AS</span> <span class="ot">&quot;date&quot;</span>, <span class="co">-- ◀ ここに注目</span></span>
+<span id="cb70-3"><a href="#cb70-3"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span></span>
+<span id="cb70-4"><a href="#cb70-4"></a><span class="kw">FROM</span></span>
+<span id="cb70-5"><a href="#cb70-5"></a>  s_characters</span>
+<span id="cb70-6"><a href="#cb70-6"></a><span class="kw">WHERE</span></span>
+<span id="cb70-7"><a href="#cb70-7"></a>  last_login_at <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb70-8"><a href="#cb70-8"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb70-9"><a href="#cb70-9"></a>  DATE_TRUNC(<span class="st">&#39;month&#39;</span>, last_login_at); <span class="co">-- ◀ ここに注目</span></span></code></pre></div>
+      <p>実行結果は、次のようになります。</p>
+      <pre><code>        date         | num 
+---------------------+-----
+ 2025-09-01 00:00:00 |   6
+ 2025-07-01 00:00:00 |   4
+ 2025-08-01 00:00:00 |   4
+ 2025-10-01 00:00:00 |   4</code></pre>
+      <p>体裁を整えたバージョンは以下のようになります。以下の SQL の <strong>第02行目</strong> の
+      <code>TO_CHAR</code> 関数は、<a
+      href="lecture03.html#日付時刻関数を利用する-授業時間外学習">第03回講義</a>で紹介したように日時などを整形出力する関数です。</p>
+      <div class="sourceCode" id="cb72" data-caption="最終ログイン日時の月別集計(2)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb72-1"><a href="#cb72-1"></a><span class="kw">SELECT</span></span>
+<span id="cb72-2"><a href="#cb72-2"></a>  <span class="fu">TO_CHAR</span>(DATE_TRUNC(<span class="st">&#39;month&#39;</span>, last_login_at), <span class="st">&#39;YYYY/MM&#39;</span>) <span class="kw">AS</span> <span class="ot">&quot;date&quot;</span>,</span>
+<span id="cb72-3"><a href="#cb72-3"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span></span>
+<span id="cb72-4"><a href="#cb72-4"></a><span class="kw">FROM</span></span>
+<span id="cb72-5"><a href="#cb72-5"></a>  s_characters</span>
+<span id="cb72-6"><a href="#cb72-6"></a><span class="kw">WHERE</span></span>
+<span id="cb72-7"><a href="#cb72-7"></a>  last_login_at <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb72-8"><a href="#cb72-8"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb72-9"><a href="#cb72-9"></a>  DATE_TRUNC(<span class="st">&#39;month&#39;</span>, last_login_at)</span>
+<span id="cb72-10"><a href="#cb72-10"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb72-11"><a href="#cb72-11"></a>  <span class="ot">&quot;date&quot;</span>;</span></code></pre></div>
+      <p>実行結果は、次のようになります。</p>
+      <pre><code>  date   | num 
+---------+-----
+ 2025/07 |   4
+ 2025/08 |   4
+ 2025/09 |   6
+ 2025/10 |   4</code></pre>
+      <h3 data-number="8.5.1" id="参考-date_trunc関数を使用せずに同様の集計をする"><span
+      class="header-section-number">8.5.1</span> 参考:
+      DATE_TRUNC関数を使用せずに同様の集計をする</h3>
+      <p><code>DATE_TRUNC</code>
+      関数を使用せずに、標準SQLで同様の処理をしたい場合には、<strong>CASE式</strong>
+      で月ごとの区分を表現することができます。</p>
+      <div class="sourceCode" id="cb74"
+      data-caption="最終ログイン日時の月別集計(DATE_TRUNC関数を不使用)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb74-1"><a href="#cb74-1"></a><span class="kw">SELECT</span></span>
+<span id="cb74-2"><a href="#cb74-2"></a>  <span class="cf">CASE</span></span>
+<span id="cb74-3"><a href="#cb74-3"></a>    <span class="cf">WHEN</span> last_login_at <span class="kw">BETWEEN</span> <span class="dt">DATE</span> <span class="st">&#39;2025-07-01&#39;</span> <span class="kw">AND</span> <span class="dt">DATE</span>  <span class="st">&#39;2025-07-31&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/07&#39;</span></span>
+<span id="cb74-4"><a href="#cb74-4"></a>    <span class="cf">WHEN</span> last_login_at <span class="kw">BETWEEN</span> <span class="dt">DATE</span> <span class="st">&#39;2025-08-01&#39;</span> <span class="kw">AND</span> <span class="dt">DATE</span>  <span class="st">&#39;2025-08-31&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/08&#39;</span></span>
+<span id="cb74-5"><a href="#cb74-5"></a>    <span class="cf">WHEN</span> last_login_at <span class="kw">BETWEEN</span> <span class="dt">DATE</span> <span class="st">&#39;2025-09-01&#39;</span> <span class="kw">AND</span> <span class="dt">DATE</span>  <span class="st">&#39;2025-09-30&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/09&#39;</span></span>
+<span id="cb74-6"><a href="#cb74-6"></a>    <span class="cf">WHEN</span> last_login_at <span class="kw">BETWEEN</span> <span class="dt">DATE</span> <span class="st">&#39;2025-10-01&#39;</span> <span class="kw">AND</span> <span class="dt">DATE</span>  <span class="st">&#39;2025-10-31&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/10&#39;</span></span>
+<span id="cb74-7"><a href="#cb74-7"></a>    <span class="cf">ELSE</span> <span class="st">&#39;(その他)&#39;</span></span>
+<span id="cb74-8"><a href="#cb74-8"></a>  <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">&quot;date&quot;</span>,</span>
+<span id="cb74-9"><a href="#cb74-9"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span></span>
+<span id="cb74-10"><a href="#cb74-10"></a><span class="kw">FROM</span></span>
+<span id="cb74-11"><a href="#cb74-11"></a>  s_characters</span>
+<span id="cb74-12"><a href="#cb74-12"></a><span class="kw">WHERE</span></span>
+<span id="cb74-13"><a href="#cb74-13"></a>  last_login_at <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb74-14"><a href="#cb74-14"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb74-15"><a href="#cb74-15"></a>  <span class="cf">CASE</span></span>
+<span id="cb74-16"><a href="#cb74-16"></a>    <span class="cf">WHEN</span> last_login_at <span class="kw">BETWEEN</span> <span class="dt">DATE</span> <span class="st">&#39;2025-07-01&#39;</span> <span class="kw">AND</span> <span class="dt">DATE</span>  <span class="st">&#39;2025-07-31&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/07&#39;</span></span>
+<span id="cb74-17"><a href="#cb74-17"></a>    <span class="cf">WHEN</span> last_login_at <span class="kw">BETWEEN</span> <span class="dt">DATE</span> <span class="st">&#39;2025-08-01&#39;</span> <span class="kw">AND</span> <span class="dt">DATE</span>  <span class="st">&#39;2025-08-31&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/08&#39;</span></span>
+<span id="cb74-18"><a href="#cb74-18"></a>    <span class="cf">WHEN</span> last_login_at <span class="kw">BETWEEN</span> <span class="dt">DATE</span> <span class="st">&#39;2025-09-01&#39;</span> <span class="kw">AND</span> <span class="dt">DATE</span>  <span class="st">&#39;2025-09-30&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/09&#39;</span></span>
+<span id="cb74-19"><a href="#cb74-19"></a>    <span class="cf">WHEN</span> last_login_at <span class="kw">BETWEEN</span> <span class="dt">DATE</span> <span class="st">&#39;2025-10-01&#39;</span> <span class="kw">AND</span> <span class="dt">DATE</span>  <span class="st">&#39;2025-10-31&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;2025/10&#39;</span></span>
+<span id="cb74-20"><a href="#cb74-20"></a>    <span class="cf">ELSE</span> <span class="st">&#39;(その他)&#39;</span></span>
+<span id="cb74-21"><a href="#cb74-21"></a>  <span class="cf">END</span></span>
+<span id="cb74-22"><a href="#cb74-22"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb74-23"><a href="#cb74-23"></a>  <span class="ot">&quot;date&quot;</span>;</span></code></pre></div>
+      <h3 data-number="8.5.2" id="sqlドリル-12"><span class="header-section-number">8.5.2</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-04_6.sql</code> 👉 <strong>s_characters</strong> テーブルについて、次のように
+      <strong>created_on</strong> で年別に「人数」と「平均レベル」を集計した結果セットを得るような
+      SQL を記述せよ。</li>
+      </ul>
+      <pre><code> year | num | avg_lv 
+------+-----+--------
+ 2020 |   4 |   38.8
+ 2021 |   3 |   43.0
+ 2022 |   4 |   50.3
+ 2023 |   4 |   57.0
+ 2024 |   4 |   53.8</code></pre>
       <h1 data-number="9" id="having-句"><span class="header-section-number">9</span> HAVING 句</h1>
       <p><code>GROUP BY</code> で <strong>集約した結果を条件で絞り込みたい</strong>
       ときは、<code>HAVING</code> 句を使用します。</p>
@@ -1549,19 +1665,19 @@ ROLLBACK</code></pre>
       <code>buff &gt; 0.0</code> のような条件式は <code>HAVING</code> ではなく <code>WHERE</code>
       句で指定します。</li>
       </ul>
-      <div class="sourceCode" id="cb70" data-caption="HAVING句の使用例"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb70-1"><a href="#cb70-1"></a><span class="kw">SELECT</span></span>
-<span id="cb70-2"><a href="#cb70-2"></a>  <span class="fu">COALESCE</span>(guild,<span class="st">&#39;Freelancer&#39;</span>) <span class="kw">AS</span> <span class="ot">&quot;guild&quot;</span>,</span>
-<span id="cb70-3"><a href="#cb70-3"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span>,</span>
-<span id="cb70-4"><a href="#cb70-4"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span></span>
-<span id="cb70-5"><a href="#cb70-5"></a><span class="kw">FROM</span></span>
-<span id="cb70-6"><a href="#cb70-6"></a>  s_characters</span>
-<span id="cb70-7"><a href="#cb70-7"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
-<span id="cb70-8"><a href="#cb70-8"></a>  guild</span>
-<span id="cb70-9"><a href="#cb70-9"></a><span class="kw">HAVING</span></span>
-<span id="cb70-10"><a href="#cb70-10"></a>  <span class="fu">AVG</span>(<span class="kw">level</span>) <span class="op">&gt;=</span> <span class="dv">50</span></span>
-<span id="cb70-11"><a href="#cb70-11"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
-<span id="cb70-12"><a href="#cb70-12"></a>  <span class="fu">AVG</span>(<span class="kw">level</span>) <span class="kw">DESC</span>;</span></code></pre></div>
+      <div class="sourceCode" id="cb76" data-caption="HAVING句の使用例"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb76-1"><a href="#cb76-1"></a><span class="kw">SELECT</span></span>
+<span id="cb76-2"><a href="#cb76-2"></a>  <span class="fu">COALESCE</span>(guild,<span class="st">&#39;Freelancer&#39;</span>) <span class="kw">AS</span> <span class="ot">&quot;guild&quot;</span>,</span>
+<span id="cb76-3"><a href="#cb76-3"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span>,</span>
+<span id="cb76-4"><a href="#cb76-4"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span></span>
+<span id="cb76-5"><a href="#cb76-5"></a><span class="kw">FROM</span></span>
+<span id="cb76-6"><a href="#cb76-6"></a>  s_characters</span>
+<span id="cb76-7"><a href="#cb76-7"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb76-8"><a href="#cb76-8"></a>  guild</span>
+<span id="cb76-9"><a href="#cb76-9"></a><span class="kw">HAVING</span></span>
+<span id="cb76-10"><a href="#cb76-10"></a>  <span class="fu">AVG</span>(<span class="kw">level</span>) <span class="op">&gt;=</span> <span class="dv">50</span></span>
+<span id="cb76-11"><a href="#cb76-11"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb76-12"><a href="#cb76-12"></a>  <span class="fu">AVG</span>(<span class="kw">level</span>) <span class="kw">DESC</span>;</span></code></pre></div>
       <p>実行結果は、次のようになります。</p>
       <pre><code> guild  | num | avg_lv 
 --------+-----+--------
@@ -1571,7 +1687,7 @@ ROLLBACK</code></pre>
       <code>WHERE</code> 句 👉 <code>GROUP BY</code> 句 👉 <code>HAVING</code> 句 👉
       <code>ORDER BY</code> 句 👉 (<code>LIMIT</code> 句 / <code>OFFSET</code> 句)
       という順で記述しないと<strong>構文エラー</strong>になるので注意してください。</p>
-      <h3 data-number="9.0.1" id="sqlドリル-12"><span class="header-section-number">9.0.1</span>
+      <h3 data-number="9.0.1" id="sqlドリル-13"><span class="header-section-number">9.0.1</span>
       SQLドリル💻</h3>
       <p><code>ex-05_1.sql</code> 👉 <strong>s_characters</strong>
       テーブルについて、次のようにジョブごとの「平均レベル」と「人数」を集計した結果セットを得る SQL
@@ -1615,14 +1731,41 @@ ROLLBACK</code></pre>
       <li>次回の講義で「<strong>小テスト❺</strong>」を実施します。
       <ul>
       <li><strong>定着確認</strong> および <strong>SQLドリル</strong> から主に出題します。</li>
-      <li>講義が進行するにつれて、当然ながら小テストの内容も複雑で高度なものになっていきます。前半で、しっかりと得点をとるようにしてください。</li>
+      <li>講義が進行するにつれて、当然ながら小テストの内容も複雑で高度なものになっていきます。</li>
       </ul></li>
-      <li>次回講義では、データベースの<strong>概念設計</strong> (概念データモデルの設計)
-      および<strong>論理設計</strong> (データモデルの設計) を学んできます。予習として📖
-      教科書「達人に学ぶDB設計 徹底指南書 (第2版)」の以下ページを読んできてください。
+      <li>ここまでの第03回講義～第05回講義では、実践的な SQL
+      について学んできました。次回講義では、データベースの<strong>概念設計</strong>
+      (概念データモデルの設計) および<strong>論理設計</strong> (データモデルの設計)
+      などの理論に寄せた内容を学んできます。</li>
+      <li>予習として📖 教科書「達人に学ぶDB設計 徹底指南書
+      (第2版)」の以下ページを読んできてください。内容が理解できなくても構いません。この予習の目的は
+      <span
+      class="masked">「ここがよく分からなかった」というポイントを自覚的に整理して、次回の授業に望んでもらうこと</span>
+      にあります。
       <ul>
-      <li>pp.53-61 「<strong>概念スキーマと論理設計</strong>」</li>
-      <li>pp.213-239 「<strong>ER図 ～複数テーブルの関係を表現する～</strong>」</li>
+      <li>皆さんは既に PG3 で、複数テーブルから構成される DB
+      を扱っているので、以下の順で読むほうが納得感があると思います。</li>
+      <li>pp.145-164 第4章「ER図」
+      <ul>
+      <li>4-1 テーブルが多すぎる</li>
+      <li>4-2 テーブル同士の関連を見抜く</li>
+      <li>4-3 ER図の書き方</li>
+      <li>4-4 「多対多」と関連実体</li>
+      </ul></li>
+      <li>pp.89-123 第3章「論理設計と正規化」
+      <ul>
+      <li>3-1 テーブルとは何か</li>
+      <li>3-2 テーブルの構成要素</li>
+      <li>3-3 正規化とは何か</li>
+      <li>3-4 第1正規形</li>
+      <li>3-5 第2正規形～部分関数従属</li>
+      <li>3-6 第3正規形～推移的関数従属</li>
+      </ul></li>
+      <li>pp.25-49 第2章「論理設計と物理設計」
+      <ul>
+      <li>2-1 概念スキーマと論理設計</li>
+      <li>2-2 内部スキーマと物理設計</li>
+      </ul></li>
       </ul></li>
       </ul>
       <hr />
