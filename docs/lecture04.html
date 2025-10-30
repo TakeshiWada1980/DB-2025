@@ -1312,7 +1312,11 @@ git merge upstream/main</code></pre>
       <li><strong>注意</strong>:
       <code>WHERE last_login_at BETWEEN '2025-07-01' AND '2025-07-31'</code>
       とすると、<strong>last_login_at</strong> が <span class="masked">2025年7月31日 10時15分</span>
-      のようなレコードが選択されないので注意してください。</li>
+      のようなレコードが選択されないので注意してください。
+      <ul>
+      <li>なお、<strong>last_login_at</strong> が、<strong>created_on</strong>
+      のように時刻を含まない <code>DATE</code> 型であれば、この問題は生じません。</li>
+      </ul></li>
       </ul>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
