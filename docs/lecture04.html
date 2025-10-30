@@ -1305,9 +1305,22 @@ git merge upstream/main</code></pre>
 <span id="cb34-5"><a href="#cb34-5"></a><span class="kw">FROM</span></span>
 <span id="cb34-6"><a href="#cb34-6"></a>  s_characters</span>
 <span id="cb34-7"><a href="#cb34-7"></a><span class="kw">WHERE</span></span>
-<span id="cb34-8"><a href="#cb34-8"></a>  last_login_at <span class="kw">BETWEEN</span> <span class="st">&#39;2025-07-01&#39;</span> <span class="kw">AND</span> <span class="st">&#39;2025-07-31&#39;</span></span>
+<span id="cb34-8"><a href="#cb34-8"></a>  last_login_at <span class="kw">BETWEEN</span> <span class="st">&#39;2025-07-01 00:00:00&#39;</span> <span class="kw">AND</span> <span class="st">&#39;2025-07-31 23:59:59.999999&#39;</span></span>
 <span id="cb34-9"><a href="#cb34-9"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
 <span id="cb34-10"><a href="#cb34-10"></a>  last_login_at;</span></code></pre></div>
+      <ul>
+      <li><strong>注意</strong>:
+      <code>WHERE last_login_at BETWEEN '2025-07-01' AND '2025-07-31'</code>
+      とすると、<strong>last_login_at</strong> が「2025年7月31日
+      10:00:00」のようなレコードが選択されないので注意してください。</li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>PostgreSQL に関する質問です。last_login_at という <code>TIMESTAMP</code>
+      型のカラムがあります。このとき、<code>WHERE last_login_at BETWEEN '2025-07-01' AND '2025-07-31'</code>
+      では、<code>2025-07-31 10:15:00</code> のようなレコードが選択されないのはなぜですか。</p>
+      </blockquote>
+      <hr />
       <p>さらに、<a
       href="lecture03.html#日付時刻関数を利用する-授業時間外学習">前回講義</a>で紹介した
       <code>DATE_PART</code>
