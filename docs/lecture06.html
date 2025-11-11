@@ -43,24 +43,71 @@
       <div id="g-nav-list">
         <!-- ---------------------------------------- -->
          <ul>
-<li><a href="#連絡" id="toc-連絡"><span class="toc-section-number">1</span> 連絡</a></li>
-<li><a href="#準備と前回の復習" id="toc-準備と前回の復習"><span class="toc-section-number">2</span>
-準備と前回の復習</a>
+<li><a href="#連絡と準備" id="toc-連絡と準備"><span class="toc-section-number">1</span>
+連絡と準備</a>
 <ul>
 <li><a href="#ハンズオン学習の準備" id="toc-ハンズオン学習の準備"><span
-class="toc-section-number">2.1</span> ハンズオン学習の準備</a></li>
+class="toc-section-number">1.1</span> ハンズオン学習の準備</a></li>
 </ul></li>
 <li><a href="#データベースの設計" id="toc-データベースの設計"><span
-class="toc-section-number">3</span> データベースの設計</a>
+class="toc-section-number">2</span> データベースの設計</a>
 <ul>
-<li><a href="#概念設計" id="toc-概念設計"><span class="toc-section-number">3.1</span>
+<li><a href="#データベース設計の三層構造-概念設計論理設計物理設計"
+id="toc-データベース設計の三層構造-概念設計論理設計物理設計"><span
+class="toc-section-number">2.1</span> データベース設計の三層構造
+(概念設計・論理設計・物理設計)</a></li>
+<li><a href="#概念設計" id="toc-概念設計"><span class="toc-section-number">2.2</span>
 概念設計</a></li>
-<li><a href="#論理設計" id="toc-論理設計"><span class="toc-section-number">3.2</span>
+<li><a href="#論理設計" id="toc-論理設計"><span class="toc-section-number">2.3</span>
 論理設計</a></li>
-<li><a href="#物理設計" id="toc-物理設計"><span class="toc-section-number">3.3</span>
+<li><a href="#物理設計" id="toc-物理設計"><span class="toc-section-number">2.4</span>
 物理設計</a></li>
-<li><a href="#正規化" id="toc-正規化"><span class="toc-section-number">3.4</span> 正規化</a></li>
 </ul></li>
+<li><a href="#データベースの概念設計" id="toc-データベースの概念設計"><span
+class="toc-section-number">3</span> データベースの概念設計</a>
+<ul>
+<li><a href="#概念er図とは" id="toc-概念er図とは"><span class="toc-section-number">3.1</span>
+概念ER図とは</a></li>
+<li><a href="#エンティティとは" id="toc-エンティティとは"><span
+class="toc-section-number">3.2</span> エンティティとは</a></li>
+<li><a href="#リレーションとは-多重度のみの表現" id="toc-リレーションとは-多重度のみの表現"><span
+class="toc-section-number">3.3</span> リレーションとは (多重度のみの表現)</a></li>
+<li><a href="#リレーションとは-多重度と任意性の表現"
+id="toc-リレーションとは-多重度と任意性の表現"><span class="toc-section-number">3.4</span>
+リレーションとは (多重度と任意性の表現)</a></li>
+<li><a href="#概念er図を作成することの意義" id="toc-概念er図を作成することの意義"><span
+class="toc-section-number">3.5</span> 概念ER図を作成することの意義</a></li>
+<li><a href="#概念設計からモデル選定へ" id="toc-概念設計からモデル選定へ"><span
+class="toc-section-number">3.6</span> 概念設計からモデル選定へ</a></li>
+</ul></li>
+<li><a href="#論理設計-1" id="toc-論理設計-1"><span class="toc-section-number">4</span> 論理設計</a>
+<ul>
+<li><a href="#テーブルとカラムの設計" id="toc-テーブルとカラムの設計"><span
+class="toc-section-number">4.1</span> テーブルとカラムの設計</a></li>
+<li><a href="#繰り返しカラムは別テーブルで管理" id="toc-繰り返しカラムは別テーブルで管理"><span
+class="toc-section-number">4.2</span> 繰り返しカラムは別テーブルで管理</a></li>
+<li><a href="#主キー-primary-key" id="toc-主キー-primary-key"><span
+class="toc-section-number">4.3</span> 主キー (Primary Key)</a></li>
+<li><a href="#複合主キー" id="toc-複合主キー"><span class="toc-section-number">4.4</span>
+複合主キー</a></li>
+<li><a href="#論理er図における主キーの表記" id="toc-論理er図における主キーの表記"><span
+class="toc-section-number">4.5</span> 論理ER図における主キーの表記</a></li>
+<li><a href="#外部キーを使用した1対多のリレーションの表現"
+id="toc-外部キーを使用した1対多のリレーションの表現"><span class="toc-section-number">4.6</span>
+外部キーを使用した「1対多」のリレーションの表現</a></li>
+<li><a href="#多対多のリレーションの分割-中間テーブル化"
+id="toc-多対多のリレーションの分割-中間テーブル化"><span class="toc-section-number">4.7</span>
+多対多のリレーションの分割 (中間テーブル化)</a></li>
+</ul></li>
+<li><a href="#課題1" id="toc-課題1"><span class="toc-section-number">5</span> 課題1</a>
+<ul>
+<li><a href="#提出ファイル作成に関する注意事項" id="toc-提出ファイル作成に関する注意事項"><span
+class="toc-section-number">5.1</span> 提出ファイル作成に関する注意事項</a></li>
+<li><a href="#課題内容" id="toc-課題内容"><span class="toc-section-number">5.2</span>
+課題内容</a></li>
+</ul></li>
+<li><a href="#授業時間外学習の指示-宿題" id="toc-授業時間外学習の指示-宿題"><span
+class="toc-section-number">6</span> 授業時間外学習の指示 (宿題)</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -73,7 +120,8 @@ class="toc-section-number">3</span> データベースの設計</a>
 
     <main class="markdown-body">
       <!-- ---------------------------------------- -->
-      <h1 data-number="1" id="連絡"><span class="header-section-number">1</span> 連絡</h1>
+      <h1 data-number="1" id="連絡と準備"><span class="header-section-number">1</span>
+      連絡と準備</h1>
       <ul>
       <li>小テスト❺ を実施します。
       <ul>
@@ -82,14 +130,8 @@ class="toc-section-number">3</span> データベースの設計</a>
       <li>遅刻・欠席等により追試験を希望する場合は<a
       href="lecture01.html#成績評価法と履修上の注意">第01回講義で案内した手続き</a>をしてください。</li>
       </ul></li>
-      <li>今回の講義内容は、<a
-      href="lecture04.html">前回講義</a>の内容を<strong>ひととおり理解していること</strong>を前提とします。まだ、前回の内容
-      (授業時間外学習のセクションを含む)
-      を終えていない人は、まずは、そちらから取り組んでください。</li>
       </ul>
-      <h1 data-number="2" id="準備と前回の復習"><span class="header-section-number">2</span>
-      準備と前回の復習</h1>
-      <h2 data-number="2.1" id="ハンズオン学習の準備"><span class="header-section-number">2.1</span>
+      <h2 data-number="1.1" id="ハンズオン学習の準備"><span class="header-section-number">1.1</span>
       ハンズオン学習の準備</h2>
       <p>次の手順でSQL演習環境の立ち上げと、教材の更新を取得してください。</p>
       <ul>
@@ -97,196 +139,1511 @@ class="toc-section-number">3</span> データベースの設計</a>
       第04回講義</li>
       <li><a href="lecture04.html#教材の更新の取得">教材の更新の取得</a>@ 第04回講義</li>
       </ul>
-      <h1 data-number="3" id="データベースの設計"><span class="header-section-number">3</span>
+      <h1 data-number="2" id="データベースの設計"><span class="header-section-number">2</span>
       データベースの設計</h1>
+      <p>ここまでの講義では、既存のテーブルを対象とした <strong>CRUD操作</strong>
+      (＝<code>INSERT</code>、<code>SELECT</code>、<code>UPDATE</code>、<code>DELETE</code>)
+      に関わる SQL について学んできました。これらは、SQL なかでも
+      <strong>DML</strong>（＝<strong>Data Manipulation
+      Language</strong>）に分類されるもので、いわば <span class="masked">データ (レコード)
+      をどう操作するか</span> という視点での学びでした。</p>
+      <p>ここからは、次の段階として <strong>データベース設計</strong>、つまり <span
+      class="masked">データ (レコード) を格納するテーブルの設計に関する考え方</span>
+      を学んでいきます。具体的には「<strong>システムの対象世界をどのようにモデル化し、どのようなテーブル構造として定義するか？</strong>」について学んでいきます。なお、このデータベース設計に関して扱う
+      SQL は、<strong>DDL</strong> (＝<strong>Data Definition Language</strong>)
+      という範疇のものになります。</p>
+      <ul>
+      <li>RDBの特徴である<strong>テーブルの結合</strong> (<code>JOIN</code>)
+      については、データベース設計のあと (後期中間試験以降) に学んでいきます。</li>
+      <li>2年次の「情報2」でも触れたように SQL の命令は、その役割によって<strong>DML
+      (データ操作)</strong>、<strong>DDL (構造定義)</strong>、<span class="masked">DCL
+      (権限制御)</span> の3つに分けられます。
+      <ul>
+      <li><strong>DML</strong>: データの追加・検索・更新・削除
+      (<code>INSERT</code>、<code>SELECT</code>、<code>UPDATE</code>、<code>DELETE</code> など)</li>
+      <li><strong>DDL</strong>: テーブルやデータベースの作成・変更
+      (<code>CREATE</code>、<code>ALTER</code>、<code>DROP</code> など)</li>
+      <li><strong>DCL</strong>: アクセス権限の設定
+      (<code>GRANT</code>、<code>REVOKE</code>、<code>TRUNCATE</code> など)</li>
+      </ul></li>
+      </ul>
+      <h3 data-number="2.0.1" id="定着確認"><span class="header-section-number">2.0.1</span>
+      定着確認</h3>
+      <ul>
+      <li>SQLは大きく3つのカテゴリに分類される。3つのカテゴリを、それぞれ大文字のアルファベット3文字で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">DML、DDL、DCL (順不同)</span></li>
+      </ul></li>
+      <li>次の SQL 命令を、DML、DDL、DCLのいずれかに分類せよ。
+      <ul>
+      <li><code>SELECT</code> : <span class="masked">DML</span></li>
+      <li><code>GRANT</code> : <span class="masked">DCL</span></li>
+      <li><code>INSERT</code> : <span class="masked">DML</span></li>
+      <li><code>ALTER</code> : <span class="masked">DDL</span></li>
+      <li><code>DROP</code> : <span class="masked">DDL</span></li>
+      <li><code>DELETE</code> : <span class="masked">DML</span></li>
+      </ul></li>
+      <li>SQL に関する文脈において、DDL とは何の略語か。英語で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">Data Definition Language</span></li>
+      </ul></li>
+      <li>SQL に関する文脈において、DML とは何の略語か。英語で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">Data Manipulation Language</span></li>
+      </ul></li>
+      <li>SQL に関する文脈において、DCL とは何の略語か。英語で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">Data Control Language</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="2.1" id="データベース設計の三層構造-概念設計論理設計物理設計"><span
+      class="header-section-number">2.1</span> データベース設計の三層構造
+      (概念設計・論理設計・物理設計)</h2>
       <p>データベース設計は、①<strong>概念設計</strong> (Conceptual
       Design)、②<strong>論理設計</strong> (Logical Design)、③<strong>物理設計</strong> (Physical
-      Design) の3段階に分けて進めることが一般的な手順 (教科書的・設計理論的な作法)
-      とされています。</p>
-      <p>以下、専門用語が多数でてきますが、随時、解説していきます。気になる用語は生成AIを使って概要を理解してください。</p>
-      <h2 data-number="3.1" id="概念設計"><span class="header-section-number">3.1</span>
+      Design)
+      と、抽象度の高いモデルから具体的な実装に向けて段階的に詳細化しながら進めることが、教科書的・設計理論的な作法とされています。</p>
+      <ul>
+      <li>実業務では、<strong>これらのプロセスを厳密に区分して進めることは少なく</strong>、いくつかのプロセスをまとめて進めたり、往復・試行錯誤を重ねながら設計を整えていくことが一般的です。</li>
+      </ul>
+      <p>以下、多数の専門用語が登場しますが、<strong>まずは細部にこだわらず、全体像を理解することを優先</strong>してください。その後、気になる用語について、ウェブや生成AIを利用して概要を掴んでください。</p>
+      <h3 data-number="2.1.1" id="定着確認-1"><span class="header-section-number">2.1.1</span>
+      定着確認</h3>
+      <ul>
+      <li>データベース設計の一般的なプロセスは「概念設計」「論理設計」「物理設計」の3段階で構成される。これらは、どの順番で行うことが適切とされているか答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">概念設計👉論理設計👉物理設計</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="2.2" id="概念設計"><span class="header-section-number">2.2</span>
       概念設計</h2>
-      <p>まず、<strong>概念設計</strong>
-      は、現実世界の情報構造を理解・把握し、関係者間で共有することを目的とするプロセスとなります。このプロセスでは「リレーショナル」や「ドキュメント指向」といった
-      <span class="masked">特定のデータモデルに依存せず</span>
-      情報構造そのものをモデルします。主なアウトプットとして、<strong>ER図</strong> (Entity
-      Relationship Diagram) や <strong>UMLクラス図</strong> (UML Class Diagram) が挙げられます。</p>
-      <p>次に、概念設計の成果やシステム要件を踏まえて、データベースモデルを選定します。ここでの「モデルの選定」とは、PostgreSQL
-      や MySQL
-      のような具体的な実装ではなく、「リレーショナルモデル」や「ドキュメント指向モデル」「キーバリューストアモデル」といった
-      <strong>アーキテクチャの選定</strong> を意味します。大規模システムでは「この部分は
-      RDB」「この部分は KV
-      ストア」といった複数モデルの併用（＝<strong>ポリグロット永続化</strong>）を行うこともあります。</p>
+      <p>データベースにおける <strong>概念設計</strong> とは、現実世界の情報構造を理解・把握し <span
+      class="masked">データベースで管理すべき情報を関係者間で共有すること</span>
+      を目的とするプロセスとなります。このプロセスでは「リレーショナルモデル」や「ドキュメント指向モデル」といった<strong>特定のデータモデルに依存せず
+      (＝データモデルを意識せずに)
+      情報構造そのものをモデル化</strong>します。こうして得られた成果物は <span
+      class="masked">概念データモデル</span> と総称され、具体的には <strong>概念ER図</strong>
+      (Conceptual Entity Relationship Diagram)、拡張ER図 (Enhanced/Extended ERD)、JSON
+      スキーマ、UMLクラス図 (UML Class Diagram)、ツリー構造図などがこれに含まれます。</p>
+      <ul>
+      <li>理論上は、概念設計はデータベースの種類を意識せずに行うことが理想とされています。ただし、<strong>実務においては、システムで利用するデータベースを
+      (ある程度は) 見据えて概念設計が行われます</strong>。RDB
+      であれば「概念ER図」を、JSONドキュメントデータベースであれば「JSONスキーマ」を作成する形で概念設計を進めることが一般的となります。</li>
+      </ul>
+      <p>概念データモデルの代表格である <span class="masked">概念ER図 (Conceptual Entity
+      Relationship Diagram)</span>
+      の例を以下に示します。図の意味や表記の読み方については、あとでセクションで解説します。</p>
+      <figure>
+      <img src="figs/06/CER-01-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>概念設計を終えたら、そのアウトプットやシステム要件を踏まえて、具体的な <span
+      class="masked">データベースモデル</span>
+      を選定していきます。ここでの「データベースモデルの選定」とは<a
+      href="https://www.postgresql.org/">PostgreSQL</a>や<a
+      href="https://www.mysql.com/jp/">MySQL</a>、<a
+      href="https://www.mongodb.com/ja-jp">MongoDB</a>といった具体的なソフトウェアの選定ではなく、「リレーショナルモデル」や「ドキュメント指向モデル」「キーバリューストアモデル」といった
+      <strong>アーキテクチャの選定</strong> を意味します。</p>
+      <p>なお、大規模なシステムにおいては「<strong>このデータは RDB で管理し、このデータは KVストア
+      で管理し…</strong>」のように複数モデルを併用（＝ポリグロット永続化）することもあります。</p>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
-      <p>ソフトウェア開発の文脈で、ポリグロット永続化とは何ですか。</p>
+      <p>ソフトウェア開発の文脈において「ポリグロット永続化」とは何ですか。</p>
       </blockquote>
       <blockquote>
-
+      <p>データベースの概念設計に関する文脈で「概念ER図」とはなんですか。</p>
       </blockquote>
-      <h2 data-number="3.2" id="論理設計"><span class="header-section-number">3.2</span>
+      <blockquote>
+      <p>データベースの概念設計に関する文脈で「UMLクラス図」とはなんですか。</p>
+      </blockquote>
+      <h3 data-number="2.2.1" id="定着確認-2"><span class="header-section-number">2.2.1</span>
+      定着確認</h3>
+      <ul>
+      <li>データベース設計に関する文脈で、ER図の「ER」とは何の略か答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">Entity Relationship</span></li>
+      </ul></li>
+      <li>データベース設計に関する文脈で、概念設計のアウトプット (総称) を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">概念データモデル</span></li>
+      </ul></li>
+      <li>データベースの概念設計は、前提としてシステムで使用するデータベースモデル
+      (可能であれば具体的な製品や実装まで)
+      を決定しておく必要がある。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="2.3" id="論理設計"><span class="header-section-number">2.3</span>
       論理設計</h2>
-      <p><strong>論理設計</strong>では、概念設計で得られたモデルをもとに、選定したデータベースモデルへと落とし込んでいきます。リレーショナルモデルを採用する場合は、テーブルやカラムの定義、主キー・外部キーの設定など、<strong>スキーマ</strong>
-      (<strong>構造</strong>)
-      を具体化する作業を行ないます。このとき、冗長性の排除やデータ整合性の維持 を目的として、正規化
-      (Normalization)
-      の考え方が重要になります。第1正規形から第3正規形、場合によってはボイス・コッド正規形 (BCNF)
-      までを検討し、重複や不整合を防ぐスキーマ構成 に整理していきます。</p>
-      <h2 data-number="3.3" id="物理設計"><span class="header-section-number">3.3</span>
+      <p><strong>論理設計</strong>では、概念設計で整理したモデルを <span
+      class="masked">実際に利用するデータベースモデルに適合する構造</span>
+      <strong>に落とし込むプロセス</strong> となります。</p>
+      <p>データベースとして、リレーショナルモデルを採用する場合には、テーブルやカラムの定義、主キー・外部キーの設定といった
+      <strong>スキーマ設計</strong> を行ない <span class="masked">論理ER図</span>
+      を作成するプロセスとなります。この際、冗長性を排除しデータの整合性を保つために
+      <strong><em>正規化</em></strong> (<strong>Normalization</strong>)
+      と呼ばれる考え方が重要となってきます。テーブル (＝カラム構成)
+      について、<strong>第1正規形</strong> (<strong>1NF</strong>: 1st Normal Form) から
+      <strong>第3正規形</strong> (<strong>3NF</strong>: 3rd Normal
+      Form)、場合によってはボイス・コッド正規形 (BCNF)
+      まで整理・検討し、重複や不整合を防ぐようなスキーマを構築していきます。</p>
+      <ul>
+      <li>テーブルの「<strong>正規化</strong>」については、次回の講義で詳しく解説していきます。</li>
+      </ul>
+      <p>(リレーショナルモデルを前提とした場合の)
+      論理設計のアウトプットとしては、<strong>論理ER図</strong> (Logical Entity Relationship
+      Diagram) や <strong>ざっくりとした CREATE 文</strong> (SQL) などがあります。</p>
+      <ul>
+      <li>ここでの「ざっくりとした CREATE
+      文」とは、インデックスや制約といった細部は省き、<strong>テーブル名・カラム名・データ型といった骨格</strong>を実装依存しない標準SQLで記述したものと考えてください。</li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>データベースに関する文脈で「実装依存しない標準SQL」とはどういうことですか。具体的な例を含めて解説してください。ちなみに自分は
+      PostgreSQL で DB の勉強をしています。</p>
+      </blockquote>
+      <blockquote>
+      <p>概念ER図と論理ER図の違い (目的や情報粒度の違い) について教えてください。</p>
+      </blockquote>
+      <blockquote>
+      <p>データベースに関する文脈で、単に「ER図」といった場合、概念ER図と論理ER図のどちらを指しますか。</p>
+      </blockquote>
+      <h2 data-number="2.4" id="物理設計"><span class="header-section-number">2.4</span>
       物理設計</h2>
-      <p><strong>論理設計</strong> では、PostgreSQL や MySQL
-      などの具体的なソフトウェアおよび、その運用環境 (ハードウェア構成)
-      を意識した設計を行ないます。具体的には、インデックス定義
-      (<code>CREATE INDEX</code>)、外部キー制約や検査制約
-      (<code>FOREIGN KEY</code>、<code>CHECK</code>）、ストレージ構成・冗長化・バックアップ方針・負荷分散設計
+      <p><strong>物理設計</strong> では、PostgreSQL や MySQL などの具体的な実装 (ソフトウェア)
+      と、その運用環境 (ハードウェア構成)
+      を意識した設計を行ないます。この段階では、テーブルや制約、ビューなどの定義に関わる
+      <strong>DDL</strong> (Data Definition Language)
+      に加え、ユーザのアクセス権限やロール管理などを扱う <strong>DCL</strong> (Data Control
+      Language) も検討します。</p>
+      <p>具体的には、インデックス定義 (<code>CREATE INDEX</code>)、外部キー制約や検査制約
+      (<code>FOREIGN KEY</code>、<code>CHECK</code>)、ストレージ構成・冗長化・バックアップ方針・負荷分散設計
       など、性能・可用性・保守性を意識したチューニングを含みます。</p>
-      <p>三層モデル（概念設計 → 論理設計 → 物理設計）実務ではほとんどの場合、ER
-      図を描いた段階で論理・物理が半ば融合した設計プロセスになっています。</p>
-      <p>概念設計、現実世界の情報構造を抽象化（
-      論理設計、仮にデータベースモデルとして「リレーショナル」を選択したとして、PostgreSQL や MySQL
-      なの具体的な RDBMS に非依存のスキーマ設計。リレーショナルモデルを意識。E
-      物理設計、具体的なRDBMSや、ハードウェア構成を意識してのトレージ最適化・インデックス・パーティションなど。</p>
-      <p><strong>概念設計</strong> (Conceptual Design)
-      は、現実世界の情報構造のモデル化、その目的は理解や把握・共有が目的であり、教科書的・設計理論的にはデータベースモデルに非依存の設計となります。具体的には「リレーショナル」「オブジェクト指向」「ドキュメント指向」「グラフ」など、どのようなデータベースタイプでも成り立つ抽象的な構造を用いた設計となります。</p>
-      <p>概念モデルを RDB の構造に落とし込む</p>
-      <p>「論理設計でリレーショナルモデルを意識し、物理設計でDB製品を意識する」 しかし実務的には：
-      「ER図を書いた時点で RDB を想定しており、CREATE文を書き始めた時点で PostgreSQL
-      を意識している」</p>
-      <p><strong>論理設計</strong></p>
-      <p>具体的には、 - どんな<strong>実体（エンティティ）</strong>が存在するか -
-      それらの間にどんな<strong>関係（リレーションシップ）</strong>があるか -
-      どんな<strong>属性（アトリビュート）</strong>を持つか -
-      現実世界の制約（1対多、多対多、必須／任意など）</p>
-      <p>現場で「概念設計図を描け」と言われると、多くの人は ER 図（Entity–Relationship Diagram）
-      を描きます。
-      この時点で、すでに「リレーショナル・データベース的な世界観」を前提にしています。現在広く使われている「ER
-      図」は、実質的にはリレーショナルデータベース（RDB）を前提とした記法・発想に強く結びついています。</p>
-      <p>ER図を概念設計と論理設計の中間くらいの扱い</p>
-      <p>仮に、ドキュメント指向データベースを</p>
-      <p>実際の世界</p>
-      <p>ER 図を描く段階、概念設計＋論理設計が混在
-      「多対多は中間テーブルだな」「主キーはIDで良いな」「created_at は TIMESTAMP で」など、すでに
-      RDB 前提で考えている</p>
-      <p>CREATE文を書く段階、論理設計＋物理設計が混在 PostgreSQLの型（SERIAL, BOOLEAN, JSONB
-      など）を選びながら実験。CHECK制約や ON DELETE CASCADEも同時に検討。だって製品依存だもん</p>
-      <p>性能検証・チューニング段階、純粋に物理設計 実データを流して EXPLAIN ANALYZE、INDEX、VACUUM
-      設定を確認。概念的な思考はほぼ消える</p>
-      <h2 data-number="3.4" id="正規化"><span class="header-section-number">3.4</span> 正規化</h2>
-      <p>以下の表は <strong>第1正規形（1NF）を満たしていません</strong>。</p>
-      <table>
+      <h1 data-number="3" id="データベースの概念設計"><span class="header-section-number">3</span>
+      データベースの概念設計</h1>
+      <p>データベースの <strong>概念設計</strong> (Conceptual Design) では、対象世界 (現実世界)
+      の情報構造を抽象化したモデルを作成します。具体的には、ヒアリングや資料分析などを通じて業務要件を把握し、データベースで管理すべき情報の全体像を概念データモデル図として描きます。</p>
+      <p>教科書的・設計論的には、<strong>概念設計はデータベースモデルに依存しない設計</strong>とされていますが、ここでは、リレーショナルデータベースを前提として、システムが対象とする世界の情報構造を
+      <strong>概念ER図</strong> として表現する方法について学んでいきます。</p>
+      <h2 data-number="3.1" id="概念er図とは"><span class="header-section-number">3.1</span>
+      概念ER図とは</h2>
+      <p>概念ER図 (Conceptual Entity Relationship Diagram) とは、対象世界の情報構造を
+      <strong><em>エンティティ</em></strong> (<strong>Entity</strong>、実体)
+      と、<strong><em>リレーション</em></strong> (<strong>Relationship</strong>、関連)
+      という2種の要素でモデル化した図になります。</p>
+      <p>例えば、ウェブの「ブログサービス」を対象としたとき、次のような概念ER図を作成することができます。</p>
+      <figure>
+      <img src="figs/06/CER-01-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ここで、図内の四角形 (User や Article など)
+      が「<strong>エンティティ</strong>」を表し、青色の線 (has や creates など)
+      が「<strong>リレーション</strong>」を表します。特にリレーションの表現法 (表記法ルール)
+      の違いにより、同じER図でも <strong>IE記法</strong> (アイイー記法) や
+      <strong>IDEF1X記法</strong> (アイデフワンエックス記法)、<strong>Chen記法</strong>
+      (チェン記法)など様々な表現が存在しています。</p>
+      <ul>
+      <li>実際に <code>概念ER図</code> で検索すると、様々な記法が存在することが確認できます。
+      <ul>
+      <li><a
+      href="https://www.google.com/search?q=概念ER図&amp;tbm=isch">「概念ER図」を画像検索した結果</a>@
+      Google検索 (画像)</li>
+      </ul></li>
+      </ul>
+      <p>実業務では<strong>IE記法</strong> (特に <strong>Crow’s Foot記法</strong>)
+      がよく使用され、基本情報技術者試験やデータベーススペシャリスト試験などの<a
+      href="https://www.ipa.go.jp/">IPA</a>の試験では、IDEF1X記法に準拠した表記が使用されています。</p>
+      <p><strong><em>参考</em></strong> 📖 教科書「達人に学ぶDB設計 徹底指南書 (第2版)」の
+      pp.151-156「<u>4-3 ER図の描き方 (IE記法・IDEFX1記法)</u>」</p>
+      <div class="note type-tips">
+      <p><strong>IPA の各種試験が CBT 方式に変更</strong></p>
+      <p>2026年度から応用情報技術者試験も、<strong>ペーパーテスト方式</strong> から
+      <strong>CBT方式</strong> に変更されます (<a
+      href="https://www.ipa.go.jp/shiken/2026/ap_koudo_sc-cbt.html">詳細</a>
+      )。なお、既に「ITパスポート」と「基本情報技術者」は CBT方式 で実施されています。</p>
+      </div>
+      <p>以下、概念ER図を構成する「エンティティ」と「リレーション」という要素について解説していきます。</p>
+      <h3 data-number="3.1.1" id="定着確認-3"><span class="header-section-number">3.1.1</span>
+      定着確認</h3>
+      <ul>
+      <li>次のような概念ER図を作成した。図のなかで「Article」や「Comment」のように四角形で示されている要素を何というか。英語で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">Entity</span></li>
+      </ul></li>
+      <li>次のような概念ER図を作成した。図のなかで四角形同士を接続している要素を何というか。英語で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked"> Relationship</span></li>
+      </ul></li>
+      </ul>
+      <figure>
+      <img src="figs/06/CER-01-2.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="3.2" id="エンティティとは"><span class="header-section-number">3.2</span>
+      エンティティとは</h2>
+      <p>RDB において「<strong>テーブル</strong>」に相当するものが <span class="masked">エンティティ
+      (Entity)</span>
+      となります。日本語では「実体」と訳されますが、<strong>必ずしも物理的な存在を意味するわけではなく</strong>、<strong>イベント
+      (出来事)</strong> や <strong>抽象的な概念</strong> もエンティティとしてモデル化されます。</p>
+      <p>例えば、ブログであれば、Article (記事)、Comment (コメント)、Category (カテゴリ)、User
+      (ユーザ)
+      といったものが「エンティティ」としてモデル化されます。概念設計の段階では細部までは詰めませんが、エンティティは、一般に複数の
+      <strong>アトリビュート</strong> (<strong>属性</strong>) を持ちます。アトリビュートは、RDB で
+      <span class="masked">カラム</span> に相当するものです。例えば、<strong>Article</strong>
+      エンティティは、title (タイトル)、body (本文)、created_at (作成日)
+      といったアトリビュートを持つと考えられます。</p>
+      <ul>
+      <li>オブジェクト指向の考え方で言えば、オブジェクトが <span
+      class="masked">エンティティ</span>、プロパティが <span class="masked">アトリビュート</span>
+      にあたります。</li>
+      </ul>
+      <div class="note type-tips">
+      <p><strong>エンティティとして扱うか、アトリビュートとして扱うかの判断</strong></p>
+      <p>ある要素をエンティティとアトリビュート (属性) のどちらで扱うかは
+      <strong>設計目的や運用文脈に左右されるもので、一般的な指針はあるものの、絶対的な正解は存在しません</strong>。とはいえ、この選択を誤ると、ビジネスロジックやデータ処理の実装に支障をきたし、大きな技術的負債となります
+      (あとから修正するときのコストは非常に大きいです)。</p>
+      <ul>
+      <li>データベース設計について、AIの提案を十分に検証せずに採用すると、設計全体に長期的な悪影響を及ぼす技術的負債が生まれる可能性があります。</li>
+      </ul>
+      <p>エンティティにするかアトリビュートにするかの判断は、システム全体の設計意図を踏まえ、要件の本質に基づいて決定することが求められます。</p>
+      <p>たとえば「住所」は単なる文字列のアトリビュートとして扱えますが、顧客・店舗・倉庫など複数のエンティティから参照されるなら、エンティティとして独立させた方が一貫性維持の観点で有利になってきます。また「所持金」もアトリビュートにできますが、履歴を管理したい場合はエンティティ化することが正解となります。</p>
+      <ul>
+      <li>ただし、過度にエンティティに分割すると理論的には美しくても実装が複雑となり、<code>SELECT</code>
+      の記述が肥大化して (<code>JOIN</code> による結合の嵐が生じて)
+      実行パフォーマンスが低下します。設計時には「どの粒度で分けるか」を意識した判断が求められます。</li>
+      </ul>
+      </div>
+      <div class="note type-senior">
+      <p><strong>概念設計でアトリビュート (属性) を表現したい場合は？</strong></p>
+      <p>エンティティに持たせる <strong>アトリビュート (属性)</strong> を詳細に検討・設計するのは
+      <strong>論理設計段階の作業</strong>
+      となります。そのため、概念設計のアウトプットである「概念ER図」には、<strong>通常、アトリビュートを記載しません</strong>。ただし、情報構造の理解を補うために
+      <strong>代表的なアトリビュート</strong> を <code>Character (name, level, job)</code>
+      のように括弧書きで添えることもあります。</p>
+      <figure>
+      <img src="figs/06/CER-01-8.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>または、概念ER図とは別に、以下のような簡易ドキュメントを作成することもあります。</p>
+      <pre><code>- Character
+  - name
+  - level
+  - job
+
+- Guild
+  - name
+  - rank</code></pre>
+      <p>ただし、概念設計の目的が、全体的な情報構造の共有であるため、<strong>代表的なアトリビュートに限って記載すること</strong>
+      が推奨されます。</p>
+      <ul>
+      <li>アトリビュートを詳細に検討しようとすると、結局のところデータベースモデル
+      (リレーショナルモデルなのか、ドキュメントモデルなのか)
+      を意識せざるを得なくなります。しかし、<strong>概念設計はモデル非依存を原則</strong>としているため、その段階で詳細なアトリビュートの検討や設計をすることは本質的に矛盾したものとなります。</li>
+      </ul>
+      </div>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>データベースの概念設計において、ある要素を「エンティティ」すべきか、「アトリビュート」にすべきか、一般的な指針や考え方について様々な観点から解説してください。</p>
+      </blockquote>
+      <h3 data-number="3.2.1" id="定着確認-4"><span class="header-section-number">3.2.1</span>
+      定着確認</h3>
+      <ul>
+      <li>概念ER図のエンティティとは、RDB における【 】に相当する要素である。【
+      】にあてはまる適切な語を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">テーブル</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="3.3" id="リレーションとは-多重度のみの表現"><span
+      class="header-section-number">3.3</span> リレーションとは (多重度のみの表現)</h2>
+      <p>ER図において <strong>リレーション</strong> とは「<strong>エンティティ同士の関連 (結びつき)
+      を表現するもの</strong>」となります。例えば、ブログシステムにおいて…</p>
+      <ul>
+      <li>1つの Article (記事) は <span class="masked">複数の Comment (コメント)
+      を持つことができる</span>。</li>
+      <li>1つの Comment (コメント) は <span class="masked">ただ1つの Article (記事)
+      に属する</span>。</li>
+      </ul>
+      <p>…のようなエンティティ間の関連があるとき、ER図では次のような線 と <strong>Crow’s
+      Foot</strong> (カラス足<i class="fa-solid fa-crow"></i>)
+      という先端記号でリレーションを表現します。</p>
+      <figure>
+      <img src="figs/06/CER-01-3.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>Crow’s Foot は、<strong><em>カーディナリティ</em></strong> (<strong>多重度</strong>)
+      と呼ばれる <strong>エンティティ同士の</strong> <span class="masked">数量的な範囲や制約</span>
+      を表現したものになります。</p>
+      <p>例えば、下図の <font color="deeppink">❶</font> のようなカラスの足マーク (<code>多</code>
+      の記号表現) は「1つの Article は、<strong>複数の Commnet
+      を持つことができる</strong>」という数量的性質を表しています。</p>
+      <figure>
+      <img src="figs/06/CER-01-4.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>一方、<font color="deeppink">❷</font> のような縦棒 (数字の <code>1</code> の記号表現) は、
+      「1つの Commnet は、<strong>1件の Article
+      に属する</strong>」という数量的性質を表しています。</p>
+      <p>このようなエンティティ同士の関係を、文字では「Article と Commnet に <code>1対多</code> や
+      <code>1:多</code>、<code>1:N</code> の関係がある」のように表現します。</p>
+      <hr />
+      <p>別な例で考えてみます。例えば、ER図で Student (学生) と Subject (科目)
+      というエンティティが、以下の図ように表現されている (＝リレーションの <strong>両端</strong> が
+      <code>多</code> となっている) とします。</p>
+      <figure>
+      <img src="figs/06/CER-01-5.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>このとき、このER図は次のことを表現しています。</p>
+      <ul>
+      <li>1人の Student は、複数の Subject を受講できる (A Student <strong>takes</strong> multiple
+      Subjects.)。</li>
+      <li>1つの Subject は、複数の Student が受講している (A Subject is taken by multiple
+      Students.)。</li>
+      </ul>
+      <div class="note type-tips">
+      <p><strong>ER図の関連名 (Relationship Name) について</strong></p>
+      <p>IE記法のER図では、下図の <code>has</code>
+      のように、リレーションを表す線上に<strong>関連名</strong> (<strong>Relationship Name</strong>)
+      を付けることがあります。これは <strong>動詞句</strong> (<strong>Verb Phrase</strong>)
+      とも呼ばれ、関係性を自然言語的に表現するためにつけられます。補助表現であるため、<span
+      class="masked">関係が明らかな場合には省略</span> されることもあります。</p>
+      <figure>
+      <img src="figs/06/CER-01-3.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>なお、関連名/動詞句は「どちらのエンティティを基準にするか」によって表現が変わります。上記の例は、<strong>Commnet</strong>
+      を基準に関連名/動詞句を記述すれば <code>belongs to</code> という表現になります。</p>
+      <figure>
+      <img src="figs/06/CER-01-7.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>どちらを基準 (主語)
+      に表現するかについて明確なルールはありませんが、一般には「より中心的なエンティティ」または「動作・行為を起こす側」を基準
+      (主語) にすることが多いです。</p>
+      <p>ER図でよく使用される関連名 (動詞句) としては、次のようなものがあります。</p>
+      <ul>
+      <li>has / belongs to</li>
+      <li>contains / is contained in</li>
+      <li>creates / is created by</li>
+      <li>manages / is managed by</li>
+      </ul>
+      </div>
+      <h3 data-number="3.3.1" id="定着確認-5"><span class="header-section-number">3.3.1</span>
+      定着確認</h3>
+      <ul>
+      <li>次の ER図におけるエンティティ A と B の関係を適切に表現しているものをすべて答えよ。
+      <ul>
+      <li>➊ 1件の A は、複数件の B に関連する</li>
+      <li>❷ 1件の B は、複数件の A に関連する</li>
+      <li>❸ 1件の A は、1件の B に関連する</li>
+      <li>❹ 1件の B は、1件の A に関連する</li>
+      <li>❺ A と B は <code>1:多</code> の関係にある</li>
+      <li>❻ A と B は <code>多:多</code> の関係にある</li>
+      <li>❼ A と B は <code>多:1</code> の関係にある</li>
+      <li><strong>答え</strong>: <span class="masked">➊、❹、❺</span></li>
+      </ul></li>
+      </ul>
+      <figure>
+      <img src="figs/06/CER-01-6.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <ul>
+      <li>エンティティ A、B、C、D、E がある。次の要件を満たすように概念ER図を作成せよ。
+      <ul>
+      <li>1件の E は、1件の D に関連する</li>
+      <li>1件の D は、複数件の E に関連する</li>
+      <li>1件の D は、複数件の C に関連する</li>
+      <li>1件の C は、複数件の D に関連する</li>
+      <li>1件の A は、1件の E に関連する</li>
+      <li>1件の E は、1件の A に関連する</li>
+      <li><strong>答え</strong>: <a href="figs/06/ex-01.png">概念ER図</a></li>
+      </ul></li>
+      <li>次の要件を満たすように概念ER図 (IE記法・Crow’s Foot記法で、関係名も記述)
+      を作成せよ。なお、オプショナリティは考慮せず、カーディナリティのみを考慮するものとする。
+      <ul>
+      <li>学校の授業管理システムを考える。</li>
+      <li>エンティティは Student (学生)、Teacher (教員)、Subject (授業)、Room (教室) とする。</li>
+      <li>1人の Teacher は、複数の Subject を担当する。</li>
+      <li>1つの Subject は、複数の Student に受講される。</li>
+      <li>1つの Subject は、1人の Teacher が担当する。</li>
+      <li>1人の Student は、複数の Subject を受講する。</li>
+      <li>1つの Subject は、1つの Room を利用する。</li>
+      <li>1つの Room は、複数の Subject で利用される。</li>
+      <li><strong>答え (作成例)</strong> : <a href="figs/06/ex-02.png">概念ER図</a></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="3.4" id="リレーションとは-多重度と任意性の表現"><span
+      class="header-section-number">3.4</span> リレーションとは (多重度と任意性の表現)</h2>
+      <p>前のセクションでは、<strong>カーディナリティ</strong> (<strong>多重度</strong>)
+      のみに着目してリレーションを表現しました。しかし実際の ER図では、そのリレーションが <span
+      class="masked">必ず存在するのか、それとも存在しない場合もあるのか</span> を示す
+      <strong><em>オプショナリティ</em></strong> (<strong>任意性</strong>)
+      についても明示することが推奨されます。</p>
+      <p>オプショナリティは、以下のように「<strong>必須</strong>」を <code>1</code>
+      を模した記号で表現し、「<strong>任意</strong> (存在しないこともある)」を <code>0</code>
+      に模した記号を使って表現します。</p>
+      <figure>
+      <img src="figs/06/CER-02-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>上記の例では、右側の Comment エンティティに接する記号が、<code>多</code>
+      を示すカーディナリティ記号と、<code>0</code> <strong>(＝任意)
+      を示すオプショナリティ記号</strong> の組み合わせになっています。これは「1つの Article
+      は、<strong>0 個以上の複数の Comment を持つことができる</strong> (＝<span
+      class="masked">Article は Comment
+      を持たない場合もある</span>)」ということを表現しています。</p>
+      <p>一方で、Article エンティティに接する記号は、<code>1</code>
+      を示すカーディナリティ記号と、<code>1</code>
+      を示すオプショナリティ記号の組み合わせであり、「1つの Commente は、<strong>必ず1つの Article
+      に属さなければならない</strong> (＝<span class="masked">Article に属さない Comment
+      は存在し得ない</span>)」ということを表現しています。</p>
+      <p>少し視点を変えれば、オプショナリティはエンティティ同士の数量的な範囲の
+      <strong>下限</strong> (<code>0</code> または <code>1</code>)
+      を表し、カーディナリティは数量的範囲の <strong>上限</strong> (<code>1</code> または
+      <code>多</code>) を表しているとも言えます。データベース設計では <code>1..*</code> や
+      <code>0..1</code> のように範囲表現することがありますが、この下限が
+      <strong>オプショナリティ</strong>、上限が <strong>カーディナリティ</strong> に対応します。</p>
+      <p>カーディナリティとオプショナリティを組み合わせてリレーションを表現するとき、Crow’s
+      Foot記法では以下の<strong>4パターン</strong>が存在します。</p>
+      <figure>
+      <img src="figs/06/CER-02-2.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>以降、(試験や小テストを含めて)
+      特に指示の無い限り、ER図はカーディナリティとオプショナリティの両方を考慮した表現を利用するようにしてください。</p>
+      <div class="note type-tips">
+      <p><strong>リレーションの具体的な上限数は考慮しないのか?</strong></p>
+      <p>概念設計や論理設計では、リレーションの数量関係を
+      <code>0</code>、<code>1</code>、<code>多</code> の3区分で扱います (<code>多</code>
+      については、<code>*</code> や <code>N</code> のように表記することもあります)。</p>
+      <p>これは、概念設計/論理設計が「<strong>データ構造を定義するプロセス</strong>」であり、「3つまで」や「5件まで」といった
+      <strong>具体的な数値制約は構造そのものには影響しないため</strong> です。RDB
+      のテーブル構造に影響するのは「単数」か「複数」かの区別だけになります。</p>
+      <p>そのため「キャラクタは最大つのギルドに所属できる」というルールが存在あったとしても、ER図
+      においては単に <code>1:多</code> のリレーションとして表現します。</p>
+      <p>具体的な数値をともなう上限制約は、物理設計やアプリケーション側の制御ロジックで扱う領域となります。</p>
+      </div>
+      <h3 data-number="3.4.1" id="定着確認-6"><span class="header-section-number">3.4.1</span>
+      定着確認</h3>
+      <ul>
+      <li>ER図の文脈において「オプショナリティ」は日本語で何と表現されるか。漢字3文字で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">任意性</span></li>
+      </ul></li>
+      <li>ER図の文脈において「カーディナリティ」は日本語で何と表現されるか。漢字3文字で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">多重度</span></li>
+      </ul></li>
+      <li>数量の範囲表現 <code>0..*</code> に対応した Crow’s Foot
+      記法の表現は、次の図のうちどれか答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">(1)</span></li>
+      </ul></li>
+      </ul>
+      <figure>
+      <img src="figs/06/ex-03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <ul>
+      <li>Character (キャラクタ) とGuild (ギルド)
+      というエンティティを考え、次の関係を適切に表現した概念ER図を作成せよ。なお、Character
+      を主語とした適切な関係名/動詞句も記載すること。
+      <ul>
+      <li>Character は Guild に所属しなくてもよいが、所属する場合は1つの Guild のみに所属する。</li>
+      <li>Guild には少なくとも1人の Character が所属していなければ存在できない。</li>
+      <li><strong>答え</strong> : <a href="figs/06/ex-04.png">概念ER図</a></li>
+      </ul></li>
+      <li>Character (キャラクタ) と Item (アイテム)
+      というエンティティを考え、次の関係を適切に表現した概念ER図を作成せよ。なお、ここでの Item
+      とは、個々の所有インスタンス (実体) ではなく、アイテムの種類 (種別情報)
+      を表すものとする。ER図には Character を主語とした適切な関係名/動詞句も記載すること。
+      <ul>
+      <li>Character は、0 個以上の複数の Item を持つことができる。</li>
+      <li>Item は、0 人以上の Character に所有される。</li>
+      <li><strong>答え</strong> : <a href="figs/06/ex-05.png">概念ER図</a></li>
+      </ul></li>
+      <li>次の
+      概念ER図について、正しく説明してる文章には「True」を、そうではない文章には「False」を答えよ。なお、図内の動詞句
+      <code>belongs to</code> は、いずれもエンティティ B を主語として読むものとする。
+      <ul>
+      <li>1つの A には、だた 1人 の B が所属する。<strong>答え:</strong> <span
+      class="masked">True</span></li>
+      <li>A には、1人 の B も所属しないこともある。</li>
+      <li>C には、0人 もしくは 1人 の B が所属する。</li>
+      <li>1人の B は、ただ1つの C に所属できる (所属しないことも可)。<strong>答え:</strong> <span
+      class="masked">True</span></li>
+      <li>1人の B は、ただ 1 つの A に所属しなければならない (複数の A
+      に所属は不可)。<strong>答え:</strong> <span class="masked">True</span></li>
+      </ul></li>
+      </ul>
+      <figure>
+      <img src="figs/06/CER-02-3.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="3.5" id="概念er図を作成することの意義"><span
+      class="header-section-number">3.5</span> 概念ER図を作成することの意義</h2>
+      <p>概念ER図 (概念データモデル) を作成・共有することで、<span
+      class="masked">自然言語での説明では曖昧になりやすい関係性</span> を
+      <strong>明示的かつ一貫した形式で表現して共有</strong>
+      することができます。図による共有は、モデルの構造的理解を助け、結果としてチーム開発におけるメンバー間の理解の齟齬や、それによる手戻りを防ぐことにつながります。</p>
+      <p>また、適切なツールを用いて作成すれば、文章を記述するよりも効率的かつ短時間でER図を作成することができます。たとえば、以下の概念ER図に相当する情報を文章で記述すると…</p>
+      <figure>
+      <img src="figs/06/CER-01-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>以下のようになります。エンティティの数が増え、それにともないリレーションが増えたとき、自然言語による説明ではとんでもない文章量になることが分かると思います。</p>
+      <blockquote>
+      <ul>
+      <li>1人の User は、0 件以上の複数の Article を作成して持つことができる (Article
+      を1件も持たないこともあり得る)。</li>
+      <li>1件の Article は、だた1人の User に属する。</li>
+      <li>1件の Article は、0 件以上の複数の Commnent を持つことができる (Comment
+      を1件も持たないこともあり得る)。</li>
+      <li>1件の Commnent は、ただ1件の Article に属する。</li>
+      <li>1件の Commnent は、ただ1人の User に属する。</li>
+      <li>1人の User は、0 件以上の複数の Commnent を作成して持つことができる (Commnent
+      を1件も持たないこともあり得る)。</li>
+      <li>1件の Article は、必ず 1つ以上の Category に属する (どの Category
+      にも属さないことは認められない)。</li>
+      <li>1つの Categorye は、0 件以上の複数の Article を持つことができる (Article を1件も持たない
+      Categorye もあり得る)。</li>
+      </ul>
+      </blockquote>
+      <p>また、個々の説明から分かるように、誤解や認識の齟齬を避けようと丁寧に記述すると、<strong>どうしても説明が冗長になりがち</strong>で、その作成や校正は非常に煩雑なものとなります。さらに、文章の列挙では
+      <span class="masked">リレーションの漏れ</span> が生じやすく
+      (また、それに気づきにくく)、<strong>全体像を把握することも困難</strong>となります。</p>
+      <p>以上のようなことから、データベース設計では ER図
+      などが活用されます。<strong>ジュニアレベルの新米エンジニアでも、現場ではER図を正しく読み解くことが求められる</strong>ので、次のセクションの論理ER図を含めて、しっかりと学ぶようにしてください。</p>
+      <h2 data-number="3.6" id="概念設計からモデル選定へ"><span
+      class="header-section-number">3.6</span> 概念設計からモデル選定へ</h2>
+      <p>概念設計が完了したら、次は <strong>データベースモデルの選定</strong>
+      を行ないます。ここでは、作成された概念ER図 (概念データモデル)
+      をもとに、<strong>代表的なユースケースを具体的に想定しながら</strong>、次のような観点から検討します。</p>
+      <ul>
+      <li><strong>どののような問い合わせ (検索・集計)
+      や更新処理を、どの程度の一貫性のもとで、どの程度の速度で実行する必要があるか</strong>
+      <ul>
+      <li>複雑な検索・結合・集計を行い、トランザクション整合性を重視するなら RDB</li>
+      <li>構造が柔軟で、ドキュメント単位での一貫性を確保できれば十分なら DocDB</li>
+      <li>単純なキーアクセスで超高速レスポンスを重視するなら KVS</li>
+      </ul></li>
+      <li><strong>将来的に、どの程度のデータ構造 (スキーマ) の変更が発生しそうか</strong>
+      <ul>
+      <li>スキーマが安定し、データ整合性を厳密に保ちたいなら RDB。</li>
+      <li>スキーマが可変的でユースケースに応じて調整可能な柔軟さが必要なら DocDB</li>
+      <li>構造を意識せず扱いたいなら (データ構造はアプリ側で管理するなら) KVS</li>
+      </ul></li>
+      <li><strong>データアクセスは読み取り中心か、頻繁な更新をともなうか</strong>
+      <ul>
+      <li>更新頻度が高くトランザクション整合性が重要なら RDB</li>
+      <li>読み取り中心で柔軟なレスポンス生成なら DocDB</li>
+      <li>ログ出力やセッション管理など、読み書きスループットを重視する用途 なら KVS
+      <ul>
+      <li>スループットとは、一定時間あたりに処理できる量の意味</li>
+      </ul></li>
+      </ul></li>
+      </ul>
+      <p>このような観点を総合して、要件に対して最も適切なデータベースモデルを選択します。上記で RDB
+      は リレーショナルデータベース、DocDB は JSONドキュメント指向データベース、KVS は
+      キーバリューストア型DB の略です。</p>
+      <p>なお、このモデルの選定について、本科目では詳しく扱わないので、興味がある学生は、次のようなプロンプトを使って学んでみてください。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>データベース設計に関する質問です。データベースの概念設計が完了し、次にデータベースモデルの選定
+      (リレーショナルモデル、ドキュメント指向モデル、KVS など)
+      を進めていきたいと考えています。一般的には、どのような設計観点や判断基準からモデルを選ぶのか教えてください。</p>
+      </blockquote>
+      <blockquote>
+      <p>データベース設計に関する質問です。リレーショナルモデル、ドキュメント指向モデル、KVS
+      などがありますが、各モデルについて、どのような要件・設計思想に向いているかを解説してください。</p>
+      </blockquote>
+      <div class="note type-caution">
+      <p><strong>以降は、データベースとして「リレーショナルモデル」が採用されたことを前提に解説を進めます。</strong></p>
+      </div>
+      <h3 data-number="3.6.1" id="定着確認-7"><span class="header-section-number">3.6.1</span>
+      定着確認</h3>
+      <ul>
+      <li>システム開発において「ユースケース」とは何か。最も適切なものを選び記号で答えよ。
+      <ul>
+      <li>❶ システム内部で使用されるデータ構造を定義したもの</li>
+      <li>❷ システムの画面レイアウトや操作方法をまとめたもの</li>
+      <li>❸ システムが現実世界でどのように使われるかを示す利用シナリオ</li>
+      <li>❹ 実装に用いるプログラム言語や開発環境を示したもの</li>
+      <li><strong>答え</strong>: <span class="masked">❸</span></li>
+      </ul></li>
+      <li>セッション情報やログイン状態など、単純なキーアクセスを超高速で処理したいという要求に対して、一般に最も適合するデータベースは「RDB」「DocDB」「KVS」のうちどれか。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">KVS</span></li>
+      </ul></li>
+      <li>トランザクションをともなうチケット予約管理システムを構築し、同時アクセスでも整合性を保ちたいという要求に対して、一般に最も適合するデータベースは「RDB」「DocDB」「KVS」のうちどれか。
+      <ul>
+      <li>答え: <span class="masked">RDB</span></li>
+      </ul></li>
+      <li>商品データの属性が案件ごとに異なり、頻繁にスキーマ変更が発生する可能性があるというシステム要件に対して、一般に最も適合するデータベースは「RDB」「DocDB」「KVS」のうちどれか。
+      <ul>
+      <li>答え: <span class="masked">DocDB</span></li>
+      </ul></li>
+      </ul>
+      <h1 data-number="4" id="論理設計-1"><span class="header-section-number">4</span> 論理設計</h1>
+      <p>論理設計では、概念ER図を<strong>リレーショナルデータベースの構造に合わせた形に整理</strong>し、次のような
+      <strong><em>論理ER図</em></strong> (Logical Entity Relationship Diagram)
+      を作成していきます。</p>
+      <figure>
+      <img src="figs/06/LER-01-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>具体的には、概念ER図を<strong>次のような要件</strong> (＝<span
+      class="masked">RDBで効果的・効率的に管理するための条件</span>)
+      を満たすように整え、テーブルやカラム、キーといった RDB
+      での実装を意識した構造に近づけていきます。</p>
+      <ul>
+      <li>各エンティティのアトリビュート (属性)
+      を洗い出し、エンティティを「<strong>テーブル</strong>」、アトリビュートを「<strong>カラム</strong>」として定義する。</li>
+      <li>階層構造や <span class="masked">列方向の繰り返し構造</span> を持たない2次元の表 (テーブル)
+      にする。</li>
+      <li>各テーブルの各セルには、<span class="masked">スカラー値</span>
+      のみを格納し、集合・配列・複合型を直接格納しない構造にする。</li>
+      <li>各テーブルにおいて、レコード (行) が一意に識別可能な <span class="masked">主キー (Primary
+      Key)</span> を設定する。</li>
+      <li><code>多対多</code> の関係は、<strong>中間テーブル</strong> (関連エンティティ) を導入して
+      <code>1対多</code> で表現可能な関係に置き換える。</li>
+      <li>必要に応じてテーブルを <strong>正規化</strong> (1NF→2NF→3NF) する。</li>
+      </ul>
+      <p>なお、この論理設計では、RDB での管理は意識するものの、PostgreSQL や SQLite のような <span
+      class="masked">個別製品の仕様や制約</span>
+      については考慮しません。それらは、<strong>論理設計</strong>につづく<strong>物理設計</strong>での検討となります。</p>
+      <h3 data-number="4.0.1" id="定着確認-8"><span class="header-section-number">4.0.1</span>
+      定着確認</h3>
+      <ul>
+      <li>データベースの論理設計において、エンティティは RDB における (　①　)
+      に相当する。また、アトリビュート (属性) は、RDB における (　②　)
+      に相当する。各括弧にあてはまるもっとも適切な語をカタカナで答えよ。
+      <ul>
+      <li><strong>答え</strong> : <span class="masked">①テーブル。②カラム</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="4.1" id="テーブルとカラムの設計"><span
+      class="header-section-number">4.1</span> テーブルとカラムの設計</h2>
+      <p>論理設計では、概念ER図の「エンティティ」を RDB の <span class="masked">テーブル</span>
+      に対応づけ、また「アトリビュート (属性)」を RDB の <span class="masked"> カラム</span>
+      に対応づけて情報を整理し、それに基づいて「<strong>論理ER図</strong>」を作成していきます。</p>
+      <h3 data-number="4.1.1" id="概念er図と論理er図の対応"><span
+      class="header-section-number">4.1.1</span> 「概念ER図」と「論理ER図」の対応</h3>
+      <p>以下に「概念ER図」と「論理ER図」の一例を示します。2つを見比べて、<strong>それぞれの対応関係</strong>や、<strong>論理ER図で新たに追加されている要素</strong>を読み解いてください。</p>
+      <hr />
+      <p><strong>概念ER図の例</strong></p>
+      <figure>
+      <img src="figs/06/CER-01-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <hr />
+      <p><strong>論理ER図の例</strong></p>
+      <figure>
+      <img src="figs/06/LER-01-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <hr />
+      <p>論理設計は、実際の RDB
+      設計にかなり近づくため、実務では「エンティティ」や「アトリビュート」よりも、<span
+      class="masked">「テーブル」や「カラム」</span>
+      という表現が使われることが多くなります。<strong>設計論的には論理ER図では前者の呼称のほうが適切ですが</strong>、本講義では実務での一般的な表現にそろえて「テーブル」と「カラム」という呼び方を用いていきます。</p>
+      <h3 data-number="4.1.2" id="テーブルとカラムの洗い出し"><span
+      class="header-section-number">4.1.2</span> テーブルとカラムの洗い出し</h3>
+      <p>論理設計では、はじめに概念ER図に表したエンティティを「テーブル」として捉え、そのテーブルの<strong>カラム構成を検討</strong>していきます。この際、一般的な
+      RDB の慣習にあわせて、<strong>テーブル名</strong>は <span
+      class="masked">可算名詞の複数形・集合名詞のスネークケース</span>、<strong>カラム名</strong>は
+      <span class="masked">単数形のスネークケース</span> で表記していきます。</p>
+      <p>また、各カラムの「型」については、文字列型、数値型、日時型といった<strong>おおまかな粒度で検討</strong>しておきます
+      (<code>VAECHAR(16)</code>、<code>INTEGER</code>、<code>TIMESTAMP</code>
+      などの実装依存を含めた具体的な型の決定は物理設計で行ないます)。</p>
+      <p>以下、概念ER図から、テーブルとカラムを洗い出して整理した一例です
+      (特定の書式があるわけではありません)。</p>
+      <pre><code>- `users` テーブル (User エンティティ)
+  - `name`       文字列型
+  - `email`      文字列型
+  - `created_at` 日時型
+  - `updated_at` 日時型
+
+- `articles` テーブル (Aarticle エンティティ)
+  - `title`      文字列型
+  - `content     文字列型
+  - `created_at` 日時型
+  - `updated_at` 日時型
+
+(以下、略)</code></pre>
+      <p>この際、テーブルのフィールド (セル) には「<strong>スカラー値</strong>」つまり <span
+      class="masked">構造を持たない1つの値</span> が格納されるようにカラムを設計してください。</p>
+      <p>たとえば、<code>position</code> というカラムに <code>[10,20]</code>
+      のような「<strong>配列</strong>」を直接格納したり、<code>class</code> というカラムに
+      <code>{"grade":4, "course":"I"}</code> のような「<strong>辞書</strong>
+      (オブジェクト)」を格納するような設計は<strong>アンチパターン</strong> (＝<span
+      class="masked">第1正規化 (1NF) を満たしていないテーブル</span>) となります。</p>
+      <ul>
+      <li><code>position</code> は、<code>pos_x</code> と <code>pos_y</code>
+      に分離し、それぞれを独立したカラムとしてスカラー値 (数値) を格納します。</li>
+      <li><code>class</code> は、<code>grade</code> と <code>course</code>
+      に分離し、それぞれを独立したカラムとしてスカラー値 (数値、文字列) を格納します。</li>
+      </ul>
+      <p>🚨「<strong>アンチパターン</strong>」とは、やってはいけない設計の典型例
+      (特に過去に多くの人が失敗している例) のことです。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>RDB の設計に関する質問です。キャラクターの位置情報を管理するために、あるテーブルの
+      <code>position</code> カラムに <code>[10, 20]</code>
+      のような配列を直接格納しようと思いました。しかし、「それはアンチパターンで、<code>pos_x</code>
+      と <code>pos_y</code> のように別のカラムに分けてスカラー値 (単一の数値)
+      を入れるべき」と言われました。どうして配列をそのまま格納すると良くないのでしょうか。また、実際に配列で格納すると、どんな
+      SQL を書くときに困るのか、初学者向けに例を挙げて説明してください。</p>
+      </blockquote>
+      <p><strong><em>参考</em></strong> 📖 教科書「達人に学ぶDB設計 徹底指南書 (第2版)」の
+      pp.228-232「<u>7-2 非スカラ値 (第1正規形未満)</u>」</p>
+      <h3 data-number="4.1.3" id="定着確認-9"><span class="header-section-number">4.1.3</span>
+      定着確認</h3>
+      <ul>
+      <li>チームやプロジェクトで命名ルールが決まっていない場合、RDB
+      のテーブル名には「パスカルケース」「キャメルケース」「スネークケース」「ケバブケース」のうち、どの命名規則に従うことが最も一般的か答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">スネークケース</span></li>
+      </ul></li>
+      <li>RDB のテーブル名は、一般に (　　　) を用いることが推奨される。 (　　　)
+      にあてはまる適切な語を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">可算名詞の複数形 または 集合名詞</span></li>
+      </ul></li>
+      <li>RDB のカラム名は、一般に (　　　) を用いることが推奨される。 (　　　)
+      にあてはまる適切な語を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">単数形の名詞</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="4.2" id="繰り返しカラムは別テーブルで管理"><span
+      class="header-section-number">4.2</span> 繰り返しカラムは別テーブルで管理</h2>
+      <p><strong>テーブルのなかに「同種の情報が繰り返し出現するようなカラム構成」</strong>が存在する場合は、その部分を別テーブルとして分離し、それを参照する形
+      (＝リレーションで関連づける形) にします。例えば、<code>characters</code>
+      テーブルに、以下のように
+      <code>skill_1</code>、<code>skill_2</code>、<code>skill_3</code>、<code>skill_4</code>
+      というカラムを設けるような設計は、RDBにおける典型的なアンチパターン (＝<span
+      class="masked">第1正規化 (1NF) を満たしていないテーブル</span>) となります。</p>
+      <table style="width:100%;">
+      <colgroup>
+      <col style="width: 16%" />
+      <col style="width: 16%" />
+      <col style="width: 16%" />
+      <col style="width: 16%" />
+      <col style="width: 16%" />
+      <col style="width: 16%" />
+      </colgroup>
       <thead>
       <tr class="header">
-      <th>名前</th>
-      <th>魔法</th>
-      <th>アイテム1</th>
-      <th>数1</th>
-      <th>アイテム2</th>
-      <th>数2</th>
-      <th>アイテム3</th>
-      <th>数3</th>
+      <th style="text-align: center;">name</th>
+      <th style="text-align: center;">job</th>
+      <th style="text-align: center;">skill_1</th>
+      <th style="text-align: center;">skill_2</th>
+      <th style="text-align: center;">skill_3</th>
+      <th style="text-align: center;">skill_4</th>
       </tr>
       </thead>
       <tbody>
       <tr class="odd">
-      <td>アリス</td>
-      <td>ファイア, アイス</td>
-      <td>ダガー</td>
-      <td>1</td>
-      <td>毒消し</td>
-      <td>2</td>
-      <td></td>
-      <td></td>
+      <td style="text-align: center;">Alice</td>
+      <td style="text-align: center;">Priest</td>
+      <td style="text-align: center;">Heal</td>
+      <td style="text-align: center;">Resurrection</td>
+      <td style="text-align: center;"><font color="lightgray">NULL</font></td>
+      <td style="text-align: center;"><font color="lightgray">NULL</font></td>
       </tr>
       <tr class="even">
-      <td>ボブ</td>
-      <td>サンダー, ヒール, テレポート</td>
-      <td>棍棒</td>
-      <td>1</td>
-      <td>ポーション</td>
-      <td>5</td>
-      <td>地図</td>
-      <td>1</td>
+      <td style="text-align: center;">Bob</td>
+      <td style="text-align: center;">Monk</td>
+      <td style="text-align: center;">DragonKick</td>
+      <td style="text-align: center;"><font color="lightgray">NULL</font></td>
+      <td style="text-align: center;"><font color="lightgray">NULL</font></td>
+      <td style="text-align: center;"><font color="lightgray">NULL</font></td>
       </tr>
       </tbody>
       </table>
-      <p><strong>NGポイント（1NF違反の理由）</strong> -
-      <code>魔法</code>：<strong>カンマ区切りで複数値</strong>を1セルに格納（多値属性） -
-      <code>位置</code>：<code>(x, y)</code>
-      の<strong>複合値</strong>を1セルに格納（スカラーでない） -
-      <code>アイテム1/2/3, 数1/2/3</code>：<strong>繰り返し列（リピーティンググループ）</strong>で可変個数を列方向に表現<br />
-      → ボブのように「魔法やアイテムが増えると列を増やす必要」が生じ、表構造が可変になってしまう</p>
-      <p>第2正規形 (2NF) とは、部分関数従属している列を切り出した形</p>
-      <p>以下は <strong>第2正規形（2NF）を満たしていません</strong>。<br />
-      想定：この表の主キーは <strong>(名前, アイテム)</strong></p>
+      <p>上記テーブルのように、同種の情報の繰り返し構造を持つ場合は、それを以下のような別テーブル
+      (ここでは <code>skills</code> テーブルを新たに作成)
+      に切り出し、<strong>縦方向に保持する形式</strong> (＝「縦持ち」「行持ち」「long
+      format」の形式) にすることが求められます。</p>
       <table>
       <thead>
       <tr class="header">
-      <th>名前</th>
-      <th>アイテム</th>
-      <th>数</th>
-      <th style="text-align: right;">単価</th>
-      <th style="text-align: right;">単位重量</th>
-      <th>カテゴリ</th>
+      <th style="text-align: center;">character_name</th>
+      <th style="text-align: center;">skill</th>
+      <th style="text-align: center;">slot_no</th>
       </tr>
       </thead>
       <tbody>
       <tr class="odd">
-      <td>アリス</td>
-      <td>ダガー</td>
-      <td>1</td>
-      <td style="text-align: right;">120</td>
-      <td style="text-align: right;">2.0</td>
-      <td>武器</td>
+      <td style="text-align: center;">Alice</td>
+      <td style="text-align: center;">Heal</td>
+      <td style="text-align: center;">1</td>
       </tr>
       <tr class="even">
-      <td>アリス</td>
-      <td>毒消し</td>
-      <td>2</td>
-      <td style="text-align: right;">50</td>
-      <td style="text-align: right;">0.2</td>
-      <td>消耗品</td>
+      <td style="text-align: center;">Alice</td>
+      <td style="text-align: center;">Resurrection</td>
+      <td style="text-align: center;">2</td>
       </tr>
       <tr class="odd">
-      <td>ボブ</td>
-      <td>棍棒</td>
-      <td>1</td>
-      <td style="text-align: right;">80</td>
-      <td style="text-align: right;">3.5</td>
-      <td>武器</td>
-      </tr>
-      <tr class="even">
-      <td>ボブ</td>
-      <td>ポーション</td>
-      <td>5</td>
-      <td style="text-align: right;">60</td>
-      <td style="text-align: right;">0.3</td>
-      <td>消耗品</td>
-      </tr>
-      <tr class="odd">
-      <td>ボブ</td>
-      <td>地図</td>
-      <td>1</td>
-      <td style="text-align: right;">200</td>
-      <td style="text-align: right;">0.1</td>
-      <td>道具</td>
+      <td style="text-align: center;">Bob</td>
+      <td style="text-align: center;">DragonKick</td>
+      <td style="text-align: center;">1</td>
       </tr>
       </tbody>
       </table>
-      <p><strong>なぜ2NF違反か？（部分関数従属）</strong> - 主キーは <strong>(名前,
-      アイテム)</strong>（＝キャラごとの所持アイテムで一意） - <code>数</code> は (名前, アイテム)
-      に依存（OK） - しかし <code>単価</code>・<code>単位重量</code>・<code>カテゴリ</code> は
-      <strong>アイテム</strong>の性質であり、<strong>(名前, アイテム)</strong> ではなく
-      <strong>アイテム</strong>のみに依存<br />
-      → <strong>部分関数従属</strong>（複合キーの一部にだけ依存） → <strong>2NF違反</strong></p>
-      <p><strong>正規化の方向性（参考）</strong> -
-      アイテム基本情報：<code>アイテム(アイテム, 単価, 単位重量, カテゴリ, …)</code><br />
-      - 所持関係：<code>所持(名前, アイテム, 数)</code>（主キーは (名前, アイテム)）</p>
-      <p>主キー (複合キーでも可) が決まれば、列の値が一意に定まる関係を関数従属と呼びます。</p>
-      <p>複合キーの一部 の項目だけで、列の値が一意に決まる関係を、部分関数従属という。</p>
-      <p>主キーの一部分に対して関数従属する項目を、部分関数従属。</p>
-      <p>第3正規形 (3NF) とは、主キー以外に関数従属している列を切り出した形</p>
-      <p>ボイス・コッド正規形。</p>
-      <p>第4正規形、第5正規形は実務では使われない。</p>
+      <p>このように情報を分離したとき、<strong>概念ER図</strong>は次のようになります。</p>
+      <figure>
+      <img src="figs/06/CER-02-4.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>また、<strong>論理ER図</strong>では次のようになります。</p>
+      <figure>
+      <img src="figs/06/LER-01-2.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="4.3" id="主キー-primary-key"><span class="header-section-number">4.3</span>
+      主キー (Primary Key)</h2>
+      <p>テーブルを構成するカラムが整理できたら、各テーブルの <strong>主キー</strong>
+      (<strong>PK</strong>: Primary Key) を決めていきます。主キーは、そのテーブル内のレコード (行)
+      を
+      <strong>一意に識別できる値を持つカラムに対して設定するもの</strong>で、他のテーブルから参照される際の
+      <strong>外部キー</strong> (<strong>FK</strong>: Foreign Key) としても使われます。</p>
+      <ul>
+      <li><strong>一意に識別可能</strong>とは <span class="masked">複数のレコード (行)
+      なかから、迷わずその1行だけを選びだすことができる</span> という意味です。</li>
+      <li>RDB
+      の各テーブルでは、<strong>いずれかのカラムを必ず主キーとして設定する必要があります</strong>。
+      <ul>
+      <li>PostgreSQL
+      では主キーを設定しないテーブルも作成可能ですが、論理設計では主キーを定義することが原則となります。</li>
+      </ul></li>
+      </ul>
+      <p>たとえば、次のようなテーブルがあるとします。<strong>name</strong>、<strong>nickname</strong>、<strong>age</strong>
+      のうち、主キーにすることができるカラムはどれなのかを検討していきます。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;">name</th>
+      <th style="text-align: center;">nickname</th>
+      <th style="text-align: center;">age</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">Alice</td>
+      <td style="text-align: center;">Ali</td>
+      <td style="text-align: center;">20</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">Bob</td>
+      <td style="text-align: center;">Bobby</td>
+      <td style="text-align: center;">25</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">Carol</td>
+      <td style="text-align: center;"><font color="lightgray">NULL</font></td>
+      <td style="text-align: center;">20</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">David</td>
+      <td style="text-align: center;">Dave</td>
+      <td style="text-align: center;">23</td>
+      </tr>
+      </tbody>
+      </table>
+      <h3 data-number="4.3.1" id="agenickname"><span class="header-section-number">4.3.1</span>
+      agenickname</h3>
+      <p><strong>age</strong> カラムは、<code>20</code> という値を持つレコードが複数存在するので
+      (また、今後、同年齢のレコードが挿入されることが十分に考えられるので)、<strong>age</strong>
+      を主キーにすることはできません。</p>
+      <h3 data-number="4.3.2" id="nicknameカラムを主キーにできるか"><span
+      class="header-section-number">4.3.2</span> nicknameカラムを主キーにできるか?</h3>
+      <p><strong>nickname</strong>
+      カラムには重複する値がないので、カラムは重複のない値を持つため、理論上はレコードを一意に識別できます。しかし、RDBMS
+      には <span class="masked"><code>NULL</code>
+      を許容するカラムを主キーに設定できない決まり</span> があり、<strong>nickname</strong>
+      を主キーにすることはできません。</p>
+      <h3 data-number="4.3.3" id="nameカラムを主キーにできるか"><span
+      class="header-section-number">4.3.3</span> nameカラムを主キーにできるか?</h3>
+      <p><strong>name</strong> カラムは <code>NULL</code> を含まず、その値 (<code>Alice</code> や
+      <code>Bob</code> など) によって一意にレコードを識別できるため、理論上は <strong>name</strong>
+      を主キーにすることができます。</p>
+      <p>ただし、<strong>name</strong> を主キーに設定すると
+      (RDBMSにより、自動でUNIQUE制約が付与されるため)、<span
+      class="masked">同名の別人を追加できなくなるという運用上の制約</span>
+      が生じます。実際のシステムでは人名の重複は一般的に起こりうるため、<strong>name</strong>
+      を主キーとするのは現実的ではありません。</p>
+      <ul>
+      <li><strong>UNIQUE制約</strong> (<strong>ユニーク制約</strong>)
+      とは、指定したカラム（またはカラムの組み合わせ）について、同じ値をもつレコードが登録されないように保証する制約です。</li>
+      <li>主キーに設定されたカラムには、UNIQUE制約に加えて <span class="masked">NOT NULL制約</span>
+      も自動的に適用されます。</li>
+      </ul>
+      <p>このような問題を避けるには <code>id</code> や <code>character_id</code>
+      のような人工的なカラムを追加し、<strong>連番</strong> や <strong>UUID</strong>
+      を割り当てて主キーとするのが一般的です。こうしたカラムを
+      <strong><em>サロゲートキー</em></strong> (代理キー、Surrogate Key) といいます。サロゲートキー
+      (整数値の連番) を追加した例を以下に示します。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>id</u></th>
+      <th style="text-align: center;">name</th>
+      <th style="text-align: center;">nickname</th>
+      <th style="text-align: center;">age</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">Alice</td>
+      <td style="text-align: center;">Ali</td>
+      <td style="text-align: center;">20</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">Bob</td>
+      <td style="text-align: center;">Bobby</td>
+      <td style="text-align: center;">25</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">Carol</td>
+      <td style="text-align: center;"><font color="lightgray">NULL</font></td>
+      <td style="text-align: center;">20</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">David</td>
+      <td style="text-align: center;">Dave</td>
+      <td style="text-align: center;">23</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>なお、「学籍番号」や「メールアドレス」のように、現実世界で意味を持ちつつデータを一意に識別可能なカラム
+      (アトリビュート) を <strong><em>ナチュラルキー</em></strong> (自然キー、Natural Key)
+      といいます。</p>
+      <div class="note type-senior">
+      <p><strong>サロゲートキーとして連番を使うべきか、UUID などを使うべきか</strong></p>
+      <p>サロゲートキーには、整数の連番を使う方法と、UUID (主に v4natural ) や Nano ID
+      などのランダムな識別子を使う方法があります。</p>
+      <ul>
+      <li><strong>連番ID</strong>は、検索や結合の処理も効率的に行えるため性能面で有利になります。しかし、値が連続して増えるために
+      <strong>外部からデータ件数や登録順序を推測されやすく</strong>、また分散環境では <span
+      class="masked">重複や競合が発生しやすい</span> という欠点があります。</li>
+      <li>UUID などの<strong>ランダムID</strong>は、<span
+      class="masked">アプリ側で独立して生成しても衝突が起きない</span>
+      という特徴があり、さらに<strong>推測耐性があり、列挙攻撃に強いという利点</strong>があります。一方で、値のサイズが大きいためにインデックスが肥大化しやすく、また検索性能で連番IDに劣るという欠点があります。</li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>UUID v4 と Nano ID をRDBのサロゲートキーとして使用する観点から比較してください。</p>
+      </blockquote>
+      <blockquote>
+      <p>ウェブアプリのバックエンドとして使用する RDB
+      において、整数値の連番をサロゲートキーとして使用するときのリスクについて具体的に解説してください。</p>
+      </blockquote>
+      </div>
+      <p><strong><em>参考</em></strong> 📖 教科書「達人に学ぶDB設計 徹底指南書 (第2版)」の
+      pp.266-280「<u>8-2 代理キー ～主キーが役に立たないとき～</u>」</p>
+      <h3 data-number="4.3.4" id="定着確認-10"><span class="header-section-number">4.3.4</span>
+      定着確認</h3>
+      <ul>
+      <li>RDB において「主キー」を表すアルファベット2文字を大文字で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">PK</span></li>
+      </ul></li>
+      <li>RDB において「主キー」の英語表記 (略語ではない) を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">Primary Key</span></li>
+      </ul></li>
+      <li>RDB
+      において、NULLを許容しているカラムを「主キー」に設定することはできない。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切である</span></li>
+      </ul></li>
+      <li>RDB
+      において学籍番号やメールアドレスのように、現実世界で意味を持ち、さらにデータを一意に識別可能なカラムを主キーにした場合、それはサロゲートキーと呼ばれる。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない</span></li>
+      </ul></li>
+      <li>RDB において主キーに設定したカラムには、自動的に NOT NULL 制約と (　　　)
+      制約が適用される。括弧にあてはまる語を大文字の英語で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">UNIQUE</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="4.4" id="複合主キー"><span class="header-section-number">4.4</span>
+      複合主キー</h2>
+      <p>テーブルの主キーは、1つのカラムだけでなく、<strong>複数のカラムを組み合わせて設定</strong>することもできます。このような主キーを、特に<strong>複合主キー</strong>
+      (Composite Primary Key) といいます。複合主キーは、<code>多対多</code> のリレーションを
+      <code>1対多</code> に変換するための中間テーブル (詳細は後述) などで頻繁に使われます。</p>
+      <ul>
+      <li>複合主キーは、文脈的に主キーであることが分かる場合は、単に「複合キー」とよばれることもあります。</li>
+      </ul>
+      <p>たとえば、以下のようにキャラクタとアイテムの対応関係を管理する中間テーブル
+      <code>character_items</code> があるとします。このとき <code>character_id</code> と
+      <code>item_id</code> の2つを組み合わせて、このテーブルの<strong>主キー</strong>
+      (<strong>複合主キー</strong>) とすることができます。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>character_id</u></th>
+      <th style="text-align: center;"><u>item_id</u></th>
+      <th style="text-align: center;">quantity</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">38</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">46</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">10</td>
+      <td style="text-align: center;">5</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">11</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">46</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>複合キーを主キーに設定したとき、その組み合わせに対して <strong>UNIQUE制約</strong>
+      が自動的にが働きます。そのため、<strong>同じキャラクタが同じアイテムを重複して所持するような不整合</strong>
+      (例えば、テーブルのなかに <code>(character_id,item_id,quantity)=(1,38,3)</code> と
+      <code>(character_id,item_id,quantity)=(1,38,4)</code> というレコードが存在ような状況)
+      が抑制され、テーブル内の整合性が保たれます。</p>
+      <p>また、複合主キーを構成する各カラムについては、<strong>NOT NULL制約</strong>
+      が自動的に適用されます。</p>
+      <div class="note type-senior">
+      <p><strong>複合主キー v.s. サロゲートキー</strong></p>
+      <p>中間テーブルの主キー設計、つまり「<strong>複合主キーとすべきか</strong>」あるいは「<strong>サロゲートキーを導入すべきか</strong>」は、設計者によって意見が分かれるテーマとなっています。どちらにも一貫した理論的正当性があり、現在のところ明確な定石はありません。興味があれば、<code>複合主キー アンチパターン</code>
+      などのキーワードで検索したり、生成AIで深掘りしてみてください。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>RDBの設計に関する質問です。中間テーブルは、複合主キーにすべきか、サロゲートキーを導入すべきかという主キー設計は、よく議論になると聞きました。双方の主張について詳しく解説してください。</p>
+      </blockquote>
+      </div>
+      <h3 data-number="4.4.1" id="定着確認-11"><span class="header-section-number">4.4.1</span>
+      定着確認</h3>
+      <ul>
+      <li>あるテーブルにおいて <strong>article_id</strong> カラムと <strong>category_id</strong>
+      カラムが複合主キーとして設定されている。このとき、<u><strong>article_id</strong> カラムには
+      <strong>UNIQUE制約</strong> が自動的に適用されるので、<strong>article_id</strong>
+      カラムに同じ値を持つレコードは存在し得ない</u>。この説明 (<u>下線部</u>)
+      は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="4.5" id="論理er図における主キーの表記"><span
+      class="header-section-number">4.5</span> 論理ER図における主キーの表記</h2>
+      <p>論理ER図において、主キー (PK)
+      となるカラムを示す表記には、いくつかの方法があります。代表的なものとしては、❶
+      <strong>カラムに下線を引く</strong>、❷ <code>id (PK)</code>
+      <strong>のように明示する</strong>、あるいは ❸ <strong>四角形の上部を区切って配置する</strong>
+      などがあります。</p>
+      <figure>
+      <img src="figs/06/LER-01-3.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>本講義資料では、上図の右端のように四角形の上部を区切ってPKカラムを配置する表記を主に使用します。</p>
+      <h2 data-number="4.6" id="外部キーを使用した1対多のリレーションの表現"><span
+      class="header-section-number">4.6</span> 外部キーを使用した「1対多」のリレーションの表現</h2>
+      <p>概念ER図で <code>1対多</code> の関係を持つリレーションは、論理ER図では、<code>1</code>
+      側のテーブルの<strong>主キー (PK)</strong> を、<code>多</code> 側のテーブルに
+      <strong><em>外部キー</em></strong> (<strong>FK: Foreign Key</strong>)
+      として保持することで表現します。このようにすると、RDB では SQL の結合操作 <code>JOIN</code>
+      により、テーブル間の関係を正しく関連づけて扱うことができます。</p>
+      <ul>
+      <li>言い換えれば、「<u>他テーブルの主キーを参照する (＝値として保持する)
+      カラム</u>」のことを「<strong>外部キー</strong>」と表現します。</li>
+      </ul>
+      <p>たとえば、ブログシステムの「概念ER図」では、以下のように「Userエンティティ」と「Commentエンティティ」が
+      <code>1対多</code> の関係となっています。つまり、<span
+      class="masked">1人のユーザーは、0個以上の複数のコメントを作成できる</span>
+      という関係を表現しています。</p>
+      <figure>
+      <img src="figs/06/LER-01-6.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>この関係を「論理ER図」で表す場合は、以下の図のように <code>comments</code>
+      テーブルのなかに、<code>users</code> テーブルの <strong>主キー</strong> (<code>user_id</code>)
+      を追加します。このように他のテーブルの主キーを参照するカラムを「<strong>外部キー</strong>
+      (<strong>FK</strong>)」と呼び、論理ER図では<code>FK</code> という略称で表記します。</p>
+      <figure>
+      <img src="figs/06/LER-01-7.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>論理ER図では、外部キーを以下のようにカラム名のあとに括弧付きで <code>user_id (FK)</code>
+      のように示すこともあります。</p>
+      <figure>
+      <img src="figs/06/LER-01-8.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>なお、リレーションはテーブルを表す四角形の任意の位置を端点にできますが、上図のように <span
+      class="masked">「主キー」と「外部キー」を端点</span>
+      として描くのが最も直感的に理解しやすく推奨されます。</p>
+      <h3 data-number="4.6.1" id="定着確認-12"><span class="header-section-number">4.6.1</span>
+      定着確認</h3>
+      <ul>
+      <li>RDB において、値として「他のテーブルの主キー」をとるカラムのことを (　　　)
+      という。括弧にあてはまる最も適切な語を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">外部キー。Foreign Key</span></li>
+      </ul></li>
+      <li>テーブルBは、テーブルAの主キーを参照する外部キーを持っている。このとき、テーブルAから見たテーブルBとのリレーションとして考えられるのは
+      <code>1対1</code> もしくは（　　　）である。括弧にあてはまる語として最も適切なものは
+      <code>1対多</code>、<code>多対1</code>、<code>多対多</code> のうちどれか答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">1対多</span></li>
+      </ul></li>
+      <li>RDB において「外部キー」を表すアルファベット2文字を大文字で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">FK</span></li>
+      </ul></li>
+      <li>RDB において「外部キー」の英語表記 (略語ではない) を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">Foreign Key</span></li>
+      </ul></li>
+      <li>次に示すような <strong>characters</strong> テーブルと、<strong>jobs</strong>
+      テーブルから構成される RDB が存在する。各テーブルにおいて主キーとなるカラムは <u>下線</u>
+      で示している。以下の各問いに答えよ。
+      <ul>
+      <li><strong>characters</strong> の <strong>job_id</strong> カラムは、<strong>jobs</strong>
+      テーブルの主キーを参照し、その値を保持している。このようなカラムを (　　　)
+      という。括弧にあてはまる最も適切な語を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">外部キー</span></li>
+      </ul></li>
+      <li><strong>characters</strong> テーブルからみた <strong>jobs</strong>
+      テーブルとのリレーションとして、最も適切なものは
+      <code>1対1</code>、<code>1対多</code>、<code>多対1</code>、<code>多対多</code>
+      のうちどれか答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">多対1</span></li>
+      </ul></li>
+      <li>論理ER図を作成せよ。ただし、<strong>characters</strong> テーブルの <strong>job_id</strong>
+      カラムには <strong>NOT NULL 制約</strong> があると仮定すること。
+      <ul>
+      <li><strong>答え</strong>: <a href="figs/06/LER-03-1.png">作成例</a></li>
+      </ul></li>
+      <li>論理ER図を作成せよ。ただし、<strong>characters</strong> テーブルの <strong>job_id</strong>
+      カラムは <code>NULL</code> も許容されると仮定すること。
+      <ul>
+      <li><strong>答え</strong>: <a href="figs/06/LER-03-2.png">作成例</a></li>
+      </ul></li>
+      </ul></li>
+      </ul>
+      <p><strong>▼ characters テーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>character_id</u></th>
+      <th style="text-align: left;">name</th>
+      <th style="text-align: center;">job_id</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: center;">J5</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: center;">J2</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">J6</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: center;">J6</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>▼ jobs テーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>job_id</u></th>
+      <th style="text-align: left;">name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">J1</td>
+      <td style="text-align: left;">Fighter</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">J2</td>
+      <td style="text-align: left;">Monk</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">J3</td>
+      <td style="text-align: left;">Ninja</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">J4</td>
+      <td style="text-align: left;">Samurai</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">J5</td>
+      <td style="text-align: left;">Priest</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">J6</td>
+      <td style="text-align: left;">Wizard</td>
+      </tr>
+      </tbody>
+      </table>
+      <h3 data-number="4.6.2" id="演習"><span class="header-section-number">4.6.2</span> 演習</h3>
+      <p>次に示す概念ER図を参考に、<u>User</u>、<u>Character</u>、<u>Guild</u>、<u>Job</u>
+      エンティティに直接関係する範囲の「論理ER図」を作成せよ (<u>Item</u> および <u>GuildStorage</u>
+      エンティティは対象としなくてよい)。なお、論理ER図のテーブルとカラムの名前は英語で適切に設定すること
+      (必要に応じて生成AIを活用すること)。また、各エンティティは、少なくとも次のアトリビュート
+      (属性) を持たせること。</p>
+      <ul>
+      <li>Userエンティティ: ID、電子メール、姓、名</li>
+      <li>Characterエンティティ: ID、名前、レベル</li>
+      <li>Guildエンティティ: ID、名前、参加ポリシー</li>
+      <li>Jobエンティティ: ID、名前、攻撃補正、防御補正、魔法補正
+      <ul>
+      <li>答え (作成例) : <a href="figs/06/LER-02-2.png">部分的な論理ER図</a></li>
+      </ul></li>
+      </ul>
+      <figure>
+      <img src="figs/06/LER-02-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>RDBのDB設計をしています。テーブルのカラム名 (英語・スネークケース)
+      を検討する手伝いをしてください。MMORPGの世界観において、<code>jobs</code> テーブルのカラム
+      (属性) として「攻撃補正」「防御補正」「魔法補正」の命名案を複数提案してください。</p>
+      </blockquote>
+      <h2 data-number="4.7" id="多対多のリレーションの分割-中間テーブル化"><span
+      class="header-section-number">4.7</span> 多対多のリレーションの分割 (中間テーブル化)</h2>
+      <p>RDB では、2つのテーブル間の <code>多対多</code> となる関係を <span
+      class="masked">直接的に定義すること</span>
+      ができません。そのため、両者を仲介する<strong>中間テーブル</strong>
+      (<strong>関連エンティティ)</strong> を設け、<code>1対多</code> と <code>多対1</code>
+      の関係に分解して扱います。</p>
+      <p>たとえば、ブログシステムでは「Articleエンティティ」と「Categoryエンティティ」が
+      <code>多対多</code>
+      の関係となります。つまり、1つの記事は「1つ以上の複数のカテゴリ」に属することができ、同時に、1つのカテゴリは「0個以上の複数の記事」を持つことができるという関係になります。</p>
+      <p>この関係を概念ER図では以下のように表現しました。</p>
+      <figure>
+      <img src="figs/06/LER-01-4.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>これを論理ER図に落とし込むときには、<code>article_categories</code>
+      という中間テーブルを設けて、以下のように変換します (RDB
+      でも同様にこの構造で実装します)。なお、中間テーブルの名前は任意ですが、一般に <span
+      class="masked">両側のエンティティ名を組み合わせる方法</span> がよく用いられます。</p>
+      <figure>
+      <img src="figs/06/LER-01-5.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><strong><em>参考</em></strong> 📖 教科書「達人に学ぶDB設計 徹底指南書 (第2版)」の
+      pp.157-158「<u>4-4 「多対多」と関連実体</u>」</p>
+      <h3 data-number="4.7.1" id="定着確認-13"><span class="header-section-number">4.7.1</span>
+      定着確認</h3>
+      <ul>
+      <li>RDB
+      の設計において「多対多」の関係は、直接テーブル間に定義することはできない。そのため、両者をつなぐ
+      (　　　) を設けて、「1対多」と「多対1」の関係に分割する。括弧にあてはまる語を答えよ。
+      <ul>
+      <li><strong>答え</strong> : <span class="masked">中間テーブル または
+      関連エンティティ</span></li>
+      </ul></li>
+      <li>(前セクションの定着確認のつづきとして)
+      次に示す概念ER図を参考に「論理ER図」を作成せよ。各エンティティは、少なくとも次のアトリビュート
+      (属性) を持たせること。
+      <ul>
+      <li>Itemエンティティ: ID、名前、種別 (整数値)、効果量 (整数値)</li>
+      <li>GuildStorageエンティティ: ID、番号、サイズ</li>
+      <li><code>多対多</code> の関係は、中間テーブルを用いて <code>1対多</code>、<code>多対1</code>
+      に落とし込む必要がある点に注意すること</li>
+      <li>答え (作成例) : <a href="figs/06/LER-02-3.png">論理ER図</a></li>
+      </ul></li>
+      </ul>
+      <figure>
+      <img src="figs/06/LER-02-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h1 data-number="5" id="課題1"><span class="header-section-number">5</span> 課題1</h1>
+      <ul>
+      <li><strong><em>内容</em></strong> :
+      後述の指示に従い、任意のツールを使用してER図を作成し、提出してください。</li>
+      <li><strong><em>提出期限</em></strong> : <strong>11月26日 (水) 23時</strong>
+      <ul>
+      <li>課題の採点後は、<strong>修正版の再提出や追提出があっても原則として再評価はしません</strong>。</li>
+      <li>担当教員に事前相談することなく、提出期限から168時間（＝1週間・7日間）を超過して提出されたもの（再提出を含む）は、未提出と同じ0点評価とします。</li>
+      </ul></li>
+      <li><strong><em>採点</em></strong> : <strong>7.5点</strong>
+      を標準として、<strong>10点満点で評価</strong> します。
+      <ul>
+      <li>総合成績において課題は <strong>20%</strong> に相当します。</li>
+      </ul></li>
+      <li><strong><em>提出先</em></strong> :
+      Teamsの「<strong>DB-課題1</strong>」にWordファイルを提出 👉<a
+      href="https://omunet-my.sharepoint.com/:w:/g/personal/z21707r_omu_ac_jp/EcO1xgMYToZOtNHc1haCBGsBkm8IzaMzCv_QO_bBS029Sg?e=8VoKaO">📄雛形ファイル</a>
+      <ul>
+      <li>🚨<u>PDFに変換せずに、Wordファイルのまま提出</u>してください。</li>
+      <li><a
+      href="https://omunet-my.sharepoint.com/:w:/g/personal/z21707r_omu_ac_jp/EUFquyBJ-uhNr7CCO9AMjl4BXIrUerGrM4z_FS-PccYcgw?e=GVzrRs">作成例</a>を参考にして、<u>2頁以内</u>に収めてください。</li>
+      <li>ファイル名は <code>NN-フルネーム.docx</code> としてください。<code>NN</code>
+      にはゼロ埋め半角で出席番号、<code>フルネーム</code>
+      は姓と名に<u>スペースを入れない</u>漢字氏名としてください。ファイルネームのミスは2点減します。</li>
+      <li>提出された課題は、クラスの学生に共有します。</li>
+      </ul></li>
+      </ul>
+      <div class="note type-tips">
+      <p>本課題には、ER図を作成するための適切なツールを選定すること、ツールの使い方を自分で学ぶこと、実務水準の見やすく整った正確なER図を作成・出力することも学習内容として含んでいます。</p>
+      <ul>
+      <li>本講義資料のER図は<a
+      href="https://www.figma.com/ja-jp/">Figma</a>を使用して作成しています。</li>
+      </ul>
+      </div>
+      <h2 data-number="5.1" id="提出ファイル作成に関する注意事項"><span
+      class="header-section-number">5.1</span> 提出ファイル作成に関する注意事項</h2>
+      <p><a
+      href="https://omunet-my.sharepoint.com/:w:/g/personal/z21707r_omu_ac_jp/EcO1xgMYToZOtNHc1haCBGsBkm8IzaMzCv_QO_bBS029Sg?e=8VoKaO">雛形のWordファイル</a>は、ダウンロードして、必ず
+      <strong>デスクトップアプリ版の Word を使って編集</strong> してください。</p>
+      <figure>
+      <img src="figs/06/kadai-01-3.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ブラウザ版 (Word for the Web) や Teams版
+      で編集すると、体裁や設定が崩れることがあります（減点対象）。ブラウザで開いてしまった場合は、次の手順でデスクトップアプリで開き直してください。</p>
+      <figure>
+      <img src="figs/06/kadai-01-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>Word
+      のオプションで、「<strong>画像が自動圧縮されない設定になっていること</strong>」を確認してください。</p>
+      <figure>
+      <img src="figs/06/kadai-01-2.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>🚨 <u>ER図をラスタ形式 (PNG など) で貼り付ける場合</u>は、<strong>印刷時の出力解像度が
+      300dpi 以上</strong> となるようにしてください。A4 用紙に貼り付けた際の実寸が <strong>約16cm
+      (≒6.3インチ)</strong> であれば、<strong>6.3 inch × 300 dpi = 1,890 px</strong>
+      となるため、図の横幅は少なくとも <strong>1,890 ピクセル以上</strong> としてください。</p>
+      <p>🚨 <u>ER図をベクタ形式 (SVG や WMF など)
+      で貼り付ける場合</u>は、解像度を意識する必要はありません。ただし、フォントをアウトライン化するなどして、どの環境でも文字化けや崩れが起きないよう配慮してください。</p>
+      <p>提出された課題は、<u>カラー印刷して紙面上で評価</u>します。提出前には実際に印刷して内容や仕上がりを確認するようにしてください。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>学校の課題で次のような指示を受けました。フォントのアウトライン化とは何ですか？👉「ER図をベクタ形式
+      (SVG や WMF など)
+      で貼り付ける場合は、フォントをアウトライン化するなどして、どの環境でも文字化けや崩れが起きないよう配慮してください。」</p>
+      </blockquote>
+      <h2 data-number="5.2" id="課題内容"><span class="header-section-number">5.2</span>
+      課題内容</h2>
+      <p>次の「<strong>演習1</strong>」から「<strong>演習3</strong>」について取り組んでください。演習
+      (＝ER図の作成) には <u>すべて同じツールを使用して取り組んでください</u>。</p>
+      <h3 data-number="5.2.1" id="演習1"><span class="header-section-number">5.2.1</span> 演習1</h3>
+      <p>次に示す「<strong>概念ER図</strong>」と同じ情報＆論理構造の概念ER図を作成して、それを雛形ファイルに貼り付けてください。</p>
+      <figure>
+      <img src="figs/06/CER-01-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h3 data-number="5.2.2" id="演習2"><span class="header-section-number">5.2.2</span> 演習2</h3>
+      <p>次に示す「<strong>論理ER図</strong>」と同じ情報＆論理構造の論理ER図を作成して、それを雛形ファイルに貼り付けてください。</p>
+      <figure>
+      <img src="figs/06/LER-01-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h3 data-number="5.2.3" id="演習3"><span class="header-section-number">5.2.3</span> 演習3</h3>
+      <p>本校の <strong>本科4年生</strong> を利用者とした <strong>提出物管理システム
+      (ウェブアプリ)</strong>
+      を題材としてデータベース設計を行い、「論理ER図」を作成して、それを雛形ファイルに貼り付けてください。</p>
+      <ul>
+      <li>テーブル名とカラム名は「英語」もしくは「ローマ字表記」の<strong>どちらか統一</strong>し、<strong>スネークケース</strong>
+      を使用してください。
+      <ul>
+      <li>英語表記とする場合は、テーブル名は「名詞の複数形または集合名詞」、カラム名は「名詞の単数形」にしてください。なお、応用専門分野や専門課題学習のような用語については、部分的に「ローマ字表記」を使用しても問題ありません。</li>
+      </ul></li>
+      <li>中間テーブルにかかるリレーションを除いて、原則として関連名 (動詞句)
+      も記載してください。</li>
+      <li>必要に応じて、以下のように大まかな型や日本語での説明補足をつけてください。</li>
+      </ul>
+      <figure>
+      <img src="figs/06/LER-02-4.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h3 data-number="5.2.4" id="共通の指示事項"><span class="header-section-number">5.2.4</span>
+      共通の指示事項</h3>
+      <ul>
+      <li>一般的に <strong>IE記法 (Crow’s Foot記法)</strong>
+      と言える範疇のものであれば体裁は自由に決定し、<strong>エンティティ配置や、 PK・FK
+      の表記など、論理構造に影響しない要素は任意に決めてください</strong>。
+      <ul>
+      <li>特に <strong><em>演習1</em></strong> と <strong><em>演習2</em></strong>
+      について、エンティティの配置などを必ずしも見本と一致させる同じである必要はありません。</li>
+      </ul></li>
+      <li><u>論理構造が正しいこと</u>および<u>図として読みやすく整っていること</u>が評価の観点となります。</li>
+      <li><strong><em>演習3</em></strong> については、設計内容の適切さも評価の観点となります。</li>
+      </ul>
+      <h1 data-number="6" id="授業時間外学習の指示-宿題"><span
+      class="header-section-number">6</span> 授業時間外学習の指示 (宿題)</h1>
+      <p>🚨<strong>本科目は「学修単位科目」であり、1回の講義あたり「4時間相当」の授業時間外学習が求められる科目です</strong>🏃</p>
+      <ul>
+      <li><strong><em>課題1</em></strong> に取り組んでください。</li>
+      <li>次回の講義で「<strong>小テスト❻</strong>」を実施します。
+      <ul>
+      <li><strong>定着確認</strong>から主に出題します。</li>
+      </ul></li>
+      <li>後期中間試験 (60分・筆記試験) については、次回講義で詳細を連絡します。
+      <ul>
+      <li><u>A5サイズ両面のメモ (手書き) は持ち込み可</u>とします。試験終了時に回収します。</li>
+      <li>主に「定着確認」と「SQLドリル」から出題します。</li>
+      </ul></li>
+      <li>次回の講義では、論理設計の仕上げとして「正規化」と「基礎的な物理設計と <code>CREATE</code>
+      文」を扱います。予習として📖 教科書「<strong>達人に学ぶDB設計 徹底指南書
+      (第2版)</strong>」の以下ページを読んできてください
+      (前回の予習指示と重複しますが、今回の授業内容を踏まえて、再度、読むことで理解が深まると思います)。
+      <ul>
+      <li>pp.89-123 第3章「論理設計と正規化」
+      <ul>
+      <li>3-3 正規化とは何か</li>
+      <li>3-4 第1正規形</li>
+      <li>3-5 第2正規形～部分関数従属</li>
+      <li>3-6 第3正規形～推移的関数従属</li>
+      </ul></li>
+      </ul></li>
+      </ul>
+      <hr />
+      <ul>
+      <li>この講義資料を再読・熟読し「不明な用語」や「理解が不十分な用語」があればインターネットや、ChatGPTなどの生成AIを利用して解決してください。また、興味関心を持ったトピックについて、ウェブ、生成AI、YouTube動画などを利用して知識を広げ、理解を深めてください。
+      <ul>
+      <li>特に <strong>(プロンプト例)</strong>
+      を示しているものについては、実際に生成AIにプロンプトを投げ、さらに対話を重ねることで、知識の幅を広げるだけでなく、理解をより深く確かなものにしてください。</li>
+      </ul></li>
+      </ul>
       <!-- ---------------------------------------- -->
     </main>
 
