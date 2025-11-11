@@ -163,8 +163,8 @@ class="toc-section-number">6</span> 授業時間外学習の指示 (宿題)</a><
       (<code>INSERT</code>、<code>SELECT</code>、<code>UPDATE</code>、<code>DELETE</code> など)</li>
       <li><strong>DDL</strong>: テーブルやデータベースの作成・変更
       (<code>CREATE</code>、<code>ALTER</code>、<code>DROP</code> など)</li>
-      <li><strong>DCL</strong>: アクセス権限の設定
-      (<code>GRANT</code>、<code>REVOKE</code>、<code>TRUNCATE</code> など)</li>
+      <li><strong>DCL</strong>: アクセス権限の設定 (<code>GRANT</code>、<code>REVOKE</code>
+      など)</li>
       </ul></li>
       </ul>
       <h3 data-number="2.0.1" id="定着確認"><span class="header-section-number">2.0.1</span>
@@ -479,16 +479,16 @@ class="toc-section-number">6</span> 授業時間外学習の指示 (宿題)</a><
       と呼ばれる <strong>エンティティ同士の</strong> <span class="masked">数量的な範囲や制約</span>
       を表現したものになります。</p>
       <p>例えば、下図の <font color="deeppink">❶</font> のようなカラスの足マーク (<code>多</code>
-      の記号表現) は「1つの Article は、<strong>複数の Commnet
+      の記号表現) は「1つの Article は、<strong>複数の Comment
       を持つことができる</strong>」という数量的性質を表しています。</p>
       <figure>
       <img src="figs/06/CER-01-4.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>一方、<font color="deeppink">❷</font> のような縦棒 (数字の <code>1</code> の記号表現) は、
-      「1つの Commnet は、<strong>1件の Article
+      「1つの Comment は、<strong>1件の Article
       に属する</strong>」という数量的性質を表しています。</p>
-      <p>このようなエンティティ同士の関係を、文字では「Article と Commnet に <code>1対多</code> や
+      <p>このようなエンティティ同士の関係を、文字では「Article と Comment に <code>1対多</code> や
       <code>1:多</code>、<code>1:N</code> の関係がある」のように表現します。</p>
       <hr />
       <p>別な例で考えてみます。例えば、ER図で Student (学生) と Subject (科目)
@@ -516,7 +516,7 @@ class="toc-section-number">6</span> 授業時間外学習の指示 (宿題)</a><
       <img src="figs/06/CER-01-3.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>なお、関連名/動詞句は「どちらのエンティティを基準にするか」によって表現が変わります。上記の例は、<strong>Commnet</strong>
+      <p>なお、関連名/動詞句は「どちらのエンティティを基準にするか」によって表現が変わります。上記の例は、<strong>Comment</strong>
       を基準に関連名/動詞句を記述すれば <code>belongs to</code> という表現になります。</p>
       <figure>
       <img src="figs/06/CER-01-7.png" alt="img" />
@@ -688,7 +688,7 @@ class="toc-section-number">6</span> 授業時間外学習の指示 (宿題)</a><
       <li>次に示す各説明を最も適切に表現した概念ER図を記号で答えよ。
       <ul>
       <li><strong>(1)</strong>
-      各キャラクタは、特定のイベントをクリアした後、3つのうち1つのキルドを選択して所属することができる。各ギルドは運営が作成するものであり、誰もメンバがいない状態もあり得る。
+      各キャラクタは、特定のイベントをクリアした後、3つのうち1つのギルドを選択して所属することができる。各ギルドは運営が作成するものであり、誰もメンバがいない状態もあり得る。
       <ul>
       <li><strong>答え</strong>: <span class="masked">(C)</span></li>
       </ul></li>
@@ -738,8 +738,8 @@ class="toc-section-number">6</span> 授業時間外学習の指示 (宿題)</a><
       を1件も持たないこともあり得る)。</li>
       <li>1件の Article は、必ず 1つ以上の Category に属する (どの Category
       にも属さないことは認められない)。</li>
-      <li>1つの Categorye は、0 件以上の複数の Article を持つことができる (Article を1件も持たない
-      Categorye もあり得る)。</li>
+      <li>1つの Category は、0 件以上の複数の Article を持つことができる (Article を1件も持たない
+      Category もあり得る)。</li>
       </ul>
       </blockquote>
       <p>また、個々の説明から分かるように、誤解や認識の齟齬を避けようと丁寧に記述すると、<strong>どうしても説明が冗長になりがち</strong>で、その作成や校正は非常に煩雑なものとなります。さらに、文章の列挙では
@@ -753,7 +753,7 @@ class="toc-section-number">6</span> 授業時間外学習の指示 (宿題)</a><
       を行ないます。ここでは、作成された概念ER図 (概念データモデル)
       をもとに、<strong>代表的なユースケースを具体的に想定しながら</strong>、次のような観点から検討します。</p>
       <ul>
-      <li><strong>どののような問い合わせ (検索・集計)
+      <li><strong>どのような問い合わせ (検索・集計)
       や更新処理を、どの程度の一貫性のもとで、どの程度の速度で実行する必要があるか</strong>
       <ul>
       <li>複雑な検索・結合・集計を行い、トランザクション整合性を重視するなら RDB</li>
@@ -897,9 +897,9 @@ class="toc-section-number">6</span> 授業時間外学習の指示 (宿題)</a><
   - `created_at` 日時型
   - `updated_at` 日時型
 
-- `articles` テーブル (Aarticle エンティティ)
+- `articles` テーブル (Article エンティティ)
   - `title`      文字列型
-  - `content     文字列型
+  - `content`    文字列型
   - `created_at` 日時型
   - `updated_at` 日時型
 
@@ -1046,8 +1046,10 @@ class="toc-section-number">6</span> 授業時間外学習の指示 (宿題)</a><
       <li><strong>一意に識別可能</strong>とは <span class="masked">複数のレコード (行)
       なかから、迷わずその1行だけを選びだすことができる</span> という意味です。</li>
       <li>RDB
-      の各テーブルでは、<strong>いずれかのカラムを必ず主キーとして設定する必要があります</strong>。
+      の各テーブルでは、<strong>いずれかのカラムを主キーとして設定する必要があります</strong>
+      (原則として設定することが望ましいです)。
       <ul>
+      <li>ログ用途やイベント収集用途などでは、明確な主キーを設けない場合もあります。</li>
       <li>PostgreSQL
       では主キーを設定しないテーブルも作成可能ですが、論理設計では主キーを定義することが原則となります。</li>
       </ul></li>
@@ -1159,7 +1161,7 @@ class="toc-section-number">6</span> 授業時間外学習の指示 (宿題)</a><
       といいます。</p>
       <div class="note type-senior">
       <p><strong>サロゲートキーとして連番を使うべきか、UUID などを使うべきか</strong></p>
-      <p>サロゲートキーには、整数の連番を使う方法と、UUID (主に v4natural ) や Nano ID
+      <p>サロゲートキーには、整数の連番を使う方法と、UUID (主に v4) や Nano ID
       などのランダムな識別子を使う方法があります。</p>
       <ul>
       <li><strong>連番ID</strong>は、検索や結合の処理も効率的に行えるため性能面で有利になります。しかし、値が連続して増えるために
