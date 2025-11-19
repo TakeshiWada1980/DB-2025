@@ -137,7 +137,7 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       <li>片面の <strong>右上部に横10cm、縦1.5cmの四角枠</strong> を作成して、そのなかに
       <code>XX番 高専 太郎</code>
       の形式で出席番号とフルネーム氏名を記入してください。四角枠内には、それ以外の情報を記入しないでください。</li>
-      <li>出席番号と氏名の枠がないメモ、<strong>手書き以外で作成したメモ (プリウントアウトやコピー)
+      <li>出席番号と氏名の枠がないメモ、<strong>手書き以外で作成したメモ (プリントアウトやコピー)
       の持ち込みは</strong> <strong><em>不正行為</em></strong> として扱います。</li>
       <li>ルーズリーフなども、<strong>A5サイズに切り取られたものであれば使用可能</strong>です。また、出席番号と氏名の<u>枠線、罫線や方眼などは印刷でも問題ありません</u>。</li>
       </ul></li>
@@ -152,7 +152,7 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       <li>第01回講義 から 第07回講義 (今回) の内容を出題範囲としています。</li>
       <li>本科目は、学修単位科目であり、その授業時間外学習を前提とした「難易度」で試験問題を作成しています。</li>
       <li><u>主として</u>「<strong>定着確認</strong>」と「<strong>SQLドリル</strong>」から出題します。ただし、そのままの出題ではなく類題や解答形式を変更した問題となることも想定してください。</li>
-      <li>実施済みの「<strong>小テスト</strong>」についても、十分に復習してしておいてください。特に、どのような問題で、どのような間違いをしたのか、は振り返っておいてください。
+      <li>実施済みの「<strong>小テスト</strong>」についても、十分に復習しておいてください。特に、どのような問題で、どのような間違いをしたのか、は振り返っておいてください。
       <ul>
       <li>小テストの解答例は Teams
       で公開済みです。今回の小テスト❻の解答例も、近日中にアップします。</li>
@@ -195,9 +195,9 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       今回の講義内容</h2>
       <p>前回の講義では、データベース設計の「概念設計」と「論理設計」を取り上げ、<strong>IE記法</strong>
       (Crow’s Foot記法)
-      によって「概念ER図」と「論理ER図」を作成する手順と、その具体的な読み取り方、作図法について学びました。この際、適切に論理ER図が設計していれば
+      によって「概念ER図」と「論理ER図」を作成する手順と、その具体的な読み取り方、作図法について学びました。この際、論理ER図が適切に設計されていれば
       <span class="masked">結果的に RDB
-      として自然に「正規化」されたテーブル構造になっている場合</span> がほとんどです。</p>
+      として自然に「正規化」されたテーブル構造になっていること</span> がほとんどです。</p>
       <p>ただし、必ずしも十分に正規化されているとは限らないため、今回の講義では、データの
       <strong><em>正規化</em></strong> (<strong>Normalization</strong>)
       という観点から、「RDBのテーブル設計」について詳しく学んでいきます。</p>
@@ -380,7 +380,7 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       </table>
       <ul>
       <li><strong>qty</strong> は <span class="masked">quantity (数量)</span>
-      の略表記です。略語としてよく使用されるでの覚えておいてください。</li>
+      の略表記です。略語としてよく使用されるので覚えておいてください。</li>
       </ul>
       <p><strong>非正規形テーブル1</strong> は、<strong>skill</strong> カラムに <span
       class="masked">非スカラー値 (複合値)</span>
@@ -601,21 +601,21 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       <tr class="odd">
       <td style="text-align: center;">2</td>
       <td style="text-align: left;">Bob</td>
-      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">3</td>
       <td style="text-align: left;">Ring</td>
       <td style="text-align: center;">3</td>
       </tr>
       <tr class="even">
       <td style="text-align: center;">3</td>
       <td style="text-align: left;">Charlie</td>
-      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">4</td>
       <td style="text-align: left;">Wand+1</td>
       <td style="text-align: center;">1</td>
       </tr>
       <tr class="odd">
       <td style="text-align: center;">3</td>
       <td style="text-align: left;">Charlie</td>
-      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">5</td>
       <td style="text-align: left;">Scroll</td>
       <td style="text-align: center;">4</td>
       </tr>
@@ -652,7 +652,7 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       定着確認</h3>
       <ul>
       <li>RDB の運用において、レコードの追加は DML操作 であるが、カラムの追加は DDL操作
-      であり、既存テーブルの構造変更をともうなため、その影響はシステム全体に及ぶ可能性がある。この説明は「適切である」か「適切ではない」か答えよ。
+      であり、既存テーブルの構造変更をともうなうため、その影響はシステム全体に及ぶ可能性がある。この説明は「適切である」か「適切ではない」か答えよ。
       <ul>
       <li><strong>答え</strong> : <span class="masked">適切である</span></li>
       </ul></li>
@@ -823,8 +823,8 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       定着確認</h3>
       <ul>
       <li>RDB において、id が決まれば name、age、address
-      が一意に決まるとき、その関係を適切に表現しているのは「name, age, adress は id
-      に関数従属する」と「id は name, age, adress
+      が一意に決まるとき、その関係を適切に表現しているのは「name, age, address は id
+      に関数従属する」と「id は name, age, address
       に関数従属する」のどちらか。「前者」または「後者」で答えよ。
       <ul>
       <li><strong>答え</strong> : <span class="masked">前者</span></li>
@@ -1773,7 +1773,7 @@ INSERT 0 2
       <h3 data-number="7.1.1" id="演習"><span class="header-section-number">7.1.1</span> 演習</h3>
       <ul>
       <li>上記のSQLの <strong>第25・26行目</strong>、<strong>第34・35行目</strong>
-      において「型付きリテラル」を使用ぜずとも、問題なくレコードが挿入できること確認してください。</li>
+      において「型付きリテラル」を使用せずとも、問題なくレコードが挿入できること確認してください。</li>
       <li>上記のSQLの <strong>第10行目</strong> を <code>notes TEXT NOT NULL,</code>
       に書き換えて実行すると、どのようになるか確認してください。確認後は、元に戻しておいてください。</li>
       <li>上記のSQLの <strong>第10行目</strong> を <code>notes VARCHAR(16),</code>
@@ -1847,7 +1847,7 @@ INSERT 0 2
       <li><code>TIMESTAMP</code>: 日付と時刻を <span class="masked">タイムゾーンなし</span>
       で扱う型になります。時刻は、100万分の1秒 (マイクロ秒) までの精度で保持されます。
       <ul>
-      <li>タイムゾーン情報を持たせる場合は <code>TIMESTAMPZ</code> を使用します。</li>
+      <li>タイムゾーン情報を持たせる場合は <code>TIMESTAMPTZ</code> を使用します。</li>
       </ul></li>
       </ul>
       <div class="note type-tips">
@@ -1876,7 +1876,7 @@ INSERT 0 2
       </ul></li>
       <li>PostgreSQL で、タイムゾーン情報ありの日時を扱うために最も適切なデータ型を答えよ。
       <ul>
-      <li><strong>答え</strong>: <span class="masked">TIMESTAMPZ。TIMESTAMP WITH TIME ZONE
+      <li><strong>答え</strong>: <span class="masked">TIMESTAMPTZ。TIMESTAMP WITH TIME ZONE
       でも可。</span></li>
       </ul></li>
       </ul>
