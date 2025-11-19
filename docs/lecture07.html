@@ -1827,8 +1827,8 @@ INSERT 0 2
       <strong>最大n文字までを格納可能な可変長文字列型</strong>です。<code>TEXT</code>
       型と同様、空文字と <code>NULL</code> は異なる値として扱われます。
       <ul>
-      <li>格納時に文字列長さがチェックされます。そのため、<code>TEXT</code>
-      型よりも、わずかに格納処理が遅くなります (十分無視できる程度の差になります)。</li>
+      <li>書き込みの際に文字数の確認が行われるため、<code>VARCHAR</code> のほうが <code>TEXT</code>
+      よりごくわずかに処理コストが高くなります。ただし、この差は通常のアプリでは誤差レベルとなります。</li>
       </ul></li>
       <li><code>DECIMAL(n, m)</code>: <strong>正確な精度を保持する数値型</strong>で、全体の桁数を
       <code>n</code>、そのうち小数点以下の桁数を <code>m</code> で指定します。
@@ -1857,6 +1857,15 @@ INSERT 0 2
       <p>ただし、本科目ではこれらの機能は扱わず、純粋な RDB
       としての「<strong>基本的なデータ型のみ</strong>」を対象とします。</p>
       </div>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>PostgreSQL に関する質問です。データ型の VARCHAR(n) と TEXT
+      は、どのように使い分けたら良いかを実務的な観点から語ってください。</p>
+      </blockquote>
+      <blockquote>
+      <p>PostgreSQL に関する質問です。データ型として DECIMAL(n, m) ではなく、単に DECIMAL
+      を指定すると、桁数や小数点以下の桁数が固定されない任意精度型になると聞きました。この任意精度型とは、どのようなものか、浮動小数点数型と比較しながら分かりやすく丁寧に解説してください。</p>
+      </blockquote>
       <h3 data-number="7.2.1" id="定着確認-9"><span class="header-section-number">7.2.1</span>
       定着確認</h3>
       <ul>
@@ -1964,7 +1973,8 @@ INSERT 0 2
       <li>④ <code>INSERT INTO character_items VALUES (1,-1, 0);</code></li>
       <li>⑤ <code>INSERT INTO character_items VALUES (NULL, 2, 1);</code></li>
       <li>➅ <code>INSERT INTO character_items VALUES (2, NULL, 1);</code></li>
-      <li><strong>答え</strong>: <span class="masked">③、⑤、⑥</span></li>
+      <li><strong>答え</strong>: <span class="masked">③ (＝UNIQUE制約に違反)、⑤・⑥ (＝NOT
+      NULL制約に違反)、</span></li>
       </ul></li>
       </ul>
       <div class="sourceCode" id="cb8" data-caption="定着確認"><pre
@@ -2064,9 +2074,9 @@ INSERT 0 2
       </table>
       <ul>
       <li><strong>author_id</strong> を導入せずに「<strong>book_id</strong> +
-      <strong>author_order</strong>」を複合主キーとしても、第1正規形としては正しいです。ただし、後続の第2正規形、第3正規形を見据えると、著者情報を独立したエンティティ
-      (テーブル) として分解できるように、<strong>author_id</strong>
-      を設ける構造にした方が望ましいです。</li>
+      <strong>author_order</strong>」を複合主キーとしても、第1正規形としては正しいです。ただし、後続の第2正規形、第3正規形を見据えると、著者情報を独立したテーブル
+      (エンティティ) として分解できるように、<strong>author_id</strong>
+      を設けるような構造にした方が望ましいです。</li>
       </ul>
       <h3 data-number="9.0.2" id="解答例-2nf-01"><span class="header-section-number">9.0.2</span>
       解答例-2nf-01</h3>
@@ -2289,7 +2299,8 @@ INSERT 0 2
       </tbody>
       </table>
       <ul>
-      <li>外部キーのカラム名は、参照先テーブルの主キー名と<strong>同一である必要はありません</strong>。たとえば、この例では、authors
+      <li>外部キーのカラム名は、参照先テーブルの主キー名と <span
+      class="masked">必ずしも同一である必要はありません</span>。たとえば、この例では、authors
       テーブルでは主キーを <strong>author_id</strong> とし、books
       テーブルではそれを指す外部キーとして <strong>primary_author_id</strong> を用いています。</li>
       </ul>
