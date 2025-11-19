@@ -1,0 +1,2353 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+type="text/javascript"></script> 
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>第07回 4I-データベース工学</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#連絡と準備" id="toc-連絡と準備"><span class="toc-section-number">1</span>
+連絡と準備</a>
+<ul>
+<li><a href="#後期中間試験に関する連絡" id="toc-後期中間試験に関する連絡"><span
+class="toc-section-number">1.1</span> 後期中間試験に関する連絡</a></li>
+<li><a href="#ハンズオン学習の準備" id="toc-ハンズオン学習の準備"><span
+class="toc-section-number">1.2</span> ハンズオン学習の準備</a></li>
+<li><a href="#今回の講義内容" id="toc-今回の講義内容"><span class="toc-section-number">1.3</span>
+今回の講義内容</a></li>
+</ul></li>
+<li><a href="#正規化-概要" id="toc-正規化-概要"><span class="toc-section-number">2</span> 正規化
+(概要)</a></li>
+<li><a href="#非正規形" id="toc-非正規形"><span class="toc-section-number">3</span>
+非正規形</a></li>
+<li><a href="#第1正規化" id="toc-第1正規化"><span class="toc-section-number">4</span>
+第1正規化</a></li>
+<li><a href="#第2正規化" id="toc-第2正規化"><span class="toc-section-number">5</span> 第2正規化</a>
+<ul>
+<li><a href="#関数従属" id="toc-関数従属"><span class="toc-section-number">5.1</span>
+関数従属</a></li>
+<li><a href="#部分関数従属と完全関数従属" id="toc-部分関数従属と完全関数従属"><span
+class="toc-section-number">5.2</span> 部分関数従属と完全関数従属</a></li>
+<li><a href="#第2正規形" id="toc-第2正規形"><span class="toc-section-number">5.3</span>
+第2正規形</a></li>
+</ul></li>
+<li><a href="#第3正規化" id="toc-第3正規化"><span class="toc-section-number">6</span> 第3正規化</a>
+<ul>
+<li><a href="#推移的関数従属" id="toc-推移的関数従属"><span class="toc-section-number">6.1</span>
+推移的関数従属</a></li>
+<li><a href="#第3正規形" id="toc-第3正規形"><span class="toc-section-number">6.2</span>
+第3正規形</a></li>
+<li><a href="#高次正規化" id="toc-高次正規化"><span class="toc-section-number">6.3</span>
+高次正規化</a></li>
+<li><a href="#論理設計のまとめ" id="toc-論理設計のまとめ"><span
+class="toc-section-number">6.4</span> 論理設計のまとめ</a></li>
+</ul></li>
+<li><a href="#物理設計-基礎" id="toc-物理設計-基礎"><span class="toc-section-number">7</span>
+物理設計 (基礎)</a>
+<ul>
+<li><a href="#テーブルの定義" id="toc-テーブルの定義"><span class="toc-section-number">7.1</span>
+テーブルの定義</a></li>
+<li><a href="#データ型" id="toc-データ型"><span class="toc-section-number">7.2</span>
+データ型</a></li>
+<li><a href="#非null制約-not-null制約" id="toc-非null制約-not-null制約"><span
+class="toc-section-number">7.3</span> 非NULL制約 (NOT NULL制約)</a></li>
+<li><a href="#primary-key指定" id="toc-primary-key指定"><span class="toc-section-number">7.4</span>
+PRIMARY KEY指定</a></li>
+</ul></li>
+<li><a href="#授業時間外学習の指示-宿題" id="toc-授業時間外学習の指示-宿題"><span
+class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a></li>
+<li><a href="#定着確認の解答例" id="toc-定着確認の解答例"><span class="toc-section-number">9</span>
+定着確認の解答例</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>2025-4I データベース工学 第07回 講義資料</p>
+      <p>2025年11月20日 (木) 3-4時限</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="連絡と準備"><span class="header-section-number">1</span>
+      連絡と準備</h1>
+      <ul>
+      <li><strong>小テスト❻</strong> を実施します。
+      <ul>
+      <li>シラバス記載のように、小テストは最終評価の <span class="masked">35%</span>
+      に相当します。</li>
+      <li>遅刻・欠席等により追試験を希望する場合は<a
+      href="lecture01.html#成績評価法と履修上の注意">第01回講義で案内した手続き</a>をしてください。</li>
+      </ul></li>
+      <li><a href="lecture06.html#課題1">課題1</a>の提出期限は <strong>11月26日 (水) 23時</strong>
+      です。</li>
+      </ul>
+      <h2 data-number="1.1" id="後期中間試験に関する連絡"><span
+      class="header-section-number">1.1</span> 後期中間試験に関する連絡</h2>
+      <p>後期中間試験 (筆記試験) は、11月28日 (金) の1時限目に試験時間
+      <strong><em>60分</em></strong> で実施します。</p>
+      <h3 data-number="1.1.1" id="持ち込み品について"><span
+      class="header-section-number">1.1.1</span> 持ち込み品について</h3>
+      <ul>
+      <li>ER図の作図も出題予定なので <strong><em>よく消える消しゴム</em></strong> と
+      <strong><em>直定規</em></strong> を準備してください。</li>
+      <li><strong>A5サイズ1枚の手書きのメモ</strong> (両面使用可・色ペンなど使用可)
+      を<strong>持ち込み可</strong>とします。持ち込みメモは、答案とともに提出してもらいます
+      (採点後に答案とともに返却します)。
+      <ul>
+      <li>片面の <strong>右上部に横10cm、縦1.5cmの四角枠</strong> を作成して、そのなかに
+      <code>XX番 高専 太郎</code>
+      の形式で出席番号とフルネーム氏名を記入してください。四角枠内には、それ以外の情報を記入しないでください。</li>
+      <li>出席番号と氏名の枠がないメモ、<strong>手書き以外で作成したメモ (プリウントアウトやコピー)
+      の持ち込みは</strong> <strong><em>不正行為</em></strong> として扱います。</li>
+      <li>ルーズリーフなども、<strong>A5サイズに切り取られたものであれば使用可能</strong>です。また、出席番号と氏名の<u>枠線、罫線や方眼などは印刷でも問題ありません</u>。</li>
+      </ul></li>
+      </ul>
+      <figure>
+      <img src="figs/07/item-01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h3 data-number="1.1.2" id="出題内容と範囲について"><span
+      class="header-section-number">1.1.2</span> 出題内容と範囲について</h3>
+      <ul>
+      <li>第01回講義 から 第07回講義 (今回) の内容を出題範囲としています。</li>
+      <li>本科目は、学修単位科目であり、その授業時間外学習を前提とした「難易度」で試験問題を作成しています。</li>
+      <li><u>主として</u>「<strong>定着確認</strong>」と「<strong>SQLドリル</strong>」から出題します。ただし、そのままの出題ではなく類題や解答形式を変更した問題となることも想定してください。</li>
+      <li>実施済みの「<strong>小テスト</strong>」についても、十分に復習してしておいてください。特に、どのような問題で、どのような間違いをしたのか、は振り返っておいてください。
+      <ul>
+      <li>小テストの解答例は Teams
+      で公開済みです。今回の小テスト❻の解答例も、近日中にアップします。</li>
+      <li>小テストでは部分点となっていた解答も、<u>試験では誤答 (部分点なし)</u>
+      とするので注意してください。</li>
+      </ul></li>
+      </ul>
+      <h3 data-number="1.1.3" id="sqlの記述について"><span
+      class="header-section-number">1.1.3</span> SQLの記述について</h3>
+      <ul>
+      <li>各種引用符は、実際のSQLで記述するように <code>'</code> と <code>"</code>
+      を使用してください。
+      <ul>
+      <li>「<code>‘</code> と <code>’</code>」「<code>“</code> と
+      <code>”</code>」のような<u>開始引用符と終了引用符の使用は誤答</u>として扱います。</li>
+      </ul></li>
+      <li>次のような <strong>SQLキーワード (予約語) や 型、関数などは全て「大文字」で記述</strong>
+      してください。
+      <ul>
+      <li><code>INSERT</code>、<code>INTO</code>、<code>VALUES</code>、<code>DELETE</code>、<code>SELECT</code>、<code>FROM</code>、<code>ORDER BY</code>、<code>LIMIT</code>、<code>OFFSET</code>、<code>WHERE</code>、<code>GROUP BY</code>、<code>HAVING</code>、<code>AND</code>、<code>OR</code>、<code>BETWEEN</code>、<code>NOT</code>、<code>AS</code>、<code>CASE</code>、<code>WHEN</code>、<code>THEN</code>、<code>ELSE</code>、<code>END</code>、<code>DISTINCT</code>、<code>ASC</code>、<code>DESC</code>
+      など</li>
+      <li><code>START TRANSACTION</code>、<code>ROLLBACK</code>、<code>COMMIT</code>、<code>ASC</code>、<code>DESC</code>
+      など</li>
+      <li><code>TRUE</code>、<code>FALSE</code> など</li>
+      <li><code>LOWER</code>、<code>UPPER</code>、<code>COALESCE</code>、<code>CAST</code>、<code>TO_CHAR</code>、<code>LOCALTIMESTAMP</code>、<code>LOCALTIME</code>、<code>CURRENT_DATE</code>
+      など</li>
+      </ul></li>
+      <li>テーブル名やカラム名は、<strong>問題文に示されたもの同じ表記 (大文字・小文字)</strong>
+      で記述してください。</li>
+      </ul>
+      <h2 data-number="1.2" id="ハンズオン学習の準備"><span class="header-section-number">1.2</span>
+      ハンズオン学習の準備</h2>
+      <p>次の手順でSQL演習環境の立ち上げと、教材の更新を取得してください。</p>
+      <ul>
+      <li><a href="lecture04.html#sql演習環境の動作確認-前回復習">SQL演習環境の動作確認</a>@
+      第04回講義</li>
+      <li><a href="lecture04.html#教材の更新の取得">教材の更新の取得</a>@ 第04回講義</li>
+      </ul>
+      <h2 data-number="1.3" id="今回の講義内容"><span class="header-section-number">1.3</span>
+      今回の講義内容</h2>
+      <p>前回の講義では、データベース設計の「概念設計」と「論理設計」を取り上げ、<strong>IE記法</strong>
+      (Crow’s Foot記法)
+      によって「概念ER図」と「論理ER図」を作成する手順と、その具体的な読み取り方、作図法について学びました。この際、適切に論理ER図が設計していれば
+      <span class="masked">結果的に RDB
+      として自然に「正規化」されたテーブル構造になっている場合</span> がほとんどです。</p>
+      <p>ただし、必ずしも十分に正規化されているとは限らないため、今回の講義では、データの
+      <strong><em>正規化</em></strong> (<strong>Normalization</strong>)
+      という観点から、「RDBのテーブル設計」について詳しく学んでいきます。</p>
+      <p>また、物理設計の基礎についても学び、実際に RDB に<strong>テーブルを作成</strong>するための
+      <code>CREATE</code> 文についても学んでいきます。</p>
+      <p>なお、正規化は <span class="masked">IPAの各種試験 (基本情報試験や応用情報試験)</span>
+      においても、知識や理解が問われるもの (頻出のテーマ)
+      になります。この講義のなかで、しっかりと学んでおくことをお勧めします。</p>
+      <ul>
+      <li>基本情報試験などは、受験から合格証書発送までに <strong>約2ヶ月のタイムラグ</strong>
+      があります。就活や単位認定に利用する場合は、早めに受験するようにしてください(<a
+      href="https://www.ipa.go.jp/shiken/mousikomi/cbt_sg_fe.html#cbt04">参考</a>)。</li>
+      </ul>
+      <h3 data-number="1.3.1" id="参考-基本情報技術者試験過去問道場"><span
+      class="header-section-number">1.3.1</span> 参考: 基本情報技術者試験過去問道場</h3>
+      <p><a
+      href="https://www.fe-siken.com/fekakomon.php">基本情報技術者試験過去問道場</a>では、当該試験の過去問に挑戦することができます。</p>
+      <h1 data-number="2" id="正規化-概要"><span class="header-section-number">2</span> 正規化
+      (概要)</h1>
+      <p>データベース設計における <strong><em>正規化</em></strong> (Normalization)
+      とは、<u>データの冗長性を排除し、効率的かつ一貫性が保たれるようにテーブルを設計</u>
+      するための概念、および、その具体的な作業を意味します。これは、エンティティの持つ情報を失うことなく、<strong>無損失分解の原則</strong>（＝<span
+      class="masked">分解しても元の情報を完全に復元できるという原則</span>）に従い、<strong>1事実1箇所</strong>
+      (1 fact in 1 place)
+      となるようにテーブルを分解していく作業になります。そして、その結果として得られるテーブル構造を
+      <strong><em>正規形</em></strong> (Normal Form) と呼びます。</p>
+      <p>正規形には、いくつかの段階 (レベル)
+      があります。非正規形からはじまり、第1正規形、第2正規形、第3正規形、ボイス・コッド正規形
+      (第3.5正規形)、第4正規形、第5正規形 へと整理していきます。ただし、実務上は <span
+      class="masked">第3正規形</span>
+      までで十分とされることが多く、本科目でも「<strong>第3正規形</strong>」までを扱います。なお、第1正規形
+      (First Normal Form)
+      は「<strong>1NF</strong>」のように略表記されることがあるので覚えておいてください。同様に
+      <strong>2NF</strong>、<strong>3NF</strong>… と表現されます。</p>
+      <p>整理すると以下のようになります。以下、これを詳しくみていきます。</p>
+      <ul>
+      <li><strong>非正規形</strong>:
+      非スカラー値を含むカラムが存在し、列方向に同種のデータが繰り返されている。</li>
+      <li><strong>第1正規形 (1NF)</strong>:
+      各カラムがスカラー値のみを格納し、列方向の繰り返しが排除されている。</li>
+      <li><strong>第2正規形 (2NF)</strong>: 第1正規形の要件を満たし、複合主キーの一部に対する
+      <strong>部分関数従属</strong> が排除されている。</li>
+      <li><strong>第3正規形 (3NF)</strong>: 第2正規形の要件を満たし、非キー属性同士の
+      <strong>推移的関数従属</strong> も排除されている。</li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>RDB設計に関する質問です。テーブルが正規形になっていないと何か困ることがあるのですか。簡単な例を示して教えてください。</p>
+      </blockquote>
+      <h3 data-number="2.0.1" id="定着確認"><span class="header-section-number">2.0.1</span>
+      定着確認</h3>
+      <ul>
+      <li>RDBにおいて、データの冗長性を排除し、効率的かつ一貫性が保たれるようにテーブルを設計するための概念を何というか。次のうち最も適切なものを答えよ。
+      <ul>
+      <li><strong>選択肢</strong>: 正則化，正規化，正準化，標準化</li>
+      <li><strong>答え</strong>: <span class="masked">正規化</span></li>
+      </ul></li>
+      <li>RDB の正規化に関する文脈で「2NF」は何の略語か英語および日本語で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">Second Normal Form (2nd Normal
+      Form)、第2正規形</span></li>
+      </ul></li>
+      <li>RDB
+      のテーブルは、理論上、非正規形から第5正規形まで段階的に正規化することができる。しかし、一般的な開発現場では通常
+      (　　　) までの正規化を行なう。括弧にあてはまる最も適切な語を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">第3正規形</span></li>
+      </ul></li>
+      <li>RDB
+      の正規化では、テーブルを分解する際、結合によって元のテーブルを完全に再構成できることが前提となる。この性質は、(　　　)
+      の原則と呼ばれる。括弧にあてはまる最も適切な語を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">無損失分解</span></li>
+      </ul></li>
+      <li>ボイス・コッド正規形は、(　　　) 正規形と (　　　)
+      正規形の中間に位置づけられる。括弧にあてはまる最も適切な語を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">第3、第4</span></li>
+      </ul></li>
+      </ul>
+      <h1 data-number="3" id="非正規形"><span class="header-section-number">3</span> 非正規形</h1>
+      <p><strong>非スカラー値 (＝複合値、つまり、単一ではない値)
+      を含むカラム</strong>が存在したり、<strong><u>列方向</u>に同種のデータが繰り返されている構造</strong>のテーブルは
+      <strong><em>非正規形</em></strong> (＝第1正規形（1NF）を満たしていない) とよばれます。</p>
+      <p>たとえば、次のようなテーブルは、典型的な <strong>非正規形</strong> (Unnormalized Form)
+      となります。テーブル上で、主キーは <u>下線</u> で示しています。</p>
+      <p><strong>▼ 非正規形テーブル1</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>character_id</u></th>
+      <th style="text-align: left;">name</th>
+      <th style="text-align: left;">job</th>
+      <th style="text-align: left;">skill</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: left;">Priest</td>
+      <td style="text-align: left;">Heal, Resurrection</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: left;">Monk</td>
+      <td style="text-align: left;">DragonKick</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: left;">Wizard</td>
+      <td style="text-align: left;">Fire, Thunder, Venom</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: left;">Wizard</td>
+      <td style="text-align: left;">Thunder</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>▼ 非正規形テーブル2</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>character_id</u></th>
+      <th style="text-align: left;">name</th>
+      <th style="text-align: left;">item1</th>
+      <th style="text-align: center;">qty1</th>
+      <th style="text-align: left;">item2</th>
+      <th style="text-align: center;">qty2</th>
+      <th style="text-align: left;">item3</th>
+      <th style="text-align: center;">qty3</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: left;">Map</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Potion</td>
+      <td style="text-align: center;">5</td>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;"></td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: left;">Ring</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;"></td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: left;">Wand+1</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Scroll</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Potion</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;"></td>
+      </tr>
+      </tbody>
+      </table>
+      <ul>
+      <li><strong>qty</strong> は <span class="masked">quantity (数量)</span>
+      の略表記です。略語としてよく使用されるでの覚えておいてください。</li>
+      </ul>
+      <p><strong>非正規形テーブル1</strong> は、<strong>skill</strong> カラムに <span
+      class="masked">非スカラー値 (複合値)</span>
+      を含んでいます。このようなテーブル設計にすると、個々の <strong>skill</strong>
+      を独立したデータとして扱うことができなくなり、<u>検索や更新における扱いが煩雑</u>
+      になります。たとえば「スキルとして <code>Heal</code>
+      を使えるキャラクターを検索したい」といった単純な問い合わせでも、<a
+      href="lecture04.html#like述語-like条件パターンマッチ演算子">LIKE述語</a>を使用した<strong>部分一致検索</strong>
+      (<code>WHERE skill LIKE '%Heal%'</code>)
+      が必要になり、<u>検索や更新に際して、正確性やパフォーマンスに関して考慮すべきことが多くなります</u>。</p>
+      <ul>
+      <li>部分一致検索は、インデックスを利用できないため、全件走査 (フルスキャン)
+      が必要であり、大量データを扱うときに性能面で大きな負荷となります。なお、インデックスについては、今後の授業で扱います。</li>
+      </ul>
+      <div class="note type-tips">
+      <p><strong>カラムに複合値を入れると検索精度や更新容易性が損なわれる理由</strong></p>
+      <p>単純な部分一致検索 <code>LIKE '%Heal%'</code> では <span class="masked">MegaHeal や
+      HealBlock</span> のように、名前の一部に Heal
+      を含むスキルを含むレコードを抽出してしまう可能性があります。</p>
+      <p>また、スキルの一部だけを更新したい場合 (たとえば <code>Fire, Thunder, Venom</code> に
+      <code>Quake</code> を追加するような処理)
+      に、<strong>文字列の部分編集や置換操作</strong>が必要となります。</p>
+      </div>
+      <p>また、<strong>非正規形テーブル2</strong> では、<span class="masked">同じ種類の情報
+      (アイテムとその数量) が列方向に繰り返されています</span>。これも、第1正規形 (1NF)
+      に違反する典型的なパターンとなります。このようなテーブル設計は「<strong>所持可能なアイテムを4種類に増やしたい</strong>」といった仕様変更に対して、<span
+      class="masked">新しいカラムの追加 (＝テーブルスキーマの変更)</span>
+      が必要となるという問題があります。</p>
+      <div class="note type-tips">
+      <p><strong>レコード追加とカラム追加は何が違うのか</strong></p>
+      <p>RDB において <code>INSERT</code> による「レコードの追加・削除」は <strong>DML操作</strong>
+      に属し、比較的軽い処理になります。これに対して「カラムの追加・削除」は <code>ALTER</code>
+      を用いた <strong>DDL操作</strong> は、テーブル構造そのもの (テーブルのスキーマ)
+      を書き換える処理となるため、負荷も時間も大きくなります。</p>
+      <p>さらに、スキーマの変更は、<u>既存 SQL
+      の前提を崩すおそれがあるため慎重に実行する必要</u>があります (既存の SQL
+      がカラム名や構造をどのように参照しているかを全て確認する必要があります)。このため、運用開始後にカラム追加が必要になる状況を極力避けられるようにテーブルを設計することが重要になります。</p>
+      </div>
+      <p>また、<strong>非正規形テーブル2</strong>
+      のようなテーブル構造は、大多数のキャラクタがアイテムを1種しか所持しないようなケース
+      (＝ほとんどのカラムが <code>NULL</code> となるようなケース)
+      では、ストレージを無駄に消費することになります。さらに、<code>SUM()</code> や
+      <code>COUNT()</code>
+      を使った集計処理を行う際にも、列を横断的に扱わねばならず、<u>SQLが複雑化し保守性や性能面で問題を抱える設計となります</u>。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>RDBに関する質問です。ワイルドカードを使用した部分一致検索は、インデックスを利用できないため、全件走査
+      (フルスキャン) が必要であると聞きました。そもそもインデックスとは何ですか。</p>
+      </blockquote>
+      <h3 data-number="3.0.1" id="定着確認-1"><span class="header-section-number">3.0.1</span>
+      定着確認</h3>
+      <ul>
+      <li>RDB において、配列やオブジェクトのような (　①　) を含むカラムが存在したり、(　②　)
+      方向に同種のデータが繰り返されている構造のテーブルを「非正規形」という。括弧にあてはまる最も適切な語を答えよ。
+      <ul>
+      <li><strong>答え</strong>: ① <span class="masked">「非スカラー値」または「複合値」</span></li>
+      <li><strong>答え</strong>: ② <span
+      class="masked">「列」。「横」でも良いが「列」が望ましい。</span></li>
+      </ul></li>
+      </ul>
+      <h1 data-number="4" id="第1正規化"><span class="header-section-number">4</span> 第1正規化</h1>
+      <p>第1正規化、つまり、<strong>非正規形を第1正規形に整える</strong>には、<strong>複合値や列方向
+      (横方向) に繰り返されている情報</strong>を <span class="masked">行方向 (縦方向)
+      に展開して保持する</span> ようにします。</p>
+      <p>具体的には、以下のようにします。</p>
+      <p><strong>▼ 先ほどの「非正規形テーブル1」を「第1正規化」したテーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>character_id</u></th>
+      <th style="text-align: left;">name</th>
+      <th style="text-align: left;">job</th>
+      <th style="text-align: left;">skill</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: left;">Priest</td>
+      <td style="text-align: left;">Heal</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: left;">Priest</td>
+      <td style="text-align: left;">Resurrection</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: left;">Monk</td>
+      <td style="text-align: left;">DragonKick</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: left;">Wizard</td>
+      <td style="text-align: left;">Fire</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: left;">Wizard</td>
+      <td style="text-align: left;">Thunder</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: left;">Wizard</td>
+      <td style="text-align: left;">Venom</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: left;">Wizard</td>
+      <td style="text-align: left;">Thunder</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>これにより、第1正規形の要件である「<u>各カラムがスカラー値のみを格納し、列方向の繰り返しが排除されている</u>」を満たした構造となりました。</p>
+      <p>ただし、このままで <strong>character_id</strong> という「主キー」だけでは、<span
+      class="masked">レコードを一意に識別できない構造となってしまっているため</span>、以下に示すように
+      <strong>skill_id</strong> カラムを追加して「<strong>複合主キー</strong>」を構成します。</p>
+      <p><strong>▼
+      「非正規形テーブル1」を「第1正規形」にして「複合主キー」を設定したテーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>character_id</u></th>
+      <th style="text-align: left;">name</th>
+      <th style="text-align: left;">job</th>
+      <th style="text-align: center;"><u>skill_id</u></th>
+      <th style="text-align: left;">skill</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: left;">Priest</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Heal</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: left;">Priest</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Resurrection</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: left;">Monk</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">DragonKick</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: left;">Wizard</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Fire</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: left;">Wizard</td>
+      <td style="text-align: center;">5</td>
+      <td style="text-align: left;">Thunder</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: left;">Wizard</td>
+      <td style="text-align: center;">6</td>
+      <td style="text-align: left;">Venom</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: left;">Wizard</td>
+      <td style="text-align: center;">5</td>
+      <td style="text-align: left;">Thunder</td>
+      </tr>
+      </tbody>
+      </table>
+      <hr />
+      <p>同様に、さきほどの <strong>非正規形テーブル2</strong>
+      についても、第1正規化して、さらに複合主キー (<strong>character_id</strong> と
+      <strong>item_id</strong>) を設定すると以下のようになります。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>character_id</u></th>
+      <th style="text-align: left;">name</th>
+      <th style="text-align: center;"><u>item_id</u></th>
+      <th style="text-align: left;">item</th>
+      <th style="text-align: center;">qty</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Map</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Potion</td>
+      <td style="text-align: center;">5</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Ring</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Wand+1</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Scroll</td>
+      <td style="text-align: center;">4</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Potion</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;"></td>
+      </tr>
+      </tbody>
+      </table>
+      <p>なお、上記の <strong>item_id</strong> のように、本来は主キー (複合主キーを含む) に <span
+      class="masked">NULL (空欄) を含めること</span> はできません。しかし、ここでは説明の都合上
+      (＝<span class="msaked">Ellen
+      のレコードを残しておくために</span>)、一時的に許容しています。この問題は、第2正規化のなかで解決していきます。</p>
+      <ul>
+      <li>第1正規形 (＝第2正規形未満) の問題として、上記の Ellen
+      のように複合主キーが設定できないレコードが存在することや、所有者がいないアイテム情報
+      (MegaPotionなど) を管理できないことが挙げられます。</li>
+      </ul>
+      <p>なお、第1正規形にしたことで「<strong>各キャラクタが所持可能なアイテム種は最大で3つまで</strong>」といった制約が無くなってしまいましたが、一般にこれらの制約は
+      <span class="masked">RDB を利用するアプリケーション側</span>
+      で管理・制御します。たとえば、<code>INSERT</code> の実行前に <code>SELECT COUNT(*)</code>
+      で現在の所持数を確認するなどの方法で対応します。</p>
+      <h3 data-number="4.0.1" id="定着確認-2"><span class="header-section-number">4.0.1</span>
+      定着確認</h3>
+      <ul>
+      <li>RDB の運用において、レコードの追加は DML操作 であるが、カラムの追加は DDL操作
+      であり、既存テーブルの構造変更をともうなため、その影響はシステム全体に及ぶ可能性がある。この説明は「適切である」か「適切ではない」か答えよ。
+      <ul>
+      <li><strong>答え</strong> : <span class="masked">適切である</span></li>
+      </ul></li>
+      <li>次に示す非正規形のテーブルを第1正規形に変換せよ。変換後のテーブルでは、各レコードが一意に識別できるように複合主キーを設定すること（必要に応じて新たなカラムを追加してよい）。
+      <ul>
+      <li>主キーを構成するカラムのヘッダ行には<u>下線</u>をつけること。</li>
+      <li>著者の並び順（author1、author2、author3
+      の順序情報）も保持すること。必要に応じて新たなカラムを追加してよい。</li>
+      <li><strong>答え</strong> : <a href="#解答例-1nf-01">こちら</a></li>
+      </ul></li>
+      </ul>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>book_id</u></th>
+      <th style="text-align: left;">title</th>
+      <th style="text-align: left;">author1</th>
+      <th style="text-align: left;">author2</th>
+      <th style="text-align: left;">author3</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">The Python</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: left;"></td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">The React 1</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: left;"></td>
+      <td style="text-align: left;"></td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">The React 2</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: left;">Charlie</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">The PostgreSQL</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: left;"></td>
+      </tr>
+      </tbody>
+      </table>
+      <h1 data-number="5" id="第2正規化"><span class="header-section-number">5</span> 第2正規化</h1>
+      <p>第1正規形の要件を満たし、<u>複合主キーの一部に対する <strong>部分関数従属</strong>
+      が排除</u> されている構造を <strong><em>第2正規形</em></strong> といいます。</p>
+      <p>まずは、<strong>関数従属</strong>
+      という概念について解説し、その後、第2正規化を解説します。なお、「関数従属」という用語は、資格試験などでも頻出するのでしっかりと理解しておいてください。</p>
+      <h2 data-number="5.1" id="関数従属"><span class="header-section-number">5.1</span>
+      関数従属</h2>
+      <p><strong>関数従属</strong> (<strong>FD: Functional Dependency</strong>) とは…</p>
+      <blockquote>
+      <p>ある属性集合 <span class="math inline">\(\mathrm{X}\)</span> の値が決まると、別の属性集合
+      <span class="math inline">\(\mathrm{Y}\)</span> の値も一意に定まる</p>
+      </blockquote>
+      <p>…という「<strong>属性間の関係を表す概念</strong>」になります。</p>
+      <p>このような関係があるとき「<u><span class="math inline">\(\mathrm{Y}\)</span> は <span
+      class="math inline">\(\mathrm{X}\)</span> に関数従属する</u>」と言い、記号では「 <span
+      class="math inline">\(\mathrm{X}\rightarrow\mathrm{Y}\)</span> 」や「 <span
+      class="math inline">\(\{x_1,\ x_2\}\rightarrow\{y_1,\ y_2,\ y_3\}\)</span>
+      」のように表現します。ただし <span class="math inline">\(\mathrm{X}=\{x_1,\
+      x_2\}\)</span>、<span class="math inline">\(\mathrm{Y}=\{y_1,\ y_2,\ y_3\}\)</span>
+      とします。</p>
+      <p>RDB のテーブル設計の文脈では、<strong>「あるカラム集合 <span
+      class="math inline">\(\mathrm{X}\)</span> の値」が決まると「別のカラム集合 <span
+      class="math inline">\(\mathrm{Y}\)</span> の値」が一意に決まるようなとき</strong>「<u><span
+      class="math inline">\(\mathrm{Y}\)</span> は <span class="math inline">\(\mathrm{X}\)</span>
+      に関数従属する </u>」といいます。単に「<u><span class="math inline">\(\mathrm{Y}\)</span> は
+      <span class="math inline">\(\mathrm{X}\)</span> に従属する」と表現する場合もあります。</p>
+      <ul>
+      <li>あとで詳しく解説しますが、関数従属には「部分関数従属」や「推移的関数従属」といった概念もあります。</li>
+      </ul>
+      <p>たとえば、次のようなテーブルがあるとします。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;">character_id</th>
+      <th style="text-align: center;">name</th>
+      <th style="text-align: center;">job_id</th>
+      <th style="text-align: center;">job</th>
+      <th style="text-align: center;">level</th>
+      <th style="text-align: center;">guild</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">Alice</td>
+      <td style="text-align: center;">J5</td>
+      <td style="text-align: center;">Priest</td>
+      <td style="text-align: center;">42</td>
+      <td style="text-align: center;">Yamato</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">Bob</td>
+      <td style="text-align: center;">J2</td>
+      <td style="text-align: center;">Monk</td>
+      <td style="text-align: center;">33</td>
+      <td style="text-align: center;">hameln</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">Charlie</td>
+      <td style="text-align: center;">J6</td>
+      <td style="text-align: center;">Wizard</td>
+      <td style="text-align: center;">57</td>
+      <td style="text-align: center;"></td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">Ellen</td>
+      <td style="text-align: center;">J6</td>
+      <td style="text-align: center;">Wizard</td>
+      <td style="text-align: center;">51</td>
+      <td style="text-align: center;"></td>
+      </tr>
+      </tbody>
+      </table>
+      <p>このとき、次のようなことが言えます。</p>
+      <ul>
+      <li><strong>character_id</strong>
+      が決まれば、<strong>name</strong>、<strong>job_id</strong>、<strong>job</strong>、<strong>level</strong>、<strong>guild</strong>
+      は一意に決まるので…
+      <ul>
+      <li><strong>name</strong>, <strong>job_id</strong>, <strong>job</strong>,
+      <strong>level</strong>, <strong>guild</strong> は、<strong>character_id</strong>
+      に<u>関数従属</u>する</li>
+      <li><span class="masked"><span class="math inline">\(\{\)</span> character_id <span
+      class="math inline">\(\} \rightarrow \{\)</span> name, job_id, job, level, guild <span
+      class="math inline">\(\}\)</span></span></li>
+      </ul></li>
+      <li><strong>job_id</strong> が決まれば、<strong>job</strong> は一意に決まるので…
+      <ul>
+      <li><strong>job</strong> は、<strong>job_id</strong> に<u>関数従属</u>する</li>
+      <li><span class="masked"><span class="math inline">\(\{\)</span> job_id <span
+      class="math inline">\(\} \rightarrow \{\)</span> job <span class="math inline">\(\}\)</span>
+      </span></li>
+      </ul></li>
+      </ul>
+      <p>なお、テーブルのなかに格納されている<u>現時点のレコードだけ</u>に着目すれば…</p>
+      <blockquote>
+      <p>character_id, name, job_id, job, guild は、level に関数従属する</p>
+      </blockquote>
+      <p>…のように判断できそうですが、<strong>これは誤り</strong>です。</p>
+      <p>正規化に関して、関数従属とは<strong>すべての可能なデータ状態において常に成り立つ制約</strong>を指し「<u>現時点のデータでは、たまたまそうなっているだけ
+      (つまり、偶然の一致や偶然依存) </u>」の関係については、関数従属とは見なしません。</p>
+      <p>たとえば、上記の例で、レベル51のキャラクタが<strong>将来的に複数存在する可能性がある場合</strong>、level
+      カラムから、他のカラムへの関数従属は成立しません。関数従属の判断は、<strong>ビジネスルールやドメイン知識に基づいた分析</strong>
+      が必要になる点に注意してください。</p>
+      <p>RDBのテーブルは、「主キー以外のすべてのカラム」が「主キー」に関数従属するように設計することが基本となります。ただし、第2正規形では、さらに
+      <u>複合主キーの一部に対する <strong>部分関数従属</strong>
+      を排除</u>し、<strong>完全関数従属</strong> することが求められます。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>RDBにおいて、関数従属であるかは、レコードのサンプルで判断するだけではなく、ドメイン知識に基づいて判断するべきであると説明されました。そもそも「ドメイン知識」とはなんですか。</p>
+      </blockquote>
+      <h3 data-number="5.1.1" id="定着確認-3"><span class="header-section-number">5.1.1</span>
+      定着確認</h3>
+      <ul>
+      <li>RDB において、id が決まれば name、age、address
+      が一意に決まるとき、その関係を適切に表現しているのは「name, age, adress は id
+      に関数従属する」と「id は name, age, adress
+      に関数従属する」のどちらか。「前者」または「後者」で答えよ。
+      <ul>
+      <li><strong>答え</strong> : <span class="masked">前者</span></li>
+      </ul></li>
+      <li>RDB において、id が決まれば name、age、address
+      が一意に決まるとき、この関係を関数従属を示す記号で表せ。
+      <ul>
+      <li><strong>答え</strong> : <span class="masked"><span class="math inline">\(\{\)</span> id
+      <span class="math inline">\(\} \rightarrow \{\)</span> name, age, address <span
+      class="math inline">\(\}\)</span> </span></li>
+      </ul></li>
+      <li>関数従属は「データの偶然の並び」によって判断するのではなく、属性間の意味的な結びつき
+      (制約)
+      として常に成り立つ関係として考えるべきである。この説明は「適切である」か「適切ではない」か答えよ。
+      <ul>
+      <li><strong>答え</strong> : <span class="masked">適切である</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="5.2" id="部分関数従属と完全関数従属"><span
+      class="header-section-number">5.2</span> 部分関数従属と完全関数従属</h2>
+      <p>RDB において、<u>テーブルの主キーが複数のカラムから構成</u>される場合
+      (つまり、複合主キーである場合)、その<u>主キーを構成するカラムの一部だけに従属するカラム</u>が存在することがあります。</p>
+      <p>たとえば、以下のようなテーブルがあるとします。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>character_id</u></th>
+      <th style="text-align: left;">name</th>
+      <th style="text-align: center;"><u>item_id</u></th>
+      <th style="text-align: left;">item</th>
+      <th style="text-align: center;">qty</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Map</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Potion</td>
+      <td style="text-align: center;">5</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Ring</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Wand+1</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">5</td>
+      <td style="text-align: left;">Scroll</td>
+      <td style="text-align: center;">4</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Potion</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;"></td>
+      </tr>
+      </tbody>
+      </table>
+      <p>このテーブルは <strong>character_id</strong> と <strong>item_id</strong>
+      で複合主キーを構成していますが、次のように
+      <strong>複合主キーの「一部だけ」に従属するカラム</strong> が存在しています。</p>
+      <ul>
+      <li><strong>item</strong> カラムは、<strong>item_id だけ</strong> に従属しています
+      <ul>
+      <li><strong>item_id</strong> だけで <strong>item</strong>
+      が一意に決定し、<strong>character_id</strong> には依存していません</li>
+      </ul></li>
+      <li><strong>name</strong> カラムは <strong>character_id だけ</strong> に従属しています
+      <ul>
+      <li><strong>character_id</strong> だけで <strong>name</strong>
+      が一意に決定し、<strong>item_id</strong> には依存していません</li>
+      </ul></li>
+      </ul>
+      <p>このような状態を <strong><em>部分関数従属</em></strong> (PFD: Partial Functional
+      Dependency)
+      といいます。それに対して、<u>複合主キーのすべてのカラムをそろえてはじめて値が一意に決定する関係</u>を
+      <strong>完全関数従属</strong> (FFD: Full Functional Dependency) といいます。</p>
+      <p>たとえば、上記のテーブルで <span class="masked">qty</span> カラムは、character_id と
+      item_id の両方がそろわなければ値が一意に決まってきません。このようなとき、<u>qty は
+      character_id と item_id に完全関数従属している</u> といいます。</p>
+      <div class="note type-tips">
+      <p>主キーが1つのカラムで構成される場合
+      (＝複合主キーではない場合)、主キーに「部分」という概念が存在しないため、部分関数従属の関係になるようなカラムは存在しません。ただし、<a
+      href="lecture06.html#nameカラムを主キーにできるか">サロゲートキー</a>を設定しているときは、<u>潜在的に部分関数従属が存在している場合</u>があり、第2正規化では、そのようなケースを含めて排除する必要があります。</p>
+      </div>
+      <h3 data-number="5.2.1" id="定着確認-4"><span class="header-section-number">5.2.1</span>
+      定着確認</h3>
+      <p>次のテーブルは、<strong>book_id</strong> と <strong>author_id</strong>
+      により、複合主キーが設定されている。以下の各問いに答えよ。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>book_id</u></th>
+      <th style="text-align: center;"><u>author_id</u></th>
+      <th style="text-align: left;">title</th>
+      <th style="text-align: left;">author</th>
+      <th style="text-align: center;">author_order</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">New Python</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">New Python</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">The React 1</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">The React 2</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">The React 2</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">The React 2</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">PostgreSQL</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">PostgreSQL</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      </tbody>
+      </table>
+      <ul>
+      <li>このテーブルは、第1正規形としての要件を「満たしている」か「満たしていない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">満たしている</span></li>
+      </ul></li>
+      <li><strong>title</strong>
+      カラムは、この複合主キーに対して「部分関数従属」しているか、「完全関数従属」しているかを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">部分関数従属</span></li>
+      </ul></li>
+      <li><strong>author</strong>
+      カラムは、この複合主キーに対して「部分関数従属」しているか、「完全関数従属」しているかを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">部分関数従属</span></li>
+      </ul></li>
+      <li><strong>author_order</strong>
+      カラムは、この複合主キーに対して「部分関数従属」しているか、「完全関数従属」しているかを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">完全関数従属</span></li>
+      </ul></li>
+      <li>このテーブルは、第2正規形としての要件を「満たしている」か「満たしていない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked">部分関数従属を含むため、満たしていない。</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="5.3" id="第2正規形"><span class="header-section-number">5.3</span>
+      第2正規形</h2>
+      <p><strong>第2正規化</strong> では、第1正規形の要件を満たしつつ、複合主キーの一部に対する
+      <strong>部分関数従属</strong> を排除するように (＝<span class="masked">完全関数従属</span>
+      になるように) テーブルを分解していきます。</p>
+      <p>たとえば、次のようなテーブル (＝部分関数従属を含むテーブル) があるとき…</p>
+      <p><strong>▼ 第1正規形 (第2正規形未満)</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>character_id</u></th>
+      <th style="text-align: left;">name</th>
+      <th style="text-align: center;"><u>item_id</u></th>
+      <th style="text-align: left;">item</th>
+      <th style="text-align: center;">qty</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Map</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Potion</td>
+      <td style="text-align: center;">5</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Ring</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Wand+1</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">5</td>
+      <td style="text-align: left;">Scroll</td>
+      <td style="text-align: center;">4</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Potion</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;"></td>
+      </tr>
+      </tbody>
+      </table>
+      <p>このテーブルを、第2正規形の要件を満たすように<strong>3つのテーブルに分解</strong>することができます。一部、カラム名を整理しています。</p>
+      <p><strong>▼ characters テーブル (第2正規形)</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>character_id</u></th>
+      <th style="text-align: left;">name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Bob</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Ellen</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>▼ items テーブル (第2正規形)</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>item_id</u></th>
+      <th style="text-align: left;">name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Map</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Potion</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Ring</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Wand+1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">5</td>
+      <td style="text-align: left;">Scroll</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>▼ character_items テーブル (第2正規形・複合主キー・完全関数従属)</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>character_id</u><br>(FK)</th>
+      <th style="text-align: center;"><u>item_id</u><br>(FK)</th>
+      <th style="text-align: center;">qty</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">5</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">5</td>
+      <td style="text-align: center;">4</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      </tbody>
+      </table>
+      <ul>
+      <li><strong>FK</strong> は、外部キー (＝<span
+      class="masked">他テーブルの主キーを参照するカラム</span>) であることを表しています。</li>
+      </ul>
+      <p>既に気づいたかもしれませんが、この分解操作は、前回講義で学んだ<a
+      href="lecture06.html#多対多のリレーションの分割-中間テーブル化">多対多のリレーションの分割
+      (中間テーブル化)</a>と本質的に同じ考え方です。そのため、論理ER図を適切に設計できていれば、結果として自然に第2正規形となっている場合が少なくありません。</p>
+      <figure>
+      <img src="figs/07/LER-04-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h3 data-number="5.3.1" id="定着確認-5"><span class="header-section-number">5.3.1</span>
+      定着確認</h3>
+      <ul>
+      <li>RDB において第2正規形とは、第1正規形の要件を満たしつつ、複合主キーの一部に対する (　　　)
+      が排除されている構造を指す。括弧にあてはまる最も適切な語を答えよ。
+      <ul>
+      <li><strong>答え</strong> : <span class="masked">部分関数従属</span></li>
+      </ul></li>
+      <li>RDB において第2正規形とは、第1正規形の要件を満たしつつ、非キー属性が複合主キー全体に対して
+      (　　　) している状態を指す。括弧にあてはまる最も適切な語を答えよ。
+      <ul>
+      <li><strong>答え</strong> : <span class="masked">完全関数従属</span></li>
+      </ul></li>
+      <li>次に示す第1正規形のテーブルを、第2正規形の要件を満たす複数のテーブルに分解せよ。分解後の各テーブルには、適切なテーブル名を付け、必要に応じてカラム名も整理すること。また、各テーブルには主キー
+      (必要に応じてサロゲートキーを含む) を設定すること。
+      <ul>
+      <li>主キーを構成するカラムのヘッダ行には<u>下線</u>をつけること。</li>
+      <li><strong>答え</strong>: <a href="#解答例-2nf-01">こちら</a></li>
+      </ul></li>
+      </ul>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>book_id</u></th>
+      <th style="text-align: center;"><u>author_id</u></th>
+      <th style="text-align: left;">title</th>
+      <th style="text-align: left;">author</th>
+      <th style="text-align: center;">author_order</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">New Python</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">New Python</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">The React 1</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">The React 2</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">The React 2</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">The React 2</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">PostgreSQL</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">PostgreSQL</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      </tbody>
+      </table>
+      <ul>
+      <li>上記で第2正規形に分解して得られたテーブル群について、それらの構造と関連を示す「論理ER図」を作成せよ。なお、1冊の書籍には必ず1名以上の著者が存在し、一方で著者は書籍を持たない場合があるものとしてオプショナリティを適切に設定すること。
+      <ul>
+      <li><strong>答え</strong>: <a href="figs/07/LER-04-3.png">作成例</a></li>
+      </ul></li>
+      </ul>
+      <h1 data-number="6" id="第3正規化"><span class="header-section-number">6</span> 第3正規化</h1>
+      <p><strong>第3正規化</strong> では、第2正規形の要件を満たしつつ、<u>非キー属性同士</u>の
+      <strong>推移的関数従属</strong> を排除していきます。非キー属性とは <span
+      class="masked">主キーを構成しないカラム、つまり主キー以外のすべてのカラム</span>
+      を指します。</p>
+      <h2 data-number="6.1" id="推移的関数従属"><span class="header-section-number">6.1</span>
+      推移的関数従属</h2>
+      <p><strong>推移的関数従属</strong> (TFD: Transitive Functional Dependency)
+      とは、<strong>主キー以外のカラムに関数従属している関係</strong>
+      を表します。砕けた表現をすれば「<u>主キー以外のカラムが「中継点」のようになって、別の非キーを決めてしまう関係</u>」を推移的関数従属といいます。</p>
+      <p>つまり、<u><span class="math inline">\(\{\)</span> 主キー<span class="math inline">\(\}
+      \rightarrow  \{\)</span> 非キーA <span class="math inline">\(\} \rightarrow  \{\)</span>
+      非キーB <span class="math inline">\(\}\)</span></u>
+      という依存の連鎖があるとき「<strong>非キーBは、主キーに推移的に従属している</strong>」のように表現します。</p>
+      <p>たとえば、次のようなテーブルを考えます。このテーブルで「主キー」は <u>下線</u> で示すように
+      <strong>character_id</strong> であり、「<strong>非キー</strong>」は <span
+      class="masked">name、job_id、job_name</span> となります。このテーブルは…</p>
+      <ul>
+      <li>各カラムがスカラー値のみを格納し、列方向の繰り返しが排除されているので、<strong>第1正規形</strong>の要件を満たしています。</li>
+      <li>複合主キーを構成していないので部分関数従属は存在せず、<strong>第2正規形</strong>の要件も満たしています。</li>
+      </ul>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>character_id</u></th>
+      <th style="text-align: left;">name</th>
+      <th style="text-align: center;">job_id</th>
+      <th style="text-align: left;">job_name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: center;">J5</td>
+      <td style="text-align: left;">Priest</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: center;">J2</td>
+      <td style="text-align: left;">Monk</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">J6</td>
+      <td style="text-align: left;">Wizard</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: center;">J6</td>
+      <td style="text-align: left;">Wizard</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>このテーブルで注目すべきは、</p>
+      <ul>
+      <li>主キーである <strong>character_id</strong> が決まれば <strong>job_id</strong>
+      は一意に決まる</li>
+      <li>そして、非キーである <strong>job_id</strong> が決まれば <strong>job_name</strong>
+      は一意に決まる (＝主キーである <strong>character_id</strong> によって直接的に
+      <strong>job_name</strong> が決まっている訳ではない)</li>
+      </ul>
+      <p>という構造になります。つまり、<u><span class="math inline">\(\{\)</span> character_id <span
+      class="math inline">\(\} \rightarrow  \{\)</span> job_id <span class="math inline">\(\}
+      \rightarrow  \{\)</span> job_name <span class="math inline">\(\}\)</span></u>
+      という関係が成立し、「<strong>job_name
+      は、主キーに推移的に従属している</strong>」といえます。</p>
+      <p>このような <strong>推移的関数従属</strong> を排除するようにテーブルを分解する操作が
+      <strong>第3正規化</strong> となります。</p>
+      <h2 data-number="6.2" id="第3正規形"><span class="header-section-number">6.2</span>
+      第3正規形</h2>
+      <p>次のような推移的関数従属 (＝具体的には <span class="masked"><span
+      class="math inline">\(\{\)</span> character_id <span class="math inline">\(\}
+      \rightarrow  \{\)</span> job_id <span class="math inline">\(\} \rightarrow  \{\)</span>
+      job_name <span class="math inline">\(\}\)</span></span>) を含むテーブルは…</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>character_id</u></th>
+      <th style="text-align: left;">name</th>
+      <th style="text-align: center;">job_id</th>
+      <th style="text-align: left;">job_name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: center;">J5</td>
+      <td style="text-align: left;">Priest</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: center;">J2</td>
+      <td style="text-align: left;">Monk</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">J6</td>
+      <td style="text-align: left;">Wizard</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: center;">J6</td>
+      <td style="text-align: left;">Wizard</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>以下のような第3正規形の2つのテーブル (<strong>characters</strong> と <strong>jobs</strong>)
+      に分解することができます。</p>
+      <p><strong>▼ characters テーブル (第3正規形)</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>character_id</u></th>
+      <th style="text-align: left;">name</th>
+      <th style="text-align: center;">job_id (FK)</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: center;">J5</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: center;">J2</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">J6</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: center;">J6</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>▼ jobs テーブル (第3正規形)</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>job_id</u></th>
+      <th style="text-align: left;">name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">J1</td>
+      <td style="text-align: left;">Fighter</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">J2</td>
+      <td style="text-align: left;">Monk</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">J3</td>
+      <td style="text-align: left;">Ninja</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">J4</td>
+      <td style="text-align: left;">Samurai</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">J5</td>
+      <td style="text-align: left;">Priest</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">J6</td>
+      <td style="text-align: left;">Wizard</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>これらのテーブルについて「論理ER図」を作成すると次のようになります (characters テーブルの
+      <strong>job_id</strong> カラムに <span class="masked">NOT NULL制約</span>
+      を想定して作成した図になります)。</p>
+      <figure>
+      <img src="figs/07/LER-04-2.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>第3正規形にすることで、<strong>いずれのキャラクタも就いていないジョブ情報</strong>
+      (たとえば、Fighter や Ninja、Samurai など) が保持可能な構造になることに注目してください。</p>
+      <ul>
+      <li>元々の1つのテーブルでは、そのジョブに就いているキャラクタが存在しないと、Fighter や Ninja
+      などのジョブ情報をシステムとして持てない構造 (＝問題のある構造) になっています。</li>
+      </ul>
+      <h3 data-number="6.2.1" id="定着確認-6"><span class="header-section-number">6.2.1</span>
+      定着確認</h3>
+      <ul>
+      <li>RDB における第3正規形とは、第2正規形を満たしたうえで、すべての非キー属性が (　　　)
+      のみに関数従属している状態、すなわち推移的関数従属が存在しない構造を指す。括弧にあてはまる最も適切な語を答えよ。
+      <ul>
+      <li><strong>答え</strong> : <span class="masked">主キー</span></li>
+      </ul></li>
+      <li>次に示すテーブルに内在している「推移的関数従属」を、関数従属を示す記号により表せ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked"><span class="math inline">\(\{\)</span>
+      book_id <span class="math inline">\(\} \rightarrow  \{\)</span> primary_author <span
+      class="math inline">\(\} \rightarrow  \{\)</span> primary_author_tel <span
+      class="math inline">\(\}\)</span></span></li>
+      <li><strong>答え</strong>: <span class="masked"><span class="math inline">\(\{\)</span>
+      book_id <span class="math inline">\(\} \rightarrow  \{\)</span> publisher <span
+      class="math inline">\(\} \rightarrow  \{\)</span> publisher_tel <span
+      class="math inline">\(\}\)</span></span></li>
+      </ul></li>
+      </ul>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>book_id</u></th>
+      <th style="text-align: left;">title</th>
+      <th style="text-align: left;">primary_author</th>
+      <th style="text-align: left;">primary_author_tel</th>
+      <th style="text-align: left;">publisher</th>
+      <th style="text-align: left;">publisher_tel</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">New Python</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: left;">5501</td>
+      <td style="text-align: left;">Hoge Inc.</td>
+      <td style="text-align: left;">4771</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">React 1</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: left;">3000</td>
+      <td style="text-align: left;">Fuga Inc.</td>
+      <td style="text-align: left;">4649</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">React 2</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: left;">3000</td>
+      <td style="text-align: left;">Fuga Inc.</td>
+      <td style="text-align: left;">4649</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">PostgreSQL</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: left;">5432</td>
+      <td style="text-align: left;">Hoge Inc.</td>
+      <td style="text-align: left;">4771</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">5</td>
+      <td style="text-align: left;">Hello COBOL</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: left;">8080</td>
+      <td style="text-align: left;">Piyo Inc.</td>
+      <td style="text-align: left;">2951</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">6</td>
+      <td style="text-align: left;">OpenCV !</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: left;">5501</td>
+      <td style="text-align: left;">Piyo Inc.</td>
+      <td style="text-align: left;">2951</td>
+      </tr>
+      </tbody>
+      </table>
+      <ul>
+      <li>上記に示したテーブルを、第3正規形としての要件を満たす複数のテーブルに分解せよ。
+      <ul>
+      <li>分解後の各テーブルには、内容に応じた適切な名前を付けて、カラム名も整理すること。</li>
+      <li>各テーブルには主キー (必要に応じてサロゲートキーを含む)
+      を設定し、主キーとなるカラムの見出しには<u>下線</u>を付けて示すこと。</li>
+      <li>外部キーのカラムには、カラムの見出しに <code>(FK)</code> を付けて示すこと。</li>
+      <li><strong>答え</strong>: <a href="#解答例-3nf-01">こちら</a></li>
+      </ul></li>
+      <li>上記で第3正規形に分解して得られたテーブル群について、それらの構造と関連を示す「論理ER図」を作成せよ。なお、リレーションには、books
+      エンティティ (テーブル) を基準とした関連名 (動詞句) を記載すること。
+      <ul>
+      <li><strong>答え</strong>: <a href="figs/07/LER-04-4.png">作成例</a></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="6.3" id="高次正規化"><span class="header-section-number">6.3</span>
+      高次正規化</h2>
+      <p>ここまで、<strong>第1正規形</strong>、<strong>第2正規形</strong>、<strong>第3正規形</strong>
+      と順に解説してきました。先にも触れたように、この先には ボイス・コッド正規形
+      (第3.5正規形)、第4正規形、第5正規形
+      と続いていきますが、実務でも資格試験でも、<u>第3正規形まで満たせていれば十分なケースがほとんど</u>であり、本講義でもそこまでの解説に留めています。</p>
+      <p>正規化について、より深く学びたい学生は、📖 教科書「<strong>達人に学ぶDB設計 徹底指南書
+      (第2版)</strong>」で丁寧に解説されているので、読んでみてください。</p>
+      <ul>
+      <li>第3章「論理設計と正規化」
+      <ul>
+      <li>3-7 <strong>ボイス・コッド正規形</strong> (pp.124-130)</li>
+      <li>3-8 <strong>第4正規形</strong> (pp.131-135)</li>
+      <li>3-9 <strong>第5正規形</strong> (pp.136-144)</li>
+      </ul></li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>RDB
+      の設計に関する質問です。実務においては第3正規形までの正規化で十分なケースが多いと聞きました。なぜ、第4正規形、第5正規形まで正規化をしないのですか。どのような背景や理由があるのですか。</p>
+      </blockquote>
+      <h2 data-number="6.4" id="論理設計のまとめ"><span class="header-section-number">6.4</span>
+      論理設計のまとめ</h2>
+      <p>ここまでに解説してきたものは「<strong>形式的に正しい構造をつくる</strong>」という側面での論理設計でしたが、現実の開発では「<strong>どのように
+      アプリ から DB
+      を使うのか</strong>」という側面からの設計テクニックや、逆に避けるべきアンチパターンも数多く存在します。これらはビジネスルールやドメイン知識に強く依存するため、授業では踏み込みませんが、Zenn、Qiita、書籍、動画などのナレッジを追いかけておくことで、より現場に近いデータベース設計の感覚を身につけることができるようになります。</p>
+      <p>以下の動画は、<strong>初心者がやらかしがちなデータベース設計のアンチパターン</strong>についてクイズ形式で解説しているものになります。ここまでに学んだ知識で十分に理解できる内容となっています。短時間で視聴できる動画なので、ぜひ、視聴してみてください。</p>
+      <ul>
+      <li><a
+      href="https://www.youtube.com/watch?v=di5zRn6b29Y">【初心者向け】クソデータベース設計をしないためのテクニック4選</a><span
+      class="citation" data-cites="YouTube">@YouTube</span> (7:51)</li>
+      <li><a
+      href="https://www.youtube.com/watch?v=nqOIHubpygU">【初心者向け】クソデータベース設計をしないためのテクニック5選</a><span
+      class="citation" data-cites="YouTube">@YouTube</span> (6:56)</li>
+      </ul>
+      <p>また、現場で遭遇する「論理設計のアンチパターン」については📖
+      教科書「<strong>達人に学ぶDB設計 徹底指南書
+      (第2版)</strong>」でも解説されているので、興味のある学生は読んでみてください。上記の動画と同様に、ここまでの授業内容が理解できていれば、概ね内容を理解することができると思います。</p>
+      <ul>
+      <li>第7章「<strong>論理設計のアンチパターン</strong>」pp.225-262</li>
+      <li>第8章「<strong>論理設計のグレーノウハウ</strong>」pp.263-302</li>
+      </ul>
+      <h1 data-number="7" id="物理設計-基礎"><span class="header-section-number">7</span> 物理設計
+      (基礎)</h1>
+      <p>物理設計 (Physical Design) では、PostgreSQL や MySQL などの実際の RDBMS
+      で動作させることを前提に、具体的なテーブルやインデックスの設計を行います。ここには、<strong>データ型の選択</strong>、<strong>外部キーやCHECK制約などの設定</strong>、<strong>テーブル定義</strong>
+      (＝<code>CREATE TABLE</code> などのDDL
+      の記述)、検索性能を意識したインデックス設計といった作業が含まれます。</p>
+      <p>また、物理設計には、ストレージ、メモリ、CPU
+      などハードウェア特性を踏まえたストレージ構成、冗長化の仕組み (たとえば
+      RAID構成など)、バックアップやレプリケーション、負荷分散など、ハードウェアおよび運用面を含めた設計も含まれます。</p>
+      <p>なお、本講義ではまず、これらのうち<u>「テーブル設計」「制約設定」「インデックス設計」など、RDBMS
+      上で完結する基礎的な物理設計を中心に扱います</u>。RDBMS としては PostgreSQL 17
+      を想定します。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>データベースにおける「レプリケーション」とはどのようなものですか。「バックアップ」とは何が違いますか。</p>
+      </blockquote>
+      <h3 data-number="7.0.1" id="定着確認-7"><span class="header-section-number">7.0.1</span>
+      定着確認</h3>
+      <ul>
+      <li>データベースの「概念設計」「論理設計」「物理設計」のうち、ハードウェア構成や
+      RAID、レプリケーションなどを扱う段階はどれか。
+      <ul>
+      <li><strong>答え</strong>：<span class="masked">物理設計</span></li>
+      </ul></li>
+      <li>データベースの物理設計には、障害復旧の仕組みやパフォーマンスチューニングのような運用面の検討は含まれない。この説明は「適切である」か「適切ではない」か答えよ。
+      <ul>
+      <li><strong>答え</strong>：<span class="masked">適切ではない</span></li>
+      </ul></li>
+      <li>データベース (RDB) の物理設計に含まれる作業として適切なものを <u>すべて選択して</u>
+      記号で答えよ。
+      <ul>
+      <li>① テーブルごとのデータ型・制約の設計</li>
+      <li>② ユースケース図の作成</li>
+      <li>③ 正規化による関係の整理</li>
+      <li>④ エンティティやリレーションの抽出</li>
+      <li>⑤ <code>CREATE TABLE</code> などの DDL 記述</li>
+      <li>⑥ CPU・メモリ搭載量を前提にした性能設計</li>
+      <li><strong>答え</strong>：<span class="masked">①、⑤、⑥</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="7.1" id="テーブルの定義"><span class="header-section-number">7.1</span>
+      テーブルの定義</h2>
+      <p>RDBMS に「テーブル」を作成するためには、SQL の <code>CREATE TABLE</code>
+      文を使用します。最小構成の <code>CREATE TABLE</code> には ❶<strong>テーブル名</strong>
+      (慣例として複数形の名詞もしくは集合名詞)、❷<strong>カラム名</strong>、❸<strong>データ型</strong>、❹<strong>主キーの指定</strong>といった基本要素を記述します。</p>
+      <p>たとえば、次のような「論理ER図」で示されたエンティティは…</p>
+      <figure>
+      <img src="figs/07/LER-05-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>次のような SQL でテーブルを定義/作成できます。</p>
+      <div class="sourceCode" id="cb1" data-caption="CREATEによるテーブルの作成"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">-- 既に存在するなら削除</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> p_characters;</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">-- テーブルの作成</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_characters (</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  character_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, <span class="co">-- 整数型、PK</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,        <span class="co">-- 可変長文字列(最大16文字)</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  buff <span class="dt">DECIMAL</span>(<span class="dv">3</span>, <span class="dv">2</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,      <span class="co">-- 固定小数点数型 (-9.99〜9.99)</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>  is_online <span class="dt">BOOLEAN</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,       <span class="co">-- 真偽値</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>  notes TEXT,                       <span class="co">-- 可変長文字列(実質無制限)</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>  created_on <span class="dt">DATE</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,         <span class="co">-- 日付型</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>  last_login_at <span class="dt">TIMESTAMP</span>           <span class="co">-- 日時型(タイムゾーンなし)</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>);</span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="co">-- レコードの挿入</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>  p_characters (character_id, name, buff, is_online, notes, created_on, last_login_at)</span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="kw">VALUES</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>  (</span>
+<span id="cb1-20"><a href="#cb1-20"></a>    <span class="dv">6</span>,</span>
+<span id="cb1-21"><a href="#cb1-21"></a>    <span class="st">&#39;Alice&#39;</span>,</span>
+<span id="cb1-22"><a href="#cb1-22"></a>    <span class="fl">0.00</span>,</span>
+<span id="cb1-23"><a href="#cb1-23"></a>    <span class="kw">TRUE</span>,</span>
+<span id="cb1-24"><a href="#cb1-24"></a>    <span class="kw">NULL</span>,</span>
+<span id="cb1-25"><a href="#cb1-25"></a>    <span class="dt">DATE</span> <span class="st">&#39;2021-06-14&#39;</span>,</span>
+<span id="cb1-26"><a href="#cb1-26"></a>    <span class="dt">TIMESTAMP</span> <span class="st">&#39;2025-09-18 14:22:00&#39;</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a>  ),</span>
+<span id="cb1-28"><a href="#cb1-28"></a>  (</span>
+<span id="cb1-29"><a href="#cb1-29"></a>    <span class="dv">8</span>,</span>
+<span id="cb1-30"><a href="#cb1-30"></a>    <span class="st">&#39;Bob&#39;</span>,</span>
+<span id="cb1-31"><a href="#cb1-31"></a>    <span class="fl">9.99</span>,</span>
+<span id="cb1-32"><a href="#cb1-32"></a>    <span class="kw">FALSE</span>,</span>
+<span id="cb1-33"><a href="#cb1-33"></a>    <span class="st">&#39;Admin note: Detected abnormal behavior; monitoring enabled.&#39;</span>,</span>
+<span id="cb1-34"><a href="#cb1-34"></a>    <span class="dt">DATE</span> <span class="st">&#39;2022-03-22&#39;</span>,</span>
+<span id="cb1-35"><a href="#cb1-35"></a>    <span class="dt">TIMESTAMP</span> <span class="st">&#39;2025-08-03 09:11:00&#39;</span></span>
+<span id="cb1-36"><a href="#cb1-36"></a>  );</span>
+<span id="cb1-37"><a href="#cb1-37"></a></span>
+<span id="cb1-38"><a href="#cb1-38"></a><span class="co">-- レコードの確認</span></span>
+<span id="cb1-39"><a href="#cb1-39"></a><span class="kw">SELECT</span></span>
+<span id="cb1-40"><a href="#cb1-40"></a>  <span class="op">*</span></span>
+<span id="cb1-41"><a href="#cb1-41"></a><span class="kw">FROM</span></span>
+<span id="cb1-42"><a href="#cb1-42"></a>  p_characters;</span></code></pre></div>
+      <p>SQL演習用のプロジェクトに <code>sql/07/tmp.sql</code> などの適当なファイルを作成して、この
+      SQL を貼り付けて、実際に実行してみてください。</p>
+      <p>次のような実行結果が得られると思います (以下では、notes カラムの表示を省略しています)。</p>
+      <pre><code>DROP TABLE
+CREATE TABLE
+INSERT 0 2
+ character_id | name  | buff | is_online | notes       | created_on |    last_login_at
+--------------+-------+------+-----------+-------------+------------+---------------------
+            6 | Alice | 0.00 | t         |             | 2021-06-14 | 2025-09-18 14:22:00
+            8 | Bob   | 9.99 | f         | Admin no... | 2022-03-22 | 2025-08-03 09:11:00</code></pre>
+      <p><strong>第02行目</strong> は「<strong>既に</strong> <code>p_characters</code>
+      <strong>テーブルが存在していれば削除する</strong>」という意味の文になります。存在しないテーブルを削除
+      (<code>DROP</code>) しようとするとエラーになるため、<code>IF EXISTS</code>
+      キーワードを追加しています。</p>
+      <p><strong>第05行目</strong> から <strong>第13行目</strong> の
+      <code>CREATE TABLE p_characters (...)</code>
+      がテーブルを新規に作成するための文になります。基本的に <code>カラム名 (Column Name)</code> 👉
+      <code>データ型 (Data Type)</code> 👉 <code>制約 (Constraint)</code> という順で記述します。</p>
+      <ul>
+      <li>「データ型」と「制約」の詳細については、あとのセクションで詳しく説明します。</li>
+      </ul>
+      <p><strong>第16行目</strong> から <strong>第36行目</strong>
+      では、作成したテーブルにレコードを挿入しています。<strong>第25行目</strong>では、<code>DATE '2021-06-14'</code>
+      のように <span class="masked">型付きリテラル</span> によって値を設定していますが、単に
+      <code>'2021-06-14'</code> としても (暗黙に変換されるので) 問題ありません。</p>
+      <ul>
+      <li><code>INSERT</code> については<a
+      href="lecture04.html#insert文-超基礎編">第04回講義</a>で学習済みです。</li>
+      </ul>
+      <h3 data-number="7.1.1" id="演習"><span class="header-section-number">7.1.1</span> 演習</h3>
+      <ul>
+      <li>上記のSQLの <strong>第25・26行目</strong>、<strong>第34・35行目</strong>
+      において「型付きリテラル」を使用ぜずとも、問題なくレコードが挿入できること確認してください。</li>
+      <li>上記のSQLの <strong>第10行目</strong> を <code>notes TEXT NOT NULL,</code>
+      に書き換えて実行すると、どのようになるか確認してください。確認後は、元に戻しておいてください。</li>
+      <li>上記のSQLの <strong>第10行目</strong> を <code>notes VARCHAR(16),</code>
+      に書き換えて実行すると、どのようになるか確認してください。確認後は、元に戻しておいてください。</li>
+      <li>上記のSQLの <strong>第12行目</strong> を <code>last_login_at TIMESTAMP,</code>
+      (＝末尾にカンマを付ける)
+      に書き換えて実行すると、どのようになるか確認してください。確認後は、元に戻しておいてください。</li>
+      <li>上記のSQLの <strong>第31行目</strong> を <code>9.999,</code>
+      に書き換えて実行すると、どのようになるか確認してください。確認後は、元に戻しておいてください。</li>
+      <li>上記のSQLの <strong>第22行目</strong> を <code>0.000,</code>
+      に書き換えて実行すると、どのようになるか確認してください。確認後は、元に戻しておいてください。</li>
+      <li>上記のSQLの <strong>第23行目</strong> を <code>1,</code>
+      に書き換えて実行すると、どのようになるか確認してください。確認後は、元に戻しておいてください。</li>
+      <li>上記のSQLの <strong>第23行目</strong> を <code>'TRUE',</code>
+      に書き換えて実行すると、どのようになるか確認してください。確認後は、元に戻しておいてください。</li>
+      </ul>
+      <h3 data-number="7.1.2" id="定着確認-8"><span class="header-section-number">7.1.2</span>
+      定着確認</h3>
+      <ul>
+      <li>PostgreSQL において、<code>DATE '2025-01-31'</code> や
+      <code>TIMESTAMP '2025-08-03 09:11:00'</code>
+      のようにリテラル値に型を直接指定して記述する書き方を何というか答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">型付きリテラル (Typed Literal)</span></li>
+      </ul></li>
+      <li>PostgreSQL において、次の指示を満たす SQL 文を 1 行で記述せよ。
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked"><code>DROP TABLE IF EXISTS users</code></span></li>
+      </ul></li>
+      </ul>
+      <blockquote>
+      <p>テーブル users
+      が存在する場合にのみ、そのテーブルを削除し、存在しない場合はエラーにならないようにすること。</p>
+      </blockquote>
+      <h2 data-number="7.2" id="データ型"><span class="header-section-number">7.2</span>
+      データ型</h2>
+      <p>PostgreSQL で利用可能な <strong>代表的なデータ型</strong>
+      としては、次のようなものがあります。</p>
+      <ul>
+      <li><code>INTEGER</code>: -2,147,483,648 から +2,147,483,647
+      までの範囲の整数値を格納可能な型です。PostgreSQL では <code>INT</code>
+      という省略形の表記も可能です。
+      <ul>
+      <li>より小さな範囲の整数を格納可能な <code>SMALLINT</code>、より大きな範囲の整数を格納可能な
+      <code>BIGINT</code> もあります。</li>
+      </ul></li>
+      <li><code>TEXT</code>: (最大 1GB まで格納可能な) <strong>可変長文字列型</strong>です。空文字
+      (長さ0の文字列) と <code>NULL</code> は「等価ではない」ので注意してください。</li>
+      <li><code>VARCHAR(n)</code>:
+      <strong>最大n文字までを格納可能な可変長文字列型</strong>です。<code>TEXT</code>
+      型と同様、空文字と <code>NULL</code> は異なる値として扱われます。
+      <ul>
+      <li>格納時に文字列長さがチェックされます。そのため、<code>TEXT</code>
+      型よりも、わずかに格納処理が遅くなります (十分無視できる程度の差になります)。</li>
+      </ul></li>
+      <li><code>DECIMAL(n, m)</code>: <strong>正確な精度を保持する数値型</strong>で、全体の桁数を
+      <code>n</code>、そのうち小数点以下の桁数を <code>m</code> で指定します。
+      <ul>
+      <li>たとえば、<code>DECIMAL(6, 2)</code> は -9,999.99 から +9,999.99
+      までの範囲を扱い、<strong>桁落ちや丸め誤差なし</strong>で、小数点以下2桁を保持できます。金額などの精度が重要な値に向いています。</li>
+      <li>PostgreSQL では、<code>NUMERIC(n, m)</code> と <code>DECIMAL(n, m)</code>
+      は同義語で内部実装も同じとなります。</li>
+      <li>単に <code>DECIMAL</code>
+      だけを指定した場合、桁数や小数点以下の桁数が固定されない任意精度型として扱われます。ただし、小数点以下を含む桁数に制限がないため便利ですが、演算処理が重くなりやすく、パフォーマンス面で不利になることがあります。</li>
+      </ul></li>
+      <li><code>BOOLEAN</code>: 真偽値を扱うブール型です。<code>TRUE</code> もしくは
+      <code>FALSE</code> を保持します。</li>
+      <li><code>DATE</code>:
+      日付型です。年、月、日の情報だけを保持し、時刻やタイムゾーンの情報は含みません。</li>
+      <li><code>TIMESTAMP</code>: 日付と時刻を <span class="masked">タイムゾーンなし</span>
+      で扱う型になります。時刻は、100万分の1秒 (マイクロ秒) までの精度で保持されます。
+      <ul>
+      <li>タイムゾーン情報を持たせる場合は <code>TIMESTAMPZ</code> を使用します。</li>
+      </ul></li>
+      </ul>
+      <div class="note type-tips">
+      <p><strong>PostgreSQLで利用可能なデータ型</strong></p>
+      <p>PostgreSQL
+      は、リレーショナルモデルではあるものの、オブジェクト指向データベース的な機能も有しており、「可変長配列型」や「JSON型」といった構造化データをそのまま扱うカラムを定義することができます。これらの値は文字列としてシリアライズされて保存されるわけではなく、<strong>検索や更新を高速化するための構造化された形式</strong>で内部的に保持されています。</p>
+      <p>ただし、本科目ではこれらの機能は扱わず、純粋な RDB
+      としての「<strong>基本的なデータ型のみ</strong>」を対象とします。</p>
+      </div>
+      <h3 data-number="7.2.1" id="定着確認-9"><span class="header-section-number">7.2.1</span>
+      定着確認</h3>
+      <ul>
+      <li>PostgreSQL において、データ型 <code>NUMERIC(8, 2)</code> と <code>DECIMAL(8, 2)</code>
+      は、内部実装も含めて同等である。この説明は「適切である」か「適切ではない」か答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切である</span></li>
+      </ul></li>
+      <li>PostgreSQL において <code>DECIMAL(5, 3)</code> が扱える数値範囲を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked"> -99.999 から 99.999 </span></li>
+      </ul></li>
+      <li>PostgreSQL において <code>VARCHAR(16)</code>
+      は、日本語などのマルチバイト文字を使うと内部的なバイト数の関係で16文字を保存できないケースがある。この説明は「適切である」か「適切ではない」か答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない</span></li>
+      </ul></li>
+      <li>PostgreSQL で、タイムゾーン情報ありの日時を扱うために最も適切なデータ型を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">TIMESTAMPZ。TIMESTAMP WITH TIME ZONE
+      でも可。</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="7.3" id="非null制約-not-null制約"><span
+      class="header-section-number">7.3</span> 非NULL制約 (NOT NULL制約)</h2>
+      <p>レコード内の特定のカラムに対して <span class="masked">「値が入っていない状態」</span>
+      を許容したくない場合は、<code>CREATE TABLE</code>
+      のなかで「<strong>非NULL制約</strong>」を指定します。たとえば
+      <code>is_online BOOLEAN NOT NULL</code> のように記述すると、is_online カラムには
+      <code>NULL</code> が格納できなくなります。逆に言えば、<code>NOT NULL</code>
+      を明示しなければ、そのカラムには <code>NULL</code> が格納できることになります。</p>
+      <ul>
+      <li>「<strong>非NULL制約</strong>」は「<strong>NOT NULL制約</strong>」とも呼ばれます。</li>
+      <li><code>character_id INTEGER PRIMARY KEY</code>
+      のように、主キーに指定されたカラムには、自動的に「非NULL制約」と「UNIQUE制約」が適用されます。</li>
+      </ul>
+      <h3 data-number="7.3.1" id="定着確認-10"><span class="header-section-number">7.3.1</span>
+      定着確認</h3>
+      <ul>
+      <li>以下のように定義される users テーブルにおいて、name
+      カラムに「非NULL制約」を追加したい。第03行目をどのように書き換えればよいか答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked"><code>name VARCHAR(16) NOT NULL</code></span></li>
+      </ul></li>
+      </ul>
+      <div class="sourceCode" id="cb3" data-caption="定着確認"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> users (</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="kw">id</span> <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>);</span></code></pre></div>
+      <h2 data-number="7.4" id="primary-key指定"><span class="header-section-number">7.4</span>
+      PRIMARY KEY指定</h2>
+      <p><code>CREATE TABLE</code> において、主キーは <code>PRIMARY KEY</code>
+      キーワードを使用して指定します。たとえば、次のようにすることで <code>character_id</code>
+      を主キーに指定することができます。このような指定方法を「カラムレベルの主キー指定」といいます。</p>
+      <div class="sourceCode" id="cb4" data-caption="主キーの設定(1)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> characters (</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  character_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb4-3"><a href="#cb4-3"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>);</span></code></pre></div>
+      <p>また、次のようにテーブル定義の末尾に主キーの指定を記述することもできます。このような形式を「<strong>テーブルレベルの主キー指定</strong>」といいます。</p>
+      <div class="sourceCode" id="cb5" data-caption="主キーの設定(2)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> characters (</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  character_id <span class="dt">INTEGER</span>,</span>
+<span id="cb5-3"><a href="#cb5-3"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="kw">PRIMARY</span> <span class="kw">KEY</span> (character_id)</span>
+<span id="cb5-5"><a href="#cb5-5"></a>);</span></code></pre></div>
+      <p>複合主キーは、テーブルレベルの主キー指定を用いて次のように記述します。</p>
+      <div class="sourceCode" id="cb6" data-caption="複合主キーの設定(2)"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> character_items (</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  character_id <span class="dt">INTEGER</span>,</span>
+<span id="cb6-3"><a href="#cb6-3"></a>  item_id <span class="dt">INTEGER</span>,</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  quantity <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="kw">PRIMARY</span> <span class="kw">KEY</span> (character_id, item_id)</span>
+<span id="cb6-6"><a href="#cb6-6"></a>);</span></code></pre></div>
+      <p>複合主キーに含まれる character_id と item_id
+      には、それぞれ自動的に「非NULL制約」が適用されます。また、character_id と item_id
+      の組み合わせに対して「UNIQUE制約」が自動適用されます。</p>
+      <h3 data-number="7.4.1" id="定着確認-11"><span class="header-section-number">7.4.1</span>
+      定着確認</h3>
+      <ul>
+      <li>次の <code>CREATE TABLE</code> 文において character_id と guild_id
+      を複合主キーとして設定したい。第05行目に記述すべき主キー指定を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked"><code>PRIMARY KEY (character_id, guild_id)</code></span></li>
+      </ul></li>
+      </ul>
+      <div class="sourceCode" id="cb7" data-caption="定着確認"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> character_guilds (</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  character_id <span class="dt">INTEGER</span>,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>  guild_id <span class="dt">INTEGER</span>,</span>
+<span id="cb7-4"><a href="#cb7-4"></a>  joined_at <span class="dt">TIMESTAMP</span>,</span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a>);</span></code></pre></div>
+      <ul>
+      <li>次のように定義されるテーブルがあり、<code>INSERT INTO character_items VALUES (1, 1, 3);</code>
+      により、すでに 1 件のレコードが挿入されているものとする。このとき、次の <code>INSERT</code>
+      文のうち、エラーとなるものをすべて答えよ。
+      <ul>
+      <li>➀ <code>INSERT INTO character_items VALUES (2, 5, 3);</code></li>
+      <li>➁ <code>INSERT INTO character_items VALUES (1, 2, 5);</code></li>
+      <li>③ <code>INSERT INTO character_items VALUES (1, 1, 4);</code></li>
+      <li>④ <code>INSERT INTO character_items VALUES (1,-1, 0);</code></li>
+      <li>⑤ <code>INSERT INTO character_items VALUES (NULL, 2, 1);</code></li>
+      <li>➅ <code>INSERT INTO character_items VALUES (2, NULL, 1);</code></li>
+      <li><strong>答え</strong>: <span class="masked">③、⑤、⑥</span></li>
+      </ul></li>
+      </ul>
+      <div class="sourceCode" id="cb8" data-caption="定着確認"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> character_items (</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  character_id <span class="dt">INTEGER</span>,</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  item_id      <span class="dt">INTEGER</span>,</span>
+<span id="cb8-4"><a href="#cb8-4"></a>  quantity     <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="kw">PRIMARY</span> <span class="kw">KEY</span> (character_id, item_id)</span>
+<span id="cb8-6"><a href="#cb8-6"></a>);</span></code></pre></div>
+      <h1 data-number="8" id="授業時間外学習の指示-宿題"><span
+      class="header-section-number">8</span> 授業時間外学習の指示 (宿題)</h1>
+      <p>🚨<strong>本科目は「学修単位科目」であり、1回の講義あたり「4時間相当」の授業時間外学習が求められる科目です</strong>🏃</p>
+      <ul>
+      <li>第01回講義から第07回講義までの内容について総復習して、後期中間試験に挑んでください。</li>
+      <li>次回、第08回講義では、小テストを実施しません。</li>
+      </ul>
+      <hr />
+      <ul>
+      <li>この講義資料を再読・熟読し「不明な用語」や「理解が不十分な用語」があればインターネットや、ChatGPTなどの生成AIを利用して解決してください。また、興味関心を持ったトピックについて、ウェブ、生成AI、YouTube動画などを利用して知識を広げ、理解を深めてください。
+      <ul>
+      <li>特に <strong>(プロンプト例)</strong>
+      を示しているものについては、実際に生成AIにプロンプトを投げ、さらに対話を重ねることで、知識の幅を広げるだけでなく、理解をより深く確かなものにしてください。</li>
+      </ul></li>
+      </ul>
+      <h1 data-number="9" id="定着確認の解答例"><span class="header-section-number">9</span>
+      定着確認の解答例</h1>
+      <h3 data-number="9.0.1" id="解答例-1nf-01"><span class="header-section-number">9.0.1</span>
+      解答例-1nf-01</h3>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>book_id</u></th>
+      <th style="text-align: center;"><u>author_id</u></th>
+      <th style="text-align: left;">title</th>
+      <th style="text-align: left;">author</th>
+      <th style="text-align: center;">author_order</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">New Python</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">New Python</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">The React 1</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">The React 2</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">The React 2</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">The React 2</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">PostgreSQL</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">PostgreSQL</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      </tbody>
+      </table>
+      <ul>
+      <li><strong>author_id</strong> を導入せずに「<strong>book_id</strong> +
+      <strong>author_order</strong>」を複合主キーとしても、第1正規形としては正しいです。ただし、後続の第2正規形、第3正規形を見据えると、著者情報を独立したエンティティ
+      (テーブル) として分解できるように、<strong>author_id</strong>
+      を設ける構造にした方が望ましいです。</li>
+      </ul>
+      <h3 data-number="9.0.2" id="解答例-2nf-01"><span class="header-section-number">9.0.2</span>
+      解答例-2nf-01</h3>
+      <p>あくまで設計の「一例」です。</p>
+      <p><strong>▼ books テーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>book_id</u></th>
+      <th style="text-align: left;">title</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">New Python</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">The React 1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">The React 2</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">PostgreSQL</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>▼ authors テーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>author_id</u></th>
+      <th style="text-align: left;">name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Ellen</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Bob</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Charlie</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>▼ book_authors テーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>book_id</u></th>
+      <th style="text-align: center;"><u>author_id</u></th>
+      <th style="text-align: center;">author_order</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      </tbody>
+      </table>
+      <h3 data-number="9.0.3" id="解答例-3nf-01"><span class="header-section-number">9.0.3</span>
+      解答例-3nf-01</h3>
+      <p>あくまで設計の「一例」です。</p>
+      <p><strong>▼ authors テーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>author_id</u></th>
+      <th style="text-align: left;">name</th>
+      <th style="text-align: left;">tel</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: left;">5501</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: left;">3000</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: left;">5432</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Ellen</td>
+      <td style="text-align: left;">8080</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>▼ publishers テーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>publisher_id</u></th>
+      <th style="text-align: left;">name</th>
+      <th style="text-align: left;">tel</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Hoge Inc.</td>
+      <td style="text-align: left;">4771</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Fuga Inc.</td>
+      <td style="text-align: left;">4649</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Piyo Inc.</td>
+      <td style="text-align: left;">2951</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>▼ books テーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>book_id</u></th>
+      <th style="text-align: left;">title</th>
+      <th style="text-align: center;">primary_author_id<br>(FK)</th>
+      <th style="text-align: center;">publisher_id<br>(FK)</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">New Python</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">React 1</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">React 2</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">PostgreSQL</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">5</td>
+      <td style="text-align: left;">Hello COBOL</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">6</td>
+      <td style="text-align: left;">OpenCV !</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      </tbody>
+      </table>
+      <ul>
+      <li>外部キーのカラム名は、参照先テーブルの主キー名と<strong>同一である必要はありません</strong>。たとえば、この例では、authors
+      テーブルでは主キーを <strong>author_id</strong> とし、books
+      テーブルではそれを指す外部キーとして <strong>primary_author_id</strong> を用いています。</li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>RDB のテーブル設計に関する相談です。<code>users</code>
+      というテーブルの主キーとなるカラムの名前を <code>id</code> にすべきか <code>user_id</code>
+      にすべきか悩んでいます。それぞれで一長一短があると思うのですが、そのあたりを教えてください。</p>
+      </blockquote>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/DB-2025/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
