@@ -111,15 +111,19 @@ class="toc-section-number">8</span> 授業時間外学習の指示 (宿題)</a><
       <h1 data-number="1" id="連絡と準備"><span class="header-section-number">1</span>
       連絡と準備</h1>
       <ul>
-      <li><strong>小テスト❻</strong> を実施します。
+      <li><p><strong>小テスト❻</strong> を実施します。</p>
       <ul>
       <li>シラバス記載のように、小テストは最終評価の <span class="masked">35%</span>
       に相当します。</li>
       <li>遅刻・欠席等により追試験を希望する場合は<a
       href="lecture01.html#成績評価法と履修上の注意">第01回講義で案内した手続き</a>をしてください。</li>
       </ul></li>
-      <li><a href="lecture06.html#課題1">課題1</a>の提出期限は <strong>11月26日 (水) 23時</strong>
-      です。</li>
+      <li><p><a href="lecture06.html#課題1">課題1</a>の提出期限は <strong>11月26日 (水)
+      23時</strong> です。</p></li>
+      <li><p>参考 👉 2025年度プログラミング3 (3年生) の <strong><em>課題1 (TodoApp)</em></strong>
+      の<a
+      href="https://omunet-my.sharepoint.com/:t:/g/personal/z21707r_omu_ac_jp/EbU8myRl3IJJny0f_QNRyHIBanMY_sgtuBABoS0nf1rszg?e=7J9XuH">作品共有</a>
+      <font size="-1">(学内のみ)</font></p></li>
       </ul>
       <h2 data-number="1.1" id="後期中間試験に関する連絡"><span
       class="header-section-number">1.1</span> 後期中間試験に関する連絡</h2>
@@ -1830,8 +1834,9 @@ INSERT 0 2
       <li>書き込みの際に文字数の確認が行われるため、<code>VARCHAR</code> のほうが <code>TEXT</code>
       よりごくわずかに処理コストが高くなります。ただし、この差は通常のアプリでは誤差レベルとなります。</li>
       </ul></li>
-      <li><code>DECIMAL(n, m)</code>: <strong>正確な精度を保持する数値型</strong>で、全体の桁数を
-      <code>n</code>、そのうち小数点以下の桁数を <code>m</code> で指定します。
+      <li><code>DECIMAL(n, m)</code>: <strong>正確な精度を保持する数値型</strong>
+      (<strong>固定小数点数型</strong>) で、全体の桁数を <code>n</code>、そのうち小数点以下の桁数を
+      <code>m</code> で指定します。
       <ul>
       <li>たとえば、<code>DECIMAL(6, 2)</code> は -9,999.99 から +9,999.99
       までの範囲を扱い、<strong>桁落ちや丸め誤差なし</strong>で、小数点以下2桁を保持できます。金額などの精度が重要な値に向いています。</li>
@@ -1984,12 +1989,68 @@ INSERT 0 2
 <span id="cb8-4"><a href="#cb8-4"></a>  quantity     <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
 <span id="cb8-5"><a href="#cb8-5"></a>  <span class="kw">PRIMARY</span> <span class="kw">KEY</span> (character_id, item_id)</span>
 <span id="cb8-6"><a href="#cb8-6"></a>);</span></code></pre></div>
+      <h3 data-number="7.4.2" id="sqlドリル"><span class="header-section-number">7.4.2</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-01_1.sql</code> 👉 以下に示す <strong>[期待する実行結果]</strong> を得るように
+      p_users テーブルの作成、レコードの挿入、集計処理をせよ。</li>
+      </ul>
+      <div class="sourceCode" id="cb9" data-caption="SQLドリル ex-01_1.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">-- トランザクションの開始</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">-- p_users テーブルの作成 (ここを記述)</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">-- p_users テーブルにレコードを挿入 (ここを記述)</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">-- テーブルの確認</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="kw">SELECT</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>  <span class="op">*</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="kw">FROM</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>  p_users;</span>
+<span id="cb9-13"><a href="#cb9-13"></a></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="co">-- p_users テーブルを集計 (ここを記述)</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="co">-- ロールバックによる処理の取り消し</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <p><strong>[期待する実行結果]</strong></p>
+      <pre><code>START TRANSACTION
+CREATE TABLE
+INSERT 0 5
+ user_id |  name   | is_admin | height_cm |  birthday
+---------+---------+----------+-----------+------------
+       1 | Alice   | t        |     162.3 | 2003-10-20
+       2 | Bob     | f        |     181.9 | 2002-05-05
+       3 | Charlie | f        |           |
+       4 | Ellen   | t        |     172.7 |
+       5 | Eve     | f        |           | 2024-06-30
+(5 行)
+
+ user_count | height_avg | admin_count
+------------+------------+-------------
+          5 |     172.30 |           2
+(1 行)</code></pre>
+      <ul>
+      <li>user_id は、整数型で主キーとしてください。</li>
+      <li>name は、文字列型として非NULL制約をつけてください。</li>
+      <li>is_admin は、ブール型としてください。非NULL制約をつけてください。</li>
+      <li>height_cm
+      は、適切に桁数を設定した固定小数点型としてください。NULLを許容してください。</li>
+      <li>birthday は、日付型としてください。NULLを許容してください。</li>
+      <li>admin_count を集計する方法 (＝<span class="masked">CASE と SUM
+      を組み合わせた典型的な条件付き集計</span>) は、授業ではまだ触れていないので解答例
+      <code>from-teacher/07/drill/ex-01_1.sql</code> を参考にしてください。</li>
+      </ul>
       <h1 data-number="8" id="授業時間外学習の指示-宿題"><span
       class="header-section-number">8</span> 授業時間外学習の指示 (宿題)</h1>
       <p>🚨<strong>本科目は「学修単位科目」であり、1回の講義あたり「4時間相当」の授業時間外学習が求められる科目です</strong>🏃</p>
       <ul>
       <li>第01回講義から第07回講義までの内容について総復習して、後期中間試験に挑んでください。</li>
-      <li>次回、第08回講義では、小テストを実施しません。</li>
+      <li>試験明けの 第09回講義 (12月11日) では、小テストを実施しません。
+      <ul>
+      <li>後期中間試験を 第08回 としてカウントしています。</li>
+      </ul></li>
+      <li>次回講義では、引き続きテーブルの制約 (特に外部キー制約) について学んでいきます。</li>
       </ul>
       <hr />
       <ul>
