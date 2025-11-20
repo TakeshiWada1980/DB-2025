@@ -1475,7 +1475,7 @@ ROLLBACK</code></pre>
 <span id="cb65-2"><a href="#cb65-2"></a>  <span class="cf">CASE</span></span>
 <span id="cb65-3"><a href="#cb65-3"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="st">&#39;無所属&#39;</span></span>
 <span id="cb65-4"><a href="#cb65-4"></a>    <span class="cf">ELSE</span> <span class="st">&#39;ギルド所属&#39;</span></span>
-<span id="cb65-5"><a href="#cb65-5"></a>  <span class="cf">END</span> <span class="ot">&quot;カテゴリ&quot;</span>,</span>
+<span id="cb65-5"><a href="#cb65-5"></a>  <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">&quot;カテゴリ&quot;</span>,</span>
 <span id="cb65-6"><a href="#cb65-6"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span>,</span>
 <span id="cb65-7"><a href="#cb65-7"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span></span>
 <span id="cb65-8"><a href="#cb65-8"></a><span class="kw">FROM</span></span>
@@ -1508,7 +1508,7 @@ ROLLBACK</code></pre>
 <span id="cb67-6"><a href="#cb67-6"></a>  <span class="cf">CASE</span></span>
 <span id="cb67-7"><a href="#cb67-7"></a>    <span class="cf">WHEN</span> guild <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="st">&#39;無所属&#39;</span></span>
 <span id="cb67-8"><a href="#cb67-8"></a>    <span class="cf">ELSE</span> <span class="st">&#39;ギルド所属&#39;</span></span>
-<span id="cb67-9"><a href="#cb67-9"></a>  <span class="cf">END</span> <span class="ot">&quot;カテゴリ&quot;</span>,</span>
+<span id="cb67-9"><a href="#cb67-9"></a>  <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">&quot;カテゴリ&quot;</span>,</span>
 <span id="cb67-10"><a href="#cb67-10"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span>,</span>
 <span id="cb67-11"><a href="#cb67-11"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="ot">&quot;num&quot;</span></span>
 <span id="cb67-12"><a href="#cb67-12"></a><span class="kw">FROM</span></span>
@@ -1553,9 +1553,9 @@ ROLLBACK</code></pre>
       class="masked">指定した単位で日時を切り捨てる関数</span> で、次のように動作します。</p>
       <ul>
       <li><code>DATE_TRUNC('hour', TIMESTAMP '2025-10-30 15:30:58')</code> 👉
-      <code>2025-10-01 00:00:00</code> (TIMESTAMP型)</li>
+      <code>2025-10-30 15:00:00</code> (TIMESTAMP型)</li>
       <li><code>DATE_TRUNC('month', TIMESTAMP '2025-10-30 15:30:58')</code> 👉
-      <code>2025-10-30 15:00:00</code> ( 〃 )</li>
+      <code>2025-10-01 00:00:00</code> ( 〃 )</li>
       <li><code>DATE_TRUNC('year', TIMESTAMP '2025-10-30 15:30:58')</code> 👉
       <code>2025-01-01 00:00:00</code> ( 〃 )
       <ul>
