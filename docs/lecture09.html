@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>第09回 4I-データベース工学</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#連絡" id="toc-連絡"><span class="toc-section-number">1</span> 連絡</a>
+<ul>
+<li><a href="#課題1の作品共有" id="toc-課題1の作品共有"><span class="toc-section-number">1.1</span>
+課題1の作品共有</a></li>
+<li><a href="#ハンズオン学習の準備" id="toc-ハンズオン学習の準備"><span
+class="toc-section-number">1.2</span> ハンズオン学習の準備</a></li>
+</ul></li>
+<li><a href="#前回の復習-create文の超基礎" id="toc-前回の復習-create文の超基礎"><span
+class="toc-section-number">2</span> 前回の復習 (CREATE文の超基礎)</a>
+<ul>
+<li><a href="#テーブルレベルの制約指定" id="toc-テーブルレベルの制約指定"><span
+class="toc-section-number">2.1</span> テーブルレベルの制約指定</a></li>
+</ul></li>
+<li><a href="#一意性制約-unique制約" id="toc-一意性制約-unique制約"><span
+class="toc-section-number">3</span> 一意性制約 (UNIQUE制約)</a></li>
+<li><a href="#カラムのデフォルト値の設定" id="toc-カラムのデフォルト値の設定"><span
+class="toc-section-number">4</span> カラムのデフォルト値の設定</a>
+<ul>
+<li><a href="#サロゲートキーの自動採番設定" id="toc-サロゲートキーの自動採番設定"><span
+class="toc-section-number">4.1</span> サロゲートキーの自動採番設定</a></li>
+<li><a href="#uuidをサロゲートキーとして使用" id="toc-uuidをサロゲートキーとして使用"><span
+class="toc-section-number">4.2</span> UUIDをサロゲートキーとして使用</a></li>
+</ul></li>
+<li><a href="#check制約" id="toc-check制約"><span class="toc-section-number">5</span> CHECK制約</a>
+<ul>
+<li><a href="#テーブルレベルのcheck制約" id="toc-テーブルレベルのcheck制約"><span
+class="toc-section-number">5.1</span> テーブルレベルのCHECK制約</a></li>
+<li><a href="#check制約が検証されるタイミングと範囲"
+id="toc-check制約が検証されるタイミングと範囲"><span class="toc-section-number">5.2</span>
+CHECK制約が検証されるタイミングと範囲</a></li>
+</ul></li>
+<li><a href="#外部キー制約-fk制約" id="toc-外部キー制約-fk制約"><span
+class="toc-section-number">6</span> 外部キー制約 (FK制約)</a>
+<ul>
+<li><a href="#on-delete-cascade-指定" id="toc-on-delete-cascade-指定"><span
+class="toc-section-number">6.1</span> ON DELETE CASCADE 指定</a></li>
+<li><a href="#on-delete-set-null-指定" id="toc-on-delete-set-null-指定"><span
+class="toc-section-number">6.2</span> ON DELETE SET NULL 指定</a></li>
+</ul></li>
+<li><a href="#授業時間外学習の指示-宿題" id="toc-授業時間外学習の指示-宿題"><span
+class="toc-section-number">7</span> 授業時間外学習の指示 (宿題)</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>2025-4I データベース工学 第09回 講義資料</p>
+      <p>2025年12月11日 (木) 3-4時限</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="連絡"><span class="header-section-number">1</span> 連絡</h1>
+      <ul>
+      <li>試験答案を返却します。
+      <ul>
+      <li>後期中間の試験の解答例と解説は<a
+      href="lecture08.html">第08回講義</a>を参照してください。</li>
+      <li>返却された答案は、採点ミスがないか確認してください。ミスと思われるものがあれば、この授業時間内に申し出てください。</li>
+      </ul></li>
+      <li><strong>Unity 1-Week GAME JAM</strong>
+      <ul>
+      <li><a href="https://unityroom.com/unity1weeks">https://unityroom.com/unity1weeks</a></li>
+      <li>次回の開催 12月22日(月) 0時 〜 12月28日(日) 20時 … お題「？？？？」</li>
+      </ul></li>
+      <li>2025年度 <u>プログラミング1 (2年生)</u> の <strong><em>ポートフォリオ</em></strong> の<a
+      href="https://omunet-my.sharepoint.com/:t:/g/personal/z21707r_omu_ac_jp/EcJwJ2lr6IxFozn_2lk7m6MB6PySj6NiE7ZfZXXHDbLnXQ?e=gVwSVv">作品共有</a>
+      <font size="-1">(学内のみ)</font></li>
+      </ul>
+      <h2 data-number="1.1" id="課題1の作品共有"><span class="header-section-number">1.1</span>
+      課題1の作品共有</h2>
+      <p><a
+      href="lecture06.html#課題1">課題1</a>として提出してもらったレポートは、Teamsの「<strong>ファイルタブ</strong>」で共有しています。各自で参考にしてください。</p>
+      <figure>
+      <img src="figs/08/teams-01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ほとんどの学生が、<strong>draw.io</strong> を使用してのER図の作成でした。</p>
+      <ul>
+      <li><a href="https://www.drawio.com/">draw.io</a>(VSCode拡張機能<a
+      href="https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio">Draw.io
+      Integration</a>を含む)</li>
+      <li><a href="https://mermaid.js.org/">Mermaid</a>+<a
+      href="https://inkscape.org/">Inkscape</a></li>
+      <li><a href="https://www.datensen.com/luna-modeler-for-relational-databases.html">Luna
+      Modeler</a></li>
+      <li><a href="https://erdplus.com/">ERDPlus</a></li>
+      <li><a href="https://www.figma.com/ja-jp/">Figma</a></li>
+      <li><a href="https://www.microsoft.com/ja-jp/microsoft-365/powerpoint">PowerPoint</a></li>
+      </ul>
+      <h2 data-number="1.2" id="ハンズオン学習の準備"><span class="header-section-number">1.2</span>
+      ハンズオン学習の準備</h2>
+      <p>次の手順でSQL演習環境の立ち上げと、教材の更新を取得してください。</p>
+      <ul>
+      <li><a href="lecture04.html#sql演習環境の動作確認-前回復習">SQL演習環境の動作確認</a>@
+      第04回講義</li>
+      <li><a href="lecture04.html#教材の更新の取得">教材の更新の取得</a>@ 第04回講義</li>
+      </ul>
+      <h1 data-number="2" id="前回の復習-create文の超基礎"><span
+      class="header-section-number">2</span> 前回の復習 (CREATE文の超基礎)</h1>
+      <p>中間試験前の<a href="lecture07.html#テーブルの定義">第07回講義</a>では <code>CREATE</code>
+      文による「<strong>テーブル定義
+      (作成)</strong>」の基礎について解説しました。テーブルは基本的には
+      <strong>カラム名</strong>、<a
+      href="lecture07.html#データ型">データ型</a>、<strong>制約</strong>
+      の3つを指定して定義しました。</p>
+      <p>具体的には、次の <strong>第08行目</strong> から <strong>第13行目</strong> のような
+      <code>CREATE</code>
+      文によって、テーブルを定義・作成することができました。演習環境上で実際に実行してみてください。</p>
+      <div class="sourceCode" id="cb1"
+      data-caption="init-tables_01.sql テーブルの初期化（作成と挿入）"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">-- 既に p_characters が存在する場合は削除</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> p_characters;</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">-- トランザクションの開始</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co">-- キャラクタテーブルの作成</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_characters (</span>
+<span id="cb1-9"><a href="#cb1-9"></a>  character_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, <span class="co">-- PK指定</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>, <span class="co">-- 非NULL制約</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>  job <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>, <span class="co">-- 非NULL制約</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>  guild <span class="dt">VARCHAR</span>(<span class="dv">16</span>)</span>
+<span id="cb1-13"><a href="#cb1-13"></a>);</span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="co">-- レコードの追加</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>  p_characters (character_id, name, job, guild)</span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="kw">VALUES</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>  (<span class="dv">1</span>, <span class="st">&#39;Alice&#39;</span>, <span class="st">&#39;Priest&#39;</span>, <span class="st">&#39;Yamato&#39;</span>),</span>
+<span id="cb1-20"><a href="#cb1-20"></a>  (<span class="dv">2</span>, <span class="st">&#39;Bob&#39;</span>, <span class="st">&#39;Monk&#39;</span>, <span class="st">&#39;hameln&#39;</span>),</span>
+<span id="cb1-21"><a href="#cb1-21"></a>  (<span class="dv">3</span>, <span class="st">&#39;Charlie&#39;</span>, <span class="st">&#39;Wizard&#39;</span>, <span class="kw">NULL</span>),</span>
+<span id="cb1-22"><a href="#cb1-22"></a>  (<span class="dv">4</span>, <span class="st">&#39;Dave&#39;</span>, <span class="st">&#39;Samurai&#39;</span>, <span class="st">&#39;Yamato&#39;</span>);</span>
+<span id="cb1-23"><a href="#cb1-23"></a></span>
+<span id="cb1-24"><a href="#cb1-24"></a><span class="co">-- テーブルの確認</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="kw">SELECT</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a>  <span class="op">*</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a><span class="kw">FROM</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a>  p_characters;</span>
+<span id="cb1-29"><a href="#cb1-29"></a></span>
+<span id="cb1-30"><a href="#cb1-30"></a><span class="co">-- ロールバックによる処理の取り消し</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <ul>
+      <li><strong>第09行目</strong> の <code>PRIMARY KEY</code> は主キー (PK: Primary key)
+      を指定するキーワードでした。</li>
+      <li><strong>第10行目</strong> の <code>NOT NULL</code> は <strong>非NULL制約</strong>
+      を指定するキーワードでした。</li>
+      </ul>
+      <p>上記SQLの実行結果 (<code>SELECT * FROM p_characters</code> の出力)
+      は、次のようになります。</p>
+      <pre><code> character_id |  name   |  job   | guild
+--------------+---------+--------+--------
+            1 | Alice   | Priest | Yamato
+            2 | Bob     | Monk   | hameln
+            3 | Charlie | Wizard |
+            4 | Dave    | Samurai | Yamato            </code></pre>
+      <p>ここで、<strong>第09行目</strong> の <code>PRIMARY KEY</code>
+      は、<strong>主キー指定</strong> (PK: Primary Key)
+      をするためのキーワードでした。主キーとして指定したカラムには、自動的に <span
+      class="masked">「非NULL制約」と「UNIQUE制約」</span> が適用されます。</p>
+      <p><strong>第10行目</strong> と <strong>第11行目</strong> の <code>NOT NULL</code>
+      は、<strong>非NULL制約</strong>
+      を指定するためのキーワードでした。これにより、<strong>name</strong> および
+      <strong>job</strong> カラムには、<strong>値の欠損が許容されなくなります</strong> (＝
+      <code>NULL</code> を格納することができなくなります)。</p>
+      <h3 data-number="2.0.1" id="演習"><span class="header-section-number">2.0.1</span> 演習</h3>
+      <ul>
+      <li>主キー指定している <strong>character_id</strong> に <code>NULL</code>
+      や、<strong>既にレコードに存在する値</strong>
+      を挿入しようとすると、失敗することを実際に確認してください。また、英語環境でのエラーメッセージについても確認してください。
+      <ul>
+      <li>例: <strong>第22行目</strong> を <code>(NULL, 'Dave', 'Samurai', 'Yamato');</code>
+      に変更</li>
+      <li>例: <strong>第22行目</strong> を <code>(1, 'Dave', 'Samurai', 'Yamato');</code>
+      に変更</li>
+      </ul></li>
+      <li>非NULL制約を与えている <strong>name</strong> や <strong>job</strong> に <code>NULL</code>
+      を挿入しようとすると、失敗することを実際に確認してください
+      (英語環境のエラーメッセージも確認)。また、<strong>空文字</strong> <code>''</code>
+      については問題なく挿入できることを確認してください。
+      <ul>
+      <li>例: <strong>第22行目</strong> を <code>(4, NULL, 'Samurai', 'Yamato');</code> に変更</li>
+      <li>例: <strong>第22行目</strong> を <code>(4, '', 'Samurai', 'Yamato');</code> に変更</li>
+      </ul></li>
+      </ul>
+      <div class="note type-tips">
+      <p><strong>英語環境でのエラーメッセージを確認するには…</strong></p>
+      <p>演習環境では、以下のように <code>sql:en</code>
+      スクリプトを実行することで、エラーメッセージなどの応答を 英語 (標準)
+      に切り替えられます。英語環境の RDBMS
+      を扱うことも多いので、この形式のメッセージにも慣れておくと後々役に立ちます。</p>
+      <pre><code>npm run sql:en sql/09/init-tables_01.sql</code></pre>
+      <p>なお、<code>[Ctrl]+[Shift]+[B]</code> で SQL
+      を実行するとき、常に英語環境を使用したい場合は、プロジェクト の
+      <code>.vscode\tasks.json</code> の <code>"args"</code> の項目を編集してください。</p>
+      </div>
+      <h2 data-number="2.1" id="テーブルレベルの制約指定"><span
+      class="header-section-number">2.1</span> テーブルレベルの制約指定</h2>
+      <p><code>init-tables_01.sql</code> では <code>PRIMARY KEY</code> や <code>NOT NULL</code> を
+      <strong>カラムレベルの制約</strong> (Column Constraint)
+      として記述しましたた。これらは、次のように <strong>テーブルレベル</strong> (Table Constraint)
+      として記述することも可能となっています。</p>
+      <div class="sourceCode" id="cb4" data-caption="テーブルレベルの制約指定"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_characters (</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  character_id <span class="dt">INTEGER</span>,</span>
+<span id="cb4-3"><a href="#cb4-3"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>),</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  job <span class="dt">VARCHAR</span>(<span class="dv">16</span>),</span>
+<span id="cb4-5"><a href="#cb4-5"></a>  guild <span class="dt">VARCHAR</span>(<span class="dv">16</span>),</span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a>  <span class="co">-- テーブルレベルでの制約指定</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>  <span class="kw">PRIMARY</span> <span class="kw">KEY</span> (character_id),</span>
+<span id="cb4-9"><a href="#cb4-9"></a>  <span class="kw">CHECK</span> (name <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span>),</span>
+<span id="cb4-10"><a href="#cb4-10"></a>  <span class="kw">CHECK</span> (job <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span>)</span>
+<span id="cb4-11"><a href="#cb4-11"></a>);</span></code></pre></div>
+      <ul>
+      <li><code>CHECK(...)</code> については<a
+      href="#check制約">以降のセクション</a>で詳しく解説します。</li>
+      <li><span class="masked">複合主キー</span> のように <u>テーブルレベルでのみ指定可能</u>
+      な制約もあります(<a href="lecture07.html#primary-key指定">前回講義</a>を参照)。</li>
+      <li><code>NOT NULL</code> や <code>UNIQUE</code>
+      のような単純な制約は、可読性の観点から一般に「カラムレベル」で指定します。</li>
+      </ul>
+      <div class="note type-senior">
+      <p><strong>CREATE 後に制約を追加したいときは…</strong></p>
+      <p>テーブル作成後に制約を追加したい場合は <code>ALTER TABLE</code>
+      文を使用します。たとえば、以下のように <code>ADD CONSTRAINT</code>
+      を使って制約を追加することができます。詳しくは、今後の授業で取り上げます。</p>
+      <div class="sourceCode" id="cb5" data-caption="テーブル定義後の制約追加"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> p_characters <span class="kw">ADD</span> <span class="kw">CHECK</span> (job <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span>);</span></code></pre></div>
+      </div>
+      <h1 data-number="3" id="一意性制約-unique制約"><span class="header-section-number">3</span>
+      一意性制約 (UNIQUE制約)</h1>
+      <p>カラムに対して<strong>一意性制約</strong> (UNIQUE制約) を設定したい場合は
+      <code>UNIQUE</code> キーワードを使用します。例えば、p_characters テーブルにおいて
+      <u>キャラクタ名の重複を許可したくない場合</u> は、<strong>name</strong>
+      カラムに対して、次のように <code>UNIQUE</code> キーワードを指定します。</p>
+      <div class="sourceCode" id="cb6" data-caption="一意性制約 (UNIQUE制約) の追加"
+      data-startFrom="8"><pre class="sourceCode numberSource sql numberLines"><code class="sourceCode sql" style="counter-reset: source-line 7;"><span id="cb6-8"><a href="#cb6-8"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_characters (</span>
+<span id="cb6-9"><a href="#cb6-9"></a>  character_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, <span class="co">-- PK指定</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">UNIQUE</span>, <span class="co">-- 非NULL制約 + 一意性制約</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>  job <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>, <span class="co">-- 非NULL制約</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>  guild <span class="dt">VARCHAR</span>(<span class="dv">16</span>)</span>
+<span id="cb6-13"><a href="#cb6-13"></a>);</span></code></pre></div>
+      <p>なお、<code>NOT NULL</code> を付けずに <code>UNIQUE</code>
+      だけを指定した場合、そのカラムには <code>NULL</code>
+      が許容されます。このとき注意したいのは「<strong>複数レコードが同時に</strong>
+      <code>NULL</code>
+      <strong>を持っていても一意性違反にはならない</strong>」という点です。これは、SQL において
+      <code>NULL</code> が <span class="masked">値が不明で比較できないもの</span>
+      と扱われ、<u>一意性チェックの対象にならないため</u> ために生じる挙動です。</p>
+      <p>実際に、以下の SQL を実行すると、<strong>第08行目</strong> で <strong>email</strong>
+      カラムに「一意性制約」をつけているにも関わらず、<strong>第14-15行目</strong> で Alice と Bob
+      の <strong>email</strong> に同時に <code>NULL</code> が登録できてしまいます。</p>
+      <div class="sourceCode" id="cb7" data-caption="UNIQUE制約では「NULLの重複」は起き得る"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> p_characters;</span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_characters (</span>
+<span id="cb7-6"><a href="#cb7-6"></a>  character_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb7-7"><a href="#cb7-7"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb7-8"><a href="#cb7-8"></a>  email <span class="dt">VARCHAR</span>(<span class="dv">64</span>) <span class="kw">UNIQUE</span> <span class="co">-- 一意性制約を設定</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>);</span>
+<span id="cb7-10"><a href="#cb7-10"></a></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>  p_characters (character_id, name, email)</span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="kw">VALUES</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>  (<span class="dv">1</span>, <span class="st">&#39;Alice&#39;</span>, <span class="kw">NULL</span>), <span class="co">-- email に NULL を登録 </span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>  (<span class="dv">2</span>, <span class="st">&#39;Bob&#39;</span>, <span class="kw">NULL</span>);  <span class="co">-- email に NULL を登録</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="kw">SELECT</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a>  <span class="op">*</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="kw">FROM</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a>  p_characters;</span>
+<span id="cb7-21"><a href="#cb7-21"></a></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <p>実行結果は次のようになります。<strong>email</strong> カラムに一意性制約を指定していても
+      <code>NULL</code> は例外となる点に注意してください。</p>
+      <pre><code> character_id | name  | email
+--------------+-------+-------
+            1 | Alice |
+            2 | Bob   |</code></pre>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>PostgreSQL に関する質問です。あるカラムに対して、<code>NULL</code>
+      を含めて一意性を保証するような制約を指定することは可能ですか。つまり、そのカラムについて、<code>NULL</code>
+      を持つレコードがただひとつになるような制約を設定することは可能ですか。</p>
+      </blockquote>
+      <h3 data-number="3.0.1" id="定着確認"><span class="header-section-number">3.0.1</span>
+      定着確認</h3>
+      <ul>
+      <li>次の説明のうち、正しいものを <u>すべて</u> 選び記号で答えよ。
+      <ul>
+      <li>❶ <code>UNIQUE</code> 制約を付けたカラムには、<code>NULL</code> は格納できない。</li>
+      <li>❷ <code>UNIQUE</code> 制約を付けたカラムでは、<code>NULL</code>
+      が複数行に存在しても一意性違反にはならない。</li>
+      <li>❸ <code>UNIQUE</code> と <code>NOT NULL</code>
+      を併用すると、そのカラムは「一意で、かつ必ず値を持つ」ことが保証される。</li>
+      <li>❹ <code>PRIMARY KEY</code> は内部的に <code>UNIQUE</code> と <code>NOT NULL</code>
+      の2つの制約と同等である。</li>
+      <li><strong>答え</strong>: <span class="masked">❷❸❹</span></li>
+      </ul></li>
+      </ul>
+      <h3 data-number="3.0.2" id="演習-1"><span class="header-section-number">3.0.2</span> 演習</h3>
+      <ul>
+      <li>一意性制約を与えた <strong>name</strong>
+      カラムに重複する値を挿入しようとすると、失敗することを実際に確認してください。</li>
+      <li><code>name VARCHAR(16) NOT NULL UNIQUE</code> を
+      <code>name VARCHAR(16) UNIQUE NOT NULL</code>
+      のように書き換えるとどうなるか確認してください。</li>
+      </ul>
+      <h1 data-number="4" id="カラムのデフォルト値の設定"><span
+      class="header-section-number">4</span> カラムのデフォルト値の設定</h1>
+      <p><code>CREATE</code>
+      文では、カラムの「<strong>デフォルト値</strong>」を設定することができます。デフォルト値が与えられているカラムは、<code>INSERT</code>
+      文で <span class="masked">値を明示せずに追加すること (＝値の指定を省略すること)</span>
+      ができます。</p>
+      <p>たとえば、次の <strong>第12行目</strong>～<strong>第15行目</strong> のように
+      <code>CREATE</code>
+      によるテーブル定義のなかでデフォルト値を与えることができます。ここでは、<strong>level</strong>、<strong>guild</strong>、<strong>created_on</strong>、<strong>updated_at</strong>
+      の 4つのカラムに <code>DEFAULT</code> キーワードを使用して、デフォルト値を設定しています。</p>
+      <div class="sourceCode" id="cb9"
+      data-caption="init-tables_02.sql テーブルの初期化（デフォルト値の設定）"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">-- 既に p_characters が存在する場合は削除</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> p_characters;</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">-- トランザクションの開始</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">-- キャラクタテーブルの作成</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_characters (</span>
+<span id="cb9-9"><a href="#cb9-9"></a>  character_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb9-10"><a href="#cb9-10"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb9-11"><a href="#cb9-11"></a>  job <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb9-12"><a href="#cb9-12"></a>  <span class="kw">level</span> <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="dv">1</span>, <span class="co">-- 1 を デフォルト値に設定</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a>  guild <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">DEFAULT</span> <span class="kw">NULL</span>, <span class="co">-- NULL を 〃</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a>  created_on <span class="dt">DATE</span> <span class="kw">DEFAULT</span> <span class="fu">CURRENT_DATE</span>, <span class="co">-- 現在日付を 〃</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>  updated_at <span class="dt">TIMESTAMP</span> <span class="kw">DEFAULT</span> <span class="fu">LOCALTIMESTAMP</span>(<span class="dv">0</span>) <span class="co">-- 現在日時(TZなし)を 〃</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>);</span>
+<span id="cb9-17"><a href="#cb9-17"></a></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="co">-- レコードの追加 1</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a>  p_characters (character_id, name, job)</span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="kw">VALUES</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a>  (<span class="dv">1</span>, <span class="st">&#39;Alice&#39;</span>, <span class="st">&#39;Priest&#39;</span>);</span>
+<span id="cb9-23"><a href="#cb9-23"></a></span>
+<span id="cb9-24"><a href="#cb9-24"></a><span class="co">-- レコードの追加 2</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a>  p_characters (character_id, name, job, guild)</span>
+<span id="cb9-27"><a href="#cb9-27"></a><span class="kw">VALUES</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a>  (<span class="dv">2</span>, <span class="st">&#39;Bob&#39;</span>, <span class="st">&#39;Priest&#39;</span>, <span class="st">&#39;hameln&#39;</span>);</span>
+<span id="cb9-29"><a href="#cb9-29"></a></span>
+<span id="cb9-30"><a href="#cb9-30"></a><span class="co">-- レコードの追加 3</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a>  p_characters (character_id, name, job, <span class="kw">level</span>, created_on)</span>
+<span id="cb9-33"><a href="#cb9-33"></a><span class="kw">VALUES</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a>  (<span class="dv">3</span>, <span class="st">&#39;Charlie&#39;</span>, <span class="st">&#39;Wizard&#39;</span>, <span class="dv">5</span>, <span class="st">&#39;2025-10-30&#39;</span>),</span>
+<span id="cb9-35"><a href="#cb9-35"></a>  (<span class="dv">4</span>, <span class="st">&#39;Dave&#39;</span>, <span class="st">&#39;Samurai&#39;</span>, <span class="dv">20</span>, <span class="st">&#39;2025-08-10&#39;</span>);</span>
+<span id="cb9-36"><a href="#cb9-36"></a></span>
+<span id="cb9-37"><a href="#cb9-37"></a><span class="co">-- テーブルの確認</span></span>
+<span id="cb9-38"><a href="#cb9-38"></a><span class="kw">SELECT</span></span>
+<span id="cb9-39"><a href="#cb9-39"></a>  character_id,</span>
+<span id="cb9-40"><a href="#cb9-40"></a>  name,</span>
+<span id="cb9-41"><a href="#cb9-41"></a>  job,</span>
+<span id="cb9-42"><a href="#cb9-42"></a>  <span class="kw">level</span>,</span>
+<span id="cb9-43"><a href="#cb9-43"></a>  guild,</span>
+<span id="cb9-44"><a href="#cb9-44"></a>  created_on,</span>
+<span id="cb9-45"><a href="#cb9-45"></a>  updated_at <span class="kw">AS</span> updated_at</span>
+<span id="cb9-46"><a href="#cb9-46"></a><span class="kw">FROM</span></span>
+<span id="cb9-47"><a href="#cb9-47"></a>  p_characters;</span>
+<span id="cb9-48"><a href="#cb9-48"></a></span>
+<span id="cb9-49"><a href="#cb9-49"></a><span class="co">-- ロールバックによる処理の取り消し</span></span>
+<span id="cb9-50"><a href="#cb9-50"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <p>実行結果は、次のようになります。</p>
+      <pre><code>INSERT 0 2
+ character_id |  name   |   job   | level | guild  | created_on |     updated_at
+--------------+---------+---------+-------+--------+------------+---------------------
+            1 | Alice   | Priest  |     1 |        | 2025-12-09 | 2025-12-09 15:13:32
+            2 | Bob     | Priest  |     1 | hameln | 2025-12-09 | 2025-12-09 15:13:32
+            3 | Charlie | Wizard  |     5 |        | 2025-10-30 | 2025-12-09 15:13:32
+            4 | Dave    | Samurai |    20 |        | 2025-08-10 | 2025-12-09 15:13:32</code></pre>
+      <p>デフォルト値が設定されている場合、<code>INSERT</code>
+      文で値の指定を省略することができます。たとえば、以下のように、デフォルト値が設定されている
+      <strong>level</strong>、<strong>guild</strong>、<strong>created_on</strong>、<strong>updated_at</strong>
+      カラムを省略してレコードを追加することが可能になります。</p>
+      <ul>
+      <li><code>LOCALTIMESTAMP(0)</code> とすることで、小数秒を含まない現在日時 (＝小数秒を 0
+      に揃えた日時値) を得ることができます。<code>DATE_TRUNC('second', LOCALTIMESTAMP)</code>
+      でも同様の結果になります。</li>
+      </ul>
+      <div class="sourceCode" id="cb11" data-caption="init-tables_02.sql（抜粋）"
+      data-startFrom="19"><pre class="sourceCode numberSource sql numberLines"><code class="sourceCode sql" style="counter-reset: source-line 18;"><span id="cb11-19"><a href="#cb11-19"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb11-20"><a href="#cb11-20"></a>  p_characters (character_id, name, job)</span>
+<span id="cb11-21"><a href="#cb11-21"></a><span class="kw">VALUES</span></span>
+<span id="cb11-22"><a href="#cb11-22"></a>  (<span class="dv">1</span>, <span class="st">&#39;Alice&#39;</span>, <span class="st">&#39;Priest&#39;</span>);</span></code></pre></div>
+      <p>また、次のように、任意のカラムだけにデフォルト値を使用することもできます。<strong>guild</strong>
+      と <strong>updated_at</strong> だけ値を省略してレコードを挿入する場合、次のようにします。</p>
+      <div class="sourceCode" id="cb12" data-caption="init-tables_02.sql（抜粋）"
+      data-startFrom="31"><pre class="sourceCode numberSource sql numberLines"><code class="sourceCode sql" style="counter-reset: source-line 30;"><span id="cb12-31"><a href="#cb12-31"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb12-32"><a href="#cb12-32"></a>  p_characters (character_id, name, job, <span class="kw">level</span>, created_on)</span>
+<span id="cb12-33"><a href="#cb12-33"></a><span class="kw">VALUES</span></span>
+<span id="cb12-34"><a href="#cb12-34"></a>  (<span class="dv">3</span>, <span class="st">&#39;Charlie&#39;</span>, <span class="st">&#39;Wizard&#39;</span>, <span class="dv">5</span>, <span class="st">&#39;2025-10-30&#39;</span>),</span>
+<span id="cb12-35"><a href="#cb12-35"></a>  (<span class="dv">4</span>, <span class="st">&#39;Dave&#39;</span>, <span class="st">&#39;Samurai&#39;</span>, <span class="dv">20</span>, <span class="st">&#39;2025-08-10&#39;</span>);</span></code></pre></div>
+      <div class="note type-tips">
+      <p><strong>非NULL制約がないカラムは「NULL」がデフォルト値</strong></p>
+      <p>カラムに <strong>非NULL制約</strong> (<code>NOT NULL</code>)
+      を付けない場合、そのデフォルト値は自動的に <code>NULL</code> となります。</p>
+      <p>たとえば、<strong>第13行目</strong> の <code>guild VARCHAR(16) DEFAULT NULL</code>
+      は、<code>guild VARCHAR(16)</code> のように記述した場合と「レコード挿入時の挙動
+      (デフォルト値)」が同じになります。</p>
+      </div>
+      <h3 data-number="4.0.1" id="定着確認-1"><span class="header-section-number">4.0.1</span>
+      定着確認</h3>
+      <ul>
+      <li>次の説明のうち、正しいものを <u>すべて</u> 選び記号で答えよ。
+      <ul>
+      <li>❶ デフォルト値が設定されているカラムは <code>INSERT</code>
+      文でそのカラムの指定を省略できる。</li>
+      <li>❷ <code>DEFAULT CURRENT_DATE</code> を指定したカラムには、INSERT
+      時の「現在日付」が自動的に入る。</li>
+      <li>❸ <code>NOT NULL</code> を付けていないカラムのデフォルト値は、自動的に <code>NULL</code>
+      となる。</li>
+      <li>❹ デフォルト値を設定したカラムは、必ず <code>INSERT</code>
+      文でその値を上書きしなければならない。</li>
+      <li><strong>答え</strong>: <span class="masked">❶❷❸</span></li>
+      </ul></li>
+      <li>小数秒を含まない現在日時 (タイムゾーン情報付き)
+      を得るための日時値関数を適切な引数を含めて答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked"><code>CURRENT_TIMESTAMP(0)</code></span></li>
+      </ul></li>
+      </ul>
+      <h3 data-number="4.0.2" id="演習-2"><span class="header-section-number">4.0.2</span> 演習</h3>
+      <ul>
+      <li><p>デフォルト値を設定していないカラムを省いてレコードを挿入しようとすると、失敗することを実際に確認してください。英語環境でのエラーメッセージについても確認してください。</p>
+      <ul>
+      <li>例: <strong>第19行目</strong> ～ を
+      <code>INSERT INTO p_characters (character_id, name) VALUES (1, 'Alice');</code> に変更</li>
+      </ul></li>
+      <li><p><code>init-tables_02.sql</code> の <strong>第19行目</strong> を
+      <code>guild VARCHAR(16),</code> に書き換えても (＝<code>DEFAULT NULL</code>
+      を明示しなくても)、同じ実行結果が得られることを確認してください。</p></li>
+      <li><p><code>init-tables_02.sql</code> の <strong>第15行目</strong> を
+      <code>LOCALTIMESTAMP(0)</code> を <code>LOCALTIMESTAMP</code>
+      に書き換えたときの実行結果について確認してください。</p></li>
+      </ul>
+      <h2 data-number="4.1" id="サロゲートキーの自動採番設定"><span
+      class="header-section-number">4.1</span> サロゲートキーの自動採番設定</h2>
+      <p><a
+      href="lecture06.html#nameカラムを主キーにできるか">サロゲートキー</a>を「主キー」として用いる場合は「<strong>自動採番機能</strong>」を使うことで
+      <u>安全でシンプルなデータ管理が可能</u> となります。</p>
+      <p><strong>整数値の連番</strong> (＝オートインクリメント) によるサロゲートキーは、次の
+      <strong>第07行目</strong> のように指定します。</p>
+      <div class="sourceCode" id="cb13"
+      data-caption="init-tables_03.sql テーブルの初期化（自動採番）"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> p_characters;</span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">-- キャラクタテーブルの作成</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_characters (</span>
+<span id="cb13-7"><a href="#cb13-7"></a>  character_id <span class="dt">INTEGER</span> <span class="kw">GENERATED</span> ALWAYS <span class="kw">AS</span> IDENTITY <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, <span class="co">-- 自動採番</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>);</span>
+<span id="cb13-10"><a href="#cb13-10"></a></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="co">-- レコードの追加</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a>  p_characters (name) <span class="co">-- character_id を省略</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="kw">VALUES</span></span>
+<span id="cb13-15"><a href="#cb13-15"></a>  (<span class="st">&#39;Alice&#39;</span>),</span>
+<span id="cb13-16"><a href="#cb13-16"></a>  (<span class="st">&#39;Bob&#39;</span>);</span>
+<span id="cb13-17"><a href="#cb13-17"></a></span>
+<span id="cb13-18"><a href="#cb13-18"></a><span class="co">-- テーブルの確認 1</span></span>
+<span id="cb13-19"><a href="#cb13-19"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> p_characters;</span>
+<span id="cb13-20"><a href="#cb13-20"></a></span>
+<span id="cb13-21"><a href="#cb13-21"></a><span class="co">-- レコードの全件削除</span></span>
+<span id="cb13-22"><a href="#cb13-22"></a><span class="kw">DELETE</span> <span class="kw">FROM</span> p_characters;</span>
+<span id="cb13-23"><a href="#cb13-23"></a></span>
+<span id="cb13-24"><a href="#cb13-24"></a><span class="co">-- レコードの再挿入</span></span>
+<span id="cb13-25"><a href="#cb13-25"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb13-26"><a href="#cb13-26"></a>  p_characters (name)</span>
+<span id="cb13-27"><a href="#cb13-27"></a><span class="kw">VALUES</span></span>
+<span id="cb13-28"><a href="#cb13-28"></a>  (<span class="st">&#39;Alice&#39;</span>),</span>
+<span id="cb13-29"><a href="#cb13-29"></a>  (<span class="st">&#39;Bob&#39;</span>),</span>
+<span id="cb13-30"><a href="#cb13-30"></a>  (<span class="st">&#39;Carol&#39;</span>);</span>
+<span id="cb13-31"><a href="#cb13-31"></a></span>
+<span id="cb13-32"><a href="#cb13-32"></a><span class="co">-- テーブルの確認 2</span></span>
+<span id="cb13-33"><a href="#cb13-33"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> p_characters;</span>
+<span id="cb13-34"><a href="#cb13-34"></a></span>
+<span id="cb13-35"><a href="#cb13-35"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <p>実行結果は、次のようになります。<strong>第22行目</strong> の
+      <code>DELETE FROM p_characters</code> でレコードを全件削除していますが、その後の再挿入でも
+      <span class="masked">重複しない値が使われていること</span> に注意してください。</p>
+      <pre><code> character_id | name
+--------------+-------
+            1 | Alice
+            2 | Bob
+
+ character_id | name
+--------------+-------
+            3 | Alice
+            4 | Bob
+            5 | Carol</code></pre>
+      <p>なお、<code>GENERATED ALWAYS AS IDENTITY</code> としている場合は <span
+      class="masked">手動で任意の値を指定すること</span>
+      が不可能になります。<u>必要に応じて任意の値を指定したい場合</u> は
+      <code>GENERATED BY DEFAULT AS IDENTITY</code> を使用してください。</p>
+      <ul>
+      <li>過去の PostgreSQL では、自動採番したいときに <strong>標準SQLではない独自構文</strong>
+      である <code>SERIAL</code>
+      が広く用いられていました。しかし、現在は<strong>標準SQLに準拠した</strong>
+      <code>GENERATED AS IDENTITY</code> <strong>が推奨</strong>されています。<code>SERIAL</code>
+      は新規設計では非推奨とされているため、本科目でも <code>SERIAL</code>
+      は使わないようにしてください。</li>
+      </ul>
+      <p><strong>プロンプト例</strong></p>
+      <blockquote>
+      <p>PostgreSQL で、PK を設定する際、<code>SERIAL</code> ではなく
+      <code>GENERATED AS IDENTITY</code>
+      を使うべきだと言われました。その理由や、両者の違いを解説してしてください。</p>
+      </blockquote>
+      <h3 data-number="4.1.1" id="演習-3"><span class="header-section-number">4.1.1</span> 演習</h3>
+      <ul>
+      <li><code>init-tables_03.sql</code> において <code>DELETE FROM p_characters</code>
+      の代わりに、<code>TRUNCATE TABLE p_characters RESTART IDENTITY</code> にすると <u>連番
+      (IDシーケンス) がリセットされること</u> を確認してください。</li>
+      <li><code>init-tables_03.sql</code> の <strong>第12行目</strong> から
+      <strong>第16行目</strong> を以下のように書き換えると (＝手動で <strong>character_id</strong>
+      を指定すると)、失敗することを実際に確認してください。</li>
+      </ul>
+      <div class="sourceCode" id="cb15" data-caption="手動でcharacter_idを指定"
+      data-startFrom="12"><pre class="sourceCode numberSource sql numberLines"><code class="sourceCode sql" style="counter-reset: source-line 11;"><span id="cb15-12"><a href="#cb15-12"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb15-13"><a href="#cb15-13"></a>  p_characters (character_id, name)</span>
+<span id="cb15-14"><a href="#cb15-14"></a><span class="kw">VALUES</span></span>
+<span id="cb15-15"><a href="#cb15-15"></a>  (<span class="dv">995</span>, <span class="st">&#39;Alice&#39;</span>),</span>
+<span id="cb15-16"><a href="#cb15-16"></a>  (<span class="dv">996</span>, <span class="st">&#39;Bob&#39;</span>);</span></code></pre></div>
+      <ul>
+      <li>上記において、<strong>第07行目</strong> の <code>GENERATED ALWAYS AS IDENTITY</code> を
+      <code>GENERATED BY DEFAULT AS IDENTITY</code> に変更すると、<u>手動による
+      <strong>character_id</strong> の指定も問題なく機能すること</u> を確認してください。</li>
+      </ul>
+      <div class="note type-tips">
+      <p><strong>手動採番と自動採番の衝突</strong></p>
+      <p>手動採番と自動採番を混在させると、予期せぬ「<strong>PRIMARY
+      KEY制約違反</strong>」が起きる場合があるので注意してください。</p>
+      <p>たとえば、次の SQL では <strong>第11～15行目</strong>
+      で手動採番、<strong>第18～22行目</strong>
+      で自動採番を利用してレコードを追加しようとしています。しかし、自動採番は <span
+      class="masked">既存の手動採番値を参照して新しい番号を調整する機能</span> を持ちません。</p>
+      <p>そのため、<strong>第21行目</strong> におけるレコードを挿入時に内部的に <code>1</code>
+      を採番しようとして、既に存在する <code>1</code> と衝突し、<strong>PRIMARY KEY 違反
+      (一意性制約違反)</strong> が発生します。</p>
+      <div class="sourceCode" id="cb16" data-caption="手動採番と自動採番の衝突"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> p_characters;</span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb16-4"><a href="#cb16-4"></a></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_characters (</span>
+<span id="cb16-6"><a href="#cb16-6"></a>  character_id <span class="dt">INTEGER</span> <span class="kw">GENERATED</span> <span class="kw">BY</span> <span class="kw">DEFAULT</span> <span class="kw">AS</span> IDENTITY <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb16-7"><a href="#cb16-7"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a>);</span>
+<span id="cb16-9"><a href="#cb16-9"></a></span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="co">-- レコードの追加 (手動採番)</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a>  p_characters (character_id, name)</span>
+<span id="cb16-13"><a href="#cb16-13"></a><span class="kw">VALUES</span></span>
+<span id="cb16-14"><a href="#cb16-14"></a>  (<span class="dv">1</span>, <span class="st">&#39;Alice&#39;</span>),</span>
+<span id="cb16-15"><a href="#cb16-15"></a>  (<span class="dv">2</span>, <span class="st">&#39;Bob&#39;</span>);</span>
+<span id="cb16-16"><a href="#cb16-16"></a></span>
+<span id="cb16-17"><a href="#cb16-17"></a><span class="co">-- レコードの追加 (自動採番)</span></span>
+<span id="cb16-18"><a href="#cb16-18"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb16-19"><a href="#cb16-19"></a>  p_characters (name)</span>
+<span id="cb16-20"><a href="#cb16-20"></a><span class="kw">VALUES</span></span>
+<span id="cb16-21"><a href="#cb16-21"></a>  (<span class="st">&#39;Carol&#39;</span>), <span class="co">-- 内部的に `1` を採番してPK制約違反が発生</span></span>
+<span id="cb16-22"><a href="#cb16-22"></a>  (<span class="st">&#39;Dave&#39;</span>);</span>
+<span id="cb16-23"><a href="#cb16-23"></a></span>
+<span id="cb16-24"><a href="#cb16-24"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <p>実行結果は、次のようになります。</p>
+      <pre><code>psql:&lt;stdin&gt;:22: ERROR:  重複したキー値は一意性制約&quot;p_characters_pkey&quot;違反となります
+DETAIL:  キー (character_id)=(1) はすでに存在します。</code></pre>
+      <p>英語環境では、次のようになります。</p>
+      <pre><code>psql:&lt;stdin&gt;:22: ERROR:  duplicate key value violates unique constraint &quot;p_characters_pkey&quot;
+DETAIL:  Key (character_id)=(1) already exists.</code></pre>
+      </div>
+      <p>なお、<code>IDENTITY</code>
+      では、<strong>任意の初期値と増分を任意に設定することもできます</strong>。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>PostgreSQL
+      に関する質問です。<code>id INTEGER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY</code>
+      のようにカラムを定義しています。自動採番の初期値と増分値を指定することは可能ですか。また、指定可能な場合、その注意点などがあれば教えてください。</p>
+      </blockquote>
+      <h2 data-number="4.2" id="uuidをサロゲートキーとして使用"><span
+      class="header-section-number">4.2</span> UUIDをサロゲートキーとして使用</h2>
+      <p>サロゲートキーには、整数値を使った連番のほか、<strong>UUID v4</strong> (Universally Unique
+      Identifier Version 4)
+      もよく使用されます。昨年度のプログラミング3でウェブアプリを開発する際にも<a
+      href="https://takeshiwada1980.github.io/Programming3-2024/lecture04.html#準備-初期データの作成">UUID
+      v4 を利用</a>しました。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>UUID v4 とは何ですか。RDB の PK
+      として、整数の連番を用いる場合と比較してのメリットとデメリットを教えてください。</p>
+      </blockquote>
+      <blockquote>
+      <p>UUID って v4
+      が広く使われていますが、それ以外のバージョンもあると聞きました。それぞれの違いと用途について解説してください。</p>
+      </blockquote>
+      <blockquote>
+      <p>RDB の PK として UUIDv4 以外に、CUID2 や NanoID
+      というものを使用するケースもあると聞きました。それぞれの概要と、使い分けの考え方を教えてください。</p>
+      </blockquote>
+      <p>PostgreSQL において、<strong>UUID
+      をカラムの「デフォルト値」として設定したいとき</strong>は、次のような SQL を用います。</p>
+      <div class="sourceCode" id="cb19"
+      data-caption="init-tables_04.sql テーブルの初期化（UUID）"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">CREATE</span> EXTENSION <span class="cf">IF</span> <span class="kw">NOT</span> <span class="kw">EXISTS</span> pgcrypto;</span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> p_characters;</span>
+<span id="cb19-4"><a href="#cb19-4"></a></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb19-6"><a href="#cb19-6"></a></span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_characters (</span>
+<span id="cb19-8"><a href="#cb19-8"></a>  character_id UUID <span class="kw">DEFAULT</span> GEN_RANDOM_UUID() <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, <span class="co">-- UUID型、自動生成</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb19-10"><a href="#cb19-10"></a>  <span class="kw">level</span> <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> (<span class="fu">FLOOR</span>(<span class="kw">RANDOM</span>() <span class="op">*</span> <span class="dv">20</span>) <span class="op">+</span> <span class="dv">1</span>) <span class="co">-- デフォルト値：1～20の整数乱数</span></span>
+<span id="cb19-11"><a href="#cb19-11"></a>);</span>
+<span id="cb19-12"><a href="#cb19-12"></a></span>
+<span id="cb19-13"><a href="#cb19-13"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb19-14"><a href="#cb19-14"></a>  p_characters (name)</span>
+<span id="cb19-15"><a href="#cb19-15"></a><span class="kw">VALUES</span></span>
+<span id="cb19-16"><a href="#cb19-16"></a>  (<span class="st">&#39;Alice&#39;</span>),</span>
+<span id="cb19-17"><a href="#cb19-17"></a>  (<span class="st">&#39;Bob&#39;</span>),</span>
+<span id="cb19-18"><a href="#cb19-18"></a>  (<span class="st">&#39;Carol&#39;</span>);</span>
+<span id="cb19-19"><a href="#cb19-19"></a></span>
+<span id="cb19-20"><a href="#cb19-20"></a><span class="kw">SELECT</span></span>
+<span id="cb19-21"><a href="#cb19-21"></a>  <span class="op">*</span></span>
+<span id="cb19-22"><a href="#cb19-22"></a><span class="kw">FROM</span></span>
+<span id="cb19-23"><a href="#cb19-23"></a>  p_characters;</span>
+<span id="cb19-24"><a href="#cb19-24"></a></span>
+<span id="cb19-25"><a href="#cb19-25"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <p>実行結果は、次のようになります (<strong>character_id</strong> と <strong>level</strong>
+      の値は実行毎に変化します)。</p>
+      <pre><code>             character_id             | name  | level
+--------------------------------------+-------+-------
+ 151ab517-d93e-4b46-90ef-70fd1419ef2a | Alice |     4
+ 1c756f44-cad1-4161-902e-db0a1d4290b2 | Bob   |     5
+ 50b2e2a8-7774-4623-9cc6-bf36e238a6e7 | Carol |    12</code></pre>
+      <p><strong>第08行目</strong> では、<strong>character_id</strong>
+      を「<strong>UUID型</strong>」として定義しています。UUID は<strong>文字列型</strong> (＝
+      <code>TEXT</code> や <code>CHAR(36)</code> などの型)
+      としても保持可能ですが、UUID型を使うことで、内部表現が16バイトに最適化され、インデックスサイズが小さくなり、<strong>比較や検索の処理も一般に向上</strong>します。</p>
+      <p>さらに <code>DEFAULT GEN_RANDOM_UUID()</code> の指定により、<code>INSERT</code> 文で
+      <strong>character_id</strong> を明示しなかった場合に、自動的にランダムな UUID
+      が生成され割り当てられます。この関数を利用するためには、<strong>第01行目</strong>
+      で記述するように <strong>pgcrypto拡張</strong> を有効化しておく必要があります。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>PostgreSQL に関する質問です。カラムに UUIDv4 を格納する場合、データ型 としては
+      <code>CHAR(36)</code> 型よりも、<code>UUID</code>
+      型のほうが良いと聞きました。その理由や効果について詳しく解説してください。</p>
+      </blockquote>
+      <p>また、参考として <strong>第10行目</strong> に <span
+      class="masked">1から20までの整数乱数値</span>
+      をデフォルト値に設定する例を示しました。ただし、ゲームのレベルや初期パラメータのような「仕様に関わるランダム値」は、DB
+      側ではなくアプリ側で決定し、明示的に値を <code>INSERT</code> する設計のほうが一般的です。</p>
+      <h1 data-number="5" id="check制約"><span class="header-section-number">5</span> CHECK制約</h1>
+      <p>PostgreSQL では、レコードを挿入/更新する際に <span
+      class="masked">値が妥当な範囲にあり、かつ、定義した条件に適合しているか</span> を
+      <u>自動的に検査する仕組み</u> として <strong><em>CHECK制約</em></strong>
+      が利用できます。これにより、テーブル自身がデータの整合性を担保し、不正なデータが保存されることを防ぐことができます。</p>
+      <ul>
+      <li>CHECK制約には <code>CHECK ()</code> を使用し、括弧の内部には真偽値 (＝<a
+      href="lecture04.html#sqlの3値論理">3値論理</a>👉
+      <code>TRUE</code>/<code>FALSE</code>/<code>UNKNOWN</code> )
+      を返す「<strong>条件式</strong>」を記述します。
+      <ul>
+      <li>たとえば <code>CREATE</code> 文で <code>level INTEGER CHECK (level &lt; 100)</code>
+      と定義すると、<strong>level</strong> カラムには 100
+      以上の値が<strong>格納できなくなります</strong>。</li>
+      <li>条件式の評価結果が <code>FALSE</code> の場合に制約違反となりエラーが発生します
+      (＝挿入や更新が失敗します)。
+      <ul>
+      <li><code>TRUE</code> に加えて、評価結果が <code>UNKNOWN</code>(＝<code>NULL</code>
+      を含む条件式の結果) の場合も <span class="masked">制約違反とは見なされないこと</span>
+      に注意してください (🚨<font color="deeppink">重要</font>)。</li>
+      </ul></li>
+      </ul></li>
+      <li>バリデーション (入力値の検証) は <strong>基本的にアプリ側の責務</strong>であり、DB側 の
+      CHECK制約 はあくまでそれを補強する安全装置であることに注意してください。</li>
+      </ul>
+      <p>CHECK制約では、単純な数値範囲のチェック (＝<strong>level</strong> は 1 から 255 の範囲など)
+      に限らず、<u>レコード内の複数のカラムを参照した条件</u>
+      も設定可能となっています。たとえば、<code>started_at &lt; finished_at</code> という
+      CHECK制約を指定して <span class="masked">「開始時刻は終了時刻より前」という関係</span>
+      を強制することが可能になります。</p>
+      <p>CHECK制約の設定例を以下に示します。まずは、実際に実行してみてください。</p>
+      <div class="sourceCode" id="cb21"
+      data-caption="init-tables_05.sql テーブルの初期化（CHECK制約）"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> p_users;</span>
+<span id="cb21-2"><a href="#cb21-2"></a></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb21-4"><a href="#cb21-4"></a></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_users (</span>
+<span id="cb21-6"><a href="#cb21-6"></a>  user_id <span class="dt">INTEGER</span> <span class="kw">GENERATED</span> ALWAYS <span class="kw">AS</span> IDENTITY <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb21-7"><a href="#cb21-7"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">CHECK</span> (name <span class="op">&lt;&gt;</span> <span class="st">&#39;&#39;</span>) <span class="kw">CHECK</span> (name ~ <span class="st">&#39;^[A-Za-z]*$&#39;</span>),</span>
+<span id="cb21-8"><a href="#cb21-8"></a>  zip_code <span class="dt">CHAR</span>(<span class="dv">8</span>) <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">CHECK</span> (zip_code ~ <span class="st">&#39;^[0-9]{3}-[0-9]{4}$&#39;</span>),</span>
+<span id="cb21-9"><a href="#cb21-9"></a>  birthday <span class="dt">DATE</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">CHECK</span> (birthday <span class="kw">BETWEEN</span> <span class="st">&#39;1900-01-01&#39;</span> <span class="kw">AND</span> <span class="fu">CURRENT_DATE</span>),</span>
+<span id="cb21-10"><a href="#cb21-10"></a>  locale <span class="dt">VARCHAR</span>(<span class="dv">5</span>) <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">CHECK</span> (locale <span class="kw">IN</span> (<span class="st">&#39;ja&#39;</span>, <span class="st">&#39;en&#39;</span>, <span class="st">&#39;de&#39;</span>, <span class="st">&#39;ru&#39;</span>)),</span>
+<span id="cb21-11"><a href="#cb21-11"></a>  created_at <span class="dt">TIMESTAMP</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">CHECK</span> (</span>
+<span id="cb21-12"><a href="#cb21-12"></a>    created_at <span class="op">&gt;=</span> birthday <span class="kw">AND</span></span>
+<span id="cb21-13"><a href="#cb21-13"></a>    created_at <span class="op">&gt;=</span> <span class="st">&#39;2024-12-01&#39;</span></span>
+<span id="cb21-14"><a href="#cb21-14"></a>  ),</span>
+<span id="cb21-15"><a href="#cb21-15"></a>  deleted_at <span class="dt">TIMESTAMP</span> <span class="kw">CHECK</span> (deleted_at <span class="op">&gt;</span> created_at)</span>
+<span id="cb21-16"><a href="#cb21-16"></a>);</span>
+<span id="cb21-17"><a href="#cb21-17"></a></span>
+<span id="cb21-18"><a href="#cb21-18"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb21-19"><a href="#cb21-19"></a>  p_users (name, zip_code, birthday, locale, created_at)</span>
+<span id="cb21-20"><a href="#cb21-20"></a><span class="kw">VALUES</span></span>
+<span id="cb21-21"><a href="#cb21-21"></a>  (</span>
+<span id="cb21-22"><a href="#cb21-22"></a>    <span class="st">&#39;Alice&#39;</span>,</span>
+<span id="cb21-23"><a href="#cb21-23"></a>    <span class="st">&#39;572-8572&#39;</span>,</span>
+<span id="cb21-24"><a href="#cb21-24"></a>    <span class="st">&#39;2001-03-12&#39;</span>,</span>
+<span id="cb21-25"><a href="#cb21-25"></a>    <span class="st">&#39;en&#39;</span>,</span>
+<span id="cb21-26"><a href="#cb21-26"></a>    DATE_TRUNC(<span class="st">&#39;second&#39;</span>, <span class="fu">CURRENT_TIMESTAMP</span>)</span>
+<span id="cb21-27"><a href="#cb21-27"></a>  );</span>
+<span id="cb21-28"><a href="#cb21-28"></a></span>
+<span id="cb21-29"><a href="#cb21-29"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> p_users;</span>
+<span id="cb21-30"><a href="#cb21-30"></a></span>
+<span id="cb21-31"><a href="#cb21-31"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <p><strong>第07行目</strong> の <strong>name</strong> カラムでは
+      <code>CHECK (name &lt;&gt; '')</code> によって「空文字」の入力を禁止しています (<a
+      href="lecture04.html#where句でよく利用する述語">第05回講義</a>で解説したように
+      <code>&lt;&gt;</code> は <span class="masked">等しくない</span>
+      を表す比較演算子です)。さらに、 <code>CHECK (name ~ '^[A-Za-z]*$')</code>
+      により、使用できる文字を英大文字・英小文字のアルファベットのみに限定しています
+      (記号や日本語などの使用を禁止しています)。ここで用いている <code>~</code> は、PostgreSQL
+      における <span class="masked">正規表現マッチ演算子</span> です (正規表現についてはPG1で<a
+      href="https://takeshiwada1980.github.io/Programming1-2023/lecture27.html#正規表現">学習済み</a>です)。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>PostgreSQL における <code>'^[A-Za-z]*$'</code>
+      という正規表現の意味を詳しく解説してください。</p>
+      </blockquote>
+      <ul>
+      <li><font color="deeppink"><b>注意</b></font>🚨 <code>CHECK (name ~ '^[A-Za-z]+$')</code>
+      とすれば、<code>CHECK (name &lt;&gt; '')</code> は省略可能です。正規表現で <code>*</code>
+      は「0文字以上の繰り返し」、<code>+</code> は「1文字以上の繰り返し」を意味します。</li>
+      </ul>
+      <hr />
+      <p><strong>第08行目</strong> の <strong>zip_code</strong> カラム (郵便番号カラム) では
+      <code>'^[0-9]{3}-[0-9]{4}$'</code> という正規表現を利用して、格納可能な文字列が
+      <code>NNN-NNNN</code> の形式 (<code>N</code>は半角数値)
+      であることを強制しています。これにより、ハイフンなしの郵便番号や <span
+      class="masked">全角数字や漢数字の郵便番号</span> が入力されることを防いでいます。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>PostgreSQL における <code>'^[0-9]{3}-[0-9]{4}$'</code>
+      という正規表現の意味を詳しく解説してください。</p>
+      </blockquote>
+      <hr />
+      <p><strong>第09行目</strong> の <strong>birthday</strong> カラムでは
+      <code>birthday BETWEEN '1900-01-01' AND CURRENT_DATE</code>
+      という条件により、<u>1900年1月1日以降、現在日付以前のみ</u>
+      を誕生日として受け付けるようにしています。</p>
+      <hr />
+      <p><strong>第10行目</strong> の <strong>locale</strong> カラムでは利用者が選択できるロケール
+      (＝言語コード) を <span
+      class="masked"><code>ja</code>、<code>en</code>、<code>de</code>、<code>ru</code>
+      のいずれかに限定</span> しています。これより、誤字 (たとえば <code>jp</code> など)
+      や、未対応のロケール値が登録されることを防いでいます。</p>
+      <hr />
+      <p><strong>第11〜14行目</strong> では、<code>created_at</code> と <code>birthday</code>
+      というカラム間の時間的な前後関係を保証するための制約を設定しています。具体的には
+      <code>created_at &gt;= birthday</code> で「作成日時は誕生日以降である」ことを保証し、さらに
+      <code>created_at &gt;= '2024-12-01'</code> で2024年12月1日 (システム運用開始日を想定)
+      以降となることを保証しています。</p>
+      <ul>
+      <li><font color="deeppink"><b>注意</b></font>🚨
+      <code>CHECK ( created_at &gt;= birthday AND created_at &gt;= '2024-12-01' )</code> のような
+      <span class="masked">AND条件</span> は
+      <code>CHECK ( created_at &gt;= birthday ) CHECK ( created_at &gt;= '2024-12-01' )</code>
+      のように <strong>複数に分割して記述しても同じ意味</strong> になります。</li>
+      </ul>
+      <hr />
+      <p><strong>第15行目</strong> では <code>created_at</code> と <code>deleted_at</code>
+      の時間的な前後関係を保証するための制約を設定しています。具体的には
+      <code>deleted_at &gt; created_at</code>
+      で「削除日時は作成日時より後にしか設定できない」ように制御しています。</p>
+      <ul>
+      <li><font color="deeppink"><b>注意</b></font>🚨 <strong>deleted_at</strong> には
+      <code>NULL</code> が <u>問題なく格納可能</u> であることに注意してください。
+      <ul>
+      <li><code>NULL &gt; created_at</code> の評価結果は <code>UNKNOWN</code> であり <span
+      class="masked">CHECK制約の違反にはなりません</span>。制約違反になるのは <code>FALSE</code>
+      のみです。</li>
+      </ul></li>
+      </ul>
+      <hr />
+      <p><strong>第26行目</strong> の <code>DATE_TRUNC</code> 関数については<a
+      href="lecture05.html#date_trunc関数を利用した時間軸に沿った集計処理">第05回講義</a>を参照してください。</p>
+      <div class="note type-senior">
+      <p><strong>PostgreSQL で値を限定する3つの実装パターン</strong></p>
+      <p>PostgreSQL でカラムに <code>admin</code>/<code>user</code>/<code>guest</code> の
+      <strong>いずれかを格納したいような場合</strong>、そのテーブル設計には、いくつかの方法があります。</p>
+      <p>ひとつは、このセクションで扱ったように
+      CHECK制約で許可する文字列を列挙し、値を制限する方法があります。そのほかに、<code>CREATE TYPE role AS ENUM ('admin', 'user', 'guest')</code>
+      のように <strong>専用の列挙型 (ENUM型)
+      を定義する方法</strong>、<strong>ロール情報をまとめたマスタテーブルを用意して外部キーで参照する方法</strong>
+      (後述)
+      などが挙げられます。これらはどれも実現可能な選択肢ですが、保守性や拡張性、アプリ側からの扱いやすさなど、それぞれにメリットとデメリットがあります。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>PostgreSQL
+      において区分値を扱いたいとき、「CHECK制約」「ENUM型」「マスタテーブル＋外部キー」による設計の違いを考察してください。特に、柔軟性・運用コスト・アプリからの扱いやすさの観点で考察してください。</p>
+      </blockquote>
+      </div>
+      <h3 data-number="5.0.1" id="演習-4"><span class="header-section-number">5.0.1</span> 演習</h3>
+      <ul>
+      <li><code>init-tables_05.sql</code> に、CHECK制約に違反するレコードを挿入するような
+      <code>INSERT</code> 文を記述し、実行するとどのような応答になるかを確認してください。</li>
+      </ul>
+      <h3 data-number="5.0.2" id="sqlドリル"><span class="header-section-number">5.0.2</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-01_1.sql</code> 👉 次のようなカラムを持ったテーブル p_characters を定義する
+      <code>CREATE</code> 文を記述せよ。
+      <ul>
+      <li><strong>character_id</strong>:
+      整数型とし、値を省略したときは、初期値を1000とする自動採番とすること。手動でも設定可能とすること。主キーとすること。</li>
+      <li><strong>public_id</strong>:
+      UUID型として、非NULL制約と一意性制約を設定すること。デフォルト値としてランダムな UUID v4
+      を設定すること。</li>
+      <li><strong>name</strong>: 文字列型で、3文字以上16文字以内の英文字 (大文字・小文字)
+      のみ使用可とすること。非NULL制約と一意性制約を設定すること。</li>
+      <li><strong>hair_color</strong>: <code>#FFFFFF</code> や <code>#3333aa</code>
+      のような形式のカラーコードのみが格納できる7文字の固定長文字列型とすること。非NULL制約を設定すること。</li>
+      <li><strong>hp_max</strong>: 整数型で、値を 0
+      以上に限定すること。非NULL制約を設定すること。</li>
+      <li><strong>hp</strong>: 整数型で、値を 0 以上かつ hp_max
+      以下に限定すること。非NULL制約を設定すること。</li>
+      <li><strong>blood_type</strong>: 文字列型として、格納可能な値は
+      <code>A</code>、<code>B</code>、<code>O</code>、<code>AB</code>
+      のいずれかに限定すること。NULLを許可すること。</li>
+      <li><strong>height_cm</strong>: 固定小数点数型とし、<strong>50.0〜250.0</strong>
+      の範囲の値に限定すること。非NULL制約を設定すること。</li>
+      <li><strong>created_on</strong>: 日付型として、格納できる値を
+      2025年12月1日以降、現在日以前にすること。非NULL制約を設定すること。</li>
+      <li><strong>deleted_on</strong>: 日付型として、格納できる値を created_on 以降とすること
+      (未来の日付も格納可能とすること)。NULLを許可すること。</li>
+      </ul></li>
+      </ul>
+      <p>テーブル定義後は、次の <code>INSERT</code> 文が <strong>正常に処理されること</strong>
+      を確認すること。</p>
+      <div class="sourceCode" id="cb22" data-caption="ex-01_1（正常に処理されるべき挿入処理）"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>  p_characters (character_id, name, hair_color, hp_max, hp, height_cm, created_on)</span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="kw">VALUES</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>  (<span class="dv">1</span>, <span class="st">&#39;TEST&#39;</span>, <span class="st">&#39;#000000&#39;</span>, <span class="dv">512</span>, <span class="dv">256</span>, <span class="dv">200</span>, <span class="st">&#39;2025-12-01&#39;</span>);</span>
+<span id="cb22-5"><a href="#cb22-5"></a></span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a>  p_characters (name, hair_color, hp_max, hp, blood_type, height_cm, created_on)</span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="kw">VALUES</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a>  (<span class="st">&#39;Alice&#39;</span>, <span class="st">&#39;#A1B2C3&#39;</span>, <span class="dv">120</span>, <span class="dv">100</span>, <span class="st">&#39;A&#39;</span>, <span class="fl">162.5</span>, <span class="st">&#39;2025-12-05&#39;</span>),</span>
+<span id="cb22-10"><a href="#cb22-10"></a>  (<span class="st">&#39;Bob&#39;</span>, <span class="st">&#39;#3344FF&#39;</span>, <span class="dv">150</span>, <span class="dv">149</span>, <span class="st">&#39;O&#39;</span>, <span class="fl">175.0</span>, <span class="st">&#39;2025-12-07&#39;</span>);</span></code></pre></div>
+      <p>テーブル定義後は、次の各 <code>INSERT</code> 文が <strong>制約違反で失敗すること</strong>
+      を確認すること。</p>
+      <div class="sourceCode" id="cb23" data-caption="ex-01_1（失敗するべき挿入処理）"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb23-1"><a href="#cb23-1"></a><span class="co">-- 1. name の一意制約違反（すでに &#39;Alice&#39; が存在すると仮定）</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>  p_characters (name, hair_color, hp_max, hp, blood_type, height_cm, created_on)</span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="kw">VALUES</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a>  (<span class="st">&#39;Alice&#39;</span>, <span class="st">&#39;#112233&#39;</span>, <span class="dv">100</span>, <span class="dv">80</span>, <span class="st">&#39;A&#39;</span>, <span class="fl">160.0</span>, <span class="st">&#39;2025-12-02&#39;</span>);</span>
+<span id="cb23-6"><a href="#cb23-6"></a></span>
+<span id="cb23-7"><a href="#cb23-7"></a><span class="co">-- 2. name が短すぎる（3文字未満で CHECK (name ~ &#39;^[A-Za-z]{3,}$&#39;) に違反）</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a>  p_characters (name, hair_color, hp_max, hp, blood_type, height_cm, created_on)</span>
+<span id="cb23-10"><a href="#cb23-10"></a><span class="kw">VALUES</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a>  (<span class="st">&#39;Al&#39;</span>, <span class="st">&#39;#112233&#39;</span>, <span class="dv">100</span>, <span class="dv">80</span>, <span class="st">&#39;A&#39;</span>, <span class="fl">160.0</span>, <span class="st">&#39;2025-12-02&#39;</span>);</span>
+<span id="cb23-12"><a href="#cb23-12"></a></span>
+<span id="cb23-13"><a href="#cb23-13"></a><span class="co">-- 3. hair_color が「#」なしで正規表現に違反</span></span>
+<span id="cb23-14"><a href="#cb23-14"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb23-15"><a href="#cb23-15"></a>  p_characters (name, hair_color, hp_max, hp, blood_type, height_cm, created_on)</span>
+<span id="cb23-16"><a href="#cb23-16"></a><span class="kw">VALUES</span></span>
+<span id="cb23-17"><a href="#cb23-17"></a>  (<span class="st">&#39;Charlie&#39;</span>, <span class="st">&#39;112233&#39;</span>, <span class="dv">100</span>, <span class="dv">80</span>, <span class="st">&#39;B&#39;</span>, <span class="fl">170.0</span>, <span class="st">&#39;2025-12-02&#39;</span>);</span>
+<span id="cb23-18"><a href="#cb23-18"></a></span>
+<span id="cb23-19"><a href="#cb23-19"></a><span class="co">-- 4. hp_max が負の値（CHECK (hp_max &gt;= 0) に違反）</span></span>
+<span id="cb23-20"><a href="#cb23-20"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb23-21"><a href="#cb23-21"></a>  p_characters (name, hair_color, hp_max, hp, blood_type, height_cm, created_on)</span>
+<span id="cb23-22"><a href="#cb23-22"></a><span class="kw">VALUES</span></span>
+<span id="cb23-23"><a href="#cb23-23"></a>  (<span class="st">&#39;David&#39;</span>, <span class="st">&#39;#445566&#39;</span>, <span class="op">-</span><span class="dv">10</span>, <span class="dv">0</span>, <span class="st">&#39;O&#39;</span>, <span class="fl">165.0</span>, <span class="st">&#39;2025-12-02&#39;</span>);</span>
+<span id="cb23-24"><a href="#cb23-24"></a></span>
+<span id="cb23-25"><a href="#cb23-25"></a><span class="co">-- 5. hp が負の値（CHECK (hp &gt;= 0) に違反）</span></span>
+<span id="cb23-26"><a href="#cb23-26"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb23-27"><a href="#cb23-27"></a>  p_characters (name, hair_color, hp_max, hp, blood_type, height_cm, created_on)</span>
+<span id="cb23-28"><a href="#cb23-28"></a><span class="kw">VALUES</span></span>
+<span id="cb23-29"><a href="#cb23-29"></a>  (<span class="st">&#39;Eve&#39;</span>, <span class="st">&#39;#778899&#39;</span>, <span class="dv">100</span>, <span class="op">-</span><span class="dv">5</span>, <span class="st">&#39;AB&#39;</span>, <span class="fl">155.0</span>, <span class="st">&#39;2025-12-02&#39;</span>);</span>
+<span id="cb23-30"><a href="#cb23-30"></a></span>
+<span id="cb23-31"><a href="#cb23-31"></a><span class="co">-- 6. hp が hp_max を超えている（CHECK (hp_max &gt;= hp) に違反）</span></span>
+<span id="cb23-32"><a href="#cb23-32"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb23-33"><a href="#cb23-33"></a>  p_characters (name, hair_color, hp_max, hp, blood_type, height_cm, created_on)</span>
+<span id="cb23-34"><a href="#cb23-34"></a><span class="kw">VALUES</span></span>
+<span id="cb23-35"><a href="#cb23-35"></a>  (<span class="st">&#39;Frank&#39;</span>, <span class="st">&#39;#ABCDEF&#39;</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="st">&#39;A&#39;</span>, <span class="fl">180.0</span>, <span class="st">&#39;2025-12-02&#39;</span>);</span>
+<span id="cb23-36"><a href="#cb23-36"></a></span>
+<span id="cb23-37"><a href="#cb23-37"></a><span class="co">-- 7. blood_type が候補外（IN (&#39;A&#39;,&#39;B&#39;,&#39;O&#39;,&#39;AB&#39;) に違反）</span></span>
+<span id="cb23-38"><a href="#cb23-38"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb23-39"><a href="#cb23-39"></a>  p_characters (name, hair_color, hp_max, hp, blood_type, height_cm, created_on)</span>
+<span id="cb23-40"><a href="#cb23-40"></a><span class="kw">VALUES</span></span>
+<span id="cb23-41"><a href="#cb23-41"></a>  (<span class="st">&#39;Grace&#39;</span>, <span class="st">&#39;#123456&#39;</span>, <span class="dv">100</span>, <span class="dv">50</span>, <span class="st">&#39;C&#39;</span>, <span class="fl">160.0</span>, <span class="st">&#39;2025-12-02&#39;</span>);</span>
+<span id="cb23-42"><a href="#cb23-42"></a></span>
+<span id="cb23-43"><a href="#cb23-43"></a><span class="co">-- 8. height_cm が範囲外（50〜250 から外れている）</span></span>
+<span id="cb23-44"><a href="#cb23-44"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb23-45"><a href="#cb23-45"></a>  p_characters (name, hair_color, hp_max, hp, blood_type, height_cm, created_on)</span>
+<span id="cb23-46"><a href="#cb23-46"></a><span class="kw">VALUES</span></span>
+<span id="cb23-47"><a href="#cb23-47"></a>  (<span class="st">&#39;Heidi&#39;</span>, <span class="st">&#39;#654321&#39;</span>, <span class="dv">100</span>, <span class="dv">80</span>, <span class="st">&#39;B&#39;</span>, <span class="fl">49.9</span>, <span class="st">&#39;2025-12-02&#39;</span>);</span>
+<span id="cb23-48"><a href="#cb23-48"></a></span>
+<span id="cb23-49"><a href="#cb23-49"></a><span class="co">-- 9. created_on が 2025-12-01 より前（CHECK (created_on &gt;= &#39;2025-12-01&#39;) に違反）</span></span>
+<span id="cb23-50"><a href="#cb23-50"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb23-51"><a href="#cb23-51"></a>  p_characters (name, hair_color, hp_max, hp, blood_type, height_cm, created_on)</span>
+<span id="cb23-52"><a href="#cb23-52"></a><span class="kw">VALUES</span></span>
+<span id="cb23-53"><a href="#cb23-53"></a>  (<span class="st">&#39;Ivan&#39;</span>, <span class="st">&#39;#00FF00&#39;</span>, <span class="dv">100</span>, <span class="dv">80</span>, <span class="st">&#39;O&#39;</span>, <span class="fl">170.0</span>, <span class="st">&#39;2025-11-30&#39;</span>);</span>
+<span id="cb23-54"><a href="#cb23-54"></a></span>
+<span id="cb23-55"><a href="#cb23-55"></a><span class="co">-- 10. deleted_on が created_on より前（CHECK (deleted_on &gt;= created_on) に違反）</span></span>
+<span id="cb23-56"><a href="#cb23-56"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb23-57"><a href="#cb23-57"></a>  p_characters (name, hair_color, hp_max, hp, blood_type, height_cm, created_on, deleted_on)</span>
+<span id="cb23-58"><a href="#cb23-58"></a><span class="kw">VALUES</span></span>
+<span id="cb23-59"><a href="#cb23-59"></a>  (<span class="st">&#39;Judy&#39;</span>, <span class="st">&#39;#FF00FF&#39;</span>, <span class="dv">100</span>, <span class="dv">80</span>, <span class="st">&#39;AB&#39;</span>, <span class="fl">165.0</span>, <span class="st">&#39;2025-12-02&#39;</span>, <span class="st">&#39;2025-12-01&#39;</span>);</span></code></pre></div>
+      <h3 data-number="5.0.3" id="定着確認-2"><span class="header-section-number">5.0.3</span>
+      定着確認</h3>
+      <ul>
+      <li>age カラムが <code>age INTEGER CHECK (age &gt;= 0)</code>
+      のように定義されるとき、このカラムに <code>NULL</code>
+      を挿入することは「できる」か「できない」か答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked">できる。<code>null &gt;= 0</code>の評価結果は<code>UNKNOWN</code>であり、制約違反にはならない。</span></li>
+      </ul></li>
+      <li>level カラムが <code>level INTEGER NOT NULL CHECK (level BETWEEN 0 AND 100)</code>
+      のように定義されるとき、このカラムに格納可能な値は 1 以上 99
+      以下の整数値に制限される。この説明は「適切である」か「適切ではない」か答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない。<code>BETWEEN</code>
+      は開始値と終了値を含む。</span></li>
+      </ul></li>
+      <li><code>CHECK (gender = 'male' OR gender = 'female')</code>
+      は、<code>CHECK (gender = 'male') CHECK (gender = 'female')</code>
+      と等価である。この説明は「適切である」か「適切ではない」か答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない (分解可能なのは <code>AND</code>
+      の場合)。</span></li>
+      </ul></li>
+      <li><strong>p_users</strong> テーブルに携帯電話電話 (日本国内を想定) を保持する
+      <strong>mobile_phone</strong>
+      というカラムを作成したい。適切なデータ型とCHECK制約を答えよ。非NULL制約も設定すること。
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked"><code>mobile_phone CHAR(13) NOT NULL CHECK (mobile_phone ~ '^0(90|80|70)-[0-9]{4}-[0-9]{4}$')</code>
+      正規表現に関する別解は多数あり。</span></li>
+      </ul></li>
+      <li><strong>p_users</strong> テーブルに「性別」を保持する <strong>gender</strong>
+      というカラムを作成したい。このカラムには、NULL許容の文字列として
+      <code>male</code>、<code>female</code>、<code>other</code>
+      のいずれかを格納したい。適切なデータ型とCHECK制約を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked"><code>gender VARCHAR(6) CHECK (gender IN ('male', 'female', 'other'))</code>
+      別解は多数あり。</span></li>
+      </ul></li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>PostgreSQL に関する質問です。テーブルの定義において
+      <code>CHECK (gender IN ('male', 'female', 'other'))</code>
+      という制約を設定するとき、データ型として <code>VARCHAR(6)</code> と <code>TEXT</code>
+      のどちらを使用するのが適切でしょうか。<code>VARCHAR</code>
+      型にすると、挿入時に文字長チェックがはいりますが、<code>CHECK (...)</code>
+      が設定されているので冗長であるようにも思います。また、今後、<code>non_binary</code> や
+      <code>prefer_not_to_say</code>
+      などの拡張があった場合に変更が必要そうです。一方で、<code>TEXT</code>
+      にすると「性別に関する短い識別子を格納する」という設計意図がぼける気がします。</p>
+      </blockquote>
+      <h2 data-number="5.1" id="テーブルレベルのcheck制約"><span
+      class="header-section-number">5.1</span> テーブルレベルのCHECK制約</h2>
+      <p>同じ CHECK 条件は、カラム定義に併記する代わりに以下のようにまとめて書くこともできます。</p>
+      <div class="sourceCode" id="cb24" data-caption="init-tables_06.sql（CHECK制約）抜粋"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_users (</span>
+<span id="cb24-2"><a href="#cb24-2"></a>  user_id <span class="dt">INTEGER</span> <span class="kw">GENERATED</span> ALWAYS <span class="kw">AS</span> IDENTITY,</span>
+<span id="cb24-3"><a href="#cb24-3"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb24-4"><a href="#cb24-4"></a>  zip_code <span class="dt">CHAR</span>(<span class="dv">8</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb24-5"><a href="#cb24-5"></a>  birthday <span class="dt">DATE</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb24-6"><a href="#cb24-6"></a>  locale <span class="dt">VARCHAR</span>(<span class="dv">5</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb24-7"><a href="#cb24-7"></a>  created_at <span class="dt">TIMESTAMP</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb24-8"><a href="#cb24-8"></a>  deleted_at <span class="dt">TIMESTAMP</span>,</span>
+<span id="cb24-9"><a href="#cb24-9"></a>  <span class="co">-- ▼ テーブルレベルの制約</span></span>
+<span id="cb24-10"><a href="#cb24-10"></a>  <span class="kw">PRIMARY</span> <span class="kw">KEY</span> (user_id),</span>
+<span id="cb24-11"><a href="#cb24-11"></a>  <span class="kw">CHECK</span> (name <span class="op">&lt;&gt;</span> <span class="st">&#39;&#39;</span>),</span>
+<span id="cb24-12"><a href="#cb24-12"></a>  <span class="kw">CHECK</span> (name ~ <span class="st">&#39;^[A-Za-z]*$&#39;</span>),</span>
+<span id="cb24-13"><a href="#cb24-13"></a>  <span class="kw">CHECK</span> (zip_code ~ <span class="st">&#39;^[0-9]{3}-[0-9]{4}$&#39;</span>),</span>
+<span id="cb24-14"><a href="#cb24-14"></a>  <span class="kw">CHECK</span> (birthday <span class="kw">BETWEEN</span> <span class="st">&#39;1900-01-01&#39;</span> <span class="kw">AND</span> <span class="fu">CURRENT_DATE</span>), </span>
+<span id="cb24-15"><a href="#cb24-15"></a>  <span class="kw">CHECK</span> (locale <span class="kw">IN</span> (<span class="st">&#39;ja&#39;</span>, <span class="st">&#39;en&#39;</span>, <span class="st">&#39;de&#39;</span>, <span class="st">&#39;ru&#39;</span>)), </span>
+<span id="cb24-16"><a href="#cb24-16"></a>  <span class="kw">CHECK</span> (created_at <span class="op">&gt;=</span> birthday), </span>
+<span id="cb24-17"><a href="#cb24-17"></a>  <span class="kw">CHECK</span> (created_at <span class="op">&gt;=</span> <span class="st">&#39;2024-12-01&#39;</span>), </span>
+<span id="cb24-18"><a href="#cb24-18"></a>  <span class="kw">CHECK</span> (</span>
+<span id="cb24-19"><a href="#cb24-19"></a>    deleted_at <span class="op">&gt;</span> created_at <span class="kw">OR</span></span>
+<span id="cb24-20"><a href="#cb24-20"></a>    deleted_at <span class="kw">IS</span> <span class="kw">NULL</span></span>
+<span id="cb24-21"><a href="#cb24-21"></a>  )</span>
+<span id="cb24-22"><a href="#cb24-22"></a>);</span></code></pre></div>
+      <h2 data-number="5.2" id="check制約が検証されるタイミングと範囲"><span
+      class="header-section-number">5.2</span> CHECK制約が検証されるタイミングと範囲</h2>
+      <p>ここでまでは、レコードの挿入 (<code>INSERT</code>) のタイミングで CHECK制約
+      が機能することを確認してきましたが、以下のように、更新 (<code>UPDATE</code>) のタイミングでも
+      CHECK制約 は機能します。</p>
+      <p>また、<strong>第09行目</strong> で <strong>hp</strong> カラムの定義で設定している
+      <code>CHECK (hp_max &gt;= hp)</code> は、<strong>hp</strong> の変更時だけでなく <span
+      class="masked"><strong>hp_max</strong> を更新した際にも再評価</span>
+      されます。つまり、どちらか一方の値を変更したときでも、常に「<strong>hp_max</strong> は
+      <strong>hp</strong>
+      以上である」という条件が満たされているかどうかが検査される点に注意してください。</p>
+      <div class="sourceCode" id="cb25" data-caption="CHECK制約が検証されるタイミングと範囲"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> p_characters;</span>
+<span id="cb25-2"><a href="#cb25-2"></a></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb25-4"><a href="#cb25-4"></a></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_characters (</span>
+<span id="cb25-6"><a href="#cb25-6"></a>  character_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb25-7"><a href="#cb25-7"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb25-8"><a href="#cb25-8"></a>  hp_max <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">CHECK</span> (hp_max <span class="op">&gt;=</span> <span class="dv">0</span>),</span>
+<span id="cb25-9"><a href="#cb25-9"></a>  hp <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">CHECK</span> (hp <span class="op">&gt;=</span> <span class="dv">0</span>) <span class="kw">CHECK</span> (hp_max <span class="op">&gt;=</span> hp)</span>
+<span id="cb25-10"><a href="#cb25-10"></a>);</span>
+<span id="cb25-11"><a href="#cb25-11"></a></span>
+<span id="cb25-12"><a href="#cb25-12"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb25-13"><a href="#cb25-13"></a>  p_characters (character_id, name, hp_max, hp)</span>
+<span id="cb25-14"><a href="#cb25-14"></a><span class="kw">VALUES</span></span>
+<span id="cb25-15"><a href="#cb25-15"></a>  (<span class="dv">1</span>, <span class="st">&#39;Alice&#39;</span>, <span class="dv">200</span>, <span class="dv">180</span>);</span>
+<span id="cb25-16"><a href="#cb25-16"></a></span>
+<span id="cb25-17"><a href="#cb25-17"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> p_characters;</span>
+<span id="cb25-18"><a href="#cb25-18"></a></span>
+<span id="cb25-19"><a href="#cb25-19"></a><span class="co">-- CHECK制約違反により失敗</span></span>
+<span id="cb25-20"><a href="#cb25-20"></a><span class="kw">UPDATE</span> p_characters</span>
+<span id="cb25-21"><a href="#cb25-21"></a><span class="kw">SET</span></span>
+<span id="cb25-22"><a href="#cb25-22"></a>  hp_max <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb25-23"><a href="#cb25-23"></a><span class="kw">WHERE</span></span>
+<span id="cb25-24"><a href="#cb25-24"></a>  character_id <span class="op">=</span> <span class="dv">1</span>;</span>
+<span id="cb25-25"><a href="#cb25-25"></a></span>
+<span id="cb25-26"><a href="#cb25-26"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> p_characters;</span>
+<span id="cb25-27"><a href="#cb25-27"></a></span>
+<span id="cb25-28"><a href="#cb25-28"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <h3 data-number="5.2.1" id="定着確認-3"><span class="header-section-number">5.2.1</span>
+      定着確認</h3>
+      <ul>
+      <li>次のように定義されるテーブルにおいて、<strong>hp</strong> カラムで設定している
+      <code>CHECK (hp_max &gt;= hp)</code> は、hp カラムの更新時には検査されるが、hp_max
+      カラムの更新時には検査されないので注意する必要がある。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない</span></li>
+      </ul></li>
+      </ul>
+      <div class="sourceCode" id="cb26" data-caption="定着確認"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_characters (</span>
+<span id="cb26-2"><a href="#cb26-2"></a>  character_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb26-3"><a href="#cb26-3"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb26-4"><a href="#cb26-4"></a>  hp_max <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb26-5"><a href="#cb26-5"></a>  hp <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">CHECK</span> (hp_max <span class="op">&gt;=</span> hp)</span>
+<span id="cb26-6"><a href="#cb26-6"></a>);</span></code></pre></div>
+      <ul>
+      <li>上記のテーブル定義は、次のように書き換えても同様に機能する。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切である。hp カラムの定義前にも CHECK
+      で参照可能。</span></li>
+      </ul></li>
+      </ul>
+      <div class="sourceCode" id="cb27" data-caption="定着確認"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_characters (</span>
+<span id="cb27-2"><a href="#cb27-2"></a>  character_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb27-3"><a href="#cb27-3"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb27-4"><a href="#cb27-4"></a>  hp_max <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">CHECK</span> (hp_max <span class="op">&gt;=</span> hp),</span>
+<span id="cb27-5"><a href="#cb27-5"></a>  hp <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb27-6"><a href="#cb27-6"></a>);</span></code></pre></div>
+      <h1 data-number="6" id="外部キー制約-fk制約"><span class="header-section-number">6</span>
+      外部キー制約 (FK制約)</h1>
+      <p><strong>外部キー制約</strong> (FK制約)
+      は、あるカラムに格納できる値を「<strong>参照先テーブルに実在する主キー (あるいは一意キー)
+      に限定する</strong>」ための仕組みになります。外部キー制約を設定することで、関連づけられたテーブル同士の整合性が自動的に保証されるようになります。</p>
+      <ul>
+      <li>本科目では、外部キーの参照先は主キーに限定して解説します。</li>
+      </ul>
+      <p>たとえば、次のような <strong>jobs</strong> テーブルがあるとします。</p>
+      <p><strong>jobsテーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>job_id</u></th>
+      <th style="text-align: left;">name</th>
+      <th style="text-align: center;">attack_gain</th>
+      <th style="text-align: center;">defense_gain</th>
+      <th style="text-align: center;">magic_gain</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Fighter</td>
+      <td style="text-align: center;">+3</td>
+      <td style="text-align: center;">+5</td>
+      <td style="text-align: center;">-2</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Monk</td>
+      <td style="text-align: center;">+4</td>
+      <td style="text-align: center;">0</td>
+      <td style="text-align: center;">-1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Ninja</td>
+      <td style="text-align: center;">+5</td>
+      <td style="text-align: center;">-1</td>
+      <td style="text-align: center;">0</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Samurai</td>
+      <td style="text-align: center;">+3</td>
+      <td style="text-align: center;">+3</td>
+      <td style="text-align: center;">+2</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">5</td>
+      <td style="text-align: left;">Priest</td>
+      <td style="text-align: center;">0</td>
+      <td style="text-align: center;">-1</td>
+      <td style="text-align: center;">+4</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">6</td>
+      <td style="text-align: left;">Wizard</td>
+      <td style="text-align: center;">-1</td>
+      <td style="text-align: center;">-3</td>
+      <td style="text-align: center;">+5</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>このとき、<strong>characters</strong> テーブルの <strong>job_id</strong>
+      (以下、<strong>characters.job_id</strong>) に格納できる値を、上記 <strong>jobs</strong>
+      テーブルの主キー (<strong>job_id</strong>) に限定したい場合に外部キー制約を設定します。</p>
+      <p><strong>charactersテーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>characters_id</u></th>
+      <th style="text-align: left;">name</th>
+      <th style="text-align: center;">level</th>
+      <th style="text-align: center;">job_id</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      <td style="text-align: center;">42</td>
+      <td style="text-align: center;">5</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Bob</td>
+      <td style="text-align: center;">33</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Charlie</td>
+      <td style="text-align: center;">57</td>
+      <td style="text-align: center;">6</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>外部キー制約が設定されると、<strong>characters.job_id</strong>
+      には、<strong>jobs.job_id</strong> に存在する値だけ (具体的には <code>1</code> から
+      <code>6</code> のみ) が挿入/更新可能となります。逆に言えば <code>0</code> や <code>7</code>
+      などの不正な job_id が保存されることを防ぐことができます。</p>
+      <hr />
+      <p>たとえば、次のような論理ER図で示されるテーブル同士の関係
+      (＝<strong>外部キー制約による参照関係</strong>) は…</p>
+      <figure>
+      <img src="figs/09/LER-01-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>…以下のような、FK制約を含むテーブル定義 (<code>CREATE</code> 文)
+      で実装することができます。p_characters のカラムが、p_jobs.job_id と p_users.user_id
+      を参照するため、p_jobs テーブルと p_users テーブルを先に定義しておく必要があります。</p>
+      <div class="sourceCode" id="cb28" data-caption="init-tables_07.sql（FK制約）"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> p_characters;</span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> p_users;</span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> p_jobs;</span>
+<span id="cb28-4"><a href="#cb28-4"></a></span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="co">-- テーブル定義・作成</span></span>
+<span id="cb28-6"><a href="#cb28-6"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_jobs (</span>
+<span id="cb28-7"><a href="#cb28-7"></a>  job_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb28-8"><a href="#cb28-8"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb28-9"><a href="#cb28-9"></a>  attack_gain <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb28-10"><a href="#cb28-10"></a>  defense_gain <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb28-11"><a href="#cb28-11"></a>  magic_gain <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb28-12"><a href="#cb28-12"></a>);</span>
+<span id="cb28-13"><a href="#cb28-13"></a></span>
+<span id="cb28-14"><a href="#cb28-14"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_users (</span>
+<span id="cb28-15"><a href="#cb28-15"></a>  user_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb28-16"><a href="#cb28-16"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb28-17"><a href="#cb28-17"></a>  email <span class="dt">VARCHAR</span>(<span class="dv">32</span>) <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb28-18"><a href="#cb28-18"></a>);</span>
+<span id="cb28-19"><a href="#cb28-19"></a></span>
+<span id="cb28-20"><a href="#cb28-20"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_characters (</span>
+<span id="cb28-21"><a href="#cb28-21"></a>  character_id <span class="dt">INTEGER</span> <span class="kw">GENERATED</span> ALWAYS <span class="kw">AS</span> IDENTITY <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb28-22"><a href="#cb28-22"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb28-23"><a href="#cb28-23"></a>  <span class="kw">level</span> <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb28-24"><a href="#cb28-24"></a>  job_id <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">REFERENCES</span> p_jobs (job_id), <span class="co">-- FK制約</span></span>
+<span id="cb28-25"><a href="#cb28-25"></a>  user_id <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">REFERENCES</span> p_users (user_id) <span class="co">-- FK制約</span></span>
+<span id="cb28-26"><a href="#cb28-26"></a>);</span>
+<span id="cb28-27"><a href="#cb28-27"></a></span>
+<span id="cb28-28"><a href="#cb28-28"></a><span class="co">-- レコード挿入</span></span>
+<span id="cb28-29"><a href="#cb28-29"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb28-30"><a href="#cb28-30"></a>  p_jobs (job_id, name, attack_gain, defense_gain, magic_gain)</span>
+<span id="cb28-31"><a href="#cb28-31"></a><span class="kw">VALUES</span></span>
+<span id="cb28-32"><a href="#cb28-32"></a>  (<span class="dv">1</span>, <span class="st">&#39;Fighter&#39;</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="op">-</span><span class="dv">2</span>),</span>
+<span id="cb28-33"><a href="#cb28-33"></a>  (<span class="dv">2</span>, <span class="st">&#39;Monk&#39;</span>, <span class="dv">4</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>),</span>
+<span id="cb28-34"><a href="#cb28-34"></a>  (<span class="dv">3</span>, <span class="st">&#39;Ninja&#39;</span>, <span class="dv">5</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb28-35"><a href="#cb28-35"></a>  (<span class="dv">4</span>, <span class="st">&#39;Samurai&#39;</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>),</span>
+<span id="cb28-36"><a href="#cb28-36"></a>  (<span class="dv">5</span>, <span class="st">&#39;Priest&#39;</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">4</span>),</span>
+<span id="cb28-37"><a href="#cb28-37"></a>  (<span class="dv">6</span>, <span class="st">&#39;Wizard&#39;</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">3</span>, <span class="dv">5</span>);</span>
+<span id="cb28-38"><a href="#cb28-38"></a></span>
+<span id="cb28-39"><a href="#cb28-39"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb28-40"><a href="#cb28-40"></a>  p_users (user_id, email, name)</span>
+<span id="cb28-41"><a href="#cb28-41"></a><span class="kw">VALUES</span></span>
+<span id="cb28-42"><a href="#cb28-42"></a>  (<span class="dv">1</span>, <span class="st">&#39;sarah.s@example.com&#39;</span>, <span class="st">&#39;Sarah Smith&#39;</span>),</span>
+<span id="cb28-43"><a href="#cb28-43"></a>  (<span class="dv">2</span>, <span class="st">&#39;james.m@example.com&#39;</span>, <span class="st">&#39;James Miller&#39;</span>);</span>
+<span id="cb28-44"><a href="#cb28-44"></a></span>
+<span id="cb28-45"><a href="#cb28-45"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb28-46"><a href="#cb28-46"></a>  p_characters (name, <span class="kw">level</span>, job_id, user_id)</span>
+<span id="cb28-47"><a href="#cb28-47"></a><span class="kw">VALUES</span></span>
+<span id="cb28-48"><a href="#cb28-48"></a>  (<span class="st">&#39;Alice&#39;</span>, <span class="dv">42</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb28-49"><a href="#cb28-49"></a>  (<span class="st">&#39;Bob&#39;</span>, <span class="dv">33</span>, <span class="dv">2</span>, <span class="dv">2</span>),</span>
+<span id="cb28-50"><a href="#cb28-50"></a>  (<span class="st">&#39;Charlie&#39;</span>, <span class="dv">57</span>, <span class="dv">6</span>, <span class="dv">1</span>);</span>
+<span id="cb28-51"><a href="#cb28-51"></a></span>
+<span id="cb28-52"><a href="#cb28-52"></a><span class="co">-- レコードの確認</span></span>
+<span id="cb28-53"><a href="#cb28-53"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> p_jobs;</span>
+<span id="cb28-54"><a href="#cb28-54"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> p_users;</span>
+<span id="cb28-55"><a href="#cb28-55"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> p_characters;</span></code></pre></div>
+      <p><strong>第24行目</strong> と <strong>第25行目</strong>
+      で「外部キー制約」を設定しています。これらの制約により、次のような動作が保証されます。</p>
+      <ul>
+      <li><strong>p_jobs.job_id</strong> に存在しない値を、<strong>p_characters.job_id</strong>
+      に挿入・更新することができなくなります。</li>
+      <li><strong>p_users.user_id</strong> に存在しない値を、<strong>p_characters.user_id</strong>
+      に挿入・更新することができなくなります。</li>
+      <li><strong>p_characters.job_id</strong> で参照しているレコードを、p_jobs
+      から削除できなくなります。</li>
+      <li><strong>p_characters.user_id</strong> で参照しているレコードを、p_users
+      から削除できなくなります。</li>
+      </ul>
+      <h3 data-number="6.0.1" id="演習-5"><span class="header-section-number">6.0.1</span> 演習</h3>
+      <ul>
+      <li><code>init-tables_07.sql</code> の <strong>第48行目</strong> を
+      <code>('Alice', 42, 10, 1),</code>
+      のように書き換えると、レコードの挿入に失敗することを確認してください
+      (どのようなエラーメッセージが表示されるかを確認してください)。確認後、変更は元に戻しておいてください。
+      <ul>
+      <li>同様に <code>('Alice', 42, 5, 10),</code>
+      に書き換えたときについても確認してください。</li>
+      </ul></li>
+      <li><code>init-tables_07.sql</code> の <strong>第01行目</strong> と <strong>第02行目</strong>
+      を入れ替えると処理に失敗することを確認してください
+      (どのようなエラーメッセージが表示されるかを確認してください)。確認後、変更は元に戻しておいてください。</li>
+      <li><code>init-tables_07.sql</code> の最後に <code>DELETE FROM p_users WHERE user_id=1;</code>
+      を追加すると処理に失敗することを確認してください。</li>
+      <li><code>init-tables_07.sql</code> の最後に <code>DELETE FROM p_jobs WHERE job_id=5;</code>
+      を追加すると処理に失敗することを確認してください。</li>
+      </ul>
+      <h3 data-number="6.0.2" id="定着確認-4"><span class="header-section-number">6.0.2</span>
+      定着確認</h3>
+      <ul>
+      <li>次に示すリレーショナルモデルを SQL の <code>CREATE</code>
+      で実装したい。外部キー制約が適切に設定可能となるように、p_users、p_characters、p_jobs
+      のテーブルを定義する適切な順番を答えよ。なお、<code>ALTER TABLE</code>
+      による後付けの制約追加は考えないものとする。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">p_users👉p_jobs👉p_characters。あるいは
+      p_jobs👉p_users👉p_characters</span></li>
+      </ul></li>
+      </ul>
+      <figure>
+      <img src="figs/09/LER-01-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="6.1" id="on-delete-cascade-指定"><span
+      class="header-section-number">6.1</span> ON DELETE CASCADE 指定</h2>
+      <p>外部キー制約では、以下の <strong>第24-25行目</strong> のように
+      <code>ON DELETE CASCADE</code> を付与することで、<strong>参照先 (親テーブル)
+      のレコードが削除されたとき</strong>、そのレコードを参照している
+      <u>子テーブル側のレコードが自動的に削除されるように設定</u> することができます。</p>
+      <div class="sourceCode" id="cb29" data-caption="ON DELETE CASCADE 指定"
+      data-startFrom="20"><pre class="sourceCode numberSource sql numberLines"><code class="sourceCode sql" style="counter-reset: source-line 19;"><span id="cb29-20"><a href="#cb29-20"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_characters (</span>
+<span id="cb29-21"><a href="#cb29-21"></a>  character_id <span class="dt">INTEGER</span> <span class="kw">GENERATED</span> ALWAYS <span class="kw">AS</span> IDENTITY <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb29-22"><a href="#cb29-22"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb29-23"><a href="#cb29-23"></a>  <span class="kw">level</span> <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb29-24"><a href="#cb29-24"></a>  job_id <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">REFERENCES</span> p_jobs (job_id) <span class="kw">ON</span> <span class="kw">DELETE</span> <span class="kw">CASCADE</span>, <span class="co">-- ◀ 注目</span></span>
+<span id="cb29-25"><a href="#cb29-25"></a>  user_id <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">REFERENCES</span> p_users (user_id) <span class="kw">ON</span> <span class="kw">DELETE</span> <span class="kw">CASCADE</span> <span class="co">-- ◀ 注目</span></span>
+<span id="cb29-26"><a href="#cb29-26"></a>);</span></code></pre></div>
+      <p>たとえば、p_jobs テーブルから <code>job_id = 5</code>
+      のレコードが削除されると、それを参照している p_characters テーブルのレコード (Alice)
+      も自動的に削除され、結果的に参照整合性が保証されます。</p>
+      <ul>
+      <li><code>ON DELETE CASCADE</code> が逆に作用することはありません。つまり、p_characters
+      テーブルのレコードを削除したとき、p_jobs や p_users のレコードが影響を受けること
+      (削除されること) は一切ありません。</li>
+      </ul>
+      <h3 data-number="6.1.1" id="演習-6"><span class="header-section-number">6.1.1</span> 演習</h3>
+      <ul>
+      <li><code>init-tables_07.sql</code> の p_characters の FK制約に <code>ON DELETE CASCADE</code>
+      を指定してください。そのうえで…
+      <ul>
+      <li><code>DELETE FROM p_jobs WHERE job_id=5</code> により、p_characters の Alice
+      のレコードが自動削除されることを確認してください。</li>
+      <li><code>DELETE FROM p_users WHERE user_id=2</code> により Bob
+      のレコードが自動削除されることを実際に確認してください。</li>
+      <li><a
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL/blob/main/from-teacher/09/init-fk_01.sql">実装例</a></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="6.2" id="on-delete-set-null-指定"><span
+      class="header-section-number">6.2</span> ON DELETE SET NULL 指定</h2>
+      <p>外部キー制約では、以下の <strong>第24-25行目</strong> のように
+      <code>ON DELETE SET NULL</code> を付与することで、参照先 (親テーブル)
+      のレコードが削除されたとき、その値を参照している子テーブル側の外部キーを <span
+      class="masked">NULL に書き換える</span> ように設定することもできます。</p>
+      <p>親テーブルの削除とともにレコードごと消してしまうのではなく、「参照が切れた状態を明示的に残す」ときに用いられます。なお、<code>ON DELETE SET NULL</code>
+      は <span class="masked">非NULL制約</span> が設定されているカラムには使用できません。</p>
+      <div class="sourceCode" id="cb30" data-caption="ON DELETE SET NULL 指定"
+      data-startFrom="20"><pre class="sourceCode numberSource sql numberLines"><code class="sourceCode sql" style="counter-reset: source-line 19;"><span id="cb30-20"><a href="#cb30-20"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> p_characters (</span>
+<span id="cb30-21"><a href="#cb30-21"></a>  character_id <span class="dt">INTEGER</span> <span class="kw">GENERATED</span> ALWAYS <span class="kw">AS</span> IDENTITY <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb30-22"><a href="#cb30-22"></a>  name <span class="dt">VARCHAR</span>(<span class="dv">16</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb30-23"><a href="#cb30-23"></a>  <span class="kw">level</span> <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb30-24"><a href="#cb30-24"></a>  job_id <span class="dt">INTEGER</span> <span class="kw">REFERENCES</span> p_jobs (job_id) <span class="kw">ON</span> <span class="kw">DELETE</span> <span class="kw">SET</span> <span class="kw">NULL</span>, <span class="co">-- ◀ 注目</span></span>
+<span id="cb30-25"><a href="#cb30-25"></a>  user_id <span class="dt">INTEGER</span> <span class="kw">REFERENCES</span> p_users (user_id) <span class="kw">ON</span> <span class="kw">DELETE</span> <span class="kw">SET</span> <span class="kw">NULL</span> <span class="co">-- ◀ 注目</span></span>
+<span id="cb30-26"><a href="#cb30-26"></a>);</span></code></pre></div>
+      <p>たとえば、p_jobs テーブルから <code>job_id = 5</code>
+      のレコードが削除された場合、これを参照している p_characters テーブルの <strong>job_id</strong>
+      は <code>NULL</code>
+      に更新されます。キャラクタ自体は残しつつ、「職業情報だけが失われた状態」を表現できるため、履歴保持や一時的な未所属状態のモデル化に適しています。</p>
+      <ul>
+      <li><code>ON DELETE SET NULL</code> が逆に作用することはありません。つまり、p_characters
+      テーブルのレコードを削除したり、<code>NULL</code> にしたとき、p_jobs や p_users
+      が影響を受けることは一切ありません。</li>
+      </ul>
+      <h3 data-number="6.2.1" id="演習-7"><span class="header-section-number">6.2.1</span> 演習</h3>
+      <ul>
+      <li><code>init-tables_07.sql</code> の p_characters の FK制約に
+      <code>ON DELETE SET NULL</code> を指定 (同時に <code>NOT NULL</code> 制約解除)
+      してください。そのうえで…
+      <ul>
+      <li><code>DELETE FROM p_jobs WHERE job_id=5</code> により、p_characters の Alice のレコードの
+      <strong>job_id</strong> カラムが <code>NULL</code> になることを確認してください。</li>
+      <li><code>DELETE FROM p_users WHERE user_id=2</code> により Bob のレコードの
+      <strong>user_id</strong> カラムが <code>NULL</code> になることを確認してください。</li>
+      <li><a
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL/blob/main/from-teacher/09/init-fk_02.sql">実装例</a></li>
+      </ul></li>
+      </ul>
+      <h3 data-number="6.2.2" id="定着確認-5"><span class="header-section-number">6.2.2</span>
+      定着確認</h3>
+      <p>次のような「論理ER図」に基づき、PostgreSQL で物理設計 (テーブル定義)
+      を行ないたい。各問いに答えよ。</p>
+      <ul>
+      <li>論理ER図に示す関係に従って、外部キー制約 (FK制約) を設定して commnents テーブルの
+      article_id カラムを定義したい。<code>CREATE TABLE</code>
+      のなかに記述すべき文を答えよ。なお、articles.articles_id は <code>INTEGER</code>
+      型とする。</li>
+      </ul>
+      <figure>
+      <img src="figs/09/LER-ex-02-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h3 data-number="6.2.3" id="sqlドリル-1"><span class="header-section-number">6.2.3</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-02_1.sql</code> 👉 次に示す「論理ER図」と「仕様」に基づくテーブル群を定義する
+      <code>SQL</code> を記述せよ。
+      <ul>
+      <li>特に指示がない限り、非キーのカラムには「非NULL制約」を設定すること。FKカラムについては「仕様」に基づき「非NULL制約」の有無を適切に設定すること。</li>
+      <li>論理ER図のなかで水色背景のカラムは主キーであることを意味する。</li>
+      </ul></li>
+      </ul>
+      <figure>
+      <img src="figs/09/LER-ex-02-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <ul>
+      <li><strong>仕様</strong>
+      <ul>
+      <li>users.user_id, articles.article_id, comments.comment_id, categories.category_id:
+      デフォルト値を自動採番 (開始値は 1001)
+      とすること。また、手動でも値を設定できるようにすること。</li>
+      <li>users.name : 3文字以上を強制すること。</li>
+      <li>users.email : 一意性制約を付加すること。</li>
+      <li>*.created_at : デフォルト値として現在日時を設定すること。ただし、小数秒を 0
+      に揃えた値とすること。</li>
+      <li>*.updated_at : 〃</li>
+      <li>articles.created_at ≦ updated_at.created_at とすること。</li>
+      <li>comments.created_at ≦ updated_at.created_at とすること。</li>
+      <li>categories.name : 3文字以上を強制すること。一意性制約を付加すること。</li>
+      <li>記事が削除されても、その記事に関連づいたコメントは消えないようにすること。</li>
+      <li>カテゴリが削除されても、そのカテゴリに属する記事は消えないようにすること。</li>
+      <li>ユーザが削除されると、そのユーザが作成した記事とコメントが自動的に削除されるようにすること。</li>
+      </ul></li>
+      </ul>
+      <h1 data-number="7" id="授業時間外学習の指示-宿題"><span
+      class="header-section-number">7</span> 授業時間外学習の指示 (宿題)</h1>
+      <p>🚨<strong>本科目は「学修単位科目」であり、1回の講義あたり「4時間相当」の授業時間外学習が求められる科目です</strong>🏃</p>
+      <ul>
+      <li>次回の講義で「<strong>小テスト❼</strong>」を実施します。
+      <ul>
+      <li>主に<strong>定着確認</strong>、<strong>演習</strong>、<strong>SQLドリル</strong>
+      から出題します。</li>
+      </ul></li>
+      </ul>
+      <hr />
+      <ul>
+      <li>この講義資料を再読・熟読し「不明な用語」や「理解が不十分な用語」があればインターネットや、ChatGPTなどの生成AIを利用して解決してください。また、興味関心を持ったトピックについて、ウェブ、生成AI、YouTube動画などを利用して知識を広げ、理解を深めてください。
+      <ul>
+      <li>特に <strong>(プロンプト例)</strong>
+      を示しているものについては、実際に生成AIにプロンプトを投げ、さらに対話を重ねることで、知識の幅を広げるだけでなく、理解をより深く確かなものにしてください。</li>
+      </ul></li>
+      <li>講義資料内の「<strong>演習</strong>」や「<strong>SQLドリル</strong>」に再度取り組んでください。特に、<strong>SQLドリル</strong>💻
+      は、授業時間中に1回取り組むだけでは定着しないので注意してください。</li>
+      </ul>
+      <!-- #### 
+
+      REFERENCES p_jobs (job_id) ON DELETE CASCADE, -->
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/DB-2025/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>

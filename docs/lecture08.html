@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+type="text/javascript"></script> 
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>第08回 4I-データベース工学</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#連絡" id="toc-連絡"><span class="toc-section-number">1</span> 連絡</a>
+<ul>
+<li><a href="#後期中間成績について" id="toc-後期中間成績について"><span
+class="toc-section-number">1.1</span> 後期中間成績について</a></li>
+</ul></li>
+<li><a href="#問題1-の解説" id="toc-問題1-の解説"><span class="toc-section-number">2</span> 問題1
+の解説</a>
+<ul>
+<li><a href="#section" id="toc-section"><span class="toc-section-number">2.1</span> (02)</a></li>
+<li><a href="#section-1" id="toc-section-1"><span class="toc-section-number">2.2</span>
+(08)</a></li>
+<li><a href="#section-2" id="toc-section-2"><span class="toc-section-number">2.3</span>
+(10)・(11)</a></li>
+<li><a href="#section-3" id="toc-section-3"><span class="toc-section-number">2.4</span>
+(20)</a></li>
+</ul></li>
+<li><a href="#問題2-の解説" id="toc-問題2-の解説"><span class="toc-section-number">3</span> 問題2
+の解説</a>
+<ul>
+<li><a href="#section-4" id="toc-section-4"><span class="toc-section-number">3.1</span>
+(23)</a></li>
+<li><a href="#section-5" id="toc-section-5"><span class="toc-section-number">3.2</span>
+(25)</a></li>
+</ul></li>
+<li><a href="#問題4-の解説" id="toc-問題4-の解説"><span class="toc-section-number">4</span> 問題4
+の解説</a>
+<ul>
+<li><a href="#非正規形" id="toc-非正規形"><span class="toc-section-number">4.1</span>
+非正規形</a></li>
+<li><a href="#第1正規形" id="toc-第1正規形"><span class="toc-section-number">4.2</span>
+第1正規形</a></li>
+<li><a href="#第2正規形" id="toc-第2正規形"><span class="toc-section-number">4.3</span>
+第2正規形</a></li>
+<li><a href="#第3正規形" id="toc-第3正規形"><span class="toc-section-number">4.4</span>
+第3正規形</a></li>
+</ul></li>
+<li><a href="#問題5-の解説" id="toc-問題5-の解説"><span class="toc-section-number">5</span> 問題5
+の解説</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>2025-4I データベース工学 第08回 講義資料</p>
+      <p>2025年11月28日 (木) 2時限 後期中間試験</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="連絡"><span class="header-section-number">1</span> 連絡</h1>
+      <ul>
+      <li>試験問題と解答例は、Teams にアップしています。</li>
+      </ul>
+      <h2 data-number="1.1" id="後期中間成績について"><span class="header-section-number">1.1</span>
+      後期中間成績について</h2>
+      <p>シラバス記載のように「試験<strong>45%</strong>、小テスト<strong>35%</strong>、課題<strong>20%</strong>の割合で総合して評価」します。具体的には、以下を合計して後期中間成績とします
+      (成績票の配付は12月下旬です)。ただし、欠課時数が <strong>10時間超</strong>
+      の場合は、これらに関わらず 0点 となります。</p>
+      <ul>
+      <li><strong><em>試験</em></strong> : 後期中間試験 (100点満点) を <strong>45点換算</strong>
+      (端数は四捨五入)。</li>
+      <li><strong><em>小テスト</em></strong> : 小テスト①～⑥の合計点 (60満点) を
+      <strong>35点換算</strong> (端数は四捨五入)。</li>
+      <li><strong><em>課題</em></strong> : 課題1 (10点満点) を <strong>20点換算</strong>
+      (端数は四捨五入)。</li>
+      </ul>
+      <h1 data-number="2" id="問題1-の解説"><span class="header-section-number">2</span> 問題1
+      の解説</h1>
+      <p>「問題1」の解説と補足です。</p>
+      <h2 data-number="2.1" id="section"><span class="header-section-number">2.1</span> (02)</h2>
+      <p>代表的な DBMS (製品名) については把握しておいてください。<a
+      href="lecture01.html#主要なrdbms">第01回講義</a>で紹介したように「MySQL」「Microsoft SQL
+      Server」「SQLite」「Microsoft
+      Access」「MariaDB」はリレーショナル型のデータベース管理システム、「MongoDB」はドキュメント指向のデータベース管理システムとなります。</p>
+      <p>一方で「Prisma」「Drizzle」は <a
+      href="lecture03.html#演習-授業時間外学習">第03回講義</a>TypeScript用の ORM
+      ライブラリ、「SQLAlchemy」は <strong>知能情報実験実習 (IoT)</strong>
+      で使用したようにPython用の ORM ライブラリの名称です。「Pandas」は Python
+      用のデータ分析ライブラリです。</p>
+      <h2 data-number="2.2" id="section-1"><span class="header-section-number">2.2</span> (08)</h2>
+      <p>「ページネーション」もしくは「ページング処理」が正答です。</p>
+      <h2 data-number="2.3" id="section-2"><span class="header-section-number">2.3</span>
+      (10)・(11)</h2>
+      <p>オプショナリティ (Optionality) は「任意<strong>性</strong>」、カーディナリティ
+      (Cardinality) は「多重<strong>度</strong>」と呼ばれるので注意してください。</p>
+      <h2 data-number="2.4" id="section-3"><span class="header-section-number">2.4</span> (20)</h2>
+      <p><code>DATE_PART('year',CURRENT_DATE)</code> もしくは
+      <code>DATE_PART('year',LOCALTIMESTAMP)</code> が正答です。次の SQL で動作を確認できます。</p>
+      <div class="sourceCode" id="cb1" data-caption="現在日時の「年」の取得"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">SELECT</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>  DATE_PART(<span class="st">&#39;year&#39;</span>, <span class="fu">LOCALTIMESTAMP</span>);</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">SELECT</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>  DATE_PART(<span class="st">&#39;year&#39;</span>, <span class="fu">CURRENT_DATE</span>);</span></code></pre></div>
+      <h1 data-number="3" id="問題2-の解説"><span class="header-section-number">3</span> 問題2
+      の解説</h1>
+      <p>「問題2」の解説と補足です。</p>
+      <h2 data-number="3.1" id="section-4"><span class="header-section-number">3.1</span> (23)</h2>
+      <p>一般に <code>-a</code>
+      のような1文字のオプションを「<strong>ショートオプション</strong>」や「ショートフラグ」と呼びます。また、<code>--all</code>
+      のようなオプションを「<strong>ロングオプション</strong>」や「ロングフラグ」と呼びます。</p>
+      <p>なお、<code>-all</code> や <code>--a</code>
+      といった形式は通常サポートされておらず、多くの場合エラーとなります。使用する際は、それぞれの書式が明確に区別されている点に注意してください。</p>
+      <h2 data-number="3.2" id="section-5"><span class="header-section-number">3.2</span> (25)</h2>
+      <p>Dockerコンテナのカスタマイズや、APIキー (アクセストークン)
+      の設定・管理には、<strong>環境変数</strong> (Environment Variables)
+      を利用するケースが多くあります。Linux および Windows における環境変数の確認方法、設定方法
+      (編集方法)
+      は、実務上の必須知識となるので、あいまいな人は、再度、学び直しておいてください。</p>
+      <p>なお、環境変数に機密情報を格納する際はログ出力や履歴 (history)
+      に残さない運用にも注意してください。</p>
+      <h1 data-number="4" id="問題4-の解説"><span class="header-section-number">4</span> 問題4
+      の解説</h1>
+      <p>「問題4」の解説と補足です。</p>
+      <h2 data-number="4.1" id="非正規形"><span class="header-section-number">4.1</span>
+      非正規形</h2>
+      <p>「問題4」では、次のような非正規形のテーブル (<strong>books</strong>)
+      が与えられています。</p>
+      <p><strong>books</strong> テーブル</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>id</u></th>
+      <th style="text-align: left;">title</th>
+      <th style="text-align: center;">author1</th>
+      <th style="text-align: center;">author2</th>
+      <th style="text-align: center;">author3</th>
+      <th style="text-align: center;">price</th>
+      <th style="text-align: center;">publisher_name</th>
+      <th style="text-align: center;">publisher_tel</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Modern COBOL</td>
+      <td style="text-align: center;">Alice</td>
+      <td style="text-align: center;">Steve</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">2000</td>
+      <td style="text-align: center;">Hoge Inc.</td>
+      <td style="text-align: center;">9696</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">New Fortran</td>
+      <td style="text-align: center;">Dave</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">3800</td>
+      <td style="text-align: center;">Piyo Inc.</td>
+      <td style="text-align: center;">0120</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Advanced C#</td>
+      <td style="text-align: center;">Ellen</td>
+      <td style="text-align: center;">Carol</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">2500</td>
+      <td style="text-align: center;">Hoge Inc.</td>
+      <td style="text-align: center;">9696</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Hello Pascal</td>
+      <td style="text-align: center;">Bob</td>
+      <td style="text-align: center;">Alice</td>
+      <td style="text-align: center;">Dave</td>
+      <td style="text-align: center;">4800</td>
+      <td style="text-align: center;">Piyo Inc.</td>
+      <td style="text-align: center;">0120</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>この books
+      テーブルにおいて、「本」を基準と考えて「<strong>1対多</strong>」または「<strong>多対多</strong>」の関係にある情報を別テーブルに分解していきます。</p>
+      <ul>
+      <li>本を基準として考えるとき、「本」と「タイトル」のように「<strong>1対1</strong>」の関係にあるものは、別テーブルに分解する必要はありません。</li>
+      </ul>
+      <p><u>慣れるまでは (＝問題4が完答できなかった学生は)
+      丁寧に「第1正規化」から「第3正規化」まで手順を踏むこと</u>
+      をお勧めします。また、慣れてきたら脳内で以下のような論理ER図を描いて、一気に第3正規形のテーブルが構成できるようになります。</p>
+      <figure>
+      <img src="figs/08/LER-ex4.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="4.2" id="第1正規形"><span class="header-section-number">4.2</span>
+      第1正規形</h2>
+      <p>問題文で与えられている非正規形の <strong>books</strong> テーブルから <span
+      class="masked">列方向の繰り返し</span> を排除すると、次のような第1正規形 (1NF)
+      となります。ここでは <strong>author_id</strong> カラムを新たに追加し、<strong>id</strong> と
+      <strong>author_id</strong> を <strong>複合主キー</strong> としています。</p>
+      <p><strong>books</strong> テーブル</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>id</u></th>
+      <th style="text-align: left;">title</th>
+      <th style="text-align: center;"><u>author_id</u></th>
+      <th style="text-align: center;">author</th>
+      <th style="text-align: center;">author_order</th>
+      <th style="text-align: center;">price</th>
+      <th style="text-align: center;">publisher_name</th>
+      <th style="text-align: center;">publisher_tel</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Modern COBOL</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">Alice</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">2000</td>
+      <td style="text-align: center;">Hoge Inc.</td>
+      <td style="text-align: center;">9696</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Modern COBOL</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">Steve</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">2000</td>
+      <td style="text-align: center;">Hoge Inc.</td>
+      <td style="text-align: center;">9696</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">New Fortran</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">Dave</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">3800</td>
+      <td style="text-align: center;">Piyo Inc.</td>
+      <td style="text-align: center;">0120</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Advanced C#</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">Ellen</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">2500</td>
+      <td style="text-align: center;">Hoge Inc.</td>
+      <td style="text-align: center;">9696</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Advanced C#</td>
+      <td style="text-align: center;">5</td>
+      <td style="text-align: center;">Carol</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">2500</td>
+      <td style="text-align: center;">Hoge Inc.</td>
+      <td style="text-align: center;">9696</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Hello Pascal</td>
+      <td style="text-align: center;">6</td>
+      <td style="text-align: center;">Bob</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">4800</td>
+      <td style="text-align: center;">Piyo Inc.</td>
+      <td style="text-align: center;">0120</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Hello Pascal</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">Alice</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">4800</td>
+      <td style="text-align: center;">Piyo Inc.</td>
+      <td style="text-align: center;">0120</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Hello Pascal</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">Dave</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">4800</td>
+      <td style="text-align: center;">Piyo Inc.</td>
+      <td style="text-align: center;">0120</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>現状では、<strong>title</strong> と
+      <strong>price</strong>、<strong>publisher_name</strong>、<strong>publisher_tel</strong>
+      が、<strong>id</strong> (＝複合主キーの一部) に <span class="masked">部分関数従属</span>
+      しています。また、<strong>author</strong> は、<strong>author_id</strong> (＝複合主キーの一部)
+      に <strong>部分関数従属</strong> しています。</p>
+      <ul>
+      <li><a href="lecture07.html#部分関数従属と完全関数従属">部分関数従属とは</a>(第07回講義)</li>
+      </ul>
+      <h2 data-number="4.3" id="第2正規形"><span class="header-section-number">4.3</span>
+      第2正規形</h2>
+      <p>第1正規形について、<u>複合主キーの一部に対する部分関数従属を排除</u>
+      するようにテーブルを分解すると、次のような第2正規形 (2NF) となります。</p>
+      <ul>
+      <li>books テーブルの <strong>id</strong> を <strong>book_id</strong> に変更しています。</li>
+      <li>authors テーブルを作成しました。</li>
+      <li>book_authors テーブルを作成しました。</li>
+      </ul>
+      <p><strong>books</strong> テーブル</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>book_id</u></th>
+      <th style="text-align: left;">title</th>
+      <th style="text-align: center;">price</th>
+      <th style="text-align: center;">publisher_name</th>
+      <th style="text-align: center;">publisher_tel</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Modern COBOL</td>
+      <td style="text-align: center;">2000</td>
+      <td style="text-align: center;">Hoge Inc.</td>
+      <td style="text-align: center;">9696</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">New Fortran</td>
+      <td style="text-align: center;">3800</td>
+      <td style="text-align: center;">Piyo Inc.</td>
+      <td style="text-align: center;">0120</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Advanced C#</td>
+      <td style="text-align: center;">2500</td>
+      <td style="text-align: center;">Hoge Inc.</td>
+      <td style="text-align: center;">9696</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Hello Pascal</td>
+      <td style="text-align: center;">4800</td>
+      <td style="text-align: center;">Piyo Inc.</td>
+      <td style="text-align: center;">0120</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>authors</strong> テーブル</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>author_id</u></th>
+      <th style="text-align: left;">name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Steve</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Dave</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Ellen</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">5</td>
+      <td style="text-align: left;">Carol</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">6</td>
+      <td style="text-align: left;">Bob</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>book_authors</strong> テーブル</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>book_id</u></th>
+      <th style="text-align: center;"><u>author_id</u></th>
+      <th style="text-align: center;">author_order</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">5</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">6</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>現状では、books テーブルにおいて、<strong>publisher_tel</strong> が <span
+      class="masked">推移的関数従属</span> になっています。つまり、<span
+      class="math inline">\(\{\)</span> <strong>book_id</strong> <span class="math inline">\(\}
+      \rightarrow \{\)</span> <strong>publisher_name</strong> <span class="math inline">\(\}
+      \rightarrow \{\)</span> <strong>publisher_tel</strong> <span class="math inline">\(\}\)</span>
+      のような関係となっています。</p>
+      <ul>
+      <li><a href="lecture07.html#推移的関数従属">推移的関数従属とは</a>(第07回講義)</li>
+      </ul>
+      <h2 data-number="4.4" id="第3正規形"><span class="header-section-number">4.4</span>
+      第3正規形</h2>
+      <p>第2正規形について、<u>非キー属性同士の推移的関数従属を排除</u> すると、次のような第3正規形
+      (3NF) となります。</p>
+      <p><strong>publishers</strong> テーブル</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>publisher_id</u></th>
+      <th style="text-align: center;">name</th>
+      <th style="text-align: center;">tel</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">Hoge Inc.</td>
+      <td style="text-align: center;">9696</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">Piyo Inc.</td>
+      <td style="text-align: center;">0120</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>books</strong> テーブル</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>book_id</u></th>
+      <th style="text-align: left;">title</th>
+      <th style="text-align: center;">price</th>
+      <th style="text-align: center;">publisher_id</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Modern COBOL</td>
+      <td style="text-align: center;">2000</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">New Fortran</td>
+      <td style="text-align: center;">3800</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Advanced C#</td>
+      <td style="text-align: center;">2500</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Hello Pascal</td>
+      <td style="text-align: center;">4800</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>authors</strong> テーブル</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>author_id</u></th>
+      <th style="text-align: left;">name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: left;">Alice</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: left;">Steve</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: left;">Dave</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: left;">Ellen</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">5</td>
+      <td style="text-align: left;">Carol</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">6</td>
+      <td style="text-align: left;">Bob</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>book_authors</strong> テーブル</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>book_id</u></th>
+      <th style="text-align: center;"><u>author_id</u></th>
+      <th style="text-align: center;">author_order</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">5</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">6</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      </tbody>
+      </table>
+      <h1 data-number="5" id="問題5-の解説"><span class="header-section-number">5</span> 問題5
+      の解説</h1>
+      <p><a
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL">教材リポジトリ</a>(SQL演習環境)
+      の <code>/from-teacher/08</code> に、「<strong>問題5</strong>」の (32) から (37) の解答例
+      (SQL) を実行可能な形式で配置しています。</p>
+      <ul>
+      <li>Teams
+      で解答例として示した以外にも「別解」があります。正答した学生も、確認しておいてください。</li>
+      </ul>
+      <p><code>/from-teacher/08/p5_init.sql</code> で <strong>user</strong>
+      テーブルを初期化後、各SQLを実行して動作確認が可能です。</p>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/DB-2025/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
