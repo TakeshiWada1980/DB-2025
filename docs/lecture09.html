@@ -1128,7 +1128,7 @@ DETAIL:  Key (character_id)=(1) already exists.</code></pre>
       は、あるカラムに格納できる値を「<strong>参照先テーブルに実在する主キー (あるいは一意キー)
       に限定する</strong>」ための仕組みになります。外部キー制約を設定することで、関連づけられたテーブル同士の整合性が自動的に保証されるようになります。</p>
       <ul>
-      <li>本科目では、外部キーの参照先は主キーに限定して解説します。</li>
+      <li>本科目では <u>外部キーの参照先は主キーに限定して解説</u> します。</li>
       </ul>
       <p>たとえば、次のような <strong>jobs</strong> テーブルがあるとします。</p>
       <p><strong>jobsテーブル</strong></p>
@@ -1233,8 +1233,10 @@ DETAIL:  Key (character_id)=(1) already exists.</code></pre>
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>…以下のような、FK制約を含むテーブル定義 (<code>CREATE</code> 文)
-      で実装することができます。p_characters のカラムが、p_jobs.job_id と p_users.user_id
-      を参照するため、p_jobs テーブルと p_users テーブルを先に定義しておく必要があります。</p>
+      で実装することができます。p_characters
+      テーブルを構成するカラムが、<strong>p_jobs.job_id</strong> と <strong>p_users.user_id</strong>
+      を参照する関係上、<span class="masked">p_jobs テーブルと p_users
+      テーブルを先に定義しておく必要</span> があります。</p>
       <div class="sourceCode" id="cb28" data-caption="init-tables_07.sql（FK制約）"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> p_characters;</span>
 <span id="cb28-2"><a href="#cb28-2"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> p_users;</span>
@@ -1298,10 +1300,10 @@ DETAIL:  Key (character_id)=(1) already exists.</code></pre>
       に挿入・更新することができなくなります。</li>
       <li><strong>p_users.user_id</strong> に存在しない値を、<strong>p_characters.user_id</strong>
       に挿入・更新することができなくなります。</li>
-      <li><strong>p_characters.job_id</strong> で参照しているレコードを、p_jobs
-      から削除できなくなります。</li>
-      <li><strong>p_characters.user_id</strong> で参照しているレコードを、p_users
-      から削除できなくなります。</li>
+      <li><strong>p_characters.job_id</strong> で参照しているレコードを <span class="masked">p_jobs
+      から削除できなくなります</span>。</li>
+      <li><strong>p_characters.user_id</strong> で参照しているレコードを <span
+      class="masked">p_users から削除できなくなります</span>。</li>
       </ul>
       <h3 data-number="6.0.1" id="演習-5"><span class="header-section-number">6.0.1</span> 演習</h3>
       <ul>
