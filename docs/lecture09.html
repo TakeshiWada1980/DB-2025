@@ -1058,7 +1058,7 @@ DETAIL:  Key (character_id)=(1) already exists.</code></pre>
       CHECK制約 は機能します。</p>
       <p>また、<strong>第09行目</strong> で <strong>hp</strong> カラムの定義で設定している
       <code>CHECK (hp_max &gt;= hp)</code> は、<strong>hp</strong> の変更時だけでなく <span
-      class="masked"><strong>hp_max</strong> を更新した際にも再評価</span>
+      class="masked">hp_max を更新した際にも再評価</span>
       されます。つまり、どちらか一方の値を変更したときでも、常に「<strong>hp_max</strong> は
       <strong>hp</strong>
       以上である」という条件が満たされているかどうかが検査される点に注意してください。</p>
