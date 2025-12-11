@@ -1369,7 +1369,8 @@ DETAIL:  Key (character_id)=(1) already exists.</code></pre>
       <li><code>DELETE FROM p_users WHERE user_id=2</code> により Bob
       のレコードが自動削除されることを実際に確認してください。</li>
       <li><a
-      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL/blob/main/from-teacher/09/init-fk_01.sql">実装例</a></li>
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL/blob/main/from-teacher/09/init-fk_01.sql">実装例</a>
+      init-fk_01.sql</li>
       </ul></li>
       </ul>
       <h2 data-number="6.2" id="on-delete-set-null-指定"><span
@@ -1408,24 +1409,18 @@ DETAIL:  Key (character_id)=(1) already exists.</code></pre>
       <li><code>DELETE FROM p_users WHERE user_id=2</code> により Bob のレコードの
       <strong>user_id</strong> カラムが <code>NULL</code> になることを確認してください。</li>
       <li><a
-      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL/blob/main/from-teacher/09/init-fk_02.sql">実装例</a></li>
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL/blob/main/from-teacher/09/init-fk_02.sql">実装例</a>
+      init-fk_02.sql</li>
       </ul></li>
       </ul>
-      <h3 data-number="6.2.2" id="定着確認-5"><span class="header-section-number">6.2.2</span>
-      定着確認</h3>
-      <p>次のような「論理ER図」に基づき、PostgreSQL で物理設計 (テーブル定義)
-      を行ないたい。各問いに答えよ。</p>
-      <ul>
-      <li>論理ER図に示す関係に従って、外部キー制約 (FK制約) を設定して commnents テーブルの
-      article_id カラムを定義したい。<code>CREATE TABLE</code>
-      のなかに記述すべき文を答えよ。なお、articles.articles_id は <code>INTEGER</code>
-      型とする。</li>
-      </ul>
-      <figure>
-      <img src="figs/09/LER-ex-02-1.png" alt="img" />
-      <figcaption aria-hidden="true">img</figcaption>
-      </figure>
-      <h3 data-number="6.2.3" id="sqlドリル-1"><span class="header-section-number">6.2.3</span>
+      <!-- #### 定着確認
+
+      次のような「論理ER図」に基づき、PostgreSQL で物理設計 (テーブル定義) を行ないたい。各問いに答えよ。
+
+      - 論理ER図に示す関係に従って、外部キー制約 (FK制約) を設定して commnents テーブルの article_id カラムを定義したい。`CREATE TABLE` のなかに記述すべき文を答えよ。なお、articles.articles_id は `INTEGER` 型とする。
+
+      ![img](figs/09/LER-ex-02-1.png) -->
+      <h3 data-number="6.2.2" id="sqlドリル-1"><span class="header-section-number">6.2.2</span>
       SQLドリル💻</h3>
       <ul>
       <li><code>ex-02_1.sql</code> 👉 次に示す「論理ER図」と「仕様」に基づくテーブル群を定義する
@@ -1450,12 +1445,12 @@ DETAIL:  Key (character_id)=(1) already exists.</code></pre>
       <li>*.created_at : デフォルト値として現在日時を設定すること。ただし、小数秒を 0
       に揃えた値とすること。</li>
       <li>*.updated_at : 〃</li>
-      <li>articles.created_at ≦ updated_at.created_at とすること。</li>
-      <li>comments.created_at ≦ updated_at.created_at とすること。</li>
+      <li>articles.created_at ≦ articles.updated_at とすること。</li>
+      <li>comments.created_at ≦ comments.updated_at とすること。</li>
       <li>categories.name : 3文字以上を強制すること。一意性制約を付加すること。</li>
-      <li>記事が削除されても、その記事に関連づいたコメントは消えないようにすること。</li>
-      <li>カテゴリが削除されても、そのカテゴリに属する記事は消えないようにすること。</li>
-      <li>ユーザが削除されると、そのユーザが作成した記事とコメントが自動的に削除されるようにすること。</li>
+      <li>記事が削除されても、その記事に関連づいたコメントは<u>消えないように</u>すること。</li>
+      <li>カテゴリが削除されても、そのカテゴリに属する記事は<u>消えないように</u>すること。</li>
+      <li>ユーザが削除されると、そのユーザが作成した記事とコメントが<u>自動的に削除されるように</u>すること。</li>
       </ul></li>
       </ul>
       <h1 data-number="7" id="授業時間外学習の指示-宿題"><span
@@ -1464,7 +1459,7 @@ DETAIL:  Key (character_id)=(1) already exists.</code></pre>
       <ul>
       <li>次回の講義で「<strong>小テスト❼</strong>」を実施します。
       <ul>
-      <li>主に<strong>定着確認</strong>、<strong>演習</strong>、<strong>SQLドリル</strong>
+      <li>主に <strong>SQLドリル</strong>、<strong>定着確認</strong>、<strong>演習</strong>
       から出題します。</li>
       </ul></li>
       </ul>
