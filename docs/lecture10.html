@@ -112,8 +112,7 @@ class="toc-section-number">5</span> 授業時間外学習の指示</a></li>
       の<strong>外部キー制約</strong> (<code>REFERENCES</code>) について学びました。</p>
       <p>ここからの講義では、複数のテーブルに分散しているデータを対象に、<u>それらを組み合わせて情報を引き出すクエリ
       (問い合わせ)</u> について学んでいきます。具体的には、<strong><em>サブクエリ</em></strong>
-      (副問い合わせ) と、<strong><em>内部結合</em></strong>
-      (<code>INNER JOIN</code>)・<strong><em>外部結合</em></strong> (<code>OUTER JOIN</code>)
+      (副問い合わせ) と、<strong><em>内部結合</em></strong>・<strong><em>外部結合</em></strong>
       によるデータ取得について学んでいきます。</p>
       <h1 data-number="2" id="準備"><span class="header-section-number">2</span> 準備</h1>
       <p>演習環境の <code>from-teacher/10/create-x_db.sql</code>
@@ -309,11 +308,6 @@ class="toc-section-number">5</span> 授業時間外学習の指示</a></li>
       <h1 data-number="3" id="サブクエリ-副問い合わせ"><span class="header-section-number">3</span>
       サブクエリ (副問い合わせ)</h1>
       <p>SQLにおける <strong>サブクエリ</strong> (<strong>副問い合わせ</strong>) とは、ある SQL
-      文の内部に「入れ子」として記述される SELECT
-      文のこと意味します。これにより、1つのクエリのなかで
-      <u>複数テーブルにまたがるような検索条件を扱ったり、集計欠課を扱ったりすること</u>
-      が可能になります。</p>
-      <p>SQLにおける <strong>サブクエリ</strong> (<strong>副問い合わせ</strong>) とは、ある SQL
       文の内部に「入れ子」として記述される <code>SELECT</code>
       文のことを意味します。これにより、1つのクエリのなかで
       <u>複数テーブルにまたがる検索条件や、集計結果</u> を扱うことが可能になります。</p>
@@ -472,16 +466,16 @@ class="toc-section-number">5</span> 授業時間外学習の指示</a></li>
       </blockquote>
       <h2 data-number="3.3" id="サブクエリを利用する場合の注意点"><span
       class="header-section-number">3.3</span> サブクエリを利用する場合の注意点</h2>
-      <p>サブクエリは、外側のクエリから見ると「<strong>スカラー値</strong>」または「<strong>スカラー値の集合</strong>」として扱われます。そのため、原則として
+      <p>式として使うサブクエリは、外側のクエリから見ると「<strong>スカラー値</strong>」または「<strong>スカラー値の集合</strong>」として扱われます。そのため、原則として
       <span class="masked">「1カラムの1レコード」または「1カラムの複数レコード」</span>
       の結果セットを返すような <code>SELECT</code> 文を記述します。</p>
       <p>サブクエリとして <strong>複数のカラム</strong> を含む結果セットを返す <code>SELECT</code>
       を記述すると次のようなエラーが発生します。</p>
-      <pre><code>psql:&lt;stdin&gt;:XX: ERROR:  式として使用された副問い合わせが2行以上の行を返しました</code></pre>
-      <p>また、単単一のスカラー値が期待されている箇所で、サブクエリとして
+      <pre><code>psql:&lt;stdin&gt;:XX: ERROR:  副問い合わせは1列のみを返さなければなりません</code></pre>
+      <p>また、単一のスカラー値が期待されている箇所で、サブクエリとして
       <strong>複数のレコード</strong> を返す <code>SELECT</code>
       を記述すると、次のようなエラーが発生します。</p>
-      <pre><code>psql:&lt;stdin&gt;:XX: ERROR:  副問い合わせは1列のみを返さなければなりません</code></pre>
+      <pre><code>psql:&lt;stdin&gt;:XX: ERROR:  式として使用された副問い合わせが2行以上の行を返しました</code></pre>
       <p>たとえば、<code>WHERE job_id IN ( SELECT ... )</code> のように <code>IN</code>
       キーワードによって「<strong>スカラー値の集合</strong>」が期待される場合は、複数のレコードを返すサブクエリを記述しても問題ありません。</p>
       <p>一方で、<code>WHERE job_id = ( SELECT ... )</code>
@@ -489,10 +483,23 @@ class="toc-section-number">5</span> 授業時間外学習の指示</a></li>
       1レコードのみ を返すサブクエリ</span> を記述する必要があります。</p>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
-      <p>SQLに関する質問です。サブクエリは、スカラー値 (1カラム1レコード) または スカラー値の集合
-      (1カラム複数レコード)
+      <p>SQLに関する質問です。式として使用するサブクエリは、スカラー値 (1カラム1レコード) または
+      スカラー値の集合 (1カラム複数レコード)
       を返す必要がある、と言われました。意味が分かりません。どういうことですか？丁寧に解説してください。</p>
       </blockquote>
+      <div class="note type-senior">
+      <p><strong>補足</strong></p>
+      <p>ここでは <code>WHERE</code> 句 や <code>SELECT</code>
+      句の「<strong>式として使うサブクエリ</strong>」に絞って説明しています。</p>
+      <p><code>FROM</code> 句 において <code>FROM ( SELECT ... )</code>
+      のように「表」として扱うサブクエリは「複数カラムの複数レコード」を返すように記述することができます。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>SQLに関する質問です。サブクエリは、<code>WHERE</code> 句 や <code>SELECT</code> 句
+      で使うことが多いが、<code>FROM</code>
+      句でも使用できると聞きました。どのような使い道があるのか教えてください。</p>
+      </blockquote>
+      </div>
       <h3 data-number="3.3.1" id="sqlドリル-1"><span class="header-section-number">3.3.1</span>
       SQLドリル💻</h3>
       <p>やや難易度の高い問題も含まれているため、数分考えても解決しない場合は、解答例（演習環境の
