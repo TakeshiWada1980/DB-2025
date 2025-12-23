@@ -62,8 +62,17 @@ class="toc-section-number">3.2</span> SELECT句におけるサブクエリの利
 <li><a href="#サブクエリを利用する場合の注意点" id="toc-サブクエリを利用する場合の注意点"><span
 class="toc-section-number">3.3</span> サブクエリを利用する場合の注意点</a></li>
 </ul></li>
-<li><a href="#内部結合" id="toc-内部結合"><span class="toc-section-number">4</span>
-内部結合</a></li>
+<li><a href="#内部結合" id="toc-内部結合"><span class="toc-section-number">4</span> 内部結合</a>
+<ul>
+<li><a href="#内部結合の概要" id="toc-内部結合の概要"><span class="toc-section-number">4.1</span>
+内部結合の概要</a></li>
+<li><a href="#内部結合のsql構文" id="toc-内部結合のsql構文"><span
+class="toc-section-number">4.2</span> 内部結合のSQL構文</a></li>
+<li><a href="#内部結合のsql構文-エイリアス使用" id="toc-内部結合のsql構文-エイリアス使用"><span
+class="toc-section-number">4.3</span> 内部結合のSQL構文 (エイリアス使用)</a></li>
+<li><a href="#つ以上のテーブルの内部結合" id="toc-つ以上のテーブルの内部結合"><span
+class="toc-section-number">4.4</span> 3つ以上のテーブルの内部結合</a></li>
+</ul></li>
 <li><a href="#授業時間外学習の指示" id="toc-授業時間外学習の指示"><span
 class="toc-section-number">5</span> 授業時間外学習の指示</a></li>
 </ul> 
@@ -106,7 +115,7 @@ class="toc-section-number">5</span> 授業時間外学習の指示</a></li>
       今回の講義の概要</h2>
       <p><a
       href="lecture07.html">第07回講義</a>では、データの冗長性を排除し、効率的かつ一貫性のある構造を実現するために、情報を複数のテーブルに分解する
-      正規化 について学びました。また、<a
+      <strong><em>正規化</em></strong> について学びました。また、<a
       href="lecture09.html">第09回講義</a>では、具体的なテーブル定義 (<code>CREATE TABLE</code>)
       と、<u>それらのテーブル同士を整合性を保ちながら関連付けるため</u>
       の<strong>外部キー制約</strong> (<code>REFERENCES</code>) について学びました。</p>
@@ -603,9 +612,496 @@ class="toc-section-number">5</span> 授業時間外学習の指示</a></li>
             9 | Walter  |          4
  ～～以下略～～</code></pre>
       <h1 data-number="4" id="内部結合"><span class="header-section-number">4</span> 内部結合</h1>
-      <div class="note type-tips">
-      <p>以下、鋭意制作中…⏳</p>
+      <p>先のセクションでは、データが複数のテーブルに分散して存在しているとき、それらを組み合わせて情報を引き出すための方法のひとつとして「<strong>サブクエリ</strong>」について学びました。</p>
+      <p>同様に、複数のテーブルを対象に情報を引き出す方法として「<strong>結合</strong>」があります。結合には、大きくわけて「<strong>内部結合</strong>
+      (<code>INNER JOIN</code>)」「<strong>外部結合</strong>
+      (<code>OUTER JOIN</code>)」「<strong>直積</strong>
+      (<code>CROSS JOIN</code>)」が存在します。</p>
+      <p>まずは、シンプルで使用頻度も高い「内部結合」について学んでいきます。</p>
+      <h2 data-number="4.1" id="内部結合の概要"><span class="header-section-number">4.1</span>
+      内部結合の概要</h2>
+      <p><strong>内部結合</strong> (<code>INNER JOIN</code>)
+      は、複数テーブルの間に定義されたリレーションに基づいて
+      <u><strong>両方のテーブルに「共通して存在する行だけ」を結合</strong></u>
+      する方法です。その結果、次のような特徴があります。</p>
+      <ul>
+      <li>結合条件がを満たさない行 (＝条件の評価結果が <code>TRUE</code> にならない行)
+      は、結果セットから除外されます。</li>
+      <li><u>対応するデータが揃っている行だけ</u> を扱いたいときに使用されます。</li>
+      </ul>
+      <p>文章だけでは分かりづらいため、ここからは具体例をみていきます。以下では、次に示すような jobs
+      と characters という2つのテーブルがあるものとします。</p>
+      <p><strong>▼ jobs テーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>job_id</u></th>
+      <th style="text-align: center;">name</th>
+      <th style="text-align: center;">attack_gain</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">Fighter</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">Monk</td>
+      <td style="text-align: center;">4</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">Ninja</td>
+      <td style="text-align: center;">5</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">Samurai</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">5</td>
+      <td style="text-align: center;">Priest</td>
+      <td style="text-align: center;">0</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">6</td>
+      <td style="text-align: center;">Wizard</td>
+      <td style="text-align: center;">-1</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>▼ characters テーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>character_id</u></th>
+      <th style="text-align: center;">name</th>
+      <th style="text-align: center;">level</th>
+      <th style="text-align: center;">job_id</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">Marvin</td>
+      <td style="text-align: center;">35</td>
+      <td style="text-align: center;">5</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">Zach</td>
+      <td style="text-align: center;">62</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">Charlie</td>
+      <td style="text-align: center;">57</td>
+      <td style="text-align: center;"></td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">Tom</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      </tbody>
+      </table>
+      <ul>
+      <li>解説の都合上、<strong>characters.job_id</strong>
+      には「非NULL制約」を<u>設定していないこと</u>に注意してください。</li>
+      </ul>
+      <p>各テーブルの主キーは「下線」で示しています。また、<strong>characters.job_id</strong>
+      に、次のような「<strong>外部キー制約</strong>」が設定されているとします。</p>
+      <pre><code>job_id INTEGER REFERENCES jobs (job_id)</code></pre>
+      <p>このとき <span class="masked"><code>characters.job_id = jobs.job_id</code></span>
+      という結合条件を用いて <strong>内部結合</strong> <code>INNER JOIN</code>
+      を行うと、次のような結果セットを得ることができます。</p>
+      <p><strong>▼ 内部結合の結果セット</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;">character_id</th>
+      <th style="text-align: center;">character_name</th>
+      <th style="text-align: center;">level</th>
+      <th style="text-align: center;">job_id</th>
+      <th style="text-align: center;">job_name</th>
+      <th style="text-align: center;">attack_gain</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">Marvin</td>
+      <td style="text-align: center;">35</td>
+      <td style="text-align: center;">5</td>
+      <td style="text-align: center;">Priest</td>
+      <td style="text-align: center;">0</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">Zach</td>
+      <td style="text-align: center;">62</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">Ninja</td>
+      <td style="text-align: center;">5</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">Tom</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">Fighter</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>内部結合では <strong>対応づけに成功した行の組だけ</strong> (＝結合条件の評価結果が
+      <code>TRUE</code> となるものだけ)
+      が、結果セットに含まれます。そのため、次のようになっていることに注意してください。</p>
+      <ul>
+      <li>どのキャラからも参照されていないジョブ (たとえば Monk や Wizard など)
+      は結果セットに<u>含まれません</u>。</li>
+      <li><strong>job_id</strong> が <code>NULL</code> のキャラクタ (＝Charlie)
+      は、結合条件を満たさないため結果セットに<u>含まれません</u>。
+      <ul>
+      <li><strong>job_id</strong> が <code>NULL</code> の行 は <code>=</code> による比較結果
+      (条件式の評価) が <code>UNKNOWN</code> となるため、結合条件を満たしません。</li>
+      </ul></li>
+      </ul>
+      <p>このような特性があるため、内部結合は SQLドリル の <code>ex-02_1.sql</code>
+      のように「<strong>どのキャラも所持していないアイテムを抽出</strong>」や「<strong>どのキャラも就いていないジョブを抽出</strong>」といったクエリには適しません。この点が、次回講義で扱う「<strong>外部結合</strong>」との大きな違いとなります。</p>
+      <p>なお、ここでは <strong>主キー</strong> (＝<span class="masked">jobs.job_id</span>) と
+      <strong>それを参照する外部キー</strong> (＝<span class="masked">characters.job_id</span>)
+      を結合条件として用いましたが、必ずしもそのような関係にあるカラムでなければならないわけではありません。</p>
+      <h3 data-number="4.1.1" id="定着確認-1"><span class="header-section-number">4.1.1</span>
+      定着確認</h3>
+      <ul>
+      <li>内部結合では、結合条件の評価結果が <code>FALSE</code> または <code>UNKNOWN</code>
+      となる行は結果セットに含まれない。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切である。</span></li>
+      </ul></li>
+      <li>CHECK 制約では、条件の評価結果が <code>FALSE</code>
+      となる場合に制約違反となる。一方、評価結果が <code>UNKNOWN</code>
+      となる場合は制約違反とはならない。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切である。</span></li>
+      </ul></li>
+      <li>内部結合は、主キーと、それを参照している外部キーのみが、結合条件に使用可能である。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない。</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="4.2" id="内部結合のsql構文"><span class="header-section-number">4.2</span>
+      内部結合のSQL構文</h2>
+      <p><strong>内部結合</strong>は SQL の <code>FROM</code> 句において、<code>INNER JOIN</code> と
+      <code>ON</code> というキーワードを用いて指定します。たとえば、x_characters と x_jobs
+      を「<strong>job_id</strong>」で内部結合する場合、次のような SQL を記述します。</p>
+      <ul>
+      <li>演習環境で実行し、実際に、どのような結果セットが得られるかを確認してください。</li>
+      </ul>
+      <div class="sourceCode" id="cb25"
+      data-caption="select-join_01.sql（job_idによるx_charactersとx_jobsの内部結合）"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">SELECT</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>  character_id,</span>
+<span id="cb25-3"><a href="#cb25-3"></a>  x_characters.name, <span class="co">-- ◀ 注目</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>  <span class="kw">level</span>,</span>
+<span id="cb25-5"><a href="#cb25-5"></a>  x_jobs.job_id, <span class="co">-- ◀ 注目</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a>  x_jobs.name, <span class="co">-- ◀ 注目</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a>  attack_gain</span>
+<span id="cb25-8"><a href="#cb25-8"></a><span class="kw">FROM</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a>  x_characters</span>
+<span id="cb25-10"><a href="#cb25-10"></a>  <span class="kw">INNER</span> <span class="kw">JOIN</span> x_jobs <span class="kw">ON</span> x_characters.job_id <span class="op">=</span> x_jobs.job_id; <span class="co">-- ◀ 注目</span></span></code></pre></div>
+      <ul>
+      <li>基本的に内部結合では <code>x_characters INNER JOIN x_jobs</code>
+      と記述しても、順番を変えて <code>x_jobs INNER JOIN x_characters</code> と記述しても同じです
+      (結合の順番は結果に影響しません)。
+      <ul>
+      <li>ただし、内部的な実行計画に影響を与えることがあり、<code>ORDER BY</code>
+      句を指定しない場合、結果セットの <span class="masked">並び順</span>
+      が変わる可能性はあります。</li>
+      </ul></li>
+      </ul>
+      <p>ここで、注意してほしいのが <code>SELECT</code> 句の記述です。<strong>name</strong> や
+      <strong>job_id</strong>
+      のように<u>両方のテーブルに「同名のカラム」が存在している場合</u>は、「<strong>どちらのテーブルのカラムであるか</strong>」を明示する必要があります。もし、<strong>第03行目</strong>
+      で <code>name</code> だけを指定すると、次のようなエラーが発生します。</p>
+      <pre><code>psql:&lt;stdin&gt;:XX: ERROR:  列参照&quot;name&quot;は曖昧です</code></pre>
+      <p>一方で、<strong>level</strong>
+      のように、結合対象のテーブル間でカラム名が重複していない場合は、そのまま指定することができます。ただし、将来的にカラムが追加される可能性があることや、可読性・識別性の観点から
+      <span class="masked">テーブル名を明示する書き方が推奨</span>
+      されます。その際、実務では次のセクションで説明するように、テーブルの別名
+      (<strong>エイリアス</strong>) が用いられます。</p>
+      <div class="note type-senior">
+      <p>ここでは 2つのテーブルを結合していますが、実務では
+      <strong>数個から十数個のテーブルを同時に結合すること</strong>
+      もあります。このような状況でテーブル名を省略してカラムを指定すると SQL
+      の可読性や保守性が著しく低下します。</p>
       </div>
+      <p>なお、SQL標準 (PostgreSQL を含む) では、<code>INNER JOIN</code> を <code>JOIN</code>
+      のように省略表記することもできます。</p>
+      <h3 data-number="4.2.1" id="定着確認-2"><span class="header-section-number">4.2.1</span>
+      定着確認</h3>
+      <ul>
+      <li>内部結合 (<code>INNER JOIN</code>) においては、<code>table_1 INNER JOIN table_2</code> と
+      <code>table_2 INNER JOIN table_1</code>
+      のように、結合するテーブルの記述順を入れ替えたとき、結果セットの正味の内容が変わる。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない。</span></li>
+      </ul></li>
+      <li>内部結合 (<code>INNER JOIN</code>)
+      では、3つ以上のテーブルを同時に結合することはできない。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない。</span></li>
+      </ul></li>
+      <li>標準SQLでは <code>OUTER JOIN</code> を <code>JOIN</code>
+      のように略表記できる。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない。</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="4.3" id="内部結合のsql構文-エイリアス使用"><span
+      class="header-section-number">4.3</span> 内部結合のSQL構文 (エイリアス使用)</h2>
+      <p>さきほどの <code>select-join_01.sql</code>
+      は、PostgreSQLでは、次のように記述することができます。本科目では保守性と可読性の関係から、原則として
+      <code>INNER JOIN</code> は <code>JOIN</code>
+      の省略形、テーブルには1から2文字のエイリアスを使用してください。</p>
+      <div class="sourceCode" id="cb27" data-caption="select-join_02.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">SELECT</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>  c.character_id,</span>
+<span id="cb27-3"><a href="#cb27-3"></a>  c.name,</span>
+<span id="cb27-4"><a href="#cb27-4"></a>  c.<span class="kw">level</span>,</span>
+<span id="cb27-5"><a href="#cb27-5"></a>  j.job_id,</span>
+<span id="cb27-6"><a href="#cb27-6"></a>  j.name,</span>
+<span id="cb27-7"><a href="#cb27-7"></a>  j.attack_gain</span>
+<span id="cb27-8"><a href="#cb27-8"></a><span class="kw">FROM</span></span>
+<span id="cb27-9"><a href="#cb27-9"></a>  x_characters <span class="kw">AS</span> c</span>
+<span id="cb27-10"><a href="#cb27-10"></a>  <span class="kw">JOIN</span> x_jobs <span class="kw">AS</span> j <span class="kw">ON</span> c.job_id <span class="op">=</span> j.job_id;</span></code></pre></div>
+      <p>ここでは <code>AS c</code> や <code>AS j</code>
+      のように、テーブルに「<strong>1文字のエイリアス (別名)</strong>」を指定していますが <span
+      class="masked">エイリアスは必ずしも1文字である必要はありません</span>。ただ、結合条件やカラム指定の際にエイリアスを何度も記述するため、実務でも1文字のエイリアスがよく用いられます。</p>
+      <h3 data-number="4.3.1" id="sqlドリル-2"><span class="header-section-number">4.3.1</span>
+      SQLドリル💻</h3>
+      <p><code>create-x_db.sql</code> および <code>insert-x_db_01.sql</code> で初期化した
+      x_items、x_jobs、x_characters、x_guilds、x_guild_characters、x_character_items、x_gold_transfers
+      を対象として、次の要求を満たす SQL を記述せよ。</p>
+      <ul>
+      <li><code>ex-03_1.sql</code> 👉 x_characters と x_guilds
+      テーブルから、次のような結果セットを得るような SQL を記述せよ (guild_id
+      の昇順で整列すること)。ただし、内部結合を用いた SQL とすること。</li>
+      </ul>
+      <pre><code> guild_id |  name  | owner_name | owner_level 
+----------+--------+------------+-------------
+        1 | Yamato | Marvin     |          35
+        2 | D.D.D  | Ellen      |          51
+        3 | hameln | Bob        |          33</code></pre>
+      <ul>
+      <li><p><code>ex-03_2.sql</code> 👉 <code>ex-03_1.sql</code> と同じ結果セットを得る SQL
+      を記述せよ。ただし、<u>結合を使用せず、サブクエリ (相関サブクエリ) を用いた SQL</u>
+      とすること。</p></li>
+      <li><p><code>ex-03_3.sql</code> 👉 x_characters と x_character_items
+      テーブルから、次のような結果セットを得るような SQL を記述せよ (character_id、item_id
+      の昇順で整列すること)。ただし、内部結合を用いた SQL とすること。</p></li>
+      </ul>
+      <pre><code> character_id |  name   | item_id | qty 
+--------------+---------+---------+-----
+            1 | Marvin  |       1 |   2
+            1 | Marvin  |       7 |   1
+            1 | Marvin  |      10 |   1
+            2 | Zach    |       3 |   1
+            2 | Zach    |      11 |   2
+ ～以下略～</code></pre>
+      <ul>
+      <li><code>ex-03_5.sql</code> 👉 ジョブが Wizard または Priest のキャラクタ (ただし、deleted_at
+      が NULL のキャラクタのみ) を抽出し、次のような結果セットを得るような SQL
+      を記述せよ。ただし、内部結合を用いた SQL とすること。
+      <ul>
+      <li><code>ex-02_4.sql</code>
+      は、同様の処理を「サブクエリ」を用いて実装をしている。両者を比較せよ。</li>
+      </ul></li>
+      </ul>
+      <pre><code> character_id |  name   |  job   | deleted_at 
+--------------+---------+--------+------------
+            1 | Marvin  | Priest |
+            3 | Charlie | Wizard |
+            6 | Alice   | Priest |
+           11 | Ellen   | Wizard |
+           13 | Mallet  | Wizard |
+           18 | Carol   | Priest |
+           19 | Jack    | Wizard |</code></pre>
+      <ul>
+      <li><code>ex-03_5.sql</code> 👉 全キャラクタを通算した所持数量の合計が 6
+      個以上であるアイテムを抽出し、次のような結果セットを得る SQL
+      を記述せよ。ただし、内部結合を用いた SQL とすること。
+      <ul>
+      <li>参考: <code>ex-01_5.sql</code> でも同様の処理をしている。</li>
+      </ul></li>
+      </ul>
+      <pre><code> item_id |     name      | 所持総数 
+---------+---------------+----------
+       1 | Potion        |       16
+       5 | Mana Potion   |        9
+       7 | Antidote      |        8
+       9 | Angel Feather |        6
+      10 | Chimera Wing  |        7
+      11 | Torch         |        9</code></pre>
+      <ul>
+      <li><code>ex-03_6.sql</code> 👉
+      各ジョブに就いているキャラクタの人数を集計し、次のような結果セットを得る SQL
+      を記述せよ。ただし、論理削除済みのキャラクタは除外し (x_characters.deleted_at が
+      <code>NULL</code> のキャラクタのみを集計対象とし)、job_id の昇順に整列すること。</li>
+      </ul>
+      <pre><code> job_id |   job   | count 
+--------+---------+-------
+      1 | Fighter |     4
+      2 | Monk    |     2
+      3 | Ninja   |     2
+      4 | Samurai |     2
+      5 | Priest  |     3
+      6 | Wizard  |     4</code></pre>
+      <ul>
+      <li><code>ex-03_7.sql</code> 👉 <code>ex-03_6.sql</code>
+      に、次のように全ジョブの合計人数を加えた結果セットを得るような SQL を記述せよ。
+      <ul>
+      <li>ヒント: 全体集計には <code>ROLLUP</code> を利用 (<a
+      href="lecture05.html#rollupによる全体集計">第05回講義</a>)</li>
+      </ul></li>
+      </ul>
+      <pre><code> job_id |   job   | count 
+--------+---------+-------
+      1 | Fighter |     4
+      2 | Monk    |     2
+      3 | Ninja   |     2
+      4 | Samurai |     2
+      5 | Priest  |     3
+      6 | Wizard  |     4
+        | (Total) |    17</code></pre>
+      <h2 data-number="4.4" id="つ以上のテーブルの内部結合"><span
+      class="header-section-number">4.4</span> 3つ以上のテーブルの内部結合</h2>
+      <p>内部結合 (<code>INNER JOIN</code>)
+      では、<strong>3つ以上のテーブル</strong>を対象に連結することもできます。例として、次に示す論理ER図のような関係をもつ
+      x_characters、x_character_items、x_items を結合することが考えます。</p>
+      <figure>
+      <img src="figs/10/LER-02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ここで <strong>x_character_items</strong>
+      は、キャラクタとアイテムの関係を表す「<strong>中間テーブル</strong>」となっています。これらの3つのテーブルを結合し、キャラクタ名、アイテム名、所持数の一覧を得るには、以下のような
+      SQL を記述します。</p>
+      <ul>
+      <li><strong>第08行目</strong> から <strong>第10行目</strong>
+      が「内部結合」に関する記述になります。</li>
+      </ul>
+      <div class="sourceCode" id="cb34" data-caption="select-join_03.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb34-1"><a href="#cb34-1"></a><span class="kw">SELECT</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>  c.character_id,</span>
+<span id="cb34-3"><a href="#cb34-3"></a>  c.name <span class="kw">AS</span> <span class="ot">&quot;character&quot;</span>,</span>
+<span id="cb34-4"><a href="#cb34-4"></a>  i.item_id,</span>
+<span id="cb34-5"><a href="#cb34-5"></a>  i.name <span class="kw">AS</span> <span class="ot">&quot;item&quot;</span>,</span>
+<span id="cb34-6"><a href="#cb34-6"></a>  ci.qty</span>
+<span id="cb34-7"><a href="#cb34-7"></a><span class="kw">FROM</span></span>
+<span id="cb34-8"><a href="#cb34-8"></a>  x_characters <span class="kw">AS</span> c</span>
+<span id="cb34-9"><a href="#cb34-9"></a>  <span class="kw">JOIN</span> x_character_items <span class="kw">AS</span> ci <span class="kw">ON</span> c.character_id <span class="op">=</span> ci.character_id</span>
+<span id="cb34-10"><a href="#cb34-10"></a>  <span class="kw">JOIN</span> x_items <span class="kw">AS</span> i <span class="kw">ON</span> i.item_id <span class="op">=</span> ci.item_id</span>
+<span id="cb34-11"><a href="#cb34-11"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb34-12"><a href="#cb34-12"></a>  c.character_id,</span>
+<span id="cb34-13"><a href="#cb34-13"></a>  i.item_id;</span></code></pre></div>
+      <p>実行結果は、次のようになります。実際に試してみてください。</p>
+      <pre><code> character_id | character | item_id |       item       | qty 
+--------------+-----------+---------+------------------+-----
+            1 | Marvin    |       1 | Potion           |   2
+            1 | Marvin    |       7 | Antidote         |   1
+            1 | Marvin    |      10 | Chimera Wing     |   1
+            2 | Zach      |       3 | Mega Potion      |   1
+            2 | Zach      |      11 | Torch            |   2
+            3 | Charlie   |       6 | High Mana Potion |   1
+            3 | Charlie   |       9 | Angel Feather    |   2
+            4 | Tom       |       1 | Potion           |   1
+ ～以下略～</code></pre>
+      <p>先に述べたように、内部結合は「<strong>どの組み合わせで結合するか
+      (結合条件)</strong>」が同じであれば、<code>FROM</code>
+      句の書き方をある程度入れ替えても、結果セットの正味の内容は同じものとなります。たとえば、
+      <strong>第08行目</strong> から <strong>第10行目</strong>
+      を以下のように書き換えても同じ結果セットとなります。</p>
+      <div class="sourceCode" id="cb36" data-caption="内部結合の別記述" data-startFrom="8"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql" style="counter-reset: source-line 7;"><span id="cb36-8"><a href="#cb36-8"></a>x_character_items <span class="kw">AS</span> ci</span>
+<span id="cb36-9"><a href="#cb36-9"></a><span class="kw">JOIN</span> x_items <span class="kw">AS</span> i <span class="kw">ON</span> ci.item_id <span class="op">=</span> i.item_id</span>
+<span id="cb36-10"><a href="#cb36-10"></a><span class="kw">JOIN</span> x_characters <span class="kw">AS</span> c <span class="kw">ON</span> ci.character_id <span class="op">=</span> c.character_id</span></code></pre></div>
+      <p>ただし、 <code>ORDER BY</code>
+      を指定していない場合は、行の並び順は変わる可能性があります。</p>
+      <h3 data-number="4.4.1" id="sqlドリル-3"><span class="header-section-number">4.4.1</span>
+      SQLドリル💻</h3>
+      <p><code>create-x_db.sql</code> および <code>insert-x_db_01.sql</code> で初期化した
+      x_items、x_jobs、x_characters、x_guilds、x_guild_characters、x_character_items、x_gold_transfers
+      を対象として、次の要求を満たす SQL を記述せよ。</p>
+      <ul>
+      <li><code>ex-04_1.sql</code> 👉 次に示すような結果セットを得る SQL を記述せよ。
+      <ul>
+      <li>整列順は、guild_id を昇順とし、同一ギルド内では 所有者 → 非所有者 の順に並べ、さらに level
+      を降順で整列すること。</li>
+      <li>論理削除済みのキャラクタは集計から除外すること。</li>
+      </ul></li>
+      </ul>
+      <pre><code> guild_id | guild  | member | level | is_owner 
+----------+--------+--------+-------+----------
+        1 | Yamato | Marvin |    35 | *
+        1 | Yamato | Dave   |    68 |
+        1 | Yamato | Trudy  |    48 |
+        1 | Yamato | Alice  |    42 |
+        2 | D.D.D  | Ellen  |    51 | *
+        2 | D.D.D  | Mallet |    64 |
+        2 | D.D.D  | Zach   |    62 |
+        2 | D.D.D  | Wendy  |    56 |
+        2 | D.D.D  | Eve    |    46 |
+        2 | D.D.D  | Alice  |    42 |
+        3 | hameln | Bob    |    33 | *
+        3 | hameln | Steve  |    70 |
+        3 | hameln | Dave   |    68 |
+        3 | hameln | Jack   |    61 |
+        3 | hameln | Oscar  |    44 |
+(15 行)</code></pre>
+      <ul>
+      <li><code>ex-04_2.sql</code> 👉 次に示すような結果セットを得る SQL を記述せよ。
+      <ul>
+      <li>整列順は、所属人数の降順とすること。</li>
+      <li>論理削除済みのキャラクタは集計から除外すること。</li>
+      <li>内部結合のみで実装する方法、相関サブクエリを併用する方法などがあります。</li>
+      </ul></li>
+      </ul>
+      <pre><code> guild_id |  name  | owner  | member_count | avg_level 
+----------+--------+--------+--------------+-----------
+        2 | D.D.D  | Ellen  |            6 |      53.5
+        3 | hameln | Bob    |            5 |      55.2
+        1 | Yamato | Marvin |            4 |      48.3
+(3 行)</code></pre>
+      <ul>
+      <li><code>ex-04_3.sql</code> 👉
+      次に示すようにギルドごとにジョブ別の人数を集計した結果セットを得る SQL を記述せよ。
+      <ul>
+      <li>第1キーを guild_id (昇順)、第2キーを job_id (昇順) とすること。</li>
+      <li>論理削除済みのキャラクタは集計から除外すること。</li>
+      </ul></li>
+      </ul>
+      <pre><code> guild_id | guild  |   job   | count 
+----------+--------+---------+-------
+        1 | Yamato | Fighter |     1
+        1 | Yamato | Samurai |     1
+        1 | Yamato | Priest  |     2
+        2 | D.D.D  | Fighter |     1
+        2 | D.D.D  | Ninja   |     2
+        2 | D.D.D  | Priest  |     1
+        2 | D.D.D  | Wizard  |     2
+        3 | hameln | Fighter |     1
+        3 | hameln | Monk    |     1
+        3 | hameln | Samurai |     2
+        3 | hameln | Wizard  |     1
+(11 行)</code></pre>
+      <p>なお、0人のジョブも表示したい場合、次回講義で扱う <strong>外部結合</strong>
+      を使用します。</p>
       <h1 data-number="5" id="授業時間外学習の指示"><span class="header-section-number">5</span>
       授業時間外学習の指示</h1>
       <p>🚨<strong>本科目は「学修単位科目」であり、1回の講義あたり「4時間相当」の授業時間外学習が求められる科目です</strong>🏃</p>
@@ -614,6 +1110,16 @@ class="toc-section-number">5</span> 授業時間外学習の指示</a></li>
       <ul>
       <li>主に <strong>SQLドリル</strong>、<strong>定着確認</strong>、<strong>演習</strong>
       から出題します。</li>
+      </ul></li>
+      <li><strong>外部結合</strong> (<code>OUTER JOIN</code>) について予習しておいてください。</li>
+      <li>次のYouTube動画がおすすめです。時間があるときに視聴してください。
+      <ul>
+      <li><a
+      href="https://www.youtube.com/watch?v=ft-OviQjSgA">AIが代わりに書く時代に「SQLを学ぶ意味」はあるのか</a>
+      4分17秒</li>
+      <li><a
+      href="https://www.youtube.com/watch?v=RjIYL-g53_g">やらかし注意。SQLでやるな、NoSQLでやるな、を完全整理</a>
+      6分25秒</li>
       </ul></li>
       </ul>
       <hr />
