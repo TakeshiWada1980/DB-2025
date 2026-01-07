@@ -241,8 +241,8 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
       を含む条件式の評価結果は常に <span class="masked">UNKNOWN</span>
       となることから、結果セットから除外されています。</p>
       <div class="note type-tips">
-      <p><strong>ON に <code>OR IS NUILL</code> を追加すると…</strong></p>
-      <p>Zach を含むために <code>select-inner_join_01.sql</code> の結合条件を
+      <p><strong>ON に <code>OR IS NULL</code> を追加すると…</strong></p>
+      <p>Zach を結果に含めたいからといって <code>select-inner_join_01.sql</code> の結合条件を
       <code>ON c.job_id = j.job_id OR c.job_id IS NULL</code>
       のようにしてしまうと、以下のように意図せぬ結果が得られるので注意してください。</p>
       <pre><code> character_id |  name   |   job   
@@ -257,6 +257,11 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
             3 | Charlie | Wizard
             4 | Tom     | Fighter
             5 | Alice   | Priest</code></pre>
+      <ul>
+      <li><code>c.job_id IS NULL</code> の行が、n_jobs 側の全行と結び付くため、Zach
+      の行がジョブの数だけ増えてしまいます
+      (後半で解説する「直積」に近い処理になってしまいます)。</li>
+      </ul>
       </div>
       <p>このような内部結合の挙動は、たとえば「<strong>ジョブ別のキャラ人数を集計したい</strong>」といった目的には適していません。</p>
       <div class="sourceCode" id="cb4"
@@ -425,7 +430,7 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
             5 | Alice   | Priest</code></pre>
       <p>…から、以下のよう変化します。内部結合では除外されていた character_id = 2 の Zach
       の行が、結果セットに含まれていることが分かります。</p>
-      <pre><code>(OUTER LEFT JOIN の場合)
+      <pre><code>(LEFT OUTER JOIN の場合)
 
  character_id |  name   |   job   
 --------------+---------+---------
@@ -524,8 +529,8 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
 <span id="cb19-7"><a href="#cb19-7"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> n_characters <span class="kw">AS</span> c <span class="kw">ON</span> c.job_id <span class="op">=</span> j.job_id</span></code></pre></div>
       <p>つまり、次の2つは等価となります。</p>
       <ul>
-      <li><code>FROM n_characters AS c RIGHT JOIN n_jobs AS j ON ...</code> 👈 左外部結合</li>
-      <li><code>FROM n_jobs AS j LEFT JOIN n_characters AS c ON ...</code> 👈 右外部結合</li>
+      <li><code>FROM n_characters AS c RIGHT JOIN n_jobs AS j ON ...</code> 👈 右外部結合</li>
+      <li><code>FROM n_jobs AS j LEFT JOIN n_characters AS c ON ...</code> 👈 左外部結合</li>
       </ul>
       <p>このように、外部結合では「<strong>どのテーブルを基準として行を残したいか</strong>」を意識して結合の向き
       (<code>LEFT</code> or <code>RIGHT</code>) を指定することが大切になってきます。</p>
@@ -542,7 +547,7 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
       <li>標準SQLにおいて、内部結合を表す正式なキーワードは (　　　) である。なお、このキーワードは
       <code>JOIN</code> という省略形で記述することができる。括弧にあてはまる語を答えよ。
       <ul>
-      <li><strong>答え</strong>: <span class="masked"><code>INNSER JOIN</code></span></li>
+      <li><strong>答え</strong>: <span class="masked"><code>INNER JOIN</code></span></li>
       </ul></li>
       <li>標準SQLにおいて、右側のテーブルを基準に結合を行う外部結合を指定する正式なキーワードは
       (　　　) である。なお、このキーワードは <code>RIGHT JOIN</code>
@@ -1039,7 +1044,7 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
            15 | Trent
             6 | Alice
             7 | Trudy</code></pre>
-      <p>また、<strong>第09行目</strong> を <code>g.name = 'D.D.D</code>
+      <p>また、<strong>第09行目</strong> を <code>g.name = 'D.D.D'</code>
       に変更すれば、<code>D.D.D</code> の所属キャラを次のように取得できます。</p>
       <pre><code> character_id |  name  
 --------------+--------
@@ -1381,8 +1386,10 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
 <span id="cb55-6"><a href="#cb55-6"></a>  <span class="kw">JOIN</span> table3 <span class="kw">AS</span> t3 <span class="kw">ON</span> t1.tbl3_id <span class="op">=</span> t3.<span class="kw">id</span>;</span></code></pre></div>
       <h1 data-number="5" id="非正規化-正規化崩し"><span class="header-section-number">5</span>
       非正規化 (正規化崩し)</h1>
-      <p>前回と今回の講義では、内部結合、外部結合、直接について学びました。これらの結合を用いて実際に
-      SQL を記述することで、その挙動を体感できたと思います。</p>
+      <p>前回と今回の講義では、内部結合 (<code>INNER JOIN</code>)、外部結合
+      (<code>LEFT OUTER JOIN</code>、<code>RIGHT OUTER JOIN</code>、<code>FULL OUTER JOIN</code>)、直積
+      (<code>CROSS JOIN</code>) について学びました。これらの結合を用いて実際に SQL
+      を記述することで、その挙動を体感できたと思います。</p>
       <p>SQLを記述するなかで気づいたと思いますが、<strong>結合は SQL
       の記述を非常に複雑にする要因</strong> となります。また、結合は <span
       class="masked">内部処理的にも負荷が大きく実行パフォーマンス</span>
