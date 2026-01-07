@@ -473,6 +473,20 @@ class="toc-section-number">5</span> 授業時間外学習の指示</a></li>
       <blockquote>
       <p>SQLに関する質問です。「サブクエリ」と「相関サブクエリ」の違いがいまいち分かりません。SELECT句に用いるものを「サブクエリ」、WHERE句に用いるものを「相関サブクエリ」というのですか🤔</p>
       </blockquote>
+      <h3 data-number="3.2.1" id="定着確認-1"><span class="header-section-number">3.2.1</span>
+      定着確認</h3>
+      <ul>
+      <li>サブクエリのうち、外側 (親側) のクエリのカラムを参照して評価されるものを特に (　　　)
+      という。括弧にあてはまる最も適切な語を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">相関サブクエリ</span></li>
+      </ul></li>
+      <li>サブクエリは <code>WHERE</code> 句のみで使用可能であり、その他の <code>SELECT</code>
+      句などでは使用することはできない。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない。</span></li>
+      </ul></li>
+      </ul>
       <h2 data-number="3.3" id="サブクエリを利用する場合の注意点"><span
       class="header-section-number">3.3</span> サブクエリを利用する場合の注意点</h2>
       <p>式として使うサブクエリは、外側のクエリから見ると「<strong>スカラー値</strong>」または「<strong>スカラー値の集合</strong>」として扱われます。そのため、原則として
@@ -777,7 +791,7 @@ class="toc-section-number">5</span> 授業時間外学習の指示</a></li>
       <p>なお、ここでは <strong>主キー</strong> (＝<span class="masked">jobs.job_id</span>) と
       <strong>それを参照する外部キー</strong> (＝<span class="masked">characters.job_id</span>)
       を結合条件として用いましたが、必ずしもそのような関係にあるカラムでなければならないわけではありません。</p>
-      <h3 data-number="4.1.1" id="定着確認-1"><span class="header-section-number">4.1.1</span>
+      <h3 data-number="4.1.1" id="定着確認-2"><span class="header-section-number">4.1.1</span>
       定着確認</h3>
       <ul>
       <li>内部結合では、結合条件の評価結果が <code>FALSE</code> または <code>UNKNOWN</code>
@@ -844,7 +858,7 @@ class="toc-section-number">5</span> 授業時間外学習の指示</a></li>
       </div>
       <p>なお、SQL標準 (PostgreSQL を含む) では、<code>INNER JOIN</code> を <code>JOIN</code>
       のように省略表記することもできます。</p>
-      <h3 data-number="4.2.1" id="定着確認-2"><span class="header-section-number">4.2.1</span>
+      <h3 data-number="4.2.1" id="定着確認-3"><span class="header-section-number">4.2.1</span>
       定着確認</h3>
       <ul>
       <li>内部結合 (<code>INNER JOIN</code>) においては、<code>table_1 INNER JOIN table_2</code> と

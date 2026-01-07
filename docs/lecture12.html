@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+type="text/javascript"></script> 
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>第12回 4I-データベース工学</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#連絡と準備" id="toc-連絡と準備"><span class="toc-section-number">1</span>
+連絡と準備</a>
+<ul>
+<li><a href="#ハンズオン学習の準備" id="toc-ハンズオン学習の準備"><span
+class="toc-section-number">1.1</span> ハンズオン学習の準備</a></li>
+<li><a href="#今回の講義の概要" id="toc-今回の講義の概要"><span
+class="toc-section-number">1.2</span> 今回の講義の概要</a></li>
+</ul></li>
+<li><a href="#csvのインポートとエクスポート" id="toc-csvのインポートとエクスポート"><span
+class="toc-section-number">2</span> CSVのインポートとエクスポート</a>
+<ul>
+<li><a href="#select文の出力をcsvにエクスポート" id="toc-select文の出力をcsvにエクスポート"><span
+class="toc-section-number">2.1</span> SELECT文の出力をCSVにエクスポート</a></li>
+<li><a href="#補足-csv関連のvscode拡張機能" id="toc-補足-csv関連のvscode拡張機能"><span
+class="toc-section-number">2.2</span> 補足: CSV関連のVSCode拡張機能</a></li>
+</ul></li>
+<li><a href="#サブクエリを用いたレコードの挿入" id="toc-サブクエリを用いたレコードの挿入"><span
+class="toc-section-number">3</span> サブクエリを用いたレコードの挿入</a>
+<ul>
+<li><a href="#準備" id="toc-準備"><span class="toc-section-number">3.1</span> 準備</a></li>
+<li><a href="#value-句を用いたリテラル挿入" id="toc-value-句を用いたリテラル挿入"><span
+class="toc-section-number">3.2</span> VALUE 句を用いたリテラル挿入</a></li>
+<li><a href="#サブクエリを用いたレコードの挿入-1" id="toc-サブクエリを用いたレコードの挿入-1"><span
+class="toc-section-number">3.3</span> サブクエリを用いたレコードの挿入</a></li>
+</ul></li>
+<li><a href="#サブクエリを用いたレコードの更新" id="toc-サブクエリを用いたレコードの更新"><span
+class="toc-section-number">4</span> サブクエリを用いたレコードの更新</a>
+<ul>
+<li><a href="#レコードの更新-固定値" id="toc-レコードの更新-固定値"><span
+class="toc-section-number">4.1</span> レコードの更新 (固定値)</a></li>
+<li><a href="#レコードの更新-固定値-1" id="toc-レコードの更新-固定値-1"><span
+class="toc-section-number">4.2</span> レコードの更新 (固定値)</a></li>
+<li><a href="#サブクエリを用いた更新" id="toc-サブクエリを用いた更新"><span
+class="toc-section-number">4.3</span> サブクエリを用いた更新</a></li>
+<li><a href="#from句の利用" id="toc-from句の利用"><span class="toc-section-number">4.4</span>
+FROM句の利用</a></li>
+</ul></li>
+<li><a href="#課題2" id="toc-課題2"><span class="toc-section-number">5</span> 課題2</a></li>
+<li><a href="#授業時間外学習の指示" id="toc-授業時間外学習の指示"><span
+class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>2025-4I データベース工学 第12回 講義資料</p>
+      <p>2026年01月15日 (木) 3-4時限</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="連絡と準備"><span class="header-section-number">1</span>
+      連絡と準備</h1>
+      <ul>
+      <li><strong>小テスト❾</strong> を実施します。
+      <ul>
+      <li>シラバス記載のように、小テストは最終評価の <span class="masked">35%</span>
+      に相当します。</li>
+      <li>遅刻・欠席等により追試験を希望する場合は<a
+      href="lecture01.html#成績評価法と履修上の注意">第01回講義で案内した手続き</a>をしてください。</li>
+      </ul></li>
+      </ul>
+      <h2 data-number="1.1" id="ハンズオン学習の準備"><span class="header-section-number">1.1</span>
+      ハンズオン学習の準備</h2>
+      <p>次の手順でSQL演習環境の立ち上げと、教材の更新を取得してください。</p>
+      <ul>
+      <li><a href="lecture04.html#sql演習環境の動作確認-前回復習">SQL演習環境の動作確認</a>@
+      第04回講義</li>
+      <li><a href="lecture04.html#教材の更新の取得">教材の更新の取得</a>@ 第04回講義</li>
+      </ul>
+      <p>また、今回の講義では、<strong>第10回講義で使用したテーブル群</strong> (<code>x_****</code>)
+      を使用します。演習環境の <code>from-teacher/10/create-x_db.sql</code> および
+      <code>insert-x_db_01.sql</code> を再実行し、次のテーブル群を初期化しておいてください。</p>
+      <ul>
+      <li>x_items</li>
+      <li>x_jobs</li>
+      <li>x_characters</li>
+      <li>x_guilds</li>
+      <li>x_guild_characters</li>
+      <li>x_character_items</li>
+      <li>x_gold_transfers</li>
+      </ul>
+      <figure>
+      <img src="figs/10/LER-01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="1.2" id="今回の講義の概要"><span class="header-section-number">1.2</span>
+      今回の講義の概要</h2>
+      <p>今回の講義では「<strong>SELECT文の出力をCSVにエクスポートする方法</strong>」と「<strong>サブクエリを用いてレコードの挿入と更新をする方法</strong>」について学んでいきます。</p>
+      <h1 data-number="2" id="csvのインポートとエクスポート"><span
+      class="header-section-number">2</span> CSVのインポートとエクスポート</h1>
+      <p><a href="lecture05.html#csvファイルからのinsert">第05回講義</a>では、<strong>CSVファイル
+      から PostgreSQL にレコードを取り込む方法</strong> (インポートする方法)
+      を学びました。本科目の演習環境 (PostgreSQL 17 の Dockerコンテナ) において、CSV
+      ファイルをテーブルにレコードとして取り込む手順は、以下のようなものでした。</p>
+      <ol type="1">
+      <li>ホストOS環境 (ローカル環境) 側で「CSVファイル」を作成する。
+      <ul>
+      <li>CSVファイルは <span class="masked">文字コード「UTF-8」、改行コード「LF」</span>
+      を原則とする。</li>
+      </ul></li>
+      <li><strong>docker cp</strong> コマンドを使って Docker コンテナ (<code>pg17</code>) に CSV
+      をコピーする。
+      <ul>
+      <li><code>docker cp from-teacher/05/insert-s_users.csv pg17:/tmp/</code></li>
+      </ul></li>
+      <li>次のような SQL (<code>COPY</code> 文) を用いて CSV からテーブルにレコードを挿入
+      (<code>INSERT</code>) する。</li>
+      </ol>
+      <div class="sourceCode" id="cb1" data-caption="CSVファイルからレコードを挿入.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">COPY</span> <span class="kw">public</span>.s_users (<span class="kw">id</span>, name, age)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">FROM</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="st">&#39;/tmp/insert-s_users.csv&#39;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">WITH</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>  (FORMAT csv, <span class="kw">HEADER</span> <span class="kw">TRUE</span>, <span class="kw">NULL</span> <span class="st">&#39;NULL&#39;</span>, ENCODING <span class="st">&#39;UTF8&#39;</span>);</span></code></pre></div>
+      <p>今回の講義では、<code>SELECT</code>
+      文の結果を「<strong>CSVファイル出力する方法</strong>」について紹介します。</p>
+      <h2 data-number="2.1" id="select文の出力をcsvにエクスポート"><span
+      class="header-section-number">2.1</span> SELECT文の出力をCSVにエクスポート</h2>
+      <p>次のように <code>COPY (...) TO ... WITH (...)</code> という構文を使って、任意の
+      <code>SELECT</code> の出力を
+      <strong>CSVファイルにエクスポートすること</strong>ができます。</p>
+      <div class="sourceCode" id="cb2" data-caption="copy-csv_01.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">COPY</span> (</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="kw">SELECT</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="op">*</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="kw">FROM</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>    x_characters</span>
+<span id="cb2-6"><a href="#cb2-6"></a>) <span class="kw">TO</span> <span class="st">&#39;/tmp/x_characters.csv&#39;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="kw">WITH</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>  (FORMAT csv, <span class="kw">HEADER</span> <span class="kw">TRUE</span>, ENCODING <span class="st">&#39;UTF8&#39;</span>);</span></code></pre></div>
+      <p>上記を実行して成功すると、コンソールには次のような応答が表示されます。</p>
+      <pre><code>COPY 19</code></pre>
+      <p>ここで <code>19</code> は <span class="masked">19件分のレコードを出力したこと</span>
+      を表しています。</p>
+      <p>CSVファイルは、<strong>Docker コンテナ内部の</strong> <code>TO</code>
+      <strong>で指定したパス</strong> (ここでは <strong>第06行目</strong> で指定した
+      <code>/tmp/x_characters.csv</code> ) に作成されます。これをホストOS側にもってくるには、VSCode
+      のターミナルから以下のコマンドを実行します。</p>
+      <pre><code>docker cp pg17:/tmp/x_characters.csv ./data</code></pre>
+      <p>これにより、<code>docker ps</code> コマンドを実行した位置 (＝<span
+      class="masked">VSCodeプロジェクトのルート</span>) を基点に <code>data</code>
+      というフォルダのなかに <code>x_characters.csv</code> がコピー (作成)
+      されます。実際に実行してみてください。</p>
+      <figure>
+      <img src="figs/12/vscode-01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><strong>プロンプト例</strong></p>
+      <blockquote>
+      <p>PostgreSQL において <code>COPY</code> コマンドを使用して結果セットを CSVファイル
+      に出力する際、<code>WITH</code> 句には、どのようなオプションが設定可能か
+      (どのような出力内容の制御が可能か) 教えてください。</p>
+      </blockquote>
+      <h2 data-number="2.2" id="補足-csv関連のvscode拡張機能"><span
+      class="header-section-number">2.2</span> 補足: CSV関連のVSCode拡張機能</h2>
+      <p>VSCode に <a
+      href="https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv">Rainbow
+      CSV</a> や <a href="https://marketplace.visualstudio.com/items?itemName=ReprEng.csv">CSV</a>
+      などの拡張機能を導入すると、CSVファイルの内容が確認しやすくなります。必要に応じて導入してください。</p>
+      <p>▼ <strong>Rainbow CSV</strong> (識別子: <code>mechatroner.rainbow-csv</code>) の導入例</p>
+      <figure>
+      <img src="figs/12/vscode-02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>▼ <strong>CSV</strong> (識別子: <code>repreng.csv</code>) の導入例</p>
+      <figure>
+      <img src="figs/12/vscode-03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>両方の拡張機能をインストール・有効化したときは「Rainbow
+      CSV」のほうが優先適用されるので注意してください。</p>
+      <h3 data-number="2.2.1" id="定着確認"><span class="header-section-number">2.2.1</span>
+      定着確認</h3>
+      <ul>
+      <li>Docker コンテナ <code>hoge</code> に存在する <code>/tmp/fuga.txt</code> を、ホスト側 OS
+      のカレントフォルダ配下に <code>data/fuga.txt</code>
+      として保存したい。このときに使用するコマンドを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked"><code>docker cp hoge:/tmp/hoge.txt data/hoge.txt</code></span></li>
+      </ul></li>
+      </ul>
+      <h1 data-number="3" id="サブクエリを用いたレコードの挿入"><span
+      class="header-section-number">3</span> サブクエリを用いたレコードの挿入</h1>
+      <p><a href="lecture04.html#insert文-超基礎編">第04回講義</a>では、<strong>INSERT文
+      (超基礎編)</strong> として、以下のように <code>VALUES</code>
+      句を用いて<u>値を直接指定し、1件ずつレコードを挿入する方法</u>を学びました。このように、挿入する値を明示的に記述する方法は「<strong>リテラル挿入</strong>」とよばれます。</p>
+      <p>このセクションでは <code>VALUES</code>
+      句を用いたリテラル挿入ではなく、<strong>サブクエリを用いたレコードの挿入</strong>
+      (つまり、<span
+      class="masked">既存のテーブルに格納されているレコードを参照し、その取得結果をもとに新しいレコードを挿入する方法</span>)
+      について学んでいきます。</p>
+      <h2 data-number="3.1" id="準備"><span class="header-section-number">3.1</span> 準備</h2>
+      <p>このセクションでは、<code>create-x_db.sql</code> で以下のように定義されている
+      <strong>x_gold_transfers</strong> というテーブルを使用します。</p>
+      <p>このテーブルは、<u>キャラクタ同士、あるいはシステムとのあいだで行われた<strong>ゴールドの送受信履歴</strong>を記録するトランザクションテーブル</u>
+      となります。</p>
+      <div class="sourceCode" id="cb5" data-caption="create-x_db.sql 抜粋" data-startFrom="77"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql" style="counter-reset: source-line 76;"><span id="cb5-77"><a href="#cb5-77"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> x_gold_transfers (</span>
+<span id="cb5-78"><a href="#cb5-78"></a>  transfer_id UUID <span class="kw">DEFAULT</span> GEN_RANDOM_UUID() <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb5-79"><a href="#cb5-79"></a>  from_character_id <span class="dt">INTEGER</span> <span class="kw">REFERENCES</span> x_characters (character_id),</span>
+<span id="cb5-80"><a href="#cb5-80"></a>  to_character_id <span class="dt">INTEGER</span> <span class="kw">REFERENCES</span> x_characters (character_id),</span>
+<span id="cb5-81"><a href="#cb5-81"></a>  amount <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">CHECK</span> (amount <span class="op">&gt;</span> <span class="dv">0</span>),</span>
+<span id="cb5-82"><a href="#cb5-82"></a>  transferred_at <span class="dt">TIMESTAMP</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="fu">LOCALTIMESTAMP</span>(<span class="dv">0</span>),</span>
+<span id="cb5-83"><a href="#cb5-83"></a>  <span class="kw">CHECK</span> (</span>
+<span id="cb5-84"><a href="#cb5-84"></a>    from_character_id <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">OR</span></span>
+<span id="cb5-85"><a href="#cb5-85"></a>    to_character_id <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb5-86"><a href="#cb5-86"></a>  ),</span>
+<span id="cb5-87"><a href="#cb5-87"></a>  <span class="kw">CHECK</span> (</span>
+<span id="cb5-88"><a href="#cb5-88"></a>    from_character_id <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">OR</span></span>
+<span id="cb5-89"><a href="#cb5-89"></a>    to_character_id <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">OR</span></span>
+<span id="cb5-90"><a href="#cb5-90"></a>    from_character_id <span class="op">&lt;&gt;</span> to_character_id</span>
+<span id="cb5-91"><a href="#cb5-91"></a>  )</span>
+<span id="cb5-92"><a href="#cb5-92"></a>);</span></code></pre></div>
+      <p><strong>from_character_id</strong> または <strong>to_character_id</strong> カラムが
+      <code>NULL</code>
+      の場合、その送受信相手は「<strong>システム</strong>」であることを表しています。from と to
+      の両方が <code>NULL</code> になることは、CHECK制約により許可されていません。</p>
+      <p>たとえば、<code>(from_character_id, to_character_id, amount) = (NULL, 6, 1000)</code>
+      は、<strong>システムから character_id =</strong> <code>6</code> <strong>のキャラに
+      1000ゴールドが付与されたこと</strong> (たとえば、クエスト達成時の報酬が運営から支給されたこと)
+      を表します。</p>
+      <p><code>SELECT * FROM x_gold_transfers</code>
+      を実行し、現状でテーブルのレコードが空であることを確認しておいてください。</p>
+      <h2 data-number="3.2" id="value-句を用いたリテラル挿入"><span
+      class="header-section-number">3.2</span> VALUE 句を用いたリテラル挿入</h2>
+      <p><code>VALUE</code> 句を用いたリテラル挿入について、一度整理しておきます。たとえば…</p>
+      <ul>
+      <li><strong>Alice</strong> (character_id=<code>6</code>) から <strong>Bob</strong>
+      (character_id=<code>8</code>) に <strong>1,600G</strong> を送金</li>
+      <li><strong>Carol</strong> (character_id=<code>18</code>) から <strong>Dave</strong>
+      (character_id=<code>12</code>) に <strong>28,000G</strong> を送金</li>
+      <li>システムから <strong>Eve</strong> (character_id=<code>14</code>) に
+      <strong>10,000G</strong> を支給</li>
+      </ul>
+      <p>…という処理は<a
+      href="lecture04.html#insert文-超基礎編">第04回講義</a>で紹介したように、<code>INSERT INTO ... VALUE ...</code>
+      の構文を使用して、次の <strong>第08行目</strong> から <strong>第13行目</strong>
+      のように記述することができます。</p>
+      <div class="sourceCode" id="cb6" data-caption="insert-value_01.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">-- レコードの全削除（念のため）</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">TRUNCATE</span> <span class="kw">TABLE</span> x_gold_transfers RESTART IDENTITY;</span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">-- トランザクションの開始</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">-- リテラル挿入（VALUE句を用いた挿入）</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>  x_gold_transfers (from_character_id, to_character_id, amount, transferred_at)</span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="kw">VALUES</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>  (<span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">1600</span>, <span class="st">&#39;2025-12-28 10:22&#39;</span>),</span>
+<span id="cb6-12"><a href="#cb6-12"></a>  (<span class="dv">18</span>, <span class="dv">12</span>, <span class="dv">28000</span>, <span class="st">&#39;2025-12-30 01:43&#39;</span>),</span>
+<span id="cb6-13"><a href="#cb6-13"></a>  (<span class="kw">NULL</span>, <span class="dv">14</span>, <span class="dv">10000</span>, <span class="st">&#39;2026-01-01 00:01&#39;</span>);</span>
+<span id="cb6-14"><a href="#cb6-14"></a></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">-- 確認</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="kw">SELECT</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a>  <span class="kw">LEFT</span>(transfer_id:<span class="ch">:TEXT</span>, <span class="dv">8</span>) <span class="kw">AS</span> <span class="ot">&quot;id&quot;</span>,</span>
+<span id="cb6-18"><a href="#cb6-18"></a>  <span class="fu">COALESCE</span>(from_character_id:<span class="ch">:TEXT</span>, <span class="st">&#39;NULL&#39;</span>) <span class="kw">AS</span> <span class="ot">&quot;from&quot;</span>,</span>
+<span id="cb6-19"><a href="#cb6-19"></a>  <span class="fu">COALESCE</span>(to_character_id:<span class="ch">:TEXT</span>, <span class="st">&#39;NULL&#39;</span>) <span class="kw">AS</span> <span class="ot">&quot;to&quot;</span>,</span>
+<span id="cb6-20"><a href="#cb6-20"></a>  <span class="fu">TO_CHAR</span>(amount, <span class="st">&#39;999,999&#39;</span>) <span class="kw">AS</span> <span class="ot">&quot;amount&quot;</span>,</span>
+<span id="cb6-21"><a href="#cb6-21"></a>  transferred_at</span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="kw">FROM</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a>  x_gold_transfers;</span>
+<span id="cb6-24"><a href="#cb6-24"></a></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="co">-- ロールバックによる処理の取り消し</span></span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <ul>
+      <li><strong>第17行目</strong> の <code>LEFT(transfer_id::TEXT, 8)</code> は、UUID型である
+      <strong>transfer_id</strong> を
+      TEXT型にキャストしたうえで、左から8文字分のみを取得する処理になります。UUID
+      全体を表示するとカラム幅が大きくなるので8文字だけ表示するようにしています。
+      <ul>
+      <li><code>::TEXT</code> は、PostgreSQL 独自のキャスト記法です。</li>
+      <li><code>COALESCE(CAST(from_character_id AS TEXT), 'NULL')</code>
+      と書いても同じ結果になります。</li>
+      </ul></li>
+      <li><strong>第18行目</strong> の <code>COALESCE(from_character_id::TEXT, 'NULL')</code>
+      は、INTEGER型である <strong>from_character_id</strong> をTEXT型にキャストし、値が
+      <code>NULL</code> の場合には <u>文字列としての</u> <code>'NULL'</code> に置き換えています。
+      <ul>
+      <li><code>COALESCE</code> は <span
+      class="masked">すべての引数を同じデータ型に揃える必要</span> があります。</li>
+      </ul></li>
+      </ul>
+      <div class="note type-senior">
+      <p><strong>TO_CHAR の FM接頭辞</strong></p>
+      <p><code>TO_CHAR</code> では、数値を文字列に変換する際に <span
+      class="masked">指定した書式に合わせて空白による桁合わせ (空白文字によるパディング)</span>
+      が行われます。この桁合わせ (fill) を無効化したときは「FM接頭辞」を使用します。</p>
+      <p>たとえば、FM接頭辞の有無により、次のように出力結果が変化します。</p>
+      <p>▼ <code>TO_CHAR(amount, '999,999')</code></p>
+      <pre><code>    id    | from | to |  amount  |   transferred_at
+----------+------+----+----------+---------------------
+ 2c3444f8 | 6    | 8  |    1,600 | 2025-12-28 10:22:00
+ d72c7645 | 18   | 12 |   28,000 | 2025-12-30 01:43:00
+ d38bb426 | NULL | 14 |   10,000 | 2026-01-01 00:01:00</code></pre>
+      <p>▼ <code>TO_CHAR(amount, 'FM999,999')</code></p>
+      <pre><code>    id    | from | to | amount |   transferred_at
+----------+------+----+--------+---------------------
+ 4d93d4db | 6    | 8  | 1,600  | 2025-12-28 10:22:00
+ 728ab2aa | 18   | 12 | 28,000 | 2025-12-30 01:43:00
+ e6878e93 | NULL | 14 | 10,000 | 2026-01-01 00:01:00</code></pre>
+      <p>対話的に結果セットを確認する場合 (＝<strong>現在のように VSCode
+      のコンソールで結果セットを確認する場合</strong>など)
+      では「FM接頭辞なし」のほうが可読性に優れます。</p>
+      <p>一方で、結果セットをCSVファイルエクスポートするときに「FM接頭辞なし」とすると、<code>1,600</code>
+      のように <span class="masked">先頭に空白文字を含む文字列</span>
+      が出力されます。これは、後続のデータ処理で不具合の原因になりやすいため注意してください。</p>
+      <ul>
+      <li>CSVファイルエクスポートを前提とする場合は、<code>TO_CHAR</code>
+      関数などで文字列型に変換するようなことはせずに、そのまま数値型として出力するようにしてください。</li>
+      </ul>
+      </div>
+      <p>実行結果は、次のようになります。</p>
+      <pre><code>TRUNCATE TABLE
+START TRANSACTION
+INSERT 0 3
+    id    | from | to |  amount  |   transferred_at
+----------+------+----+----------+---------------------
+ acb42523 | 6    | 8  |    1,600 | 2025-12-28 10:22:00
+ daac3f23 | 18   | 12 |   28,000 | 2025-12-30 01:43:00
+ 7907a775 | NULL | 14 |   10,000 | 2026-01-01 00:01:00
+(3 行)</code></pre>
+      <p>以上のように <u>データを1件ずつ明示的に指定できる</u>
+      という点でリテラル挿入は直感的で分かりやすく、使いやすい方法と言えます。一方で <span
+      class="masked">条件に合致する複数のレコードをまとめて挿入したい</span>
+      ような場合には、記述量が増え、管理も煩雑になるという問題がでてきます。</p>
+      <p>たとえば、ギルドクエストの達成報酬として、次のような処理を行なう場合を考えてみます。</p>
+      <ul>
+      <li>ギルド「<strong>Yamato</strong>」に所属するメンバー全員に 5,000G を支給する</li>
+      <li>ギルドのオーナー (所有者) には、上記に追加して 10,000G を支給する</li>
+      </ul>
+      <p>この処理をリテラル挿入で実行しようとすると、まずは対象となるキャラ (＝ Yamato のメンバの
+      <strong>character_id</strong> ) を、以下のような <code>SELECT</code>
+      文で事前に把握する必要があります。</p>
+      <div class="sourceCode" id="cb10" data-caption="insert-value_02.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">SELECT</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  c.character_id,</span>
+<span id="cb10-3"><a href="#cb10-3"></a>  c.name,</span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="cf">CASE</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>    <span class="cf">WHEN</span> c.character_id <span class="op">=</span> g.owner_id <span class="cf">THEN</span> <span class="st">&#39;*&#39;</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>    <span class="cf">ELSE</span> <span class="st">&#39;&#39;</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>  <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">&quot;is_owner&quot;</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="kw">FROM</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>  x_guild_characters <span class="kw">AS</span> gc</span>
+<span id="cb10-10"><a href="#cb10-10"></a>  <span class="kw">JOIN</span> x_characters <span class="kw">AS</span> c <span class="kw">ON</span> gc.character_id <span class="op">=</span> c.character_id</span>
+<span id="cb10-11"><a href="#cb10-11"></a>  <span class="kw">JOIN</span> x_guilds <span class="kw">AS</span> g <span class="kw">ON</span> gc.guild_id <span class="op">=</span> g.guild_id</span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="kw">WHERE</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a>  g.name <span class="op">=</span> <span class="st">&#39;Yamato&#39;</span> <span class="kw">AND</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a>  c.deleted_at <span class="kw">IS</span> <span class="kw">NULL</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a>  c.character_id;</span></code></pre></div>
+      <pre><code> character_id |  name  | is_owner 
+--------------+--------+----------
+            1 | Marvin | *
+            6 | Alice  |
+            7 | Trudy  |
+           12 | Dave   |</code></pre>
+      <p>そして、この情報をもとに、次のように <code>VALUES</code>
+      句を<strong>1件ずつ記述</strong>していく必要があります。</p>
+      <div class="sourceCode" id="cb12" data-caption="insert-value_03.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">TRUNCATE</span> <span class="kw">TABLE</span> x_gold_transfers RESTART IDENTITY;</span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  x_gold_transfers (from_character_id, to_character_id, amount)</span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="kw">VALUES</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>  (<span class="kw">NULL</span>, <span class="dv">1</span>, <span class="dv">15000</span>), <span class="co">-- Marvin</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>  (<span class="kw">NULL</span>, <span class="dv">6</span>, <span class="dv">5000</span>), <span class="co">-- Alice</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>  (<span class="kw">NULL</span>, <span class="dv">7</span>, <span class="dv">5000</span>), <span class="co">-- Trudy </span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>  (<span class="kw">NULL</span>, <span class="dv">12</span>, <span class="dv">5000</span>) <span class="co">-- Dave</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a>;</span>
+<span id="cb12-13"><a href="#cb12-13"></a></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <p>ここでは対象キャラが4名しかいませんが、これが20人、30人と増えていったとき、それらを
+      <code>VALUES (...)</code>
+      に1件づつ書いていくことは極めて煩雑であり、また転記ミスや指定漏れの原因ともなります。</p>
+      <p>以上のように挿入すべきレコードの内容（たとえば「誰にいくら付与するか」という情報）が
+      <u>既存のテーブルのレコードによって決まる</u>
+      ケースでは、リテラル挿入ではなく、<strong>サブクエリを用いた挿入</strong>
+      を利用することになります。</p>
+      <h3 data-number="3.2.1" id="sqlドリル"><span class="header-section-number">3.2.1</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-01_1.sql</code> 👉 <code>insert-value_01.sql</code> の <strong>第16行目</strong>
+      以降の <code>SELECT</code>
+      文を書き換えて、次のように整形した結果セットを出力するようにせよ。</li>
+      </ul>
+      <pre><code>    id    | from  |  to  |  amount  |   transferred_at
+----------+-------+------+----------+---------------------
+ de0f591f | Alice | Bob  |    1,600 | 2025-12-28 10:22:00
+ a4d5e736 | Carol | Dave |   28,000 | 2025-12-30 01:43:00
+ 568eac47 | _SYS_ | Eve  |   10,000 | 2026-01-01 00:01:00</code></pre>
+      <h3 data-number="3.2.2" id="定着確認-1"><span class="header-section-number">3.2.2</span>
+      定着確認</h3>
+      <ul>
+      <li><p>UUID型のカラム <strong>user_id</strong> を <code>SELECT</code> 句で出力する際、UUID
+      全体ではなく、文字列に変換したうえで「先頭8文字のみ」を表示したい。また、結果セットのカラム名
+      (ヘッダ)
+      は「識別子」として表示したい。このときに用いるべき式を答えよ。PostgreSQLを前提とすること。</p>
+      <ul>
+      <li><strong>答え</strong> : <span
+      class="masked"><code>LEFT(user_id::TEXT, 8) AS "識別子"</code></span></li>
+      <li><strong>別解1</strong>: <span
+      class="masked"><code>LEFT(CAST(user_id AS TEXT), 8) AS "識別子"</code></span></li>
+      <li><strong>別解2</strong>: <span
+      class="masked"><code>SUBSTR(transfer_id::TEXT, 1, 8) AS "識別子"</code></span></li>
+      <li><strong>別解3</strong>: <span
+      class="masked"><code>LEFT(FORMAT('%s', user_id), 8) AS "識別子"</code></span></li>
+      </ul></li>
+      <li><p>UUID型のカラム <strong>user_id</strong> を <code>SELECT</code> 句で出力する際、UUID
+      全体ではなく、文字列に変換したうえで先頭8文字のみを、<u>英字は大文字表記に統一</u>
+      して表示したい。また、結果セットのカラム名 (ヘッダ)
+      は「識別子」としたい。このときに用いるべき式を答えよ。PostgreSQLを前提とすること。</p>
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked"><code>UPPER(LEFT(user_id::TEXT, 8)) AS "識別子"</code></span></li>
+      <li><strong>別解</strong>: <span
+      class="masked"><code>LEFT(UPPER(user_id::TEXT), 8) AS "識別子"</code></span></li>
+      </ul></li>
+      <li><p>NULL許容のINTEGER型のカラム <strong>price</strong> を <code>SELECT</code>
+      句で出力する際、<code>5,000円</code> や <code>1,900,000円</code> のように表示し、値が
+      <code>NULL</code> のときは <code>非売品</code> のように表示したい。また、結果セットのカラム名
+      (ヘッダ)
+      は「売価」としたい。このときに用いるべき式を答えよ。PostgreSQLを前提とすること。</p></li>
+      <li><p>NULL 許容の INTEGER 型のカラム <strong>price</strong> を <code>SELECT</code>
+      句で出力する際、数値が存在する場合は3桁区切りの金額表記（例：<code>5,000円</code>、<code>1,900,000円</code>）で表示し、値が
+      <code>NULL</code> の場合は <code>非売品</code> と表示したい。また、結果セットのカラム名
+      (ヘッダ) は「売価」とする。このときに用いるべき式を答えよ。PostgreSQL を前提とすること。</p>
+      <ul>
+      <li>price の値は 10,000,000 未満を想定すること。</li>
+      <li>空白文字によるパディング (fill) はしないこと。</li>
+      <li><strong>答え</strong>: <span
+      class="masked"><code>COALESCE(TO_CHAR(price, 'FM9,999,999') || '円', '非売品') AS "売価"</code></span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="3.3" id="サブクエリを用いたレコードの挿入-1"><span
+      class="header-section-number">3.3</span> サブクエリを用いたレコードの挿入</h2>
+      <p>レコードの挿入は <code>INSERT INTO ... VALUES ...</code>
+      の他に、<code>INSERT INTO ... SELECT ...</code> という構文でも実行できます。この構文では <span
+      class="masked">SELECT文の実行結果をそのまま挿入すること</span> が可能になります。</p>
+      <p>このとき、<code>SELECT</code> 句に記述された <code>SELECT</code>
+      文がサブクエリとなり「どのレコードを、どのような値で挿入するか」を決定します。つまり、サブクエリを用いて
+      <strong>挿入すべきレコードを動的に生成する</strong> という考え方になります。</p>
+      <p>先ほどの「リテラル挿入」の例では、</p>
+      <ol type="1">
+      <li>対象キャラを <code>SELECT</code> 文で取得する
+      <ul>
+      <li><code>insert-value_02.sql</code></li>
+      </ul></li>
+      <li>その結果に基づき、手作業で <code>VALUES (...)</code> を記述する
+      <ul>
+      <li><code>insert-value_03.sql</code></li>
+      </ul></li>
+      </ol>
+      <p>という<strong>2段階の作業が必要</strong>でした。</p>
+      <p>これに対して、サブクエリを用いた挿入では、対象キャラの抽出と金額の分岐処理を、次のような
+      1つの SQL 文で完結させることができます。複雑に見えますが、<strong>第08行目</strong> から
+      <strong>第21行目</strong> の内容は <code>insert-value_02.sql</code>
+      とほぼ同じものとなっています。</p>
+      <div class="sourceCode" id="cb14" data-caption="insert-select_01.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">TRUNCATE</span> <span class="kw">TABLE</span> x_gold_transfers RESTART IDENTITY;</span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb14-4"><a href="#cb14-4"></a></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co">-- サブクエリを用いたレコードの挿入</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>  x_gold_transfers (from_character_id, to_character_id, amount)</span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="kw">SELECT</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a>  <span class="kw">NULL</span>,</span>
+<span id="cb14-10"><a href="#cb14-10"></a>  c.character_id,</span>
+<span id="cb14-11"><a href="#cb14-11"></a>  <span class="cf">CASE</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a>    <span class="cf">WHEN</span> g.owner_id <span class="op">=</span> c.character_id <span class="cf">THEN</span> <span class="dv">15000</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a>    <span class="cf">ELSE</span> <span class="dv">5000</span></span>
+<span id="cb14-14"><a href="#cb14-14"></a>  <span class="cf">END</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a><span class="kw">FROM</span></span>
+<span id="cb14-16"><a href="#cb14-16"></a>  x_guild_characters <span class="kw">AS</span> gc</span>
+<span id="cb14-17"><a href="#cb14-17"></a>  <span class="kw">JOIN</span> x_characters <span class="kw">AS</span> c <span class="kw">ON</span> gc.character_id <span class="op">=</span> c.character_id</span>
+<span id="cb14-18"><a href="#cb14-18"></a>  <span class="kw">JOIN</span> x_guilds <span class="kw">AS</span> g <span class="kw">ON</span> gc.guild_id <span class="op">=</span> g.guild_id</span>
+<span id="cb14-19"><a href="#cb14-19"></a><span class="kw">WHERE</span></span>
+<span id="cb14-20"><a href="#cb14-20"></a>  g.name <span class="op">=</span> <span class="st">&#39;Yamato&#39;</span> <span class="kw">AND</span></span>
+<span id="cb14-21"><a href="#cb14-21"></a>  c.deleted_at <span class="kw">IS</span> <span class="kw">NULL</span>;</span>
+<span id="cb14-22"><a href="#cb14-22"></a></span>
+<span id="cb14-23"><a href="#cb14-23"></a><span class="co">-- 確認</span></span>
+<span id="cb14-24"><a href="#cb14-24"></a><span class="kw">SELECT</span></span>
+<span id="cb14-25"><a href="#cb14-25"></a>  <span class="kw">LEFT</span>(gt.transfer_id:<span class="ch">:TEXT</span>, <span class="dv">8</span>) <span class="kw">AS</span> <span class="ot">&quot;id&quot;</span>,</span>
+<span id="cb14-26"><a href="#cb14-26"></a>  <span class="fu">COALESCE</span>(fc.name, <span class="st">&#39;_SYS_&#39;</span>) <span class="kw">AS</span> <span class="ot">&quot;from&quot;</span>,</span>
+<span id="cb14-27"><a href="#cb14-27"></a>  <span class="fu">COALESCE</span>(tc.name, <span class="st">&#39;_SYS_&#39;</span>) <span class="kw">AS</span> <span class="ot">&quot;to&quot;</span>,</span>
+<span id="cb14-28"><a href="#cb14-28"></a>  <span class="fu">TO_CHAR</span>(amount, <span class="st">&#39;999,999&#39;</span>) <span class="kw">AS</span> <span class="ot">&quot;amount&quot;</span>,</span>
+<span id="cb14-29"><a href="#cb14-29"></a>  gt.transferred_at</span>
+<span id="cb14-30"><a href="#cb14-30"></a><span class="kw">FROM</span></span>
+<span id="cb14-31"><a href="#cb14-31"></a>  x_gold_transfers <span class="kw">AS</span> gt</span>
+<span id="cb14-32"><a href="#cb14-32"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> x_characters <span class="kw">AS</span> fc <span class="kw">ON</span> gt.from_character_id <span class="op">=</span> fc.character_id</span>
+<span id="cb14-33"><a href="#cb14-33"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> x_characters <span class="kw">AS</span> tc <span class="kw">ON</span> gt.to_character_id <span class="op">=</span> tc.character_id;</span>
+<span id="cb14-34"><a href="#cb14-34"></a></span>
+<span id="cb14-35"><a href="#cb14-35"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <p>ここで注意すべき点は、サブクエリの結果セットに含まれる カラムの個数・順序・データ型
+      を、<code>INSERT INTO</code>
+      <strong>句で指定しているカラムと一致させる必要がある</strong>ということです。本例では
+      <strong>第07行目</strong> で…</p>
+      <pre><code>x_gold_transfers (from_character_id, to_character_id, amount)</code></pre>
+      <p>…としているので、<strong>第08行目</strong>
+      以降のサブクエリが返す結果セットも、<strong>これに対応したカラム構成 (個数・順序・データ型)
+      にする必要</strong> があります。</p>
+      <p>実行結果は次のようになります。</p>
+      <pre><code>    id    | from  |   to   |  amount  |   transferred_at
+----------+-------+--------+----------+---------------------
+ ac5dc8fc | _SYS_ | Marvin |   15,000 | 2026-01-01 07:30:55
+ 1b31b2ff | _SYS_ | Dave   |    5,000 | 2026-01-01 07:30:55
+ d08d41c6 | _SYS_ | Alice  |    5,000 | 2026-01-01 07:30:55
+ d8876fe5 | _SYS_ | Trudy  |    5,000 | 2026-01-01 07:30:55</code></pre>
+      <h3 data-number="3.3.1" id="sqlドリル-1"><span class="header-section-number">3.3.1</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-02_1.sql</code> 👉 運営から「お年玉」として、システムから全キャラ
+      (論理削除済みのキャラを除く) に向けて 2026年1月1日午前4時00分 付けで 25,000G ～ 45,000G
+      (1,000G 刻みのランダム値) を支給するような送金レコードを x_gold_transfers に挿入する SQL
+      を記述せよ。
+      <ul>
+      <li><strong>ヒント</strong>: <a
+      href="lecture09.html#uuidをサロゲートキーとして使用">乱数の生成</a>(第09回講義)</li>
+      <li><code>START TRANSACTION</code>、<code>ROLLBACK</code>
+      で囲んで実行すること。以下、同様。</li>
+      </ul></li>
+      </ul>
+      <p><strong>▼ 実行例</strong></p>
+      <pre><code>    id    | from  |   to    |  amount  |   transferred_at
+----------+-------+---------+----------+---------------------
+ daa3a581 | _SYS_ | Marvin  |   30,000 | 2026-01-01 04:00:00
+ 932cc09c | _SYS_ | Zach    |   38,000 | 2026-01-01 04:00:00
+ f90e8faf | _SYS_ | Charlie |   39,000 | 2026-01-01 04:00:00
+ 5f5d410e | _SYS_ | Tom     |   30,000 | 2026-01-01 04:00:00
+ ～ 略 ～  
+ 59bcff20 | _SYS_ | Carol   |   30,000 | 2026-01-01 04:00:00
+ fd88bfa0 | _SYS_ | Jack    |   26,000 | 2026-01-01 04:00:00
+(17 行)</code></pre>
+      <ul>
+      <li><code>ex-02_2.sql</code> 👉 各ギルドにおいてメンバからオーナー (所有者)
+      に対して「共益費」として 2,000G を支払うような送金レコードを x_gold_transfers に挿入する SQL
+      を記述せよ。
+      <ul>
+      <li>transferred_at は 2025年12月15日午前4時00分 とすること。</li>
+      <li>論理削除済みのキャラを除いて処理すること。</li>
+      <li>ギルドのメンバ構成は<a href="lecture10.html#sqlドリル-3">第10回講義</a>の「SQLドリル」の
+      <code>ex-04_1.sql</code> で書いたコードで確認できる。</li>
+      </ul></li>
+      </ul>
+      <p><strong>▼ 実行例</strong></p>
+      <pre><code>    id    |  from  |   to   |  amount  |   transferred_at
+----------+--------+--------+----------+---------------------
+ 935a0194 | Alice  | Marvin |    2,000 | 2025-12-15 04:00:00
+ dcd184f5 | Trudy  | Marvin |    2,000 | 2025-12-15 04:00:00
+ c3354257 | Dave   | Marvin |    2,000 | 2025-12-15 04:00:00
+ 1e06fd6c | Oscar  | Bob    |    2,000 | 2025-12-15 04:00:00
+ 01cb481f | Dave   | Bob    |    2,000 | 2025-12-15 04:00:00
+ 6ee41395 | Steve  | Bob    |    2,000 | 2025-12-15 04:00:00
+ 1ae49a32 | Jack   | Bob    |    2,000 | 2025-12-15 04:00:00
+ 36f146f1 | Zach   | Ellen  |    2,000 | 2025-12-15 04:00:00
+ 9d27424b | Alice  | Ellen  |    2,000 | 2025-12-15 04:00:00
+ 066f056a | Mallet | Ellen  |    2,000 | 2025-12-15 04:00:00
+ 2f1cab0f | Eve    | Ellen  |    2,000 | 2025-12-15 04:00:00
+ b719e073 | Wendy  | Ellen  |    2,000 | 2025-12-15 04:00:00
+(12 行)</code></pre>
+      <ul>
+      <li><code>ex-02_3.sql</code> 👉 キャラ作成後の初期資金として、各キャラに運営から 1,000G
+      を支給する送金レコードを x_gold_transfers に挿入する SQL を記述せよ。
+      <ul>
+      <li>論理削除済みのキャラも含めること。</li>
+      <li>transferred_at は、各キャラの created_at の「5分後」とすること。
+      <ul>
+      <li>時間の加減演算には <code>INTERVAL</code> を使用する。詳細は各自で調べること。</li>
+      </ul></li>
+      </ul></li>
+      </ul>
+      <p><strong>▼ 実行例</strong></p>
+      <pre><code>    id    | from  |   to    |  amount  |   transferred_at
+----------+-------+---------+----------+---------------------
+ 2ab6215d | _SYS_ | Marvin  |      500 | 2020-09-23 13:37:00
+ f5d8e680 | _SYS_ | Zach    |      500 | 2020-10-25 21:17:00
+ a92c57f6 | _SYS_ | Charlie |      500 | 2020-12-05 10:20:00
+ ba01915f | _SYS_ | Tom     |      500 | 2020-12-05 18:45:00
+ ～ 略 ～ 
+ 05a68a32 | _SYS_ | Carol   |      500 | 2024-05-11 11:47:00
+ b6a5e35d | _SYS_ | Jack    |      500 | 2024-07-12 15:48:00
+(19 行)</code></pre>
+      <ul>
+      <li><code>ex-02_4.sql</code> 👉
+      後衛職応援キャンペーンとして、ジョブが「Priest」または「Wizard」のキャラに、level <span
+      class="math inline">\(\times\)</span> 1000G を運営から支給する送金レコードを x_gold_transfers
+      に挿入する SQL を記述せよ。
+      <ul>
+      <li>論理削除済みのキャラを除いて処理すること。</li>
+      <li>transferred_at は現在日時 (デフォルト値) とすること。</li>
+      </ul></li>
+      </ul>
+      <p><strong>▼ 実行例</strong></p>
+      <pre><code>    id    | from  |   to    |  amount  |   transferred_at
+----------+-------+---------+----------+---------------------
+ 7165e932 | _SYS_ | Marvin  |   35,000 | 2026-01-02 13:54:43
+ a2cda2a8 | _SYS_ | Charlie |   57,000 | 2026-01-02 13:54:43
+ dd22194e | _SYS_ | Alice   |   42,000 | 2026-01-02 13:54:43
+ 3409604e | _SYS_ | Ellen   |   51,000 | 2026-01-02 13:54:43
+ 562f2143 | _SYS_ | Mallet  |   64,000 | 2026-01-02 13:54:43
+ 65c4bc28 | _SYS_ | Carol   |   28,000 | 2026-01-02 13:54:43
+ 891398db | _SYS_ | Jack    |   61,000 | 2026-01-02 13:54:43</code></pre>
+      <h1 data-number="4" id="サブクエリを用いたレコードの更新"><span
+      class="header-section-number">4</span> サブクエリを用いたレコードの更新</h1>
+      <p><a
+      href="lecture05.html#すべてのレコードの値を固定値で更新">第05回講義</a>では<strong>UPDATE文
+      (基礎編)</strong> として、<code>SET</code> 句や <code>WHERE</code> 句に
+      <strong>直接的に値を指定してレコードを更新する方法</strong> について学びました。</p>
+      <p>このセクションでは、<code>SET</code> 句や <code>WHERE</code> 句に
+      <strong>サブクエリを用いたレコードの更新</strong>
+      (つまり、<u>既存のテーブルに格納されているレコードを参照し、それをもとに更新後の値を動的に与えたり、更新するレコードを指定したりする方法</u>)
+      について学んでいきます。</p>
+      <h2 data-number="4.1" id="レコードの更新-固定値"><span
+      class="header-section-number">4.1</span> レコードの更新 (固定値)</h2>
+      <p><code>UPDATE</code>
+      文による基本的なフィールドの更新について一度整理しておきます。たとえば、x_jobs テーブルの
+      <strong>Samurai</strong> (job_id=<code>4</code>) を対象に…</p>
+      <ul>
+      <li><strong>attack_gain</strong> (現在値 <code>3</code>) を <code>5</code> に更新</li>
+      <li><strong>defense_gain</strong> (現在値 <code>3</code>) を <code>4</code> に更新</li>
+      </ul>
+      <p>…するための SQL は、次のように記述することができました。</p>
+      <div class="sourceCode" id="cb21" data-caption="update-set_01.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb21-1"><a href="#cb21-1"></a>TSTART <span class="kw">TRANSACTION</span>;</span>
+<span id="cb21-2"><a href="#cb21-2"></a></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="co">-- 現在値の確認</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="kw">SELECT</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>  <span class="op">*</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="kw">FROM</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a>  x_jobs</span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="kw">WHERE</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a>  job_id <span class="op">=</span> <span class="dv">4</span>;</span>
+<span id="cb21-10"><a href="#cb21-10"></a></span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="co">-- 更新処理 (更新後の値の確認)</span></span>
+<span id="cb21-12"><a href="#cb21-12"></a><span class="kw">UPDATE</span> x_jobs</span>
+<span id="cb21-13"><a href="#cb21-13"></a><span class="kw">SET</span></span>
+<span id="cb21-14"><a href="#cb21-14"></a>  attack_gain <span class="op">=</span> <span class="dv">5</span>,</span>
+<span id="cb21-15"><a href="#cb21-15"></a>  defense_gain <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb21-16"><a href="#cb21-16"></a><span class="kw">WHERE</span></span>
+<span id="cb21-17"><a href="#cb21-17"></a>  job_id <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb21-18"><a href="#cb21-18"></a><span class="kw">RETURNING</span></span>
+<span id="cb21-19"><a href="#cb21-19"></a>  <span class="op">*</span>;</span>
+<span id="cb21-20"><a href="#cb21-20"></a></span>
+<span id="cb21-21"><a href="#cb21-21"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <p>この SQL の実行結果は、次のようになります。<strong>attack_gain</strong> と
+      <strong>defense_gain</strong> の値が更新されていることが確認できます。</p>
+      <pre><code>START TRANSACTION
+ job_id |  name   | attack_gain | defense_gain | magic_gain
+--------+---------+-------------+--------------+------------
+      4 | Samurai |           3 |            3 |          2
+(1 行)
+
+ job_id |  name   | attack_gain | defense_gain | magic_gain
+--------+---------+-------------+--------------+------------
+      4 | Samurai |           5 |            4 |          2
+(1 行)
+
+UPDATE 1
+ROLLBACK</code></pre>
+      <p><strong>第18行目</strong> の <code>RETURNING</code> 句は、既に<a
+      href="lecture05.html#補足-returning句">第05回講義</a>で学んだように <span
+      class="masked">更新とともに、更新後のレコードをあわせて簡易出力するため</span>
+      の指定となります。任意のカラムだけを出力したい場合は <code>*</code>
+      の代わりに、具体的なカラム名を記述します。</p>
+      <h3 data-number="4.1.1" id="演習"><span class="header-section-number">4.1.1</span> 演習</h3>
+      <p><code>update-set_01.sql</code> の <code>RETURNING</code>
+      句を次のように書き換え、実行結果を確認してください。</p>
+      <div class="sourceCode" id="cb23" data-caption="RETURNINGで出力するカラム指定"
+      data-startFrom="18"><pre class="sourceCode numberSource sql numberLines"><code class="sourceCode sql" style="counter-reset: source-line 17;"><span id="cb23-18"><a href="#cb23-18"></a><span class="kw">RETURNING</span></span>
+<span id="cb23-19"><a href="#cb23-19"></a>  job_id,</span>
+<span id="cb23-20"><a href="#cb23-20"></a>  attack_gain <span class="kw">AS</span> <span class="ot">&quot;updated_attack_gain&quot;</span>,</span>
+<span id="cb23-21"><a href="#cb23-21"></a>  defense_gain <span class="kw">AS</span> <span class="ot">&quot;updated_defense_gain&quot;</span>;</span></code></pre></div>
+      <h2 data-number="4.2" id="レコードの更新-固定値-1"><span
+      class="header-section-number">4.2</span> レコードの更新 (固定値)</h2>
+      <p><code>UPDATE</code>
+      文では、以下のように「<strong>現在値</strong>」あるいは「<strong><u>更新しようとしているレコードの他のカラムの値</u></strong>」を参照し、更新後の値を動的に与えることも可能でした。</p>
+      <ul>
+      <li>参考: 第05回講義の<a
+      href="lecture05.html#現在の値を利用した更新">現在の値を利用した更新</a></li>
+      </ul>
+      <div class="sourceCode" id="cb24" data-caption="update-set_02.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb24-2"><a href="#cb24-2"></a></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="kw">SELECT</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a>  <span class="op">*</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="kw">FROM</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a>  x_jobs</span>
+<span id="cb24-7"><a href="#cb24-7"></a><span class="kw">WHERE</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a>  job_id <span class="kw">IN</span> (<span class="dv">3</span>, <span class="dv">4</span>);</span>
+<span id="cb24-9"><a href="#cb24-9"></a></span>
+<span id="cb24-10"><a href="#cb24-10"></a><span class="kw">UPDATE</span> x_jobs</span>
+<span id="cb24-11"><a href="#cb24-11"></a><span class="kw">SET</span></span>
+<span id="cb24-12"><a href="#cb24-12"></a>  attack_gain <span class="op">=</span> attack_gain <span class="op">+</span> <span class="dv">1</span>, <span class="co">-- ◀ 変更</span></span>
+<span id="cb24-13"><a href="#cb24-13"></a>  defense_gain <span class="op">=</span> <span class="dv">8</span> <span class="op">-</span> attack_gain <span class="op">-</span> magic_gain <span class="co">-- ◀ 変更</span></span>
+<span id="cb24-14"><a href="#cb24-14"></a><span class="kw">WHERE</span></span>
+<span id="cb24-15"><a href="#cb24-15"></a>  job_id <span class="kw">IN</span> (<span class="dv">3</span>, <span class="dv">4</span>) <span class="co">-- ◀ 変更</span></span>
+<span id="cb24-16"><a href="#cb24-16"></a><span class="kw">RETURNING</span></span>
+<span id="cb24-17"><a href="#cb24-17"></a>  <span class="op">*</span>;</span>
+<span id="cb24-18"><a href="#cb24-18"></a></span>
+<span id="cb24-19"><a href="#cb24-19"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <p>実行結果は、次のようになります。</p>
+      <pre><code> job_id |  name   | attack_gain | defense_gain | magic_gain
+--------+---------+-------------+--------------+------------
+      3 | Ninja   |           5 |           -1 |          0
+      4 | Samurai |           3 |            3 |          2
+(2 行)
+
+ job_id |  name   | attack_gain | defense_gain | magic_gain
+--------+---------+-------------+--------------+------------
+      3 | Ninja   |           6 |            3 |          0
+      4 | Samurai |           4 |            3 |          2
+(2 行)</code></pre>
+      <h2 data-number="4.3" id="サブクエリを用いた更新"><span
+      class="header-section-number">4.3</span> サブクエリを用いた更新</h2>
+      <p><code>UPDATE</code> 文では、<code>SET</code> 句や <code>WHERE</code>
+      句に「<strong>サブクエリ</strong>」を用いることも可能です。</p>
+      <p>たとえば、</p>
+      <ul>
+      <li>ギルド「<strong>Yamato</strong>」に所属するキャラのレベルが…</li>
+      <li>全キャラ平均レベル以下のときは、レベルを <code>+2</code> する</li>
+      <li>全キャラ平均レベルを超えているときは、レベルを <code>+1</code> する</li>
+      </ul>
+      <p>ような処理を、次のように<strong>「サブクエリ」を使用して一括して実行</strong>することができます。</p>
+      <div class="sourceCode" id="cb26" data-caption="update-set_03-a.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb26-2"><a href="#cb26-2"></a></span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="co">-- 確認: 全キャラの平均レベル</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="kw">SELECT</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="kw">FROM</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a>  x_characters</span>
+<span id="cb26-8"><a href="#cb26-8"></a><span class="kw">WHERE</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a>  deleted_at <span class="kw">IS</span> <span class="kw">NULL</span>;</span>
+<span id="cb26-10"><a href="#cb26-10"></a></span>
+<span id="cb26-11"><a href="#cb26-11"></a><span class="co">-- 確認: Yamato所属キャラの現在レベル</span></span>
+<span id="cb26-12"><a href="#cb26-12"></a><span class="kw">SELECT</span></span>
+<span id="cb26-13"><a href="#cb26-13"></a>  character_id,</span>
+<span id="cb26-14"><a href="#cb26-14"></a>  name,</span>
+<span id="cb26-15"><a href="#cb26-15"></a>  <span class="kw">level</span></span>
+<span id="cb26-16"><a href="#cb26-16"></a><span class="kw">FROM</span></span>
+<span id="cb26-17"><a href="#cb26-17"></a>  x_characters</span>
+<span id="cb26-18"><a href="#cb26-18"></a><span class="kw">WHERE</span></span>
+<span id="cb26-19"><a href="#cb26-19"></a>  deleted_at <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">AND</span></span>
+<span id="cb26-20"><a href="#cb26-20"></a>  character_id <span class="kw">IN</span> (</span>
+<span id="cb26-21"><a href="#cb26-21"></a>    <span class="kw">SELECT</span></span>
+<span id="cb26-22"><a href="#cb26-22"></a>      c.character_id</span>
+<span id="cb26-23"><a href="#cb26-23"></a>    <span class="kw">FROM</span></span>
+<span id="cb26-24"><a href="#cb26-24"></a>      x_guild_characters <span class="kw">AS</span> gc</span>
+<span id="cb26-25"><a href="#cb26-25"></a>      <span class="kw">JOIN</span> x_characters <span class="kw">AS</span> c <span class="kw">ON</span> gc.character_id <span class="op">=</span> c.character_id</span>
+<span id="cb26-26"><a href="#cb26-26"></a>      <span class="kw">JOIN</span> x_guilds <span class="kw">AS</span> g <span class="kw">ON</span> gc.guild_id <span class="op">=</span> g.guild_id</span>
+<span id="cb26-27"><a href="#cb26-27"></a>    <span class="kw">WHERE</span></span>
+<span id="cb26-28"><a href="#cb26-28"></a>      g.name <span class="op">=</span> <span class="st">&#39;Yamato&#39;</span></span>
+<span id="cb26-29"><a href="#cb26-29"></a>  );</span>
+<span id="cb26-30"><a href="#cb26-30"></a></span>
+<span id="cb26-31"><a href="#cb26-31"></a><span class="co">-- 本体: サブクエリを用いた更新処理</span></span>
+<span id="cb26-32"><a href="#cb26-32"></a><span class="kw">UPDATE</span> x_characters <span class="kw">AS</span> c</span>
+<span id="cb26-33"><a href="#cb26-33"></a><span class="kw">SET</span></span>
+<span id="cb26-34"><a href="#cb26-34"></a>  <span class="kw">level</span> <span class="op">=</span> c.<span class="kw">level</span> <span class="op">+</span> (</span>
+<span id="cb26-35"><a href="#cb26-35"></a>    <span class="kw">SELECT</span></span>
+<span id="cb26-36"><a href="#cb26-36"></a>      <span class="cf">CASE</span></span>
+<span id="cb26-37"><a href="#cb26-37"></a>        <span class="cf">WHEN</span> c.<span class="kw">level</span> <span class="op">&lt;=</span> <span class="fu">AVG</span>(c1.<span class="kw">level</span>) <span class="cf">THEN</span> <span class="dv">2</span></span>
+<span id="cb26-38"><a href="#cb26-38"></a>        <span class="cf">ELSE</span> <span class="dv">1</span></span>
+<span id="cb26-39"><a href="#cb26-39"></a>      <span class="cf">END</span></span>
+<span id="cb26-40"><a href="#cb26-40"></a>    <span class="kw">FROM</span></span>
+<span id="cb26-41"><a href="#cb26-41"></a>      x_characters <span class="kw">as</span> c1</span>
+<span id="cb26-42"><a href="#cb26-42"></a>    <span class="kw">WHERE</span></span>
+<span id="cb26-43"><a href="#cb26-43"></a>      c1.deleted_at <span class="kw">IS</span> <span class="kw">NULL</span></span>
+<span id="cb26-44"><a href="#cb26-44"></a>  ) <span class="co">-- ◀ レベルの増分値をサブクエリで指定</span></span>
+<span id="cb26-45"><a href="#cb26-45"></a><span class="kw">WHERE</span></span>
+<span id="cb26-46"><a href="#cb26-46"></a>  c.deleted_at <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">AND</span></span>
+<span id="cb26-47"><a href="#cb26-47"></a>  c.character_id <span class="kw">IN</span> (</span>
+<span id="cb26-48"><a href="#cb26-48"></a>    <span class="kw">SELECT</span></span>
+<span id="cb26-49"><a href="#cb26-49"></a>      c2.character_id</span>
+<span id="cb26-50"><a href="#cb26-50"></a>    <span class="kw">FROM</span></span>
+<span id="cb26-51"><a href="#cb26-51"></a>      x_guild_characters <span class="kw">AS</span> gc</span>
+<span id="cb26-52"><a href="#cb26-52"></a>      <span class="kw">JOIN</span> x_characters <span class="kw">AS</span> c2 <span class="kw">ON</span> gc.character_id <span class="op">=</span> c2.character_id</span>
+<span id="cb26-53"><a href="#cb26-53"></a>      <span class="kw">JOIN</span> x_guilds <span class="kw">AS</span> g <span class="kw">ON</span> gc.guild_id <span class="op">=</span> g.guild_id</span>
+<span id="cb26-54"><a href="#cb26-54"></a>    <span class="kw">WHERE</span></span>
+<span id="cb26-55"><a href="#cb26-55"></a>      g.name <span class="op">=</span> <span class="st">&#39;Yamato&#39;</span></span>
+<span id="cb26-56"><a href="#cb26-56"></a>  ) <span class="co">-- ◀ 更新対象のレコードをサブクエリで指定</span></span>
+<span id="cb26-57"><a href="#cb26-57"></a><span class="kw">RETURNING</span></span>
+<span id="cb26-58"><a href="#cb26-58"></a>  c.character_id,</span>
+<span id="cb26-59"><a href="#cb26-59"></a>  c.name,</span>
+<span id="cb26-60"><a href="#cb26-60"></a>  c.<span class="kw">level</span>;</span>
+<span id="cb26-61"><a href="#cb26-61"></a></span>
+<span id="cb26-62"><a href="#cb26-62"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <p><strong>第32行目</strong> から <strong>第60行目</strong>
+      がメインの更新処理になります。やや複雑な SQL となっているので丁寧に読解してください。特に
+      x_characters は、3カ所で参照されており、それぞれ
+      <code>c</code>、<code>c1</code>、<code>c2</code>
+      のエイリアスが設定されています。これらの区別に注意しながら読み解くようにしてください。</p>
+      <ul>
+      <li><p><strong>第33行目</strong> からの <code>SET</code>
+      句では、全キャラの平均レベルを求めて、更新対象の行の level と比較して増分値 (<code>+1</code>
+      or <code>+2</code>) を決定するために「相関サブクエリ」を使用しています。</p></li>
+      <li><p><strong>第45行目</strong> からの <code>WHERE</code> 句では、更新対象のレコード
+      (＝ギルド「Yamato」に所属するキャラのレコード)
+      を「サブクエリ」を使用して指定しています。</p></li>
+      </ul>
+      <p>実行結果は次のようになります。</p>
+      <pre><code> character_id |  name  | level
+--------------+--------+-------
+            1 | Marvin |    35
+            6 | Alice  |    42
+            7 | Trudy  |    48
+           12 | Dave   |    68
+(4 行)
+
+ character_id |  name  | level
+--------------+--------+-------
+            1 | Marvin |    37
+            6 | Alice  |    44
+            7 | Trudy  |    49
+           12 | Dave   |    69
+(4 行)</code></pre>
+      <h3 data-number="4.3.1" id="sqlドリル-2"><span class="header-section-number">4.3.1</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-03_1.sql</code> 👉 ジョブが「Priest」「Wizard」以外のキャラについて、レベルを
+      <code>+1</code> するような SQL を記述せよ。
+      <ul>
+      <li>論理削除済みのキャラを除いて更新すること。</li>
+      <li><code>UPDATE</code> 文の <code>WHERE</code> 句においてサブクエリを用いること。</li>
+      <li><code>RETURNING</code> を使用して、次のようなカラムを持った更新情報を出力すること。</li>
+      </ul></li>
+      </ul>
+      <pre><code> character_id | name  | updated_level
+--------------+-------+---------------
+            2 | Zach  |            63
+            4 | Tom   |             2
+            5 | Ivan  |            40
+            7 | Trudy |            49
+            8 | Bob   |            34
+           10 | Oscar |            45
+           12 | Dave  |            69
+           14 | Eve   |            47
+           16 | Steve |            71
+           17 | Wendy |            57
+</code></pre>
+      <div class="note type-tips">
+      <p>無数の別解が存在します。「自分で考えた SQL」と「演習環境の <code>from-teacher</code> に示す
+      SQL」を比較したり、それぞれの書き方や考え方の違いを整理するためには、生成AIを活用してください。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>次の 2 つの SQL
+      は、同じ要件を満たすことを目的としたものです。両者を比較しながら「処理内容としての違い」「可読性・保守性・実行効率」「実務で使用する場合にどちらが適しているか」という観点からレビューしてください。</p>
+      <p>```<br />
+      UPDATE … ;<br />
+      ```</p>
+      <p>```<br />
+      UPDATE … ;<br />
+      ```</p>
+      </blockquote>
+      </div>
+      <ul>
+      <li><code>ex-03_2.sql</code> 👉 アイテムとして「High Mana
+      Potion」を所持しているキャラについて、レベルを <code>+2</code> するような SQL を記述せよ。
+      <ul>
+      <li>論理削除済みのキャラを除いて更新すること。</li>
+      <li><code>UPDATE</code> 文の <code>WHERE</code> 句においてサブクエリを用いること。</li>
+      <li><code>RETURNING</code> を使用して、次のようなカラムを持った更新情報を出力すること。</li>
+      </ul></li>
+      </ul>
+      <pre><code> character_id |  name   | updated_level
+--------------+---------+---------------
+            3 | Charlie |            59
+           13 | Mallet  |            66
+           19 | Jack    |            63</code></pre>
+      <ul>
+      <li><code>ex-03_3.sql</code> 👉 論理削除されていないキャラのみを対象に、各アイテムの所持数合計
+      (全キャラ合計) が 6個以上のアイテムの価格を 1.2倍 (10円未満は切り上げ) に改定するような SQL
+      を記述せよ。
+      <ul>
+      <li><code>UPDATE</code> 文の <code>WHERE</code> 句においてサブクエリを用いること。</li>
+      <li><code>RETURNING</code> を使用して、次のようなカラムを持った更新情報を出力すること。</li>
+      </ul></li>
+      </ul>
+      <pre><code> item_id |     name     | updated_price
+---------+--------------+---------------
+       1 | Potion       |           240
+       5 | Mana Potion  |          1200
+       7 | Antidote     |           360
+      10 | Chimera Wing |           600
+      11 | Torch        |           990</code></pre>
+      <ul>
+      <li><code>ex-03_4.sql</code> 👉 各アイテムの価格を「そのアイテムの所持人数
+      (論理削除済みのキャラを除く) <span class="math inline">\(\times\)</span>
+      50G」だけ値上げし、「所持人数が 0 のアイテムは 100G」だけ値下げするような SQL を記述せよ。
+      <ul>
+      <li>例: <strong>Potion</strong> を所持するキャラの人数は 3 人なので、3 <span
+      class="math inline">\(\times\)</span> 50G だけ値上げする。200G → 350G。</li>
+      <li><code>UPDATE</code> 文の <code>SET</code> 句においてサブクエリを用いること。</li>
+      <li><code>RETURNING</code> を使用して、次のようなカラムを持った更新情報を出力すること。</li>
+      </ul></li>
+      </ul>
+      <pre><code> item_id |       name       | updated_price
+---------+------------------+---------------
+       1 | Potion           |           350
+       2 | High Potion      |           700
+       3 | Mega Potion      |          1350
+       4 | Giga Potion      |          3900
+       5 | Mana Potion      |          1150
+       6 | High Mana Potion |          5150
+       7 | Antidote         |           500
+       8 | Paralyze Cure    |           500
+       9 | Angel Feather    |          1400
+      10 | Chimera Wing     |           750
+      11 | Torch            |          1020
+      12 | Climbing Rope    |          1050</code></pre>
+      <ul>
+      <li><code>ex-03_5.sql</code> 👉 各キャラクタのレベルを「そのジョブに就いているキャラ人数
+      (論理削除済みのキャラを除く)」だけ上げるような SQL を記述せよ。
+      <ul>
+      <li>例: を所持するキャラの人数は 3 人なので、3 <span class="math inline">\(\times\)</span> 50G
+      だけ値上げする。200G → 350G。</li>
+      <li><code>UPDATE</code> 文の <code>SET</code> 句においてサブクエリを用いること。</li>
+      <li><code>RETURNING</code> を使用して、次のようなカラムを持った更新情報を出力すること。</li>
+      </ul></li>
+      </ul>
+      <pre><code> character_id |  name   | job_id | updated_level
+--------------+---------+--------+---------------
+            1 | Marvin  |      5 |            38
+            2 | Zach    |      3 |            64
+            3 | Charlie |      6 |            61
+            4 | Tom     |      1 |             5
+            5 | Ivan    |      2 |            41
+            6 | Alice   |      5 |            45
+            7 | Trudy   |      1 |            52
+            8 | Bob     |      2 |            35
+           10 | Oscar   |      1 |            48
+           11 | Ellen   |      6 |            55
+           12 | Dave    |      4 |            70
+           13 | Mallet  |      6 |            68
+           14 | Eve     |      3 |            48
+           16 | Steve   |      4 |            72
+           17 | Wendy   |      1 |            60
+           18 | Carol   |      5 |            31
+           19 | Jack    |      6 |            65
+(17 行)</code></pre>
+      <h2 data-number="4.4" id="from句の利用"><span class="header-section-number">4.4</span>
+      FROM句の利用</h2>
+      <p><code>UPDATE</code>
+      文には、<strong>「更新対象」や「更新値」を決定するための</strong>「<u><strong>参照テーブル用</strong></u>」に
+      <code>FROM</code> 句を指定することもできます。</p>
+      <p>なお、<strong>実際に更新されるのは</strong> <code>UPDATE</code>
+      <strong>句で指定したテーブルのみ</strong>であり、<code>FROM</code> 句に指定したテーブルは
+      <span class="masked">条件判定や更新値の算出に利用されるだけで更新されることない</span>
+      ことに十分に注意してください。</p>
+      <div class="sourceCode" id="cb33" data-caption="update-set_03-b.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb33-1"><a href="#cb33-1"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
+<span id="cb33-2"><a href="#cb33-2"></a></span>
+<span id="cb33-3"><a href="#cb33-3"></a><span class="co">-- 確認: 全キャラの平均レベル</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a><span class="kw">SELECT</span></span>
+<span id="cb33-5"><a href="#cb33-5"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="kw">level</span>), <span class="dv">1</span>) <span class="kw">AS</span> <span class="ot">&quot;avg_lv&quot;</span></span>
+<span id="cb33-6"><a href="#cb33-6"></a><span class="kw">FROM</span></span>
+<span id="cb33-7"><a href="#cb33-7"></a>  x_characters</span>
+<span id="cb33-8"><a href="#cb33-8"></a><span class="kw">WHERE</span></span>
+<span id="cb33-9"><a href="#cb33-9"></a>  deleted_at <span class="kw">IS</span> <span class="kw">NULL</span>;</span>
+<span id="cb33-10"><a href="#cb33-10"></a></span>
+<span id="cb33-11"><a href="#cb33-11"></a><span class="co">-- 確認: Yamato所属キャラの現在レベル</span></span>
+<span id="cb33-12"><a href="#cb33-12"></a><span class="kw">SELECT</span></span>
+<span id="cb33-13"><a href="#cb33-13"></a>  character_id,</span>
+<span id="cb33-14"><a href="#cb33-14"></a>  name,</span>
+<span id="cb33-15"><a href="#cb33-15"></a>  <span class="kw">level</span></span>
+<span id="cb33-16"><a href="#cb33-16"></a><span class="kw">FROM</span></span>
+<span id="cb33-17"><a href="#cb33-17"></a>  x_characters</span>
+<span id="cb33-18"><a href="#cb33-18"></a><span class="kw">WHERE</span></span>
+<span id="cb33-19"><a href="#cb33-19"></a>  deleted_at <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">AND</span></span>
+<span id="cb33-20"><a href="#cb33-20"></a>  character_id <span class="kw">IN</span> (</span>
+<span id="cb33-21"><a href="#cb33-21"></a>    <span class="kw">SELECT</span></span>
+<span id="cb33-22"><a href="#cb33-22"></a>      c.character_id</span>
+<span id="cb33-23"><a href="#cb33-23"></a>    <span class="kw">FROM</span></span>
+<span id="cb33-24"><a href="#cb33-24"></a>      x_guild_characters <span class="kw">AS</span> gc</span>
+<span id="cb33-25"><a href="#cb33-25"></a>      <span class="kw">JOIN</span> x_characters <span class="kw">AS</span> c <span class="kw">ON</span> gc.character_id <span class="op">=</span> c.character_id</span>
+<span id="cb33-26"><a href="#cb33-26"></a>      <span class="kw">JOIN</span> x_guilds <span class="kw">AS</span> g <span class="kw">ON</span> gc.guild_id <span class="op">=</span> g.guild_id</span>
+<span id="cb33-27"><a href="#cb33-27"></a>    <span class="kw">WHERE</span></span>
+<span id="cb33-28"><a href="#cb33-28"></a>      g.name <span class="op">=</span> <span class="st">&#39;Yamato&#39;</span></span>
+<span id="cb33-29"><a href="#cb33-29"></a>  );</span>
+<span id="cb33-30"><a href="#cb33-30"></a></span>
+<span id="cb33-31"><a href="#cb33-31"></a><span class="co">-- 本体: FROM句を用いた更新処理</span></span>
+<span id="cb33-32"><a href="#cb33-32"></a><span class="kw">UPDATE</span> x_characters <span class="kw">AS</span> c</span>
+<span id="cb33-33"><a href="#cb33-33"></a><span class="kw">SET</span></span>
+<span id="cb33-34"><a href="#cb33-34"></a>  <span class="kw">level</span> <span class="op">=</span> c.<span class="kw">level</span> <span class="op">+</span> <span class="cf">CASE</span></span>
+<span id="cb33-35"><a href="#cb33-35"></a>    <span class="cf">WHEN</span> c.<span class="kw">level</span> <span class="op">&lt;=</span> a.avg_level <span class="cf">THEN</span> <span class="dv">2</span></span>
+<span id="cb33-36"><a href="#cb33-36"></a>    <span class="cf">ELSE</span> <span class="dv">1</span></span>
+<span id="cb33-37"><a href="#cb33-37"></a>  <span class="cf">END</span></span>
+<span id="cb33-38"><a href="#cb33-38"></a><span class="kw">FROM</span></span>
+<span id="cb33-39"><a href="#cb33-39"></a>  x_guild_characters <span class="kw">AS</span> gc</span>
+<span id="cb33-40"><a href="#cb33-40"></a>  <span class="kw">JOIN</span> x_guilds <span class="kw">AS</span> g <span class="kw">ON</span> g.guild_id <span class="op">=</span> gc.guild_id</span>
+<span id="cb33-41"><a href="#cb33-41"></a>  <span class="kw">CROSS</span> <span class="kw">JOIN</span> (</span>
+<span id="cb33-42"><a href="#cb33-42"></a>    <span class="kw">SELECT</span></span>
+<span id="cb33-43"><a href="#cb33-43"></a>      <span class="fu">AVG</span>(<span class="kw">level</span>) <span class="kw">AS</span> avg_level</span>
+<span id="cb33-44"><a href="#cb33-44"></a>    <span class="kw">FROM</span></span>
+<span id="cb33-45"><a href="#cb33-45"></a>      x_characters</span>
+<span id="cb33-46"><a href="#cb33-46"></a>    <span class="kw">WHERE</span></span>
+<span id="cb33-47"><a href="#cb33-47"></a>      deleted_at <span class="kw">IS</span> <span class="kw">NULL</span></span>
+<span id="cb33-48"><a href="#cb33-48"></a>  ) <span class="kw">AS</span> a</span>
+<span id="cb33-49"><a href="#cb33-49"></a><span class="kw">WHERE</span></span>
+<span id="cb33-50"><a href="#cb33-50"></a>  c.deleted_at <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">AND</span></span>
+<span id="cb33-51"><a href="#cb33-51"></a>  gc.character_id <span class="op">=</span> c.character_id <span class="kw">AND</span></span>
+<span id="cb33-52"><a href="#cb33-52"></a>  g.name <span class="op">=</span> <span class="st">&#39;Yamato&#39;</span></span>
+<span id="cb33-53"><a href="#cb33-53"></a><span class="kw">RETURNING</span></span>
+<span id="cb33-54"><a href="#cb33-54"></a>  c.character_id,</span>
+<span id="cb33-55"><a href="#cb33-55"></a>  c.name,</span>
+<span id="cb33-56"><a href="#cb33-56"></a>  c.<span class="kw">level</span>;</span>
+<span id="cb33-57"><a href="#cb33-57"></a></span>
+<span id="cb33-58"><a href="#cb33-58"></a><span class="kw">ROLLBACK</span>;</span></code></pre></div>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>SQLに関する質問です。<code>UPDATE</code> 文は
+      <code>UPDATE tbl_1 SET col_1=xxx, col_2=xxx WHERE col_3=xxx;</code>
+      のように記述しますが、これにくわえて <code>FROM</code>
+      句を記述できると聞きました。<code>UPDATE tbl_1</code> により、既に <code>tbl_1</code>
+      を更新対象として指定しているのに、何のために <code>FROM</code> 句を指定するのですか。</p>
+      </blockquote>
+      <blockquote>
+      <p>(上記のつづきとして) 更新に使う値を取得するための参照テーブルとして <code>FROM</code>
+      句を与えるとのことですが、新に使う値を取得にはサブクエリも使えると思います。両者の使い分けを教えてください。</p>
+      </blockquote>
+      <h1 data-number="5" id="課題2"><span class="header-section-number">5</span> 課題2</h1>
+      <h1 data-number="6" id="授業時間外学習の指示"><span class="header-section-number">6</span>
+      授業時間外学習の指示</h1>
+      <p>🚨<strong>本科目は「学修単位科目」であり、1回の講義あたり「4時間相当」の授業時間外学習が求められる科目です</strong>🏃</p>
+      <ul>
+      <li>次回の講義で「<strong>小テスト❾</strong>」を実施します。
+      <ul>
+      <li>主に <strong>SQLドリル</strong>、<strong>定着確認</strong>、<strong>演習</strong>
+      から出題します。</li>
+      </ul></li>
+      </ul>
+      <hr />
+      <ul>
+      <li>この講義資料を再読・熟読し「不明な用語」や「理解が不十分な用語」があればインターネットや、ChatGPTなどの生成AIを利用して解決してください。また、興味関心を持ったトピックについて、ウェブ、生成AI、YouTube動画などを利用して知識を広げ、理解を深めてください。
+      <ul>
+      <li>特に <strong>(プロンプト例)</strong>
+      を示しているものについては、実際に生成AIにプロンプトを投げ、さらに対話を重ねることで、知識の幅を広げるだけでなく、理解をより深く確かなものにしてください。</li>
+      </ul></li>
+      <li>講義資料内の「<strong>演習</strong>」や「<strong>SQLドリル</strong>」に再度取り組んでください。特に、<strong>SQLドリル</strong>💻
+      は、授業時間中に1回取り組むだけでは定着しないので注意してください。</li>
+      </ul>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/DB-2025/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>

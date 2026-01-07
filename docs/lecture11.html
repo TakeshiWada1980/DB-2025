@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+type="text/javascript"></script> 
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>第11回 4I-データベース工学</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#連絡と準備" id="toc-連絡と準備"><span class="toc-section-number">1</span>
+連絡と準備</a>
+<ul>
+<li><a href="#ハンズオン学習の準備" id="toc-ハンズオン学習の準備"><span
+class="toc-section-number">1.1</span> ハンズオン学習の準備</a></li>
+<li><a href="#今回の講義の概要" id="toc-今回の講義の概要"><span
+class="toc-section-number">1.2</span> 今回の講義の概要</a></li>
+</ul></li>
+<li><a href="#外部結合" id="toc-外部結合"><span class="toc-section-number">2</span> 外部結合</a>
+<ul>
+<li><a href="#外部結合の使用例" id="toc-外部結合の使用例"><span
+class="toc-section-number">2.1</span> 外部結合の使用例</a></li>
+<li><a href="#左外部結合-left-join-と右外部結合-right-join-の挙動の違い"
+id="toc-左外部結合-left-join-と右外部結合-right-join-の挙動の違い"><span
+class="toc-section-number">2.2</span> 左外部結合 (LEFT JOIN) と右外部結合 (RIGHT JOIN)
+の挙動の違い</a></li>
+<li><a href="#左外部結合と右外部結合の書き換え" id="toc-左外部結合と右外部結合の書き換え"><span
+class="toc-section-number">2.3</span> 左外部結合と右外部結合の書き換え</a></li>
+<li><a href="#つ以上のテーブルの外部結合" id="toc-つ以上のテーブルの外部結合"><span
+class="toc-section-number">2.4</span> 3つ以上のテーブルの外部結合</a></li>
+<li><a href="#内部結合と外部結合を混在させた場合の注意点"
+id="toc-内部結合と外部結合を混在させた場合の注意点"><span class="toc-section-number">2.5</span>
+内部結合と外部結合を混在させた場合の注意点</a></li>
+</ul></li>
+<li><a href="#完全外部結合-full-outer-join" id="toc-完全外部結合-full-outer-join"><span
+class="toc-section-number">3</span> 完全外部結合 (FULL OUTER JOIN)</a></li>
+<li><a href="#直積-cross-join" id="toc-直積-cross-join"><span class="toc-section-number">4</span>
+直積 (CROSS JOIN)</a></li>
+<li><a href="#非正規化-正規化崩し" id="toc-非正規化-正規化崩し"><span
+class="toc-section-number">5</span> 非正規化 (正規化崩し)</a></li>
+<li><a href="#授業時間外学習の指示" id="toc-授業時間外学習の指示"><span
+class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>2025-4I データベース工学 第11回 講義資料</p>
+      <p>2026年01月08日 (木) 3-4時限</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="連絡と準備"><span class="header-section-number">1</span>
+      連絡と準備</h1>
+      <ul>
+      <li><strong>小テスト❽</strong> を実施します。
+      <ul>
+      <li>シラバス記載のように、小テストは最終評価の <span class="masked">35%</span>
+      に相当します。</li>
+      <li>遅刻・欠席等により追試験を希望する場合は<a
+      href="lecture01.html#成績評価法と履修上の注意">第01回講義で案内した手続き</a>をしてください。</li>
+      </ul></li>
+      <li><strong>Unity 1-Week GAME JAM</strong>
+      <ul>
+      <li><a href="https://unityroom.com/unity1weeks">https://unityroom.com/unity1weeks</a></li>
+      <li>開催終了 … お題「<a href="https://unityroom.com/unity1weeks/68">もうひとつ</a>」</li>
+      </ul></li>
+      </ul>
+      <h2 data-number="1.1" id="ハンズオン学習の準備"><span class="header-section-number">1.1</span>
+      ハンズオン学習の準備</h2>
+      <p>次の手順でSQL演習環境の立ち上げと、教材の更新を取得してください。</p>
+      <ul>
+      <li><a href="lecture04.html#sql演習環境の動作確認-前回復習">SQL演習環境の動作確認</a>@
+      第04回講義</li>
+      <li><a href="lecture04.html#教材の更新の取得">教材の更新の取得</a>@ 第04回講義</li>
+      </ul>
+      <p>また、演習環境の <code>from-teacher/11/init-n_db.sql</code>
+      を実行して、次のテーブル群を作成してください。</p>
+      <ul>
+      <li>n_items</li>
+      <li>n_jobs</li>
+      <li>n_characters</li>
+      <li>n_character_items</li>
+      </ul>
+      <p>これらは、次の関係となっています (テーブルの定義を確認しておいてください)。</p>
+      <figure>
+      <img src="figs/11/LER-01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>また、前回講義で使用したテーブル群 (<code>x_****</code>)
+      も使用するので、<code>from-teacher/10/create-x_db.sql</code> と
+      <code>insert-x_db_01.sql</code> もあらためて実行しておいてください。</p>
+      <h2 data-number="1.2" id="今回の講義の概要"><span class="header-section-number">1.2</span>
+      今回の講義の概要</h2>
+      <p>前回の講義では、<strong>内部結合</strong> (<code>INNER JOIN</code>) を扱いました。</p>
+      <p>内部結合では、次のように <code>FROM</code> 句を
+      <code>n_characters AS c JOIN n_jobs AS j ON c.job_id = j.job_id</code>
+      のように指定することで、n_characters と n_jobs の <strong>2つのテーブルを結合したもの</strong>
+      に対して、クエリを発行することができました。</p>
+      <div class="sourceCode" id="cb1" data-caption="select-inner_join_01.sql（内部結合）"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">SELECT</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>  c.character_id,</span>
+<span id="cb1-3"><a href="#cb1-3"></a>  c.name,</span>
+<span id="cb1-4"><a href="#cb1-4"></a>  j.name <span class="kw">AS</span> <span class="ot">&quot;job&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">FROM</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  n_characters <span class="kw">AS</span> c</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="kw">JOIN</span> n_jobs <span class="kw">AS</span> j <span class="kw">ON</span> c.job_id <span class="op">=</span> j.job_id</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>  c.character_id;</span></code></pre></div>
+      <ul>
+      <li>SQL標準 (PostgreSQL を含む) では <code>INNER JOIN</code> を、<code>JOIN</code>
+      という省略形で表記することができました。</li>
+      </ul>
+      <p>たとえば n_jobs と n_characters テーブルが次のような内容であるとします
+      (ここで、<u>下線</u>は「主キー」であること、空欄は <code>NULL</code>
+      であることを表しています)。</p>
+      <p><strong>▼ n_jobs テーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>job_id</u></th>
+      <th style="text-align: center;">name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">Fighter</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">Monk</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">Ninja</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">Samurai</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">5</td>
+      <td style="text-align: center;">Priest</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">6</td>
+      <td style="text-align: center;">Wizard</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>▼ n_characters テーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>character_id</u></th>
+      <th style="text-align: center;">name</th>
+      <th style="text-align: center;">job_id</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">Marvin</td>
+      <td style="text-align: center;">5</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">Zach</td>
+      <td style="text-align: center;"></td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">Charlie</td>
+      <td style="text-align: center;">6</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">Tom</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">5</td>
+      <td style="text-align: center;">Alice</td>
+      <td style="text-align: center;">5</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>このとき、<code>select-inner_join_01.sql</code> の実行結果は次のようになります。</p>
+      <pre><code> character_id |  name   |   job   
+--------------+---------+---------
+            1 | Marvin  | Priest
+            3 | Charlie | Wizard
+            4 | Tom     | Fighter
+            5 | Alice   | Priest</code></pre>
+      <p>ここで注意すべきは、character_id が <code>2</code> の Zach が、<span
+      class="masked">結果セットに含まれないこと</span> です。<strong>内部結合</strong>においては
+      <code>ON</code> で指定した結合条件 (ここでは <code>c.job_id = j.job_id</code> ) が
+      <code>TRUE</code> になった行<strong>だけ</strong>が結果セットに含まれるという特性がありました
+      (前回講義で確認済み)。</p>
+      <p>Zach の場合、n_characters.job_id は <code>NULL</code> であり、SQL の<a
+      href="lecture04.html#sqlの3値論理">3値論理</a>では <code>NULL</code>
+      を含む条件式の評価結果は常に <span class="masked">UNKNOWN</span>
+      となることから、結果セットから除外されています。</p>
+      <div class="note type-tips">
+      <p><strong>ON に <code>OR IS NUILL</code> を追加すると…</strong></p>
+      <p>Zach を含むために <code>select-inner_join_01.sql</code> の結合条件を
+      <code>ON c.job_id = j.job_id OR c.job_id IS NULL</code>
+      のようにしてしまうと、以下のように意図せぬ結果が得られるので注意してください。</p>
+      <pre><code> character_id |  name   |   job   
+--------------+---------+---------
+            1 | Marvin  | Priest
+            2 | Zach    | Fighter
+            2 | Zach    | Monk
+            2 | Zach    | Ninja
+            2 | Zach    | Samurai
+            2 | Zach    | Priest
+            2 | Zach    | Wizard
+            3 | Charlie | Wizard
+            4 | Tom     | Fighter
+            5 | Alice   | Priest</code></pre>
+      </div>
+      <p>このような内部結合の挙動は、たとえば「<strong>ジョブ別のキャラ人数を集計したい</strong>」といった目的には適していません。</p>
+      <div class="sourceCode" id="cb4"
+      data-caption="select-inner_join_02.sql ジョブ別のキャラ人数の集計"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">SELECT</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  j.job_id,</span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">MAX</span>(j.name) <span class="kw">AS</span> <span class="ot">&quot;name&quot;</span>,</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>)</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">FROM</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>  n_characters <span class="kw">AS</span> c</span>
+<span id="cb4-7"><a href="#cb4-7"></a>  <span class="kw">JOIN</span> n_jobs <span class="kw">AS</span> j <span class="kw">ON</span> c.job_id <span class="op">=</span> j.job_id</span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>  j.job_id</span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>  j.job_id;</span></code></pre></div>
+      <p>実行結果は次のようになります。</p>
+      <pre><code> job_id |  name   | count 
+--------+---------+-------
+      1 | Fighter |     1
+      5 | Priest  |     2
+      6 | Wizard  |     1</code></pre>
+      <p>この結果セットには Monk や Ninja、Samurai といった <span class="masked">キャラが 0
+      人のジョブ</span> の情報が欠落しています。内部結合では、n_characters
+      側に対応する行が存在しないジョブは、集計対象にすら含まれません。</p>
+      <p>このように「<strong>0
+      人であること</strong>」も集計結果に含めたい場合、<u>内部結合では要件を満たすことができません</u>。この問題を解決する方法として、今回の講義では「<strong>外部結合</strong>
+      <code>OUTER JOIN</code>」について学んでいきます。</p>
+      <h3 data-number="1.2.1" id="演習"><span class="header-section-number">1.2.1</span> 演習</h3>
+      <ul>
+      <li><code>select-inner_join_01.sql</code> の <code>FROM</code> を次のように書き換えても
+      <strong>結果セットの内容が同じであること</strong> を確認してください (つまり、内部結合では
+      <span class="masked">JOIN の順番が結果に影響しないこと</span> を確認してください)。
+      <ul>
+      <li>変更前: <code>FROM n_characters AS c JOIN n_jobs AS j ON c.job_id = j.job_id</code></li>
+      <li>変更後: <code>FROM n_jobs AS j JOIN n_characters AS c ON c.job_id = j.job_id</code></li>
+      </ul></li>
+      </ul>
+      <p>確認後は、変更前の状態に戻しておいてください。</p>
+      <h3 data-number="1.2.2" id="sqlドリル-前回の復習"><span
+      class="header-section-number">1.2.2</span> SQLドリル💻 (前回の復習)</h3>
+      <ul>
+      <li><code>ex-01_1.sql</code> 👉 サブクエリを使用して n_characters と n_jobs
+      から次のような結果を得る SQL を記述せよ。
+      <ul>
+      <li><strong>サブクエリ</strong> (副問い合わせ) については<a
+      href="lecture10.html#サブクエリ-副問い合わせ">前回講義</a>で学習済み</li>
+      </ul></li>
+      </ul>
+      <pre><code> character_id |  name   |   job   
+--------------+---------+---------
+            1 | Marvin  | Priest
+            2 | Zach    |
+            3 | Charlie | Wizard
+            4 | Tom     | Fighter
+            5 | Alice   | Priest</code></pre>
+      <ul>
+      <li><code>ex-01_2.sql</code> 👉 サブクエリを使用して n_characters と n_jobs
+      から次のような結果を得る SQL を記述せよ。</li>
+      </ul>
+      <pre><code> job_id |  name   | count 
+--------+---------+-------
+      1 | Fighter |     1
+      2 | Monk    |     0
+      3 | Ninja   |     0
+      4 | Samurai |     0
+      5 | Priest  |     2
+      6 | Wizard  |     1</code></pre>
+      <ul>
+      <li><code>ex-01_3.sql</code> 👉 サブクエリを使用して n_characters と n_jobs
+      から次のような結果を得る SQL を記述せよ。
+      <ul>
+      <li>job カラムが <code>NULL</code> の箇所を <code>---</code> で表示する。</li>
+      <li><strong>ヒント</strong>: <span class="masked">COALESCEを利用</span></li>
+      </ul></li>
+      </ul>
+      <pre><code> character_id |  name   |   job   
+--------------+---------+---------
+            1 | Marvin  | Priest
+            2 | Zach    | ---
+            3 | Charlie | Wizard
+            4 | Tom     | Fighter
+            5 | Alice   | Priest</code></pre>
+      <h3 data-number="1.2.3" id="sqlドリル-ex"><span class="header-section-number">1.2.3</span>
+      SQLドリル💻 (EX)</h3>
+      <p>前回講義で扱ったテーブル群 ( <code>x_○○○</code> ) を使用する演習問題です。</p>
+      <ul>
+      <li><code>ex-01_4.sql</code> 👉 次のように各ジョブの最高レベルのキャラを出力する SQL
+      を記述せよ。
+      <ul>
+      <li>ヒント: <span class="masked">内部結合に加えて <code>WHERE</code>
+      句で相関サブクエリを使用する</span></li>
+      </ul></li>
+      </ul>
+      <pre><code> job_id |   job   | character_id |  name  | level 
+--------+---------+--------------+--------+-------
+      1 | Fighter |           17 | Wendy  |    56
+      2 | Monk    |            5 | Ivan   |    39
+      3 | Ninja   |            2 | Zach   |    62
+      4 | Samurai |            9 | Walter |    73
+      5 | Priest  |           15 | Trent  |    50
+      6 | Wizard  |           13 | Mallet |    64</code></pre>
+      <ul>
+      <li><code>ex-01_5.sql</code> 👉 2種類の異なるアイテムの「セット販売」を考える
+      (価格は単品合計の3割引きで、端数は四捨五入する)。次のように割引後価格が 3,500
+      ゴールド以上となるアイテムセットを全て出力する SQL を記述せよ。
+      <ul>
+      <li>ヒント: <span class="masked">x_items テーブル同士を内部結合する</span></li>
+      </ul></li>
+      </ul>
+      <pre><code>     item_1 (price)      |     item_2 (price)      | discounted_price 
+-------------------------+-------------------------+------------------
+ Potion (200)            | High Mana Potion (5000) |             3640
+ High Potion (600)       | High Mana Potion (5000) |             3920
+ Mega Potion (1200)      | Giga Potion (4000)      |             3640
+ Mega Potion (1200)      | High Mana Potion (5000) |             4340
+ Giga Potion (4000)      | Mana Potion (1000)      |             3500
+ Giga Potion (4000)      | High Mana Potion (5000) |             6300
+ Giga Potion (4000)      | Angel Feather (1200)    |             3640
+ Giga Potion (4000)      | Climbing Rope (1000)    |             3500
+ Mana Potion (1000)      | High Mana Potion (5000) |             4200
+ High Mana Potion (5000) | Antidote (300)          |             3710
+ High Mana Potion (5000) | Paralyze Cure (600)     |             3920
+ High Mana Potion (5000) | Angel Feather (1200)    |             4340
+ High Mana Potion (5000) | Chimera Wing (500)      |             3850
+ High Mana Potion (5000) | Torch (820)             |             4074
+ High Mana Potion (5000) | Climbing Rope (1000)    |             4200
+(15 行)</code></pre>
+      <h1 data-number="2" id="外部結合"><span class="header-section-number">2</span> 外部結合</h1>
+      <p><strong>内部結合</strong> (<code>INNER JOIN</code>) において、結合条件を満たさない行は
+      <span class="masked">結果セットから除外</span> されてしまいました。これに対して
+      <strong>外部結合</strong> (<code>OUTER JOIN</code>) は
+      <u>結合条件を満たさない行も結果セットに含めることができる結合方法</u> となります。</p>
+      <p>たとえば、<code>LEFT OUTER JOIN</code> (省略形 <code>LEFT JOIN</code> )
+      を用いると、<strong>左側のテーブルに存在する行は、右側に対応する行がなくても結果セットに残すことができる</strong>ようになります。このような結合を「左外部結合」「左側外部結合」「左結合」といいます。そのため「<strong>キャラが
+      0 人のジョブも含めた集計</strong>」などがシンプルに記述できます。</p>
+      <ul>
+      <li>右側のテーブルに存在する行を基準に結合する <code>RIGHT OUTER JOIN</code> (省略形
+      <code>RIGHT JOIN</code> ) もあります。</li>
+      </ul>
+      <h2 data-number="2.1" id="外部結合の使用例"><span class="header-section-number">2.1</span>
+      外部結合の使用例</h2>
+      <p>さきほどの <code>select-inner_join_01.sql</code> の <strong>第07行目</strong>
+      を、以下のように <code>JOIN</code> から <code>LEFT JOIN</code> に書き換えます。</p>
+      <ul>
+      <li>非省略形で記述する場合、<code>INNER JOIN</code> から <code>LEFT OUTER JOIN</code>
+      に書き換えます。</li>
+      </ul>
+      <div class="sourceCode" id="cb11" data-caption="select-outer_join_01.sql（外部結合）"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">SELECT</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  c.character_id,</span>
+<span id="cb11-3"><a href="#cb11-3"></a>  c.name,</span>
+<span id="cb11-4"><a href="#cb11-4"></a>  j.name <span class="kw">AS</span> <span class="ot">&quot;job&quot;</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="kw">FROM</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>  n_characters <span class="kw">AS</span> c</span>
+<span id="cb11-7"><a href="#cb11-7"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> n_jobs <span class="kw">AS</span> j <span class="kw">ON</span> c.job_id <span class="op">=</span> j.job_id <span class="co">-- ◀ JOIN から LEFT JOIN に変更</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>  c.character_id;</span></code></pre></div>
+      <p>この SQL を実行すると、結果セットが…</p>
+      <pre><code>(INNER JOIN の場合)
+
+ character_id |  name   |   job   
+--------------+---------+---------
+            1 | Marvin  | Priest
+            3 | Charlie | Wizard
+            4 | Tom     | Fighter
+            5 | Alice   | Priest</code></pre>
+      <p>…から、以下のよう変化します。内部結合では除外されていた character_id = 2 の Zach
+      の行が、結果セットに含まれていることが分かります。</p>
+      <pre><code>(OUTER LEFT JOIN の場合)
+
+ character_id |  name   |   job   
+--------------+---------+---------
+            1 | Marvin  | Priest
+            2 | Zach    |
+            3 | Charlie | Wizard
+            4 | Tom     | Fighter
+            5 | Alice   | Priest</code></pre>
+      <p>以上のように <code>FROM</code> 句の <code>n_characters AS c LEFT JOIN n_jobs AS j</code>
+      において <code>LEFT JOIN</code> キーワードの左側のテーブル、つまり <strong>n_characters
+      に存在する行は</strong> <span class="masked">右側のテーブルに対応する行がなくても
+      (＝結合条件を満たさない行であっても) 結果セット</span> に含まれるようになります。</p>
+      <p>また、その場合、当該行で右側テーブルを参照するカラムの値は <span
+      class="masked"><code>NULL</code></span> となります。</p>
+      <h2 data-number="2.2" id="左外部結合-left-join-と右外部結合-right-join-の挙動の違い"><span
+      class="header-section-number">2.2</span> 左外部結合 (LEFT JOIN) と右外部結合 (RIGHT JOIN)
+      の挙動の違い</h2>
+      <p>つづいて、外部結合を利用して、次のような <strong>ジョブ別のキャラクタ人数の集計</strong>
+      を取得するような SQL を考えていきます。</p>
+      <pre><code> job_id |  name   | count 
+--------+---------+-------
+      1 | Fighter |     1
+      2 | Monk    |     0
+      3 | Ninja   |     0
+      4 | Samurai |     0
+      5 | Priest  |     2
+      6 | Wizard  |     1</code></pre>
+      <p>まず、さきほどの 内部結合を用いた SQL である <code>select-inner_join_02.sql</code>
+      (＝ジョブ別のキャラ人数の集計) の <strong>第07行目</strong> を、以下のように <code>JOIN</code>
+      から <code>LEFT JOIN</code> に書き換えてみます。</p>
+      <div class="sourceCode" id="cb15" data-caption="select-outer_join_02-a.sql（左外部結合）"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">SELECT</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>  j.job_id,</span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">MAX</span>(j.name) <span class="kw">AS</span> <span class="ot">&quot;name&quot;</span>,</span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">COUNT</span>(c.character_id)</span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="kw">FROM</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a>  n_characters <span class="kw">AS</span> c</span>
+<span id="cb15-7"><a href="#cb15-7"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> n_jobs <span class="kw">AS</span> j <span class="kw">ON</span> c.job_id <span class="op">=</span> j.job_id <span class="co">-- ◀ JOIN から LEFT JOIN に変更</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a>  j.job_id</span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a>  j.job_id;</span></code></pre></div>
+      <p>これを実行すると、次のような実行結果となります (実際に実行してみてください)。</p>
+      <pre><code> job_id |  name   | count 
+--------+---------+-------
+      1 | Fighter |     1
+      5 | Priest  |     2
+      6 | Wizard  |     1
+        |         |     1</code></pre>
+      <p>この結果は、<u>期待する出力 (ジョブ別のキャラ人数の集計) とは異なっていること</u>
+      が分かります。</p>
+      <p>これは <code>n_characters AS c LEFT JOIN n_jobs AS j</code>
+      のように指定しているため、左側のテーブル (＝n_characters)
+      を基準に行を残す形で集計が行われていることに起因します。</p>
+      <p>ここでは「ジョブ別のキャラクタ人数」を集計したいため、<span class="masked">n_jobs
+      (＝右側テーブル) を基準に外部結合する必要</span> があります。その場合、次のように
+      <code>RIGHT JOIN</code> (<strong>右外部結合</strong>) を用います。</p>
+      <div class="sourceCode" id="cb17" data-caption="select-outer_join_02-b.sql（右外部結合）"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">SELECT</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>  j.job_id,</span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">MAX</span>(j.name) <span class="kw">AS</span> <span class="ot">&quot;name&quot;</span>,</span>
+<span id="cb17-4"><a href="#cb17-4"></a>  <span class="fu">COUNT</span>(c.character_id) <span class="co">-- ◀ 注意</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="kw">FROM</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a>  n_characters <span class="kw">AS</span> c</span>
+<span id="cb17-7"><a href="#cb17-7"></a>  <span class="kw">RIGHT</span> <span class="kw">JOIN</span> n_jobs <span class="kw">AS</span> j <span class="kw">ON</span> c.job_id <span class="op">=</span> j.job_id <span class="co">-- ◀ JOIN から RIGHT JOIN に</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a>  j.job_id</span>
+<span id="cb17-10"><a href="#cb17-10"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb17-11"><a href="#cb17-11"></a>  j.job_id;</span></code></pre></div>
+      <p>これを実行すると、以下のように期待どおりの結果が得られます。</p>
+      <pre><code> job_id |  name   | count 
+--------+---------+-------
+      1 | Fighter |     1
+      2 | Monk    |     0
+      3 | Ninja   |     0
+      4 | Samurai |     0
+      5 | Priest  |     2
+      6 | Wizard  |     1</code></pre>
+      <p>なお、<strong>第04行目</strong> を <code>COUNT(*)</code>
+      としてしまうと意図せぬ結果になるので注意してください。実際に試してみてください。</p>
+      <ul>
+      <li><a href="lecture05.html#count関数">第05回講義</a>で学んだように、<code>COUNT(*)</code> は
+      <span class="masked">行そのものの数</span> を数えるため、<u>キャラが存在しないジョブでも 1
+      行としてカウント</u> されてしまいます。</li>
+      </ul>
+      <h2 data-number="2.3" id="左外部結合と右外部結合の書き換え"><span
+      class="header-section-number">2.3</span> 左外部結合と右外部結合の書き換え</h2>
+      <p><strong>左外部結合</strong> (<code>LEFT JOIN</code>) と <strong>右外部結合</strong>
+      (<code>RIGHT JOIN</code>)
+      は、<strong>相互に書き換えが可能</strong>となっています。例えば、さきほどの右外部結合の SQL
+      (<code>select-outer_join_02-b.sql</code>) は、次のような <strong>左外部結合</strong> の SQL
+      に書き換えが可能です。</p>
+      <div class="sourceCode" id="cb19" data-caption="select-outer_join_02-c.sql 抜粋"
+      data-startFrom="5"><pre class="sourceCode numberSource sql numberLines"><code class="sourceCode sql" style="counter-reset: source-line 4;"><span id="cb19-5"><a href="#cb19-5"></a><span class="kw">FROM</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>  n_jobs <span class="kw">AS</span> j</span>
+<span id="cb19-7"><a href="#cb19-7"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> n_characters <span class="kw">AS</span> c <span class="kw">ON</span> c.job_id <span class="op">=</span> j.job_id</span></code></pre></div>
+      <p>つまり、次の2つは等価となります。</p>
+      <ul>
+      <li><code>FROM n_characters AS c RIGHT JOIN n_jobs AS j ON ...</code> 👈 左外部結合</li>
+      <li><code>FROM n_jobs AS j LEFT JOIN n_characters AS c ON ...</code> 👈 右外部結合</li>
+      </ul>
+      <p>このように、外部結合では「<strong>どのテーブルを基準として行を残したいか</strong>」を意識して結合の向き
+      (<code>LEFT</code> or <code>RIGHT</code>) を指定することが大切になってきます。</p>
+      <h3 data-number="2.3.1" id="定着確認"><span class="header-section-number">2.3.1</span>
+      定着確認</h3>
+      <ul>
+      <li>次の結合と論理的に同等な結果セットとなるように <code>RIGHT JOIN</code>
+      を用いて書き換えよ。
+      <ul>
+      <li><code>FROM jobs AS j LEFT JOIN characters AS c ON c.job_id = j.job_id</code></li>
+      <li><strong>答え</strong>: <span
+      class="masked"><code>FROM characters AS c RIGHT JOIN jobs AS j ON c.job_id = j.job_id</code></span></li>
+      </ul></li>
+      <li>標準SQLにおいて、内部結合を表す正式なキーワードは (　　　) である。なお、このキーワードは
+      <code>JOIN</code> という省略形で記述することができる。括弧にあてはまる語を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked"><code>INNSER JOIN</code></span></li>
+      </ul></li>
+      <li>標準SQLにおいて、右側のテーブルを基準に結合を行う外部結合を指定する正式なキーワードは
+      (　　　) である。なお、このキーワードは <code>RIGHT JOIN</code>
+      という省略形で記述することができる。括弧にあてはまる語を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked"><code>RIGHT OUTER JOIN</code></span></li>
+      </ul></li>
+      <li>内部結合と <code>WHERE</code>
+      を組み合わせることで、一般に、外部結合を用いた場合と等価な結果セットを得ることができる。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない</span></li>
+      </ul></li>
+      </ul>
+      <h3 data-number="2.3.2" id="sqlドリル"><span class="header-section-number">2.3.2</span>
+      SQLドリル💻</h3>
+      <ul>
+      <li><code>ex-02_1.sql</code> 👉 n_characters と n_jobs から次のような結果を得る SQL
+      を記述せよ。ただし、<strong>右外部結合</strong> <code>RIGHT JOIN</code>
+      を使用すること。特定のジョブに就いていない場合は <code>---</code> を出力すること。
+      <ul>
+      <li>サブクエリを用いたバージョン (<code>ex-01_3.sql</code>) と SQL の構成を比較せよ
+      (可読性や保守性など)。</li>
+      </ul></li>
+      </ul>
+      <pre><code> character_id |  name   |   job   
+--------------+---------+---------
+            1 | Marvin  | Priest
+            2 | Zach    | ---
+            3 | Charlie | Wizard
+            4 | Tom     | Fighter
+            5 | Alice   | Priest</code></pre>
+      <h2 data-number="2.4" id="つ以上のテーブルの外部結合"><span
+      class="header-section-number">2.4</span> 3つ以上のテーブルの外部結合</h2>
+      <p><strong>内部結合</strong> (<code>INNER JOIN</code>)
+      の場合と同様に、<strong>外部結合</strong> (<code>OUTER JOIN</code>) でも
+      <strong>3つ以上のテーブルを結合すること</strong> ができます。</p>
+      <p>たとえば、n_characters、n_items、n_character_items
+      の3つテーブルが次のような内容であるとします (ここで、<u>下線</u>は「主キー」であること、空欄は
+      <code>NULL</code> であることを表しています)。</p>
+      <p><strong>▼ n_characters テーブル</strong> (再掲)</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>character_id</u></th>
+      <th style="text-align: center;">name</th>
+      <th style="text-align: center;">job_id</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">Marvin</td>
+      <td style="text-align: center;">5</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">Zach</td>
+      <td style="text-align: center;"></td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">Charlie</td>
+      <td style="text-align: center;">6</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">Tom</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">5</td>
+      <td style="text-align: center;">Alice</td>
+      <td style="text-align: center;">5</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>▼ n_items テーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>item_id</u></th>
+      <th style="text-align: center;">name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">Potion</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">High Potion</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">Mega Potion</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">Giga Potion</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">5</td>
+      <td style="text-align: center;">Mana Potion</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>▼ n_character_items テーブル</strong> (中間テーブル)</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>character_id</u></th>
+      <th style="text-align: center;"><u>item_id</u></th>
+      <th style="text-align: center;">qty</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">1</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">5</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>このとき、次のような <strong>キャラを基準として所持アイテムの一覧</strong>
+      を取得したいとします。</p>
+      <pre><code> character_id |  name   |    name     | qty 
+--------------+---------+-------------+-----
+            1 | Marvin  | Potion      |   3
+            1 | Marvin  | High Potion |   2
+            1 | Marvin  | Mega Potion |   1
+            2 | Zach    | Mega Potion |   1
+            3 | Charlie |             |
+            4 | Tom     | Mana Potion |   3
+            4 | Tom     | Potion      |   2
+            5 | Alice   |             |      </code></pre>
+      <p>これは、次のような SQL によって取得することができます。</p>
+      <div class="sourceCode" id="cb22" data-caption="select-outer_join_03.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">SELECT</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>  c.character_id,</span>
+<span id="cb22-3"><a href="#cb22-3"></a>  c.name,</span>
+<span id="cb22-4"><a href="#cb22-4"></a>  i.name,</span>
+<span id="cb22-5"><a href="#cb22-5"></a>  ci.qty</span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="kw">FROM</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a>  n_characters <span class="kw">AS</span> c</span>
+<span id="cb22-8"><a href="#cb22-8"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> n_character_items <span class="kw">AS</span> ci <span class="kw">ON</span> c.character_id <span class="op">=</span> ci.character_id</span>
+<span id="cb22-9"><a href="#cb22-9"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> n_items <span class="kw">AS</span> i <span class="kw">ON</span> ci.item_id <span class="op">=</span> i.item_id</span>
+<span id="cb22-10"><a href="#cb22-10"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a>  c.character_id;</span></code></pre></div>
+      <p>ここでも <code>FROM</code>
+      句のなかでの「<strong>結合の記述順</strong>」が重要となってきます。外部結合のみで構成されている場合、最終的な結果は、<strong>記述した順番に
+      1 個ずつ結合していった場合と同じ</strong>になります。 つまり、記述順に、まず <span
+      class="masked">n_characters と n_character_items</span> を結合し、さらに、その結果に対して
+      <span class="masked">n_items</span> を結合したものと同じになります。</p>
+      <div class="note type-senior">
+      <p><strong>補足</strong></p>
+      <p>ここでの「<strong>最終的な結果は、記述した順番に結合した場合と同じ</strong>」という説明は、「結果の解釈についての話」です。データベース内部においては、最適化の都合により、必ずしも記述した順番で処理されるとは限らないので注意してください。
+      ただし、外部結合のみで構成されている場合、記述した順に結合した場合と同じになることが保証されます。</p>
+      </div>
+      <p>具体的には、まず
+      <code>n_characters AS c LEFT JOIN n_character_items AS ci ON c.character_id = ci.character_id</code>
+      によって、キャラを基準とした次のような結果セットが内部的に得られます。</p>
+      <pre><code> character_id |  name   | job_id | character_id | item_id | qty 
+--------------+---------+--------+--------------+---------+-----
+            1 | Marvin  |      5 |            1 |       1 |   3
+            1 | Marvin  |      5 |            1 |       2 |   2
+            1 | Marvin  |      5 |            1 |       3 |   1
+            2 | Zach    |        |            2 |       3 |   1
+            3 | Charlie |      6 |              |         |
+            4 | Tom     |      1 |            4 |       1 |   2
+            4 | Tom     |      1 |            4 |       5 |   3
+            5 | Alice   |      5 |              |         |</code></pre>
+      <p>つづいて、その結果セットに対して
+      <code>LEFT JOIN n_items AS i ON ci.item_id = i.item_id</code>
+      が適用され、次のような結果になります。</p>
+      <pre><code> character_id |  name   | job_id | character_id | item_id | qty | item_id |    name     
+--------------+---------+--------+--------------+---------+-----+---------+-------------
+            1 | Marvin  |      5 |            1 |       1 |   3 |       1 | Potion
+            1 | Marvin  |      5 |            1 |       2 |   2 |       2 | High Potion
+            1 | Marvin  |      5 |            1 |       3 |   1 |       3 | Mega Potion
+            2 | Zach    |        |            2 |       3 |   1 |       3 | Mega Potion
+            3 | Charlie |      6 |              |         |     |         |
+            4 | Tom     |      1 |            4 |       5 |   3 |       5 | Mana Potion
+            4 | Tom     |      1 |            4 |       1 |   2 |       1 | Potion
+            5 | Alice   |      5 |              |         |     |         |</code></pre>
+      <p>最後に、<code>SELECT</code> 句によって必要なカラムだけが射影され、さらに
+      <code>ORDER BY</code> により整列されて、最終的に次のような結果セットが得られます。</p>
+      <pre><code> character_id |  name   |    name     | qty 
+--------------+---------+-------------+-----
+            1 | Marvin  | Potion      |   3
+            1 | Marvin  | High Potion |   2
+            1 | Marvin  | Mega Potion |   1
+            2 | Zach    | Mega Potion |   1
+            3 | Charlie |             |
+            4 | Tom     | Mana Potion |   3
+            4 | Tom     | Potion      |   2
+            5 | Alice   |             |</code></pre>
+      <p>このように、外部結合を 2
+      つ以上用いる場合は「<strong>どのテーブルを基準に、どの順序で結合するか</strong>」をしっかりと意識することが重要となります。</p>
+      <div class="note type-caution">
+      <p><strong>LEFT JOIN と RIGHT JOIN の併用は避ける</strong></p>
+      <p>3つ以上のテーブルを結合する場合、FROM 句において <strong>LEFT JOIN と RIGHT JOIN
+      を混在させることは、SQL の仕様上は可能</strong> となっています。</p>
+      <p>ただし、実務においては「可読性」や「保守性」の観点から、<strong>外部結合はどちらか一方に統一して記述することが推奨</strong>されます。特に、基準となるテーブルを左側に置き、そこから関連するテーブルを順に結合していくという考え方が分かりやすいため、<code>LEFT JOIN</code>
+      で統一して記述することが一般的となっています。</p>
+      </div>
+      <h3 data-number="2.4.1" id="sqlドリル-1"><span class="header-section-number">2.4.1</span>
+      SQLドリル💻</h3>
+      <p><code>init-n_db.sql</code> で初期化されるテーブル群 <code>n_****</code>
+      について、次の各問いに答えよ。</p>
+      <ul>
+      <li><code>ex-03_1.sql</code> 👉 次のような結果 (アイテムを基準とした所持キャラの一覧) を得る
+      SQL を外部結合を用いて記述せよ。</li>
+      </ul>
+      <pre><code> item_id |    name     | holder | qty 
+---------+-------------+--------+-----
+       1 | Potion      | Marvin |   3
+       1 | Potion      | Tom    |   2
+       2 | High Potion | Marvin |   2
+       3 | Mega Potion | Zach   |   1
+       3 | Mega Potion | Marvin |   1
+       4 | Giga Potion |        |
+       5 | Mana Potion | Tom    |   3</code></pre>
+      <ul>
+      <li><code>ex-03_2.sql</code> 👉 次のような結果 (アイテムを基準とした所持キャラの一覧) を得る
+      SQL を外部結合を用いて記述せよ。
+      <ul>
+      <li><code>NULL</code> の処理に注意すること</li>
+      </ul></li>
+      </ul>
+      <pre><code> item_id |    name     | holder |   job   | qty 
+---------+-------------+--------+---------+-----
+       1 | Potion      | Marvin | Priest  |   3
+       1 | Potion      | Tom    | Fighter |   2
+       2 | High Potion | Marvin | Priest  |   2
+       3 | Mega Potion | Marvin | Priest  |   1
+       3 | Mega Potion | Zach   | ---     |   1
+       4 | Giga Potion | ---    | ---     |   0
+       5 | Mana Potion | Tom    | Fighter |   3</code></pre>
+      <ul>
+      <li><code>ex-03_3.sql</code> 👉 次のような結果 (キャラを基準とした所持アイテム総数の一覧)
+      を得る SQL を外部結合を用いて記述せよ。
+      <ul>
+      <li>アイテム未所持のキャラについても出力に含めること</li>
+      <li>文字列の結合については<a
+      href="lecture03.html#カラム値に文字列演算と算術演算を適用する">第03回講義</a>で学習済み</li>
+      </ul></li>
+      </ul>
+      <pre><code> character_id |    name (job)    | total_qty 
+--------------+------------------+-----------
+            1 | Marvin (Priest)  |         6
+            2 | Zach             |         1
+            3 | Charlie (Wizard) |         0
+            4 | Tom (Fighter)    |         5
+            5 | Alice (Priest)   |         0</code></pre>
+      <ul>
+      <li><code>ex-03_4.sql</code> 👉 次のような結果 (アイテムを基準とした所持キャラ人数) を得る SQL
+      を外部結合を用いて記述せよ。</li>
+      </ul>
+      <pre><code> item_id |    name     | holder_count 
+---------+-------------+--------------
+       1 | Potion      |            2
+       2 | High Potion |            1
+       3 | Mega Potion |            2
+       4 | Giga Potion |            0
+       5 | Mana Potion |            1</code></pre>
+      <h3 data-number="2.4.2" id="定着確認-1"><span class="header-section-number">2.4.2</span>
+      定着確認</h3>
+      <ul>
+      <li>SQLの仕様上、<code>FROM</code> 句において <code>LEFT JOIN</code> と
+      <code>RIGHT JOIN</code>
+      を混在させることはできない。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない。</span></li>
+      </ul></li>
+      <li>左外部結合 (<code>LEFT OUTER JOIN</code>)
+      のみで構成される場合、結合の記述順序を変更すると、結果セットの正味の内容が変化することがある。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切である。</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="2.5" id="内部結合と外部結合を混在させた場合の注意点"><span
+      class="header-section-number">2.5</span> 内部結合と外部結合を混在させた場合の注意点</h2>
+      <p><code>FROM</code> 句のなかで <strong>内部結合</strong> と <strong>外部結合</strong>
+      を混在させることも可能ですが、その挙動は初学者にとって直感に反しやすいため注意が必要となります。</p>
+      <p>たとえば、さきほどの <code>select-outer_join_03.sql</code>
+      (＝キャラを基準とした所持アイテムの一覧を出力するSQL) の <code>FROM</code>
+      句を、次のように書き換えたとします。</p>
+      <div class="sourceCode" id="cb30" data-caption="select-outer_join_03.sql・改"
+      data-startFrom="6"><pre class="sourceCode numberSource sql numberLines"><code class="sourceCode sql" style="counter-reset: source-line 5;"><span id="cb30-6"><a href="#cb30-6"></a><span class="kw">FROM</span></span>
+<span id="cb30-7"><a href="#cb30-7"></a>  n_characters <span class="kw">AS</span> c</span>
+<span id="cb30-8"><a href="#cb30-8"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> n_character_items <span class="kw">AS</span> ci <span class="kw">ON</span> c.character_id <span class="op">=</span> ci.character_id</span>
+<span id="cb30-9"><a href="#cb30-9"></a>  <span class="kw">JOIN</span> n_items <span class="kw">AS</span> i <span class="kw">ON</span> ci.item_id <span class="op">=</span> i.item_id <span class="co">-- LEFT JOIN を JOIN に変更</span></span></code></pre></div>
+      <p>ここで、<strong>第09行目</strong> の
+      <code>JOIN n_items AS i ON ci.item_id = i.item_id</code> だけに着目すると「n_character_items
+      と n_items を item_id で内部結合している」という処理をするように読めて、一見すると問題がない
+      (<code>LEFT JOIN</code> と同じ結果が得られる) ように感じられます。</p>
+      <p>しかし、実際に実行してみると、次のような結果になります。</p>
+      <pre><code> character_id |  name  |    name     | qty 
+--------------+--------+-------------+-----
+            1 | Marvin | Potion      |   3
+            1 | Marvin | High Potion |   2
+            1 | Marvin | Mega Potion |   1
+            2 | Zach   | Mega Potion |   1
+            4 | Tom    | Potion      |   2
+            4 | Tom    | Mana Potion |   3</code></pre>
+      <p>これは、結合処理内容が…</p>
+      <ul>
+      <li>n_character_items と n_items を、<strong>item_id</strong> で内部結合している</li>
+      </ul>
+      <p>…のではなく、実際には…</p>
+      <ul>
+      <li><u>n_characters と n_character_items を<strong>外部結合</strong>した結果</u> と n_items を
+      <strong>item_id</strong> で内部結合している</li>
+      </ul>
+      <p>…ためです。 n_characters と n_character_items を <strong>外部結合</strong>
+      (<code>LEFT JOIN</code>) した結果は、以下のようになります。</p>
+      <pre><code> character_id |  name   | job_id | character_id | item_id | qty 
+--------------+---------+--------+--------------+---------+-----
+            1 | Marvin  |      5 |            1 |       1 |   3
+            1 | Marvin  |      5 |            1 |       2 |   2
+            1 | Marvin  |      5 |            1 |       3 |   1
+            2 | Zach    |        |            2 |       3 |   1
+            3 | Charlie |      6 |              |         |
+            4 | Tom     |      1 |            4 |       1 |   2
+            4 | Tom     |      1 |            4 |       5 |   3
+            5 | Alice   |      5 |              |         |</code></pre>
+      <p>ここから分かるように、Charlie と Alice の行の <strong>item_id</strong> カラムは
+      <code>NULL</code> となります。これに対して n_items テーブルと <strong>item_id</strong>
+      による内部結合が行われるため、item_id が <code>NULL</code>
+      の行は結合条件を満たさず、最終的な結果セットから除外されます。</p>
+      <p>このように、内部結合と外部結合を混在させると<strong>「どの時点で内部結合が適用されるのか」</strong>によって、大きく結果が変わるため注意してください。</p>
+      <div class="note type-senior">
+      <p><code>select-outer_join_03.sql</code>
+      と同様の結果セットを、外部結合と内部結合の組み合わせで取得したい場合は、次のように
+      <strong>括弧を用いて結合順序を明示的に指定</strong> します。</p>
+      <div class="sourceCode" id="cb33" data-caption="select-outer_join_04.sql（非推奨）"
+      data-startFrom="6"><pre class="sourceCode numberSource sql numberLines"><code class="sourceCode sql" style="counter-reset: source-line 5;"><span id="cb33-6"><a href="#cb33-6"></a><span class="kw">FROM</span></span>
+<span id="cb33-7"><a href="#cb33-7"></a>  n_characters <span class="kw">AS</span> c</span>
+<span id="cb33-8"><a href="#cb33-8"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> (</span>
+<span id="cb33-9"><a href="#cb33-9"></a>    n_character_items <span class="kw">AS</span> ci</span>
+<span id="cb33-10"><a href="#cb33-10"></a>    <span class="kw">JOIN</span> n_items <span class="kw">AS</span> i <span class="kw">ON</span> ci.item_id <span class="op">=</span> i.item_id</span>
+<span id="cb33-11"><a href="#cb33-11"></a>  ) <span class="kw">ON</span> c.character_id <span class="op">=</span> ci.character_id</span></code></pre></div>
+      <p>ただし、このような記述は構造が複雑で、可読性が悪くなりがちです。そのため、特別な理由がない限り
+      <code>LEFT JOIN</code> のみで表現する方が可読性・保守性の両面で望ましいと言えます。</p>
+      </div>
+      <h3 data-number="2.5.1" id="定着確認-2"><span class="header-section-number">2.5.1</span>
+      定着確認</h3>
+      <ul>
+      <li><code>FROM</code> 句において、内部結合と外部結合を混在させることは SQL
+      の仕様上は問題ない。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切である。</span></li>
+      </ul></li>
+      </ul>
+      <p><strong><em>問題1</em></strong> 次の SQL を実行したときに得られるものは、以下の
+      <strong>結果セット A</strong> から <strong>C</strong> のうちどれか。</p>
+      <ul>
+      <li>答え: <span class="masked">結果セットB</span></li>
+      </ul>
+      <div class="sourceCode" id="cb34" data-caption="SQL-1.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb34-1"><a href="#cb34-1"></a><span class="kw">SELECT</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>  i.item_id, i.name <span class="kw">AS</span> <span class="ot">&quot;item&quot;</span>, c.name <span class="kw">AS</span> <span class="ot">&quot;character&quot;</span>, j.name <span class="kw">AS</span> <span class="ot">&quot;job&quot;</span>, ci.qty</span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="kw">FROM</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a>  n_items <span class="kw">AS</span> i</span>
+<span id="cb34-5"><a href="#cb34-5"></a>  <span class="kw">JOIN</span> n_character_items <span class="kw">AS</span> ci <span class="kw">ON</span> i.item_id <span class="op">=</span> ci.item_id <span class="co">-- ◀ 内部結合</span></span>
+<span id="cb34-6"><a href="#cb34-6"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> n_characters <span class="kw">AS</span> c <span class="kw">ON</span> ci.character_id <span class="op">=</span> c.character_id</span>
+<span id="cb34-7"><a href="#cb34-7"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> n_jobs <span class="kw">AS</span> j <span class="kw">ON</span> c.job_id <span class="op">=</span> j.job_id</span>
+<span id="cb34-8"><a href="#cb34-8"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb34-9"><a href="#cb34-9"></a>  i.item_id, c.character_id;</span></code></pre></div>
+      <p><strong>▼ 結果セット A</strong></p>
+      <pre><code>item_id |    item     | character |   job   | qty 
+---------+-------------+-----------+---------+-----
+       1 | Potion      | Marvin    | Priest  |   3
+       1 | Potion      | Tom       | Fighter |   2
+       2 | High Potion | Marvin    | Priest  |   2
+       3 | Mega Potion | Marvin    | Priest  |   1
+       5 | Mana Potion | Tom       | Fighter |   3</code></pre>
+      <p><strong>▼ 結果セット B</strong></p>
+      <pre><code> item_id |    item     | character |   job   | qty 
+---------+-------------+-----------+---------+-----
+       1 | Potion      | Marvin    | Priest  |   3
+       1 | Potion      | Tom       | Fighter |   2
+       2 | High Potion | Marvin    | Priest  |   2
+       3 | Mega Potion | Marvin    | Priest  |   1
+       3 | Mega Potion | Zach      |         |   1
+       5 | Mana Potion | Tom       | Fighter |   3</code></pre>
+      <p><strong>▼ 結果セット C</strong></p>
+      <pre><code> item_id |    item     | character |   job   | qty 
+---------+-------------+-----------+---------+-----
+       1 | Potion      | Marvin    | Priest  |   3
+       1 | Potion      | Tom       | Fighter |   2
+       2 | High Potion | Marvin    | Priest  |   2
+       3 | Mega Potion | Marvin    | Priest  |   1
+       3 | Mega Potion | Zach      |         |   1
+       4 | Giga Potion |           |         |
+       5 | Mana Potion | Tom       | Fighter |   3</code></pre>
+      <hr />
+      <p><strong><em>問題2</em></strong> 次の SQL を実行したとき得られるものは、<strong>結果セット
+      A</strong> から <strong>C</strong> のうちどれか (結果セットの選択肢は
+      <strong><em>問題1</em></strong> と同じ)。</p>
+      <ul>
+      <li>答え: <span class="masked">結果セットA</span></li>
+      </ul>
+      <div class="sourceCode" id="cb38" data-caption="SQL-2.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">SELECT</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>  i.item_id, i.name <span class="kw">AS</span> <span class="ot">&quot;item&quot;</span>, c.name <span class="kw">AS</span> <span class="ot">&quot;character&quot;</span>, j.name <span class="kw">AS</span> <span class="ot">&quot;job&quot;</span>, ci.qty</span>
+<span id="cb38-3"><a href="#cb38-3"></a><span class="kw">FROM</span></span>
+<span id="cb38-4"><a href="#cb38-4"></a>  n_items <span class="kw">AS</span> i</span>
+<span id="cb38-5"><a href="#cb38-5"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> n_character_items <span class="kw">AS</span> ci <span class="kw">ON</span> i.item_id <span class="op">=</span> ci.item_id</span>
+<span id="cb38-6"><a href="#cb38-6"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> n_characters <span class="kw">AS</span> c <span class="kw">ON</span> ci.character_id <span class="op">=</span> c.character_id</span>
+<span id="cb38-7"><a href="#cb38-7"></a>  <span class="kw">JOIN</span> n_jobs <span class="kw">AS</span> j <span class="kw">ON</span> c.job_id <span class="op">=</span> j.job_id <span class="co">-- ◀ 内部結合</span></span>
+<span id="cb38-8"><a href="#cb38-8"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb38-9"><a href="#cb38-9"></a>  i.item_id, c.character_id;</span></code></pre></div>
+      <hr />
+      <p><strong><em>問題3</em></strong> 次の SQL を実行したとき得られるものは、<strong>結果セット
+      A</strong> から <strong>C</strong> のうちどれか (結果セットの選択肢は
+      <strong><em>問題1</em></strong> と同じ)。</p>
+      <ul>
+      <li>答え: <span class="masked">結果セットB</span></li>
+      </ul>
+      <div class="sourceCode" id="cb39" data-caption="SQL-3.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb39-1"><a href="#cb39-1"></a><span class="kw">SELECT</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a>  i.item_id, i.name <span class="kw">AS</span> <span class="ot">&quot;item&quot;</span>, c.name <span class="kw">AS</span> <span class="ot">&quot;character&quot;</span>, j.name <span class="kw">AS</span> <span class="ot">&quot;job&quot;</span>, ci.qty</span>
+<span id="cb39-3"><a href="#cb39-3"></a><span class="kw">FROM</span></span>
+<span id="cb39-4"><a href="#cb39-4"></a>  n_items <span class="kw">AS</span> i</span>
+<span id="cb39-5"><a href="#cb39-5"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> n_character_items <span class="kw">AS</span> ci <span class="kw">ON</span> i.item_id <span class="op">=</span> ci.item_id</span>
+<span id="cb39-6"><a href="#cb39-6"></a>  <span class="kw">JOIN</span> n_characters <span class="kw">AS</span> c <span class="kw">ON</span> ci.character_id <span class="op">=</span> c.character_id <span class="co">-- ◀ 内部結合</span></span>
+<span id="cb39-7"><a href="#cb39-7"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> n_jobs <span class="kw">AS</span> j <span class="kw">ON</span> c.job_id <span class="op">=</span> j.job_id</span>
+<span id="cb39-8"><a href="#cb39-8"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb39-9"><a href="#cb39-9"></a>  i.item_id, c.character_id;</span></code></pre></div>
+      <h1 data-number="3" id="完全外部結合-full-outer-join"><span
+      class="header-section-number">3</span> 完全外部結合 (FULL OUTER JOIN)</h1>
+      <p>テーブルを結合する際、<u>左右どちらにしか存在しない行も含めるような外部結合</u>を「<strong>完全外部結合</strong>
+      (<code>FULL OUTER JOIN</code>)」と言います。完全外部結合は「全結合」とも呼ばれることもあります。また、標準SQL
+      では <code>FULL JOIN</code> という省略形を用いることもできます。</p>
+      <p>テーブル同士に適切な <strong>FK制約</strong> (<strong>外部キー制約</strong>)
+      が設定されている場合、それらのテーブルの結合は、<strong>内部結合</strong>
+      (<code>INNER JOIN</code>) もしくは <strong>左外部結合</strong> (<code>LEFT OUTER JOIN</code>)
+      で <u>要件を満たせることがほとんど</u> であり、<strong>完全外部結合</strong>
+      (<code>FULL OUTER JOIN</code>) が必要となるケースは限定的となります。</p>
+      <p>完全外部結合が使われるのは、<span
+      class="masked">直接つながっていないテーブル同士を比較したい場合</span> や <span
+      class="masked">「差分」や「過不足」を確認したい場面</span> となります。</p>
+      <p>ここでは、ギルド「Yamato」と「D.D.D」に所属するキャラクタの一覧を「<strong>比較</strong>」する例を考えます
+      (いま、キャラクタは複数のギルドに所属可能である前提とします)。</p>
+      <div class="note type-caution">
+      <p><strong>注意</strong></p>
+      <p>ここからは、<strong>前回講義で扱ったテーブル群</strong> ( <code>x_****</code> )
+      を使用します。<code>from-teacher/10/create-x_db.sql</code> と <code>insert-x_db_01.sql</code>
+      を再実行しておいてください。</p>
+      </div>
+      <p>まず、<code>Yamato</code> に所属するキャラは、内部結合を用いて次のように取得できます。</p>
+      <div class="sourceCode" id="cb40" data-caption="ギルド「Yamato」の所属メンバの抽出"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb40-1"><a href="#cb40-1"></a><span class="kw">SELECT</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a>  c.character_id,</span>
+<span id="cb40-3"><a href="#cb40-3"></a>  c.name</span>
+<span id="cb40-4"><a href="#cb40-4"></a><span class="kw">FROM</span></span>
+<span id="cb40-5"><a href="#cb40-5"></a>  x_characters <span class="kw">AS</span> c</span>
+<span id="cb40-6"><a href="#cb40-6"></a>  <span class="kw">JOIN</span> x_guild_characters <span class="kw">AS</span> gc <span class="kw">ON</span> gc.character_id <span class="op">=</span> c.character_id</span>
+<span id="cb40-7"><a href="#cb40-7"></a>  <span class="kw">JOIN</span> x_guilds <span class="kw">AS</span> g <span class="kw">ON</span> gc.guild_id <span class="op">=</span> g.guild_id</span>
+<span id="cb40-8"><a href="#cb40-8"></a><span class="kw">WHERE</span></span>
+<span id="cb40-9"><a href="#cb40-9"></a>  g.name <span class="op">=</span> <span class="st">&#39;Yamato&#39;</span>;</span></code></pre></div>
+      <p>実行結果は、次のようになります。</p>
+      <pre><code> character_id |  name  
+--------------+--------
+            1 | Marvin
+           12 | Dave
+           15 | Trent
+            6 | Alice
+            7 | Trudy</code></pre>
+      <p>また、<strong>第09行目</strong> を <code>g.name = 'D.D.D</code>
+      に変更すれば、<code>D.D.D</code> の所属キャラを次のように取得できます。</p>
+      <pre><code> character_id |  name  
+--------------+--------
+           11 | Ellen
+            2 | Zach
+            6 | Alice
+           13 | Mallet
+           14 | Eve
+           17 | Wendy</code></pre>
+      <p>以上を踏まえて、これら (各ギルドの所属キャラの) の比較に <strong>完全外部結合</strong>
+      (<code>FULL OUTER JOIN</code>) を使用する例を示します。</p>
+      <div class="sourceCode" id="cb43" data-caption="select-full_outer_join.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb43-1"><a href="#cb43-1"></a><span class="kw">SELECT</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">COALESCE</span>(c1.character_id, c2.character_id) <span class="kw">AS</span> <span class="ot">&quot;c_id&quot;</span>,</span>
+<span id="cb43-3"><a href="#cb43-3"></a>  c1.name <span class="kw">AS</span> <span class="ot">&quot;Yamato&quot;</span>,</span>
+<span id="cb43-4"><a href="#cb43-4"></a>  c2.name <span class="kw">AS</span> <span class="ot">&quot;D.D.D&quot;</span></span>
+<span id="cb43-5"><a href="#cb43-5"></a><span class="kw">FROM</span></span>
+<span id="cb43-6"><a href="#cb43-6"></a>  (</span>
+<span id="cb43-7"><a href="#cb43-7"></a>    <span class="kw">SELECT</span></span>
+<span id="cb43-8"><a href="#cb43-8"></a>      c.character_id,</span>
+<span id="cb43-9"><a href="#cb43-9"></a>      c.name</span>
+<span id="cb43-10"><a href="#cb43-10"></a>    <span class="kw">FROM</span></span>
+<span id="cb43-11"><a href="#cb43-11"></a>      x_characters <span class="kw">AS</span> c</span>
+<span id="cb43-12"><a href="#cb43-12"></a>      <span class="kw">JOIN</span> x_guild_characters <span class="kw">AS</span> gc <span class="kw">ON</span> gc.character_id <span class="op">=</span> c.character_id</span>
+<span id="cb43-13"><a href="#cb43-13"></a>      <span class="kw">JOIN</span> x_guilds <span class="kw">AS</span> g <span class="kw">ON</span> gc.guild_id <span class="op">=</span> g.guild_id</span>
+<span id="cb43-14"><a href="#cb43-14"></a>    <span class="kw">WHERE</span></span>
+<span id="cb43-15"><a href="#cb43-15"></a>      g.name <span class="op">=</span> <span class="st">&#39;Yamato&#39;</span></span>
+<span id="cb43-16"><a href="#cb43-16"></a>  ) <span class="kw">AS</span> c1</span>
+<span id="cb43-17"><a href="#cb43-17"></a>  <span class="kw">FULL</span> <span class="kw">OUTER</span> <span class="kw">JOIN</span> ( <span class="co">-- ◀ 完全外部結合</span></span>
+<span id="cb43-18"><a href="#cb43-18"></a>    <span class="kw">SELECT</span></span>
+<span id="cb43-19"><a href="#cb43-19"></a>      c.character_id,</span>
+<span id="cb43-20"><a href="#cb43-20"></a>      c.name</span>
+<span id="cb43-21"><a href="#cb43-21"></a>    <span class="kw">FROM</span></span>
+<span id="cb43-22"><a href="#cb43-22"></a>      x_characters <span class="kw">AS</span> c</span>
+<span id="cb43-23"><a href="#cb43-23"></a>      <span class="kw">JOIN</span> x_guild_characters <span class="kw">AS</span> gc <span class="kw">ON</span> gc.character_id <span class="op">=</span> c.character_id</span>
+<span id="cb43-24"><a href="#cb43-24"></a>      <span class="kw">JOIN</span> x_guilds <span class="kw">AS</span> g <span class="kw">ON</span> gc.guild_id <span class="op">=</span> g.guild_id</span>
+<span id="cb43-25"><a href="#cb43-25"></a>    <span class="kw">WHERE</span></span>
+<span id="cb43-26"><a href="#cb43-26"></a>      g.name <span class="op">=</span> <span class="st">&#39;D.D.D&#39;</span></span>
+<span id="cb43-27"><a href="#cb43-27"></a>  ) <span class="kw">AS</span> c2 <span class="kw">ON</span> c1.character_id <span class="op">=</span> c2.character_id</span>
+<span id="cb43-28"><a href="#cb43-28"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb43-29"><a href="#cb43-29"></a>  c1.character_id,</span>
+<span id="cb43-30"><a href="#cb43-30"></a>  c2.character_id;</span></code></pre></div>
+      <ul>
+      <li><strong>第07行目</strong> から <strong>第15行目</strong>
+      に、先ほど示した<strong>「Yamato」の所属メンバの抽出</strong> の <code>SELECT</code>
+      文がサブクエリとして埋め込まれています。<strong>第18行目</strong> から
+      <strong>第26行目</strong> も同様です。</li>
+      <li><strong>第02行目</strong> で <code>COALESCE(c1.character_id, c2.character_id)</code>
+      を使用しているのは、左右どちらか一方にしか存在しない行でも、キャラクタID
+      を欠損させずに表示するためです。</li>
+      </ul>
+      <p>実行結果は次のようになります。</p>
+      <pre><code> c_id | Yamato | D.D.D  
+------+--------+--------
+    1 | Marvin |
+    6 | Alice  | Alice
+    7 | Trudy  |
+   12 | Dave   |
+   15 | Trent  |
+    2 |        | Zach
+   11 |        | Ellen
+   13 |        | Mallet
+   14 |        | Eve
+   17 |        | Wendy</code></pre>
+      <p>この結果セットでは「<strong>両ギルドに所属しているキャラ</strong>」と「<strong>どちらか一方にしか所属していないキャラ</strong>」が明確に分離して表示されます。このような用途は
+      <span class="masked">年度マスタの比較</span> や <span
+      class="masked">設定変更前後の差分確認</span> で頻出します。</p>
+      <p>以上のように完全外部結合は、日常的なデータ取得よりも、比較・検証といった用途で用いられることが多くなります。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>SQL
+      に関する質問です。完全外部結合の「つかいどころ」がいまいちわかりません。どんな場面で使用されるか具体例とともに解説してください。</p>
+      </blockquote>
+      <h3 data-number="3.0.1" id="定着確認-3"><span class="header-section-number">3.0.1</span>
+      定着確認</h3>
+      <ul>
+      <li>標準SQLにおいて <code>OUTER JOIN</code>
+      と記述した場合、それは「完全外部結合」として解釈される。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない。</span></li>
+      </ul></li>
+      <li>完全外部結合においては、結合順を入れ替えると結果セットの正味の内容 (集合としての行)
+      が変化することがある。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない。</span></li>
+      </ul></li>
+      <li>標準SQLにおいて、完全外部結合を表す正式なキーワードは <code>FULL OUTER JOIN</code>
+      である。なお、このキーワードは (　　　)
+      という省略形で記述することができる。括弧にあてはまる語を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked"><code>FULL JOIN</code></span></li>
+      </ul></li>
+      </ul>
+      <h3 data-number="3.0.2" id="sqlドリル-2"><span class="header-section-number">3.0.2</span>
+      SQLドリル💻</h3>
+      <p><code>create-x_db.sql</code> と <code>insert-x_db_01.sql</code>
+      で初期化されるテーブル群について、次の各問いに答えよ。</p>
+      <ul>
+      <li><code>ex-04_1.sql</code> 👉 次のような結果を得る SQL を完全外部結合を用いて記述せよ。</li>
+      </ul>
+      <pre><code> i_id |    item_name     | Marvin | Jack | Alice |    description     
+------+------------------+--------+------+-------+--------------------
+    1 | Potion           |      2 |      |       | 単体HPを小回復
+    3 | Mega Potion      |        |    1 |       | 単体HPを大回復
+    5 | Mana Potion      |        |      |     2 | 単体MPを小回復
+    6 | High Mana Potion |        |    1 |       | 単体MPを大回復
+    7 | Antidote         |      1 |      |       | 毒状態を回復
+    9 | Angel Feather    |        |    1 |     1 | 戦闘不能を回復
+   10 | Chimera Wing     |      1 |    2 |     1 | 指定の街に瞬間移動</code></pre>
+      <h1 data-number="4" id="直積-cross-join"><span class="header-section-number">4</span> 直積
+      (CROSS JOIN)</h1>
+      <p><strong>直積</strong> (<code>CROSS JOIN</code>) は <strong>結合条件を使用せずに
+      <u>2つのテーブルの全組み合わせ</u></strong>
+      を生成する結合となります。左側のテーブルの各行に対して、右側のテーブルのすべての行が組み合わされるため、結果セットの行数は「<strong>左テーブルの行数</strong>
+      <span class="math inline">\(\times\)</span>
+      <strong>右テーブルの行数</strong>」となります。</p>
+      <ul>
+      <li>直積は「クロス結合」とも呼ばれます。</li>
+      </ul>
+      <div class="sourceCode" id="cb46" data-caption="SQL-3.sql"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb46-1"><a href="#cb46-1"></a><span class="kw">SELECT</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a>  c.character_id,</span>
+<span id="cb46-3"><a href="#cb46-3"></a>  c.name,</span>
+<span id="cb46-4"><a href="#cb46-4"></a>  j.job_id,</span>
+<span id="cb46-5"><a href="#cb46-5"></a>  j.name <span class="kw">AS</span> <span class="ot">&quot;job&quot;</span></span>
+<span id="cb46-6"><a href="#cb46-6"></a><span class="kw">FROM</span></span>
+<span id="cb46-7"><a href="#cb46-7"></a>  n_characters <span class="kw">AS</span> c</span>
+<span id="cb46-8"><a href="#cb46-8"></a>  <span class="kw">CROSS</span> <span class="kw">JOIN</span> n_jobs <span class="kw">AS</span> j <span class="co">-- 直積</span></span>
+<span id="cb46-9"><a href="#cb46-9"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb46-10"><a href="#cb46-10"></a>  c.character_id,</span>
+<span id="cb46-11"><a href="#cb46-11"></a>  j.job_id;</span></code></pre></div>
+      <p>実行結果は、次のようになります。</p>
+      <pre><code> character_id |  name   | job_id |   job   
+--------------+---------+--------+---------
+            1 | Marvin  |      1 | Fighter
+            1 | Marvin  |      2 | Monk
+            1 | Marvin  |      3 | Ninja
+            1 | Marvin  |      4 | Samurai
+            1 | Marvin  |      5 | Priest
+            1 | Marvin  |      6 | Wizard
+            2 | Zach    |      1 | Fighter
+            2 | Zach    |      2 | Monk
+            2 | Zach    |      3 | Ninja
+            2 | Zach    |      4 | Samurai
+            2 | Zach    |      5 | Priest
+            2 | Zach    |      6 | Wizard
+            3 | Charlie |      1 | Fighter
+            3 | Charlie |      2 | Monk
+ ～以下略～</code></pre>
+      <p>直積は <span class="masked">テストデータの生成</span>
+      や全パターンの列挙など用途が明確な場合にのみ使用される結合となります。</p>
+      <p>通常のデータ取得ではほとんど使われず、意図せず直積が発生すると、結果セットが爆発的に増加し、パフォーマンス低下の原因となる点に注意してください。</p>
+      <h3 data-number="4.0.1" id="定着確認-4"><span class="header-section-number">4.0.1</span>
+      定着確認</h3>
+      <ul>
+      <li>SQLにおいて、「直積」は「全結合」ともよばれる。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない。</span></li>
+      </ul></li>
+      <li>クロス結合においては、結合順を入れ替えると結果セットの正味の内容 (集合としての行)
+      が変化することがある。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">適切ではない。</span></li>
+      </ul></li>
+      <li>クロス結合は (　　　) とも呼ばれる。 括弧にあてはまる語を漢字2文字で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">直積</span></li>
+      </ul></li>
+      </ul>
+      <h3 data-number="4.0.2" id="定着確認-5"><span class="header-section-number">4.0.2</span>
+      定着確認</h3>
+      <p>次に示すテーブル群 (table1、table2、table3) に対する SQL 操作に関する各問いに答えよ。</p>
+      <p><strong>▼ table1</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>id</u></th>
+      <th style="text-align: center;">tbl2_id</th>
+      <th style="text-align: center;">tbl3_id</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;"></td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">5</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">2</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">5</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;"></td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">6</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">3</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>▼ table2</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>id</u></th>
+      <th style="text-align: center;">attr_a</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">hoge</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">fuga</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">piyo</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">hogera</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>▼ table3</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: center;"><u>id</u></th>
+      <th style="text-align: center;">attr_b</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">foo</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">bar</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">3</td>
+      <td style="text-align: center;">baz</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">qux</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: center;">5</td>
+      <td style="text-align: center;">quux</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong><em>問題1</em></strong>: 次の SQL によって得られる結果セットのレコード数 (行数)
+      を答えよ。<strong>答え</strong>: <span class="masked">4行</span></p>
+      <div class="sourceCode" id="cb48" data-caption="問題1"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb48-1"><a href="#cb48-1"></a><span class="kw">SELECT</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a>  <span class="op">*</span></span>
+<span id="cb48-3"><a href="#cb48-3"></a><span class="kw">FROM</span></span>
+<span id="cb48-4"><a href="#cb48-4"></a>  table2 <span class="kw">AS</span> t2</span>
+<span id="cb48-5"><a href="#cb48-5"></a>  <span class="kw">JOIN</span> table1 <span class="kw">AS</span> t1 <span class="kw">ON</span> t2.<span class="kw">id</span> <span class="op">=</span> t1.tbl2_id;</span></code></pre></div>
+      <p><strong><em>問題2</em></strong>: 次の SQL によって得られる結果セットのレコード数 (行数)
+      を答えよ。<strong>答え</strong>: <span class="masked">6行</span></p>
+      <div class="sourceCode" id="cb49" data-caption="問題2"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb49-1"><a href="#cb49-1"></a><span class="kw">SELECT</span></span>
+<span id="cb49-2"><a href="#cb49-2"></a>  <span class="op">*</span></span>
+<span id="cb49-3"><a href="#cb49-3"></a><span class="kw">FROM</span></span>
+<span id="cb49-4"><a href="#cb49-4"></a>  table2 <span class="kw">AS</span> t2</span>
+<span id="cb49-5"><a href="#cb49-5"></a>  <span class="kw">RIGHT</span> <span class="kw">JOIN</span> table1 <span class="kw">AS</span> t1 <span class="kw">ON</span> t2.<span class="kw">id</span> <span class="op">=</span> t1.tbl2_id;</span></code></pre></div>
+      <p><strong><em>問題3</em></strong>: 次の SQL によって得られる結果セットのレコード数 (行数)
+      を答えよ。<strong>答え</strong>: <span class="masked">5行</span></p>
+      <div class="sourceCode" id="cb50" data-caption="問題3"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">SELECT</span></span>
+<span id="cb50-2"><a href="#cb50-2"></a>  <span class="op">*</span></span>
+<span id="cb50-3"><a href="#cb50-3"></a><span class="kw">FROM</span></span>
+<span id="cb50-4"><a href="#cb50-4"></a>  table2 <span class="kw">AS</span> t2</span>
+<span id="cb50-5"><a href="#cb50-5"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> table1 <span class="kw">AS</span> t1 <span class="kw">ON</span> t2.<span class="kw">id</span> <span class="op">=</span> t1.tbl2_id;</span></code></pre></div>
+      <p><strong><em>問題4</em></strong>: 次の SQL によって得られる結果セットのレコード数 (行数)
+      を答えよ。<strong>答え</strong>: <span class="masked">8行</span></p>
+      <div class="sourceCode" id="cb51" data-caption="問題4"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb51-1"><a href="#cb51-1"></a><span class="kw">SELECT</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a>  <span class="op">*</span></span>
+<span id="cb51-3"><a href="#cb51-3"></a><span class="kw">FROM</span></span>
+<span id="cb51-4"><a href="#cb51-4"></a>  table3 <span class="kw">AS</span> t3</span>
+<span id="cb51-5"><a href="#cb51-5"></a>  <span class="kw">FULL</span> <span class="kw">JOIN</span> table1 <span class="kw">AS</span> t1 <span class="kw">ON</span> t3.<span class="kw">id</span> <span class="op">=</span> t1.tbl3_id;</span></code></pre></div>
+      <p><strong><em>問題5</em></strong>: 次の SQL によって得られる結果セットのレコード数 (行数)
+      を答えよ。<strong>答え</strong>: <span class="masked">20行</span></p>
+      <div class="sourceCode" id="cb52" data-caption="問題5"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb52-1"><a href="#cb52-1"></a><span class="kw">SELECT</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a>  <span class="op">*</span></span>
+<span id="cb52-3"><a href="#cb52-3"></a><span class="kw">FROM</span></span>
+<span id="cb52-4"><a href="#cb52-4"></a>  table2 <span class="kw">AS</span> t2</span>
+<span id="cb52-5"><a href="#cb52-5"></a>  <span class="kw">CROSS</span> <span class="kw">JOIN</span> table3 <span class="kw">AS</span> t3;</span></code></pre></div>
+      <p><strong><em>問題6</em></strong>: 次の SQL によって得られる結果セットのレコード数 (行数)
+      を答えよ。<strong>答え</strong>: <span class="masked">6行</span></p>
+      <div class="sourceCode" id="cb53" data-caption="問題6"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb53-1"><a href="#cb53-1"></a><span class="kw">SELECT</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a>  <span class="op">*</span></span>
+<span id="cb53-3"><a href="#cb53-3"></a><span class="kw">FROM</span></span>
+<span id="cb53-4"><a href="#cb53-4"></a>  table1 <span class="kw">AS</span> t1</span>
+<span id="cb53-5"><a href="#cb53-5"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> table2 <span class="kw">AS</span> t2 <span class="kw">ON</span> t1.tbl2_id <span class="op">=</span> t2.<span class="kw">id</span></span>
+<span id="cb53-6"><a href="#cb53-6"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> table3 <span class="kw">AS</span> t3 <span class="kw">ON</span> t1.tbl3_id <span class="op">=</span> t3.<span class="kw">id</span>;</span></code></pre></div>
+      <p><strong><em>問題7</em></strong>: 次の SQL によって得られる結果セットのレコード数 (行数)
+      を答えよ。<strong>答え</strong>: <span class="masked">4行</span></p>
+      <div class="sourceCode" id="cb54" data-caption="問題7"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb54-1"><a href="#cb54-1"></a><span class="kw">SELECT</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a>  <span class="op">*</span></span>
+<span id="cb54-3"><a href="#cb54-3"></a><span class="kw">FROM</span></span>
+<span id="cb54-4"><a href="#cb54-4"></a>  table1 <span class="kw">AS</span> t1</span>
+<span id="cb54-5"><a href="#cb54-5"></a>  <span class="kw">JOIN</span> table2 <span class="kw">AS</span> t2 <span class="kw">ON</span> t1.tbl2_id <span class="op">=</span> t2.<span class="kw">id</span></span>
+<span id="cb54-6"><a href="#cb54-6"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> table3 <span class="kw">AS</span> t3 <span class="kw">ON</span> t1.tbl3_id <span class="op">=</span> t3.<span class="kw">id</span>;</span></code></pre></div>
+      <p><strong><em>問題8</em></strong>: 次の SQL によって得られる結果セットのレコード数 (行数)
+      を答えよ。<strong>答え</strong>: <span class="masked">4行</span></p>
+      <div class="sourceCode" id="cb55" data-caption="問題8"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb55-1"><a href="#cb55-1"></a><span class="kw">SELECT</span></span>
+<span id="cb55-2"><a href="#cb55-2"></a>  <span class="op">*</span></span>
+<span id="cb55-3"><a href="#cb55-3"></a><span class="kw">FROM</span></span>
+<span id="cb55-4"><a href="#cb55-4"></a>  table1 <span class="kw">AS</span> t1</span>
+<span id="cb55-5"><a href="#cb55-5"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> table2 <span class="kw">AS</span> t2 <span class="kw">ON</span> t1.tbl2_id <span class="op">=</span> t2.<span class="kw">id</span></span>
+<span id="cb55-6"><a href="#cb55-6"></a>  <span class="kw">JOIN</span> table3 <span class="kw">AS</span> t3 <span class="kw">ON</span> t1.tbl3_id <span class="op">=</span> t3.<span class="kw">id</span>;</span></code></pre></div>
+      <h1 data-number="5" id="非正規化-正規化崩し"><span class="header-section-number">5</span>
+      非正規化 (正規化崩し)</h1>
+      <p>前回と今回の講義では、内部結合、外部結合、直接について学びました。これらの結合を用いて実際に
+      SQL を記述することで、その挙動を体感できたと思います。</p>
+      <p>SQLを記述するなかで気づいたと思いますが、<strong>結合は SQL
+      の記述を非常に複雑にする要因</strong> となります。また、結合は <span
+      class="masked">内部処理的にも負荷が大きく実行パフォーマンス</span>
+      にも影響を与えます。本講義では最大で 3
+      つのテーブルを結合する例を扱いましたが、実務では十数個のテーブルを結合するようなケースもあり、その場合、SQL
+      の記述や保守の観点だけでなく、実行パフォーマンスの面でも無視できない影響が生じます。</p>
+      <p>これらの結合は、テーブルを「正規化」することで必然的に生じるものですが、こうしたデメリットもあるため、実務においては、性能や運用を優先して、<strong>あえて正規化を崩す</strong>
+      という判断が行われることもあります。このような設計は「<strong>非正規化</strong>」や「<strong>正規化崩し</strong>」と呼ばれます。</p>
+      <p>非正規化や正規化崩しについては、📖 教科書「達人に学ぶDB設計 徹底指南書 (第2版)」の
+      <strong>第5章 論理設計とパフォーマンス ～正規化の欠点と非正規化～</strong>
+      において詳しく解説されています。</p>
+      <h1 data-number="6" id="授業時間外学習の指示"><span class="header-section-number">6</span>
+      授業時間外学習の指示</h1>
+      <p>🚨<strong>本科目は「学修単位科目」であり、1回の講義あたり「4時間相当」の授業時間外学習が求められる科目です</strong>🏃</p>
+      <ul>
+      <li>次回の講義で「<strong>小テスト❾</strong>」を実施します。
+      <ul>
+      <li>主に <strong>SQLドリル</strong>、<strong>定着確認</strong>、<strong>演習</strong>
+      から出題します。</li>
+      </ul></li>
+      <li>📖 教科書「達人に学ぶDB設計 徹底指南書 (第2版)」の <strong>第5章 論理設計とパフォーマンス
+      ～正規化の欠点と非正規化～</strong> について読んでおいてください。
+      <ul>
+      <li>参考: <a
+      href="https://www.youtube.com/watch?v=UPS-VYkxQE0">教科書通りの正規化が現場で嫌われる理由</a><span
+      class="citation" data-cites="YouTube動画">@YouTube動画</span>(9:16)</li>
+      </ul></li>
+      </ul>
+      <hr />
+      <ul>
+      <li>この講義資料を再読・熟読し「不明な用語」や「理解が不十分な用語」があればインターネットや、ChatGPTなどの生成AIを利用して解決してください。また、興味関心を持ったトピックについて、ウェブ、生成AI、YouTube動画などを利用して知識を広げ、理解を深めてください。
+      <ul>
+      <li>特に <strong>(プロンプト例)</strong>
+      を示しているものについては、実際に生成AIにプロンプトを投げ、さらに対話を重ねることで、知識の幅を広げるだけでなく、理解をより深く確かなものにしてください。</li>
+      </ul></li>
+      <li>講義資料内の「<strong>演習</strong>」や「<strong>SQLドリル</strong>」に再度取り組んでください。特に、<strong>SQLドリル</strong>💻
+      は、授業時間中に1回取り組むだけでは定着しないので注意してください。</li>
+      </ul>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/DB-2025/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
