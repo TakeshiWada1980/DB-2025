@@ -882,8 +882,8 @@ class="toc-section-number">5</span> 授業時間外学習の指示</a></li>
       class="header-section-number">4.3</span> 内部結合のSQL構文 (エイリアス使用)</h2>
       <p>さきほどの <code>select-join_01.sql</code>
       は、PostgreSQLでは、次のように記述することができます。本科目では保守性と可読性の関係から、原則として
-      <code>INNER JOIN</code> は <code>JOIN</code>
-      の省略形、テーブルには1から2文字のエイリアスを使用してください。</p>
+      <code>INNER JOIN</code> は省略形である
+      <code>JOIN</code>、テーブルには1から2文字のエイリアスを使用してください。</p>
       <div class="sourceCode" id="cb27" data-caption="select-join_02.sql"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">SELECT</span></span>
 <span id="cb27-2"><a href="#cb27-2"></a>  c.character_id,</span>
@@ -930,7 +930,7 @@ class="toc-section-number">5</span> 授業時間外学習の指示</a></li>
             2 | Zach    |      11 |   2
  ～以下略～</code></pre>
       <ul>
-      <li><code>ex-03_5.sql</code> 👉 ジョブが Wizard または Priest のキャラクタ (ただし、deleted_at
+      <li><code>ex-03_4.sql</code> 👉 ジョブが Wizard または Priest のキャラクタ (ただし、deleted_at
       が NULL のキャラクタのみ) を抽出し、次のような結果セットを得るような SQL
       を記述せよ。ただし、内部結合を用いた SQL とすること。
       <ul>
