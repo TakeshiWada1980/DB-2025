@@ -1126,10 +1126,16 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
       <ul>
       <li><strong>答え</strong>: <span class="masked">適切ではない。</span></li>
       </ul></li>
-      <li>完全外部結合においては、結合順を入れ替えると結果セットの正味の内容 (集合としての行)
-      が変化することがある。この説明は「適切である」か「適切ではない」かを答えよ。
+      <li>2つのテーブルに限った完全外部結合においては、結合順を入れ替えると結果セットの正味の内容
+      (集合としての行) が変化することがある。この説明は「適切である」か「適切ではない」かを答えよ。
       <ul>
       <li><strong>答え</strong>: <span class="masked">適切ではない。</span></li>
+      </ul></li>
+      <li>3つ以上のテーブルの完全外部結合においては、結合順を入れ替えると結果セットの正味の内容
+      (集合としての行) が変化することがある。この説明は「適切である」か「適切ではない」かを答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span
+      class="masked">適切である。<code>(A FULL JOIN B) FULL JOIN C ≠ A FULL JOIN (B FULL JOIN C)</code></span></li>
       </ul></li>
       <li>標準SQLにおいて、完全外部結合を表す正式なキーワードは <code>FULL OUTER JOIN</code>
       である。なお、このキーワードは (　　　)
