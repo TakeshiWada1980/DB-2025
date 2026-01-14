@@ -1329,67 +1329,67 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb48-1"><a href="#cb48-1"></a><span class="kw">SELECT</span></span>
 <span id="cb48-2"><a href="#cb48-2"></a>  <span class="op">*</span></span>
 <span id="cb48-3"><a href="#cb48-3"></a><span class="kw">FROM</span></span>
-<span id="cb48-4"><a href="#cb48-4"></a>  table2 <span class="kw">AS</span> t2</span>
-<span id="cb48-5"><a href="#cb48-5"></a>  <span class="kw">JOIN</span> table1 <span class="kw">AS</span> t1 <span class="kw">ON</span> t2.<span class="kw">id</span> <span class="op">=</span> t1.tbl2_id;</span></code></pre></div>
+<span id="cb48-4"><a href="#cb48-4"></a>  table2 <span class="kw">AS</span> <span class="ot">&quot;t2&quot;</span></span>
+<span id="cb48-5"><a href="#cb48-5"></a>  <span class="kw">JOIN</span> table1 <span class="kw">AS</span> <span class="ot">&quot;t1&quot;</span> <span class="kw">ON</span> t2.<span class="kw">id</span> <span class="op">=</span> t1.tbl2_id;</span></code></pre></div>
       <p><strong><em>問題2</em></strong>: 次の SQL によって得られる結果セットのレコード数 (行数)
       を答えよ。<strong>答え</strong>: <span class="masked">6行</span></p>
       <div class="sourceCode" id="cb49" data-caption="問題2"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb49-1"><a href="#cb49-1"></a><span class="kw">SELECT</span></span>
 <span id="cb49-2"><a href="#cb49-2"></a>  <span class="op">*</span></span>
 <span id="cb49-3"><a href="#cb49-3"></a><span class="kw">FROM</span></span>
-<span id="cb49-4"><a href="#cb49-4"></a>  table2 <span class="kw">AS</span> t2</span>
-<span id="cb49-5"><a href="#cb49-5"></a>  <span class="kw">RIGHT</span> <span class="kw">JOIN</span> table1 <span class="kw">AS</span> t1 <span class="kw">ON</span> t2.<span class="kw">id</span> <span class="op">=</span> t1.tbl2_id;</span></code></pre></div>
+<span id="cb49-4"><a href="#cb49-4"></a>  table2 <span class="kw">AS</span> <span class="ot">&quot;t2&quot;</span></span>
+<span id="cb49-5"><a href="#cb49-5"></a>  <span class="kw">RIGHT</span> <span class="kw">JOIN</span> table1 <span class="kw">AS</span> <span class="ot">&quot;t1&quot;</span> <span class="kw">ON</span> t2.<span class="kw">id</span> <span class="op">=</span> t1.tbl2_id;</span></code></pre></div>
       <p><strong><em>問題3</em></strong>: 次の SQL によって得られる結果セットのレコード数 (行数)
       を答えよ。<strong>答え</strong>: <span class="masked">5行</span></p>
       <div class="sourceCode" id="cb50" data-caption="問題3"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">SELECT</span></span>
 <span id="cb50-2"><a href="#cb50-2"></a>  <span class="op">*</span></span>
 <span id="cb50-3"><a href="#cb50-3"></a><span class="kw">FROM</span></span>
-<span id="cb50-4"><a href="#cb50-4"></a>  table2 <span class="kw">AS</span> t2</span>
-<span id="cb50-5"><a href="#cb50-5"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> table1 <span class="kw">AS</span> t1 <span class="kw">ON</span> t2.<span class="kw">id</span> <span class="op">=</span> t1.tbl2_id;</span></code></pre></div>
+<span id="cb50-4"><a href="#cb50-4"></a>  table2 <span class="kw">AS</span> <span class="ot">&quot;t2&quot;</span></span>
+<span id="cb50-5"><a href="#cb50-5"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> table1 <span class="kw">AS</span> <span class="ot">&quot;t1&quot;</span> <span class="kw">ON</span> t2.<span class="kw">id</span> <span class="op">=</span> t1.tbl2_id;</span></code></pre></div>
       <p><strong><em>問題4</em></strong>: 次の SQL によって得られる結果セットのレコード数 (行数)
       を答えよ。<strong>答え</strong>: <span class="masked">8行</span></p>
       <div class="sourceCode" id="cb51" data-caption="問題4"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb51-1"><a href="#cb51-1"></a><span class="kw">SELECT</span></span>
 <span id="cb51-2"><a href="#cb51-2"></a>  <span class="op">*</span></span>
 <span id="cb51-3"><a href="#cb51-3"></a><span class="kw">FROM</span></span>
-<span id="cb51-4"><a href="#cb51-4"></a>  table3 <span class="kw">AS</span> t3</span>
-<span id="cb51-5"><a href="#cb51-5"></a>  <span class="kw">FULL</span> <span class="kw">JOIN</span> table1 <span class="kw">AS</span> t1 <span class="kw">ON</span> t3.<span class="kw">id</span> <span class="op">=</span> t1.tbl3_id;</span></code></pre></div>
+<span id="cb51-4"><a href="#cb51-4"></a>  table3 <span class="kw">AS</span> <span class="ot">&quot;t3&quot;</span></span>
+<span id="cb51-5"><a href="#cb51-5"></a>  <span class="kw">FULL</span> <span class="kw">JOIN</span> table1 <span class="kw">AS</span> <span class="ot">&quot;t1&quot;</span> <span class="kw">ON</span> t3.<span class="kw">id</span> <span class="op">=</span> t1.tbl3_id;</span></code></pre></div>
       <p><strong><em>問題5</em></strong>: 次の SQL によって得られる結果セットのレコード数 (行数)
       を答えよ。<strong>答え</strong>: <span class="masked">20行</span></p>
       <div class="sourceCode" id="cb52" data-caption="問題5"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb52-1"><a href="#cb52-1"></a><span class="kw">SELECT</span></span>
 <span id="cb52-2"><a href="#cb52-2"></a>  <span class="op">*</span></span>
 <span id="cb52-3"><a href="#cb52-3"></a><span class="kw">FROM</span></span>
-<span id="cb52-4"><a href="#cb52-4"></a>  table2 <span class="kw">AS</span> t2</span>
-<span id="cb52-5"><a href="#cb52-5"></a>  <span class="kw">CROSS</span> <span class="kw">JOIN</span> table3 <span class="kw">AS</span> t3;</span></code></pre></div>
+<span id="cb52-4"><a href="#cb52-4"></a>  table2 <span class="kw">AS</span> <span class="ot">&quot;t2&quot;</span></span>
+<span id="cb52-5"><a href="#cb52-5"></a>  <span class="kw">CROSS</span> <span class="kw">JOIN</span> table3 <span class="kw">AS</span> <span class="ot">&quot;t3&quot;</span>;</span></code></pre></div>
       <p><strong><em>問題6</em></strong>: 次の SQL によって得られる結果セットのレコード数 (行数)
       を答えよ。<strong>答え</strong>: <span class="masked">6行</span></p>
       <div class="sourceCode" id="cb53" data-caption="問題6"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb53-1"><a href="#cb53-1"></a><span class="kw">SELECT</span></span>
 <span id="cb53-2"><a href="#cb53-2"></a>  <span class="op">*</span></span>
 <span id="cb53-3"><a href="#cb53-3"></a><span class="kw">FROM</span></span>
-<span id="cb53-4"><a href="#cb53-4"></a>  table1 <span class="kw">AS</span> t1</span>
-<span id="cb53-5"><a href="#cb53-5"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> table2 <span class="kw">AS</span> t2 <span class="kw">ON</span> t1.tbl2_id <span class="op">=</span> t2.<span class="kw">id</span></span>
-<span id="cb53-6"><a href="#cb53-6"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> table3 <span class="kw">AS</span> t3 <span class="kw">ON</span> t1.tbl3_id <span class="op">=</span> t3.<span class="kw">id</span>;</span></code></pre></div>
+<span id="cb53-4"><a href="#cb53-4"></a>  table1 <span class="kw">AS</span> <span class="ot">&quot;t1&quot;</span></span>
+<span id="cb53-5"><a href="#cb53-5"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> table2 <span class="kw">AS</span> <span class="ot">&quot;t2&quot;</span> <span class="kw">ON</span> t1.tbl2_id <span class="op">=</span> t2.<span class="kw">id</span></span>
+<span id="cb53-6"><a href="#cb53-6"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> table3 <span class="kw">AS</span> <span class="ot">&quot;t3&quot;</span> <span class="kw">ON</span> t1.tbl3_id <span class="op">=</span> t3.<span class="kw">id</span>;</span></code></pre></div>
       <p><strong><em>問題7</em></strong>: 次の SQL によって得られる結果セットのレコード数 (行数)
       を答えよ。<strong>答え</strong>: <span class="masked">4行</span></p>
       <div class="sourceCode" id="cb54" data-caption="問題7"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb54-1"><a href="#cb54-1"></a><span class="kw">SELECT</span></span>
 <span id="cb54-2"><a href="#cb54-2"></a>  <span class="op">*</span></span>
 <span id="cb54-3"><a href="#cb54-3"></a><span class="kw">FROM</span></span>
-<span id="cb54-4"><a href="#cb54-4"></a>  table1 <span class="kw">AS</span> t1</span>
-<span id="cb54-5"><a href="#cb54-5"></a>  <span class="kw">JOIN</span> table2 <span class="kw">AS</span> t2 <span class="kw">ON</span> t1.tbl2_id <span class="op">=</span> t2.<span class="kw">id</span></span>
-<span id="cb54-6"><a href="#cb54-6"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> table3 <span class="kw">AS</span> t3 <span class="kw">ON</span> t1.tbl3_id <span class="op">=</span> t3.<span class="kw">id</span>;</span></code></pre></div>
+<span id="cb54-4"><a href="#cb54-4"></a>  table1 <span class="kw">AS</span> <span class="ot">&quot;t1&quot;</span></span>
+<span id="cb54-5"><a href="#cb54-5"></a>  <span class="kw">JOIN</span> table2 <span class="kw">AS</span> <span class="ot">&quot;t2&quot;</span> <span class="kw">ON</span> t1.tbl2_id <span class="op">=</span> t2.<span class="kw">id</span></span>
+<span id="cb54-6"><a href="#cb54-6"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> table3 <span class="kw">AS</span> <span class="ot">&quot;t3&quot;</span> <span class="kw">ON</span> t1.tbl3_id <span class="op">=</span> t3.<span class="kw">id</span>;</span></code></pre></div>
       <p><strong><em>問題8</em></strong>: 次の SQL によって得られる結果セットのレコード数 (行数)
       を答えよ。<strong>答え</strong>: <span class="masked">4行</span></p>
       <div class="sourceCode" id="cb55" data-caption="問題8"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb55-1"><a href="#cb55-1"></a><span class="kw">SELECT</span></span>
 <span id="cb55-2"><a href="#cb55-2"></a>  <span class="op">*</span></span>
 <span id="cb55-3"><a href="#cb55-3"></a><span class="kw">FROM</span></span>
-<span id="cb55-4"><a href="#cb55-4"></a>  table1 <span class="kw">AS</span> t1</span>
-<span id="cb55-5"><a href="#cb55-5"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> table2 <span class="kw">AS</span> t2 <span class="kw">ON</span> t1.tbl2_id <span class="op">=</span> t2.<span class="kw">id</span></span>
-<span id="cb55-6"><a href="#cb55-6"></a>  <span class="kw">JOIN</span> table3 <span class="kw">AS</span> t3 <span class="kw">ON</span> t1.tbl3_id <span class="op">=</span> t3.<span class="kw">id</span>;</span></code></pre></div>
+<span id="cb55-4"><a href="#cb55-4"></a>  table1 <span class="kw">AS</span> <span class="ot">&quot;t1&quot;</span></span>
+<span id="cb55-5"><a href="#cb55-5"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> table2 <span class="kw">AS</span> <span class="ot">&quot;t2&quot;</span> <span class="kw">ON</span> t1.tbl2_id <span class="op">=</span> t2.<span class="kw">id</span></span>
+<span id="cb55-6"><a href="#cb55-6"></a>  <span class="kw">JOIN</span> table3 <span class="kw">AS</span> <span class="ot">&quot;t3&quot;</span> <span class="kw">ON</span> t1.tbl3_id <span class="op">=</span> t3.<span class="kw">id</span>;</span></code></pre></div>
       <h1 data-number="5" id="非正規化-正規化崩し"><span class="header-section-number">5</span>
       非正規化 (正規化崩し)</h1>
       <p>前回と今回の講義では、内部結合 (<code>INNER JOIN</code>)、外部結合
