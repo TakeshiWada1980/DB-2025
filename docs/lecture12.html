@@ -729,8 +729,9 @@ class="toc-section-number">7</span> 授業時間外学習の指示</a></li>
       は、INTEGER型である <strong>from_character_id</strong> をTEXT型にキャストし、値が
       <code>NULL</code> の場合には <u>文字列としての</u> <code>'NULL'</code> に置き換えています。
       <ul>
-      <li><code>COALESCE</code> は <span
-      class="masked">すべての引数を同じデータ型に揃える必要</span> があります。</li>
+      <li><code>COALESCE</code> 関数は <span
+      class="masked">最初に見つかった「非NULL値」を返す関数であり、すべての引数は互換性のあるデータ型である必要</span>
+      があります。</li>
       </ul></li>
       </ul>
       <div class="note type-senior">
