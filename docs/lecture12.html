@@ -73,8 +73,8 @@ class="toc-section-number">3.2</span> 補足: CSV関連のVSCode拡張機能</a>
 class="toc-section-number">4</span> サブクエリを用いたレコードの挿入</a>
 <ul>
 <li><a href="#準備" id="toc-準備"><span class="toc-section-number">4.1</span> 準備</a></li>
-<li><a href="#value-句を用いたリテラル挿入" id="toc-value-句を用いたリテラル挿入"><span
-class="toc-section-number">4.2</span> VALUE 句を用いたリテラル挿入</a></li>
+<li><a href="#values-句を用いたリテラル挿入" id="toc-values-句を用いたリテラル挿入"><span
+class="toc-section-number">4.2</span> VALUES 句を用いたリテラル挿入</a></li>
 <li><a href="#サブクエリを用いたレコードの挿入-1" id="toc-サブクエリを用いたレコードの挿入-1"><span
 class="toc-section-number">4.3</span> サブクエリを用いたレコードの挿入</a></li>
 </ul></li>
@@ -168,7 +168,7 @@ class="toc-section-number">7</span> 授業時間外学習の指示</a></li>
       <li><code>LEFT JOIN</code> <strong>と</strong> <code>WHERE</code>
       <strong>を組み合せる場合の注意</strong></li>
       <li><strong>SELECT文の出力をCSVにエクスポートする方法</strong></li>
-      <li><strong>サブクエリを用いてレコーを挿入・更新する方法</strong></li>
+      <li><strong>サブクエリを用いてレコードを挿入・更新する方法</strong></li>
       <li><strong>データベースのバックアップ (ダンプ) とリストア</strong></li>
       </ul>
       <p>…について学んでいきます。</p>
@@ -671,9 +671,9 @@ class="toc-section-number">7</span> 授業時間外学習の指示</a></li>
       </ul>
       <p>以下の演習の準備として <code>SELECT * FROM x_gold_transfers</code>
       を実行し、現状で「テーブルのレコードが空であること」を確認しておいてください。</p>
-      <h2 data-number="4.2" id="value-句を用いたリテラル挿入"><span
-      class="header-section-number">4.2</span> VALUE 句を用いたリテラル挿入</h2>
-      <p><code>VALUE</code>
+      <h2 data-number="4.2" id="values-句を用いたリテラル挿入"><span
+      class="header-section-number">4.2</span> VALUES 句を用いたリテラル挿入</h2>
+      <p><code>VALUES</code>
       句を用いた「リテラル挿入」の記述について、一度整理しておきます。たとえば…</p>
       <ul>
       <li><strong>Alice</strong> (character_id=<code>6</code>) から <strong>Bob</strong>
@@ -684,7 +684,7 @@ class="toc-section-number">7</span> 授業時間外学習の指示</a></li>
       <strong>10,000G</strong> を支給</li>
       </ul>
       <p>…という処理は<a
-      href="lecture04.html#insert文-超基礎編">第04回講義</a>で紹介したように、<code>INSERT INTO ... VALUE ...</code>
+      href="lecture04.html#insert文-超基礎編">第04回講義</a>で紹介したように、<code>INSERT INTO ... VALUES ...</code>
       の構文を使用して、次の <strong>第08行目</strong> から <strong>第13行目</strong>
       のように記述することができます。</p>
       <div class="sourceCode" id="cb21" data-caption="insert-value_01.sql"><pre
@@ -694,7 +694,7 @@ class="toc-section-number">7</span> 授業時間外学習の指示</a></li>
 <span id="cb21-4"><a href="#cb21-4"></a><span class="co">-- トランザクションの開始</span></span>
 <span id="cb21-5"><a href="#cb21-5"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
 <span id="cb21-6"><a href="#cb21-6"></a></span>
-<span id="cb21-7"><a href="#cb21-7"></a><span class="co">-- リテラル挿入（VALUE句を用いた挿入）</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="co">-- リテラル挿入（VALUES句を用いた挿入）</span></span>
 <span id="cb21-8"><a href="#cb21-8"></a><span class="kw">INSERT</span> <span class="kw">INTO</span></span>
 <span id="cb21-9"><a href="#cb21-9"></a>  x_gold_transfers (from_character_id, to_character_id, amount, transferred_at)</span>
 <span id="cb21-10"><a href="#cb21-10"></a><span class="kw">VALUES</span></span>
@@ -1078,7 +1078,7 @@ INSERT 0 3
       </ul>
       <p>…するための SQL は、次のように記述することができました。</p>
       <div class="sourceCode" id="cb36" data-caption="update-set_01.sql"><pre
-      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb36-1"><a href="#cb36-1"></a>TSTART <span class="kw">TRANSACTION</span>;</span>
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">START</span> <span class="kw">TRANSACTION</span>;</span>
 <span id="cb36-2"><a href="#cb36-2"></a></span>
 <span id="cb36-3"><a href="#cb36-3"></a><span class="co">-- 現在値の確認</span></span>
 <span id="cb36-4"><a href="#cb36-4"></a><span class="kw">SELECT</span></span>
