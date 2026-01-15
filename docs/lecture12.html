@@ -1341,7 +1341,7 @@ ROLLBACK</code></pre>
            19 | Jack    |            63</code></pre>
       <ul>
       <li><code>ex-04_3</code> 👉 流通数 (全キャラの所持数合計) が 6個以上のアイテムの価格を 1.2倍
-      (10円未満は切り上げ) に改定するような SQL を記述せよ。
+      (10円単位に切り上げ) に改定するような SQL を記述せよ。
       <ul>
       <li>論理削除されていないキャラのみを対象にアイテムの所持数合計を計算すること。</li>
       <li><code>UPDATE</code> 文の <code>WHERE</code> 句においてサブクエリを用いること。</li>
@@ -1523,14 +1523,32 @@ ROLLBACK</code></pre>
       </blockquote>
       <h3 data-number="5.4.1" id="sqlドリル-4"><span class="header-section-number">5.4.1</span>
       SQLドリル💻</h3>
-      <p>以下、<code>x_****</code> テーブル群を使用する演習問題です。</p>
+      <p>以下、<code>x_****</code> テーブル群を使用する演習問題です。難しめです。</p>
       <ul>
       <li><code>ex-05_1</code> 👉 <code>ex-04_1</code> の要求を <code>FROM</code>
       句を用いたSQLで記述せよ。</li>
       <li><code>ex-05_2</code> 👉 <code>ex-04_2</code> の要求を <code>FROM</code>
       句を用いたSQLで記述せよ。</li>
+      </ul>
+      <h3 data-number="5.4.2" id="sqlドリル-ex"><span class="header-section-number">5.4.2</span>
+      SQLドリル💻 (<strong>EX</strong>)</h3>
+      <p>以下、<code>x_****</code> テーブル群を使用する演習問題です。かなり難しめです。</p>
+      <ul>
       <li><code>ex-05_3</code> 👉 <code>ex-04_3</code> の要求を <code>FROM</code>
-      句を用いたSQLで記述せよ。</li>
+      句を用いたSQLで記述せよ。
+      <ul>
+      <li>なお <code>FROM</code> 句のなかでサブクエリを使用してもよい。</li>
+      </ul></li>
+      <li><code>ex-05_4</code> 👉 <code>ex-04_4</code> の要求を <code>FROM</code>
+      句を用いたSQLで記述せよ。
+      <ul>
+      <li>なお <code>FROM</code> 句のなかでサブクエリを使用してもよい。</li>
+      </ul></li>
+      <li><code>ex-05_5</code> 👉 <code>ex-04_5</code> の要求を <code>FROM</code>
+      句を用いたSQLで記述せよ。
+      <ul>
+      <li>なお <code>FROM</code> 句のなかでサブクエリを使用してもよい。</li>
+      </ul></li>
       </ul>
       <h1 data-number="6" id="バックアップとリストア"><span class="header-section-number">6</span>
       バックアップとリストア</h1>
