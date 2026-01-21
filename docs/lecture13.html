@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>第13回 4I-データベース工学</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#連絡と準備" id="toc-連絡と準備"><span class="toc-section-number">1</span>
+連絡と準備</a></li>
+<li><a href="#課題2" id="toc-課題2"><span class="toc-section-number">2</span> 課題2</a>
+<ul>
+<li><a href="#提出先や期限など" id="toc-提出先や期限など"><span
+class="toc-section-number">2.1</span> 提出先や期限など</a></li>
+<li><a href="#作成上の注意点" id="toc-作成上の注意点"><span class="toc-section-number">2.2</span>
+作成上の注意点</a></li>
+</ul></li>
+<li><a href="#ex課題" id="toc-ex課題"><span class="toc-section-number">3</span> EX課題</a></li>
+<li><a href="#授業時間外学習の指示" id="toc-授業時間外学習の指示"><span
+class="toc-section-number">4</span> 授業時間外学習の指示</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>2025-4I データベース工学 第13回 講義資料</p>
+      <p>2026年01月23日 (木) 3-4時限</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="連絡と準備"><span class="header-section-number">1</span>
+      連絡と準備</h1>
+      <ul>
+      <li><p><strong>小テスト❿</strong> を実施します。</p>
+      <ul>
+      <li>シラバス記載のように、小テストは最終評価の <span class="masked">35%</span>
+      に相当します。</li>
+      <li>遅刻・欠席等により追試験を希望する場合は<a
+      href="lecture01.html#成績評価法と履修上の注意">第01回講義で案内した手続き</a>をしてください。</li>
+      <li>小テストは、今回で終わりです。次回以降は、<u>小テストはありません</u>。</li>
+      </ul></li>
+      <li><p>今回返却した <strong>小テスト❾</strong>
+      の「左上に青文字で書かれた数値」は9回分の小テストの累計 (90点満点) です。</p></li>
+      <li><p>2026/01/18 (日) に大学入学共通テスト「<strong>情報</strong>」が実施されました。Teams
+      に「問題」と「解答例」を配置しています。60分・100点満点・マークシート式の試験です。</p>
+      <ul>
+      <li>高校 (≠高専) の「<strong>情報Ⅰ</strong>（＝<span
+      class="masked">主に高校1年で開講される2単位の必修科目</span>）」の範囲から出題されるものです。</li>
+      <li>腕試しにトライしてみてください。</li>
+      </ul></li>
+      </ul>
+      <h1 data-number="2" id="課題2"><span class="header-section-number">2</span> 課題2</h1>
+      <p>次に示すトピックのなかから <strong>1項目</strong>
+      を選び、技術解説記事を作成してください。各トピックは、RDB / RDBMS
+      の理解を一段深めるために重要な概念であるものの、講義時間の制約上、本科目では扱うことができなかった内容となります。</p>
+      <p>執筆にあたっては、後述の<a
+      href="lecture13.html#作成上の注意点">作成上の注意点</a>に従い、<a
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL.git">本科目の演習環境</a>(PostgreSQL
+      17 のコンテナ)
+      を用いた<strong>実験や検証を必ず含め</strong>、その実行結果や挙動を踏まえた説明や解説としてください
+      (単なる調査のみ、理論説明のみの内容は不可です)。また、理解や定着を確認するための問題や演習も含む内容としてください。</p>
+      <ul>
+      <li><u><strong>インデックス設計</strong></u>
+      <ul>
+      <li><code>INDEX</code>、B-tree、探索コスト</li>
+      <li>探索アルゴリズムやデータ構造の知識が、SQL
+      の実行性能にどのように結びつくのかを理解したい学生におすすめ。</li>
+      <li>参考: 📖 教科書「6-2 インデックス設計」「6-3 B-treeインデックスの設計方針」</li>
+      <li>難易度: ⭐⭐</li>
+      </ul></li>
+      <li><u><strong>実行計画</strong></u>
+      <ul>
+      <li><code>EXPLAIN</code>、<code>EXPLAIN ANALYZE</code>、オプティマイザ、Seq Scan / Index
+      Scan</li>
+      <li>パフォーマンスチューニング (インデックス設計を含む) に興味関心がある学生におすすめ。</li>
+      <li>参考: 📖 教科書「6-4 統計情報」</li>
+      <li>難易度: ⭐⭐⭐</li>
+      </ul></li>
+      <li><u><strong>同時実行制御 (隔離レベル)</strong></u>
+      <ul>
+      <li><code>TRANSACTION ISOLATION LEVEL</code>、ロック</li>
+      <li>複数ユーザが同時にアクセスする環境で、どのように整合性が保たれているのかを理論と実験の両面から確認したい学生におすすめ。</li>
+      <li>難易度: ⭐⭐⭐⭐</li>
+      </ul></li>
+      <li><u><strong>PITR (Point-In-Time Recovery: 時点復旧)</strong></u>
+      <ul>
+      <li>PITR、WAL (Write-Ahead Logging)</li>
+      <li>障害発生時に、データベースを「ある過去の時点」に戻す仕組みを理解したい学生におすすめ。</li>
+      <li>参考: 📖 教科書「2-6 バックアップ設計」「2-7 リカバリ設計」</li>
+      <li>難易度: ⭐⭐⭐⭐</li>
+      </ul></li>
+      <li><u><strong>ウィンドウ関数</strong></u>
+      <ul>
+      <li><code>RANK</code>、<code>ROW_NUMBER</code>、<code>PARTITION BY</code>、<code>GROUPING</code></li>
+      <li>SQL による高度な集計処理を学びたい学生向け。</li>
+      <li>難易度: ⭐⭐⭐</li>
+      </ul></li>
+      <li><u><strong>ビュー と CTE (Common Table Expression)</strong></u>
+      <ul>
+      <li><code>VIEW</code>、<code>WITH</code>、CTE、ビュー、マテリアルズビュー、再帰 CTE</li>
+      <li>複雑な SQL を分割・整理し、可読性や保守性を高める方法を学びたい学生におすすめ。</li>
+      <li>難易度: ⭐⭐</li>
+      </ul></li>
+      <li><u><strong>ボイスコッド正規化、第4正規化、第5正規化</strong></u>
+      <ul>
+      <li>ボイスコッド正規化 (3.5正規化)、第4正規化、第5正規化</li>
+      <li>難易度: ⭐⭐⭐</li>
+      </ul></li>
+      <li><u><strong>Drizzle ORM</strong></u>
+      <ul>
+      <li>ウェブアプリのバックエンド (TypeScript) から、複雑な SQL (結合・集計・サブクエリなど)
+      を安全かつ可読性を保った形で発行する方法について学びたい学生におすすめ。</li>
+      <li>難易度: ⭐⭐⭐</li>
+      </ul></li>
+      </ul>
+      <h2 data-number="2.1" id="提出先や期限など"><span class="header-section-number">2.1</span>
+      提出先や期限など</h2>
+      <ul>
+      <li><strong><em>提出先</em></strong> : Teamsの「<strong>DB-課題2</strong>」に URL
+      を提出してください。
+      <ul>
+      <li>解説記事は <strong>自身のポートフォリオサイト</strong>、<a
+      href="https://note.com/">note</a>、<a href="https://note.com/">Zenn</a>、<a
+      href="https://qiita.com/">Qiita</a>のいずれかでパブリック公開で作成してください。その他のメディアを使用したい場合は事前相談ください。</li>
+      <li>提出された URL は、知能情報コースの学生と教員に共有します。</li>
+      </ul></li>
+      <li><strong><em>提出期限</em></strong> : <strong>2月18日 (水) 23時</strong>
+      <ul>
+      <li>担当教員に事前相談することなく、提出期限から168時間（＝1週間・7日間）を超過して提出されたもの（追提出・再提出を含む）は、未提出と同じ0点評価とします。</li>
+      <li>採点後は、<strong>修正版の再提出や追提出があっても原則として再評価はしません</strong>。
+      <ul>
+      <li>Teams で点数がフィードバックされるまでは、(URLに変更がない範囲で)
+      加筆・修正等が可能です。</li>
+      <li>実際の採点は、早ければ 02月24日 (火) から開始予定です。</li>
+      </ul></li>
+      </ul></li>
+      <li><strong><em>採点</em></strong> : <strong>7.5点</strong>
+      を標準として、<strong>10点満点で評価</strong> します。
+      <ul>
+      <li>本科目では、<strong>本課題が最終課題</strong> となります。</li>
+      <li>総合成績において課題は <strong>20%</strong> に相当します。
+      <ul>
+      <li><strong>課題1</strong> (10点満点) を「7.5点」に換算、<strong>課題2</strong> (10点満点)
+      を「12.5点」に換算して合計します。</li>
+      </ul></li>
+      </ul></li>
+      <li><strong><em>取り組み時間の目安</em></strong> : この課題には
+      最低でも「<strong>10時間</strong>」以上を費やして取り組んでください。
+      <ul>
+      <li>解説記事の末尾に「<u><strong>本コンテンツの作成時間：約XX時間</strong></u>」を必ず記載してください。記載漏れは、最大でも「<strong>6点評価</strong>」となります。注意してください。</li>
+      </ul></li>
+      </ul>
+      <h2 data-number="2.2" id="作成上の注意点"><span class="header-section-number">2.2</span>
+      作成上の注意点</h2>
+      <ul>
+      <li>技術解説の読者としては「<strong>本科目を履修している4Iの学生</strong>」を想定してください。
+      <ul>
+      <li>読者は、第01回講義から第12回講義までに扱った内容を既に学習・理解しているものとし、その知識水準を前提として解説のレベルを設定してください。</li>
+      </ul></li>
+      <li>解説の内容は、単なる調査や理論説明だけではなく、必ず<a
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL.git">本科目の演習環境</a>(PostgreSQL
+      17 のコンテナ) を用いて
+      <strong>ハンズオン形式で実験や検証を行ないながら、読者が理解を深められるもの</strong>
+      としてください。また、<span class="masked">理解度を確認するための問題
+      (＝本講義資料の「定着確認」に相当するもの) や、演習
+      (＝本講義資料の「SQLドリル」に相当するもの)</span> を適宜、含めてください。
+      <ul>
+      <li>想定読者が、解説記事の読解に加えて、問題や演習を通じて手を動かしながら学習した場合に
+      <u><strong>90分以上の学習体験ができるようなコンテンツのボリュームや難易度</strong></u>
+      としてください。</li>
+      <li>問題や演習には、必ず「解答例」を付けてください。解答例は GitHub
+      のリンクなどで示すことも可とします。</li>
+      </ul></li>
+      <li>必要に応じて、今回までに<a
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL.git">演習環境</a>で提供してきた各種テーブルやレコードを、そのまま記事のなかで使用することも可能です。また、内容に応じて改編して利用することも可能です。
+      <ul>
+      <li>解説記事のなかで <a
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL.git">演習環境</a>
+      のリンク等を掲載しても問題ありません。</li>
+      </ul></li>
+      </ul>
+      <p>その他、不明点や提案があれば、Teamsのチャットで早めに連絡をお願いします。</p>
+      <h1 data-number="3" id="ex課題"><span class="header-section-number">3</span> EX課題</h1>
+      <p><strong><em>課題2</em></strong> に相当する記事を、もう1件、執筆してください。</p>
+      <p>提出先は、Teams Chat となります。それ以外 (期限など) はすべて
+      <strong><em>課題2</em></strong> と同じです。成績評価において考慮します。</p>
+      <h1 data-number="4" id="授業時間外学習の指示"><span class="header-section-number">4</span>
+      授業時間外学習の指示</h1>
+      <p>🚨<strong>本科目は「学修単位科目」であり、1回の講義あたり「4時間相当」の授業時間外学習が求められる科目です</strong>🏃</p>
+      <ul>
+      <li>次回の講義では「小テスト」を<u>実施しません</u>。</li>
+      <li><strong><em>課題2</em></strong> に取り組んでください。</li>
+      </ul>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/DB-2025/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
