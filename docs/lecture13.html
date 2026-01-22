@@ -54,8 +54,10 @@ class="toc-section-number">2.1</span> 提出先や期限など</a></li>
 </ul></li>
 <li><a href="#ex課題-任意" id="toc-ex課題-任意"><span class="toc-section-number">3</span> EX課題
 (任意)</a></li>
+<li><a href="#次回授業の準備" id="toc-次回授業の準備"><span class="toc-section-number">4</span>
+次回授業の準備</a></li>
 <li><a href="#授業時間外学習の指示" id="toc-授業時間外学習の指示"><span
-class="toc-section-number">4</span> 授業時間外学習の指示</a></li>
+class="toc-section-number">5</span> 授業時間外学習の指示</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -154,6 +156,16 @@ class="toc-section-number">4</span> 授業時間外学習の指示</a></li>
       <li>難易度: ⭐⭐⭐</li>
       </ul></li>
       </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>私は情報系学科の高専4年生です。データベース工学という授業で、以下のような課題がでました。どれに取り組むべきかアドバイスが欲しいです。具体的には、各トピックの概要の説明と、どのトピックを選ぶのがよいか？について、対話的に一緒に考えて欲しいです。</p>
+      <p>課題：次に示すトピックのなかから1項目を選び、技術解説記事を作成してください。執筆にあたっては、授業で使用した環境
+      (＝PostgreSQL 17 の Dockerコンテナ)
+      を用いた実験や検証を必ず含め、その実行結果や挙動を踏まえた説明や解説としてください。単なる調査のみ、理論説明のみの内容は不可です。また、理解や定着を確認するための問題や演習も含む内容としてください。</p>
+      <p>トピック：「インデックス設計」「実行計画」「同時実行制御
+      (隔離レベル)」「PITR」「ウィンドウ関数」「ビュー・CTE」「ボイスコッド正規化、第4正規化、第5正規化」「Drizzle
+      ORM」</p>
+      </blockquote>
       <h2 data-number="2.1" id="提出先や期限など"><span class="header-section-number">2.1</span>
       提出先や期限など</h2>
       <ul>
@@ -225,9 +237,32 @@ class="toc-section-number">4</span> 授業時間外学習の指示</a></li>
       (任意)</h1>
       <p><strong><em>課題2</em></strong> に相当する記事を、もう1件、執筆してください。</p>
       <p>提出先は、Teams Chat となります。それ以外 (期限など) はすべて
-      <strong><em>課題2</em></strong>
-      と同じです。内容に応じて、最終成績の評価において考慮します。提出は任意です。</p>
-      <h1 data-number="4" id="授業時間外学習の指示"><span class="header-section-number">4</span>
+      <strong><em>課題2</em></strong> と同じです。内容 (努力と質)
+      に応じて、最終成績の評価において考慮します。提出は任意です。</p>
+      <h1 data-number="4" id="次回授業の準備"><span class="header-section-number">4</span>
+      次回授業の準備</h1>
+      <p>次回の授業では、<a href="https://hub.docker.com/_/mongo">MongoDB</a> と <a
+      href="https://hub.docker.com/_/mongo-express">mongo-express</a>
+      のコンテナを作成します。その準備として、各コンテナの元になるイメージを予めプル
+      (ローカルにダウンロード) しておいてください。</p>
+      <pre><code>docker image pull mongo:8.2.3
+docker image pull mongo-express:1.0.2-20-alpine3.19</code></pre>
+      <ul>
+      <li><code>docker image pull</code>
+      コマンドの実行には、回線状況によっては数分から10分程度かかる場合があります。</li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>MongoDB とは、どのようなソフトウェアですか。</p>
+      </blockquote>
+      <blockquote>
+      <p>mongo-express とは、どのようなソフトウェアですか。</p>
+      </blockquote>
+      <blockquote>
+      <p>Docker のイメージには <code>alpine</code> や <code>dookworm</code>、<code>trixie</code>
+      とか名前がついていますが、これらは何を意味していますか。</p>
+      </blockquote>
+      <h1 data-number="5" id="授業時間外学習の指示"><span class="header-section-number">5</span>
       授業時間外学習の指示</h1>
       <p>🚨<strong>本科目は「学修単位科目」であり、1回の講義あたり「4時間相当」の授業時間外学習が求められる科目です</strong>🏃</p>
       <ul>
