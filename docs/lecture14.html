@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>第14回 4I-データベース工学</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#連絡と準備" id="toc-連絡と準備"><span class="toc-section-number">1</span>
+連絡と準備</a></li>
+<li><a href="#学年末試験に関する連絡" id="toc-学年末試験に関する連絡"><span
+class="toc-section-number">2</span> 学年末試験に関する連絡</a></li>
+<li><a href="#mongodb" id="toc-mongodb"><span class="toc-section-number">3</span> MongoDB</a>
+<ul>
+<li><a href="#nosql" id="toc-nosql"><span class="toc-section-number">3.1</span> NoSQL</a></li>
+<li><a href="#mongodb-の特徴" id="toc-mongodb-の特徴"><span class="toc-section-number">3.2</span>
+MongoDB の特徴</a></li>
+</ul></li>
+<li><a href="#mongodb-演習環境のセットアップ" id="toc-mongodb-演習環境のセットアップ"><span
+class="toc-section-number">4</span> MongoDB 演習環境のセットアップ</a></li>
+<li><a href="#mongosh-による-mongodb-の操作" id="toc-mongosh-による-mongodb-の操作"><span
+class="toc-section-number">5</span> mongosh による MongoDB の操作</a>
+<ul>
+<li><a href="#mongosh-の起動" id="toc-mongosh-の起動"><span class="toc-section-number">5.1</span>
+mongosh の起動</a></li>
+<li><a href="#データベースの選択とコレクションの削除"
+id="toc-データベースの選択とコレクションの削除"><span class="toc-section-number">5.2</span>
+データベースの選択とコレクションの削除</a></li>
+<li><a href="#ドキュメントの挿入" id="toc-ドキュメントの挿入"><span
+class="toc-section-number">5.3</span> ドキュメントの挿入</a></li>
+<li><a href="#ドキュメントの抽出" id="toc-ドキュメントの抽出"><span
+class="toc-section-number">5.4</span> ドキュメントの抽出</a></li>
+<li><a href="#vscode-から-mongosh-にスクリプトを送信"
+id="toc-vscode-から-mongosh-にスクリプトを送信"><span class="toc-section-number">5.5</span> VSCode
+から mongosh にスクリプトを送信</a></li>
+</ul></li>
+<li><a href="#授業時間外学習の指示" id="toc-授業時間外学習の指示"><span
+class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>2025-4I データベース工学 第13回 講義資料</p>
+      <p>2026年01月29日 (木) 3-4時限</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="連絡と準備"><span class="header-section-number">1</span>
+      連絡と準備</h1>
+      <ul>
+      <li>高専テクノゼミ「<strong>実践教育プログラム2026春</strong>」のエントリが開始されています。
+      <ul>
+      <li><a
+      href="https://sprinkle-hawk-750.notion.site/2026-2bf62c8a232280199b5ae8ce2a474eaa">案内ページ</a></li>
+      </ul></li>
+      <li>高専テクノゼミ「<strong>進路選択の部屋</strong>」
+      <ul>
+      <li><a href="https://portal.techno-semi.com/shinro">案内ページ</a></li>
+      <li>日時: 2026年3月6日(金) 10:00～17:30</li>
+      <li>場所: 東京大学</li>
+      </ul></li>
+      </ul>
+      <h1 data-number="2" id="学年末試験に関する連絡"><span class="header-section-number">2</span>
+      学年末試験に関する連絡</h1>
+      <p>学年末試験 (筆記試験) は、2月12日 (木) の2時限目に試験時間 <strong><em>80分</em></strong>
+      で実施します。</p>
+      <h3 data-number="2.0.1" id="持ち込み品について"><span
+      class="header-section-number">2.0.1</span> 持ち込み品について</h3>
+      <ul>
+      <li><strong><em>よく消える消しゴム</em></strong> と <strong><em>直定規</em></strong>
+      を準備してください。</li>
+      <li><strong>A4サイズ1枚の手書きのメモ</strong> (両面使用可・色ペンなど使用可)
+      を<strong>持ち込み可</strong>とします。持ち込みメモは、答案とともに提出してもらいます
+      (採点後に答案とともに返却します)。
+      <ul>
+      <li><u><strong>「A4」よりも小さなサイズは、持ち込みは不可</strong></u>
+      なので注意ください。</li>
+      <li>片面の <strong>右上部に横10cm、縦1.5cmの四角枠</strong> を作成して、そのなかに
+      <code>XX番 高専 太郎</code>
+      の形式で出席番号とフルネーム氏名を記入してください。四角枠内には、それ以外の情報を記入しないでください。</li>
+      <li>出席番号と氏名の枠がないメモ、<strong>手書き以外で作成したメモ (プリントアウトやコピー)
+      の持ち込みは</strong> <strong><em>不正行為</em></strong> として扱います。</li>
+      <li>ルーズリーフなども、<strong>A4サイズに切り取られたものであれば使用可能</strong>です。また、出席番号と氏名の<u>枠線、罫線や方眼などは印刷でも問題ありません</u>。</li>
+      </ul></li>
+      </ul>
+      <figure>
+      <img src="figs/14/item-02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h3 data-number="2.0.2" id="出題内容と範囲について"><span
+      class="header-section-number">2.0.2</span> 出題内容と範囲について</h3>
+      <ul>
+      <li>第01回講義 から 第14回講義 (今回) までの内容を出題範囲としています。
+      <ul>
+      <li>MongoDB を操作するコード (＝mongosh で実行する具体的なコード)
+      を問う問題については出題しません。</li>
+      </ul></li>
+      <li>本科目は、学修単位科目であり、その授業時間外学習を前提とした「難易度」で試験問題を作成しています。</li>
+      <li><u>主として</u>「<strong>定着確認</strong>」と「<strong>SQLドリル</strong>」から出題します。ただし、そのままの出題ではなく類題や解答形式を変更した問題となることも想定してください。</li>
+      <li>実施済みの「<strong>小テスト</strong>」についても、十分に復習しておいてください。特に、どのような問題で、どのような間違いをしたのか、は振り返っておいてください。
+      <ul>
+      <li>小テストでは部分点 (部分正解) となっていた解答も、<u>試験では誤答 (部分点なし)
+      として扱う場合がある</u> ので注意してください。</li>
+      </ul></li>
+      </ul>
+      <h1 data-number="3" id="mongodb"><span class="header-section-number">3</span> MongoDB</h1>
+      <p>今回と次回では、ドキュメント指向データベースマネジメントシステムである
+      <strong><em>MongoDB</em></strong> について学んでいきます。 Mongo
+      は「モンゴ」または「モンゴー」と読みます。</p>
+      <ul>
+      <li>ドキュメント指向データベース (<strong>document-oriented database</strong>)
+      は、一般に「<strong>ドキュメント型データベース</strong>」とも呼ばれます。</li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>ドキュメント指向データベースとは、どのような特徴を持ったデータベースですか？私は、既に RDB
+      (PostgreSQL)
+      についての基礎の知識と利用経験があるので、それを踏まえて比較しながら解説してください。</p>
+      </blockquote>
+      <blockquote>
+      <p>ドキュメント指向データベースには、CouchDB や Firestore などがありますが、そのなかでの
+      MongoDB の特徴について解説してください。</p>
+      </blockquote>
+      <h2 data-number="3.1" id="nosql"><span class="header-section-number">3.1</span> NoSQL</h2>
+      <p><a
+      href="lecture01.html#データベースの種類">第01回講義</a>でも簡単に触れましたが、<strong>データベースのアーキテクチャ</strong>
+      (内部の仕組み/データの整理方法)
+      は、大きく「<strong>RDB</strong>」と「<strong>NoSQL</strong>」の2つに分類することができます。</p>
+      <p>基本的に <span class="masked">RDB 以外は、NoSQL に分類される</span> ため、NoSQL
+      には様々な方式のデータベースが存在します。そのなかでも
+      <strong>ドキュメント指向データベース</strong> の一種である MongoDB は、NoSQL
+      を代表するデータベースとして、<strong>特に知名度が高く実務でも広く利用されています</strong>。</p>
+      <p><strong>JSON形式</strong> (JSON: JavaScript Object Notation)
+      でデータを扱えるという特性から、<strong>ウェブアプリ開発との親和性が高く</strong>、APIサーバやバックエンドのデータベースとして採用されるケースが多いことが特徴となっています。</p>
+      <ul>
+      <li><a
+      href="https://www.mongodb.com/solutions/customer-case-studies">MongoDBを導入している企業やサービス</a></li>
+      </ul>
+      <p>MongoDB には、サーバ構築や運用を意識せずに利用できるマネージドサービスである <a
+      href="https://www.mongodb.com/ja-jp/products/platform/atlas-database">MongoDB
+      Atlas</a>も提供されています (簡単に言えば <span
+      class="masked">クラウド提供されるMongoDB</span>
+      です)。<u>クレジットカード登録不要で、無料利用枠もあるので</u>、個人開発のウェブアプリなどでも採用されることが多いです。</p>
+      <ul>
+      <li>この授業では MongoDB Atlas (DBaaS: Database as a Service) は利用せず、<span
+      class="masked">MongoDB の Docker コンテナ</span> を使用します。</li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>MongoDB Atlas とは、どのようなウェブサービスですか？ウェブアプリを個人開発する場合、自前で
+      MongoDB サーバを用意する場合 (セルフホストする場合)
+      と比較して、どのようなメリットがありますか。</p>
+      </blockquote>
+      <blockquote>
+      <p>「MongoDB Atlas
+      はマネージドデータベースサービスである」という文脈において、マネージドデータベースサービスとは、どのような意味ですか。</p>
+      </blockquote>
+      <h3 data-number="3.1.1" id="定着確認"><span class="header-section-number">3.1.1</span>
+      定着確認</h3>
+      <ul>
+      <li>MongoDB 社が提供する「クラウド上で MongoDB
+      を管理・運用できるマネージドデータベースサービス」の名称を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">MongoDB Atlas</span></li>
+      </ul></li>
+      <li>MongoDB 以外の、代表的なドキュメント指向データベースを1つ挙げよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">CouchDB、Firestore</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="3.2" id="mongodb-の特徴"><span class="header-section-number">3.2</span>
+      MongoDB の特徴</h2>
+      <p>MongoDB は、キーバリュー構造を持った <strong>ドキュメント</strong> (Document)
+      を基本単位にデータを管理する方式のデータベースになります。MongoDB
+      において、1件1件のデータは「ドキュメント」という単位で扱われ、RDB
+      との大きな違いとして、ドキュメント内部に <span
+      class="masked">入れ子構造や配列構造をそのまま含められること</span> が挙げられます。</p>
+      <p>より具体的には、MongoDB のドキュメントは表面的には <strong>JSON形式のデータ</strong>
+      で表現されます。そのため、RDB
+      では複数テーブルに分割して管理していたようなデータ構造も、次のように
+      <strong>1つのドキュメント</strong> としてまとめて保持することができます。</p>
+      <div class="sourceCode" id="cb1" data-caption="MongoDBにおけるドキュメントの例"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="dt">&quot;_id&quot;</span><span class="fu">:</span> <span class="er">ObjectId(</span><span class="st">&quot;65f0c9e2b3a1c8a1d4e12345&quot;</span><span class="er">)</span><span class="fu">,</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="dt">&quot;character_id&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Marvin&quot;</span><span class="fu">,</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="dt">&quot;job&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>    <span class="dt">&quot;job_id&quot;</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>    <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Priest&quot;</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="fu">},</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>  <span class="dt">&quot;items&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="fu">{</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>      <span class="dt">&quot;item_id&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Potion&quot;</span><span class="fu">,</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>      <span class="dt">&quot;qty&quot;</span><span class="fu">:</span> <span class="dv">3</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>    <span class="fu">{</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>      <span class="dt">&quot;item_id&quot;</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Mana Potion&quot;</span><span class="fu">,</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>      <span class="dt">&quot;qty&quot;</span><span class="fu">:</span> <span class="dv">1</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>    <span class="fu">}</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>  <span class="dt">&quot;level&quot;</span><span class="fu">:</span> <span class="dv">35</span><span class="fu">,</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>  <span class="dt">&quot;created_at&quot;</span><span class="fu">:</span> <span class="er">ISODate(</span><span class="st">&quot;2025-01-10T12:00:00Z&quot;</span><span class="er">)</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="fu">}</span></span></code></pre></div>
+      <p>これらのドキュメントは、内部的には <span class="masked">BSON (Binary JSON)</span>
+      形式で保存されています。BSON（ビーソン）は、JSON
+      を拡張したバイナリ形式のデータ表現であり、<strong>型情報や長さ情報を持つことで、高速なアクセスや効率的なデータ管理が可能</strong>
+      となっています。</p>
+      <p>概念的には、RDB における <span class="masked">行・レコード</span> が MongoDB
+      における「<strong>ドキュメント</strong>」に対応します。同様に、RDB
+      における「テーブル」が、MongoDB では <span class="masked">「コレクション」</span>
+      とよばれます。</p>
+      <p>また、MongoDB は「<strong>スキーマレス</strong>」という特徴を持ちます。RDB
+      のように厳密なスキーマを事前に定義する必要がなく、同じコレクションのなかでも <span
+      class="masked">ドキュメントごとに異なる構造のデータを格納できることが可能</span>
+      になっています。この柔軟性により、アジャイル開発や、仕様変更が頻繁に発生するウェブアプリケーションとも相性がよいデータベースとなっています。</p>
+      <ul>
+      <li>MongoDB の名称は、英語の humongous（＝非常に大きい）に由来するとされています。</li>
+      </ul>
+      <h3 data-number="3.2.1" id="定着確認-1"><span class="header-section-number">3.2.1</span>
+      定着確認</h3>
+      <ul>
+      <li>データモデルの観点から見たとき、RDB におけるレコード (行) に対応する MongoDB
+      の基本的なデータ単位を答えよ。カタカナもしくは英語で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">ドキュメント、Document</span></li>
+      </ul></li>
+      <li>データモデルの観点から見たとき、RDB におけるテーブルに対応する MongoDB
+      の基本的なデータ単位を答えよ。カタカナもしくは英語で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">コレクション、Collection</span></li>
+      </ul></li>
+      <li>MongoDB において、JSON
+      を拡張し、バイナリ表現によって効率的な保存や高速な処理を可能にしたデータ形式を何というか。アルファベット4文字で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">BSON</span></li>
+      </ul></li>
+      <li>データベースにおいて「スキーマレスである」とは、同じデータ集合内のすべてのデータが、同一の構造を持つことが保証されていることを意味する。この説明は「適切である」か「不適切である」か答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">不適切である</span></li>
+      </ul></li>
+      </ul>
+      <h1 data-number="4" id="mongodb-演習環境のセットアップ"><span
+      class="header-section-number">4</span> MongoDB 演習環境のセットアップ</h1>
+      <p>こちらの <i class="fa-brands fa-github"></i> <a
+      href="https://github.com/TakeshiWada1980/DB-2025-MongoDB">リポジトリ</a> の Readme
+      を参照しながらセットアップと動作確認をしてください。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>MongoDB について学ぼうと思っています。mongo-express
+      とは、何のために使用する、どのようなツールですか？</p>
+      </blockquote>
+      <blockquote>
+      <p>MongoDB について学ぼうと思っています。MongoDB Compass
+      とは、何のために使用する、どのようなツールですか？</p>
+      </blockquote>
+      <blockquote>
+      <p>MongoDB について学ぼうと思っています。mongosh
+      とは、何のために使用する、どのようなツールですか？</p>
+      </blockquote>
+      <h3 data-number="4.0.1" id="定着確認-2"><span class="header-section-number">4.0.1</span>
+      定着確認</h3>
+      <ul>
+      <li>MongoDB
+      のデータベースやコレクション、ドキュメントの内容を、ウェブブラウザ上から確認したり、クエリを発効したりすことができる管理用ツールの名称を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">mongo-express</span></li>
+      </ul></li>
+      </ul>
+      <h1 data-number="5" id="mongosh-による-mongodb-の操作"><span
+      class="header-section-number">5</span> mongosh による MongoDB の操作</h1>
+      <p>PostgreSQL では、<strong>psql</strong> という CLI (Command Line Interface)
+      の公式ツールを用いて、対話的にデータベースの管理操作をすることや、SQL
+      クエリを発行することができました (<a
+      href="lecture02.html#psql-の対話モードで-postgresql-を操作%22">第02回講義</a>)。</p>
+      <p>MongoDB においても、これと同様の役割を持つ公式 CLI ツールとして <span
+      class="masked">mongosh (モンゴシェル)</span> が提供されています。この <strong>mongosh</strong>
+      を利用することで、MongoDB に接続し、対話的に各種管理操作やクエリ発行をすることができます。</p>
+      <ul>
+      <li>mongosh は、「Mongo」と「sh (shellの略)」をつなげた語になります。</li>
+      </ul>
+      <p>実際に mongosh を起動して操作してみます。</p>
+      <p>現在の環境では <strong>MongoDB はコンテナ内で稼働しており</strong>、ホスト側 (Windows 上)
+      には mongosh は存在しません。そのため、MongoDB コンテナ (<code>mongo8</code>)
+      に接続し、コンテナ内部で <code>mongosh</code> を実行します。</p>
+      <h3 data-number="5.0.1" id="定着確認-3"><span class="header-section-number">5.0.1</span>
+      定着確認</h3>
+      <ul>
+      <li>MongoDB
+      において、データベースに接続し、対話的に管理操作やクエリの実行を行なうために用いられる 公式
+      CLI ツールの名称を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">mongosh</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="5.1" id="mongosh-の起動"><span class="header-section-number">5.1</span>
+      mongosh の起動</h2>
+      <p>演習環境のプロジェクトフォルダを VSCode
+      で開いて、ターミナルから次のコマンドを実行してコンテナを起動しておきます。</p>
+      <pre><code>npm run db:up</code></pre>
+      <p>Docker Desktop のウィンドウを表示し、左パネルの <strong>Containers</strong>
+      を選択します。さらに <code>mongo8</code> コンテナの「三点リーダ」をクリックして「<strong>Open
+      in terminal</strong>」を選択します。</p>
+      <figure>
+      <img src="figs/14/docker-01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>コンテナに接続されたターミナルが表示されるので、以下のように認証情報を添えて
+      <code>mongosh</code> を入力して <code>[Enter]</code> を押下します。</p>
+      <pre><code>mongosh -u student -p secret123 --authenticationDatabase admin</code></pre>
+      <ul>
+      <li>上記の <code>student</code> と <code>secret123</code> は
+      <code>docker/docker-compose.yaml</code> で設定している値です。</li>
+      </ul>
+      <p>次のように mongosh が起動し、対話的に操作ができる状態になります。</p>
+      <figure>
+      <img src="figs/14/docker-02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ここで <code>test&gt;</code> という表示は、mongosh が <span class="masked">現在「test
+      データベース」を対象としてコマンドを受け付けている状態</span> であることを表しています
+      (<code>test</code>
+      は、デフォルトで選択されるデータベースの名前です)。この表示は、使用するデータベースを切り替えると変化します。</p>
+      <h2 data-number="5.2" id="データベースの選択とコレクションの削除"><span
+      class="header-section-number">5.2</span> データベースの選択とコレクションの削除</h2>
+      <p>次のコマンドを入力して、データベースを <code>playground</code>
+      に切り替えます。<code>playground</code> は <code>docker/docker-compose.yaml</code>
+      のなかで、環境変数 <code>MONGO_INITDB_DATABASE</code>
+      に設定しているデータベースの名前です。</p>
+      <pre><code>use playground</code></pre>
+      <p>実行すると、以下のような応答があるはずです。</p>
+      <pre><code>switched to db playground
+playground&gt;</code></pre>
+      <p><code>s_users</code> というコレクション (RDBで言うところの <span
+      class="masked">テーブル</span> に相当) を作成します。</p>
+      <p>その前準備として、<u>同名のコレクションが存在する場合は削除</u>
+      しておきます。以下のコマンドは、<strong>s_users</strong>
+      コレクションが存在すれば削除し、存在しない場合は <code>false</code> を返すものになります。</p>
+      <pre><code>db.s_users.drop();</code></pre>
+      <h2 data-number="5.3" id="ドキュメントの挿入"><span class="header-section-number">5.3</span>
+      ドキュメントの挿入</h2>
+      <p>MongoDB
+      では、ドキュメントを作成する際に、自動的にコレクションが作成されます。3件のドキュメントを挿入してみます。以下を貼付けてください。</p>
+      <pre><code>db.s_users.insertMany([
+  { name: &quot;Alice&quot;, level: 20 },
+  { name: &quot;Bob&quot;, level: 22 },
+  { name: &quot;Carol&quot;, level: 19 },
+]);</code></pre>
+      <p>次のような応答がかえってきます。</p>
+      <pre><code>{
+  acknowledged: true,
+  insertedIds: {
+    &#39;0&#39;: ObjectId(&#39;6979d36a02e36dd8878de666&#39;),
+    &#39;1&#39;: ObjectId(&#39;6979d36a02e36dd8878de667&#39;),
+    &#39;2&#39;: ObjectId(&#39;6979d36a02e36dd8878de668&#39;)
+  }
+}</code></pre>
+      <p>次の応答は <code>insertMany()</code>
+      によるドキュメント挿入が正常に完了したことを示しています。</p>
+      <p>まず、<code>acknowledged: true</code> は、MongoDB
+      サーバがこの書き込み操作を正しく受け付け、完了したことを保証していることを意味します。次に、<code>insertedIds</code>
+      には、今回挿入された各ドキュメントに自動的に割り当てられた <code>_id</code>
+      の一覧が含まれています。</p>
+      <div class="note type-tips">
+      <p><strong>MongoDBの <code>_id</code> について</strong></p>
+      <p>MongoDB では、ドキュメントの挿入時に <code>_id</code>
+      を明示的に指定しなかった場合、自動的に <strong>ObjectId型</strong>
+      の一意な識別子が生成されます。上記で表示されている
+      <code>ObjectId('6979d36a02e36dd8878de666')</code> などが、それに該当します。</p>
+      </div>
+      <h3 data-number="5.3.1" id="定着確認-4"><span class="header-section-number">5.3.1</span>
+      定着確認</h3>
+      <ul>
+      <li>MongoDB において、RDB における主キー (PK)
+      に相当し、各ドキュメントに必ず存在するフィールドの名称を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked"><code>_id</code></span></li>
+      </ul></li>
+      <li>MongoDB
+      において、各ドキュメントを一意に識別するために、自動的に付与されるフィールドの名称を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked"><code>_id</code></span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="5.4" id="ドキュメントの抽出"><span class="header-section-number">5.4</span>
+      ドキュメントの抽出</h2>
+      <p><strong>s_users</strong>
+      テーブルからレベルが「<strong>20以上</strong>」のユーザを抽出してみます。ここで使用している
+      <code>printjson</code> は、JavaScript オブジェクトを整形して見やすく出力するための mongosh
+      の補助関数になります。</p>
+      <pre><code>printjson(
+  db.s_users
+    .find({ level: { $gte: 20 } }) // Lv. が 20 以上のユーザを抽出
+    .sort({ level: -1 }) // Lv. の降順で整列
+    .toArray(),
+);</code></pre>
+      <p>この例では…</p>
+      <ul>
+      <li><code>find()</code> で条件に合致するドキュメントを抽出し、</li>
+      <li><code>sort()</code> でレベルの高い順 (降順) に並べ替え、</li>
+      <li><code>toArray()</code> で結果を配列として取得したうえで、</li>
+      <li><code>printjson()</code> によって内容を確認</li>
+      </ul>
+      <p>…しています。</p>
+      <p>次のような応答が返ってきます。</p>
+      <pre><code>[
+  {
+    _id: ObjectId(&#39;6979d3e5d53c0e2c7c8de667&#39;),
+    name: &#39;Bob&#39;,
+    level: 22
+  },
+  {
+    _id: ObjectId(&#39;6979d3e5d53c0e2c7c8de666&#39;),
+    name: &#39;Alice&#39;,
+    level: 20
+  }
+]</code></pre>
+      <p>ここで、一旦、<code>.exit</code> を入力し、mongosh CLI を抜けます
+      (先頭にドットを付けるのを忘れないようにしてください)。</p>
+      <p>プロンプトが <code>playground&gt;</code> から <code>#</code> に切り替われば、mongosh
+      は正しく終了しています。</p>
+      <h2 data-number="5.5" id="vscode-から-mongosh-にスクリプトを送信"><span
+      class="header-section-number">5.5</span> VSCode から mongosh にスクリプトを送信</h2>
+      <p>以上で紹介したような手順によって、MongoDB
+      を操作することができますが、かなり煩雑なものとなります。そこで、演習環境では
+      <code>*.mongosh.js</code> というファイルを作成し、そこに記述したスクリプトをコンテナの mongosh
+      に送信し、実行できるようにしています。</p>
+      <p><code>mongosh/14/sample.mongosh.js</code> を作成し、以下を貼付けてください。</p>
+      <ul>
+      <li>ファイルの拡張子は必ず <code>.mongosh.js</code> としてください。そうでない場合、ESLint
+      によるエラーや警告が発生します。</li>
+      <li>ファイルを配置するフォルダは必ず <code>mongosh</code>
+      配下としてください。そうでない場合、ESLint によるエラーや警告が発生します。</li>
+      </ul>
+      <div class="sourceCode" id="cb11" data-caption="mongosh/14/sample.mongosh.js"><pre
+      class="sourceCode numberSource js numberLines"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1"></a>db<span class="op">.</span><span class="at">s_users</span><span class="op">.</span><span class="fu">drop</span>()<span class="op">;</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a>db<span class="op">.</span><span class="at">s_users</span><span class="op">.</span><span class="fu">insertMany</span>([</span>
+<span id="cb11-4"><a href="#cb11-4"></a>  { <span class="dt">name</span><span class="op">:</span> <span class="st">&quot;Alice&quot;</span><span class="op">,</span> <span class="dt">level</span><span class="op">:</span> <span class="dv">20</span> }<span class="op">,</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  { <span class="dt">name</span><span class="op">:</span> <span class="st">&quot;Bob&quot;</span><span class="op">,</span> <span class="dt">level</span><span class="op">:</span> <span class="dv">22</span> }<span class="op">,</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>  { <span class="dt">name</span><span class="op">:</span> <span class="st">&quot;Carol&quot;</span><span class="op">,</span> <span class="dt">level</span><span class="op">:</span> <span class="dv">19</span> }<span class="op">,</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>])<span class="op">;</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="fu">printjson</span>(</span>
+<span id="cb11-10"><a href="#cb11-10"></a>  db<span class="op">.</span><span class="at">s_users</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>    <span class="op">.</span><span class="fu">find</span>({ <span class="dt">level</span><span class="op">:</span> { <span class="dt">$gte</span><span class="op">:</span> <span class="dv">20</span> } })</span>
+<span id="cb11-12"><a href="#cb11-12"></a>    <span class="op">.</span><span class="fu">sort</span>({ <span class="dt">level</span><span class="op">:</span> <span class="op">-</span><span class="dv">1</span> })</span>
+<span id="cb11-13"><a href="#cb11-13"></a>    <span class="op">.</span><span class="fu">toArray</span>()<span class="op">,</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a>)<span class="op">;</span></span></code></pre></div>
+      <p>上記のスクリプト (<strong>実体は JavaScript</strong>) は、VSCode
+      のターミナルから、次のコマンドで実行することが (＝コンテナ <code>mongo8</code> の mongosh
+      に流し込むことが) できます。もしくは <code>[Ctrl]+[Shift]+[B]</code> でも実行できます。</p>
+      <pre><code>npm run mql mongosh/14/sample.mongosh.js </code></pre>
+      <ul>
+      <li>この方法で実行した場合、操作対象となるデータベースは <code>playground</code>
+      となります。詳しくは <code>scripts/mqlFileRunner.ts</code> を参照してください。</li>
+      </ul>
+      <h3 data-number="5.5.1" id="定着確認-5"><span class="header-section-number">5.5.1</span>
+      定着確認</h3>
+      <ul>
+      <li>ソフトウェア開発におけるツールの操作形態の文脈で「CLI」とは何の略語か。英語で答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">Command Line Interface</span></li>
+      </ul></li>
+      </ul>
+      <h1 data-number="6" id="授業時間外学習の指示"><span class="header-section-number">6</span>
+      授業時間外学習の指示</h1>
+      <p>🚨<strong>本科目は「学修単位科目」であり、1回の講義あたり「4時間相当」の授業時間外学習が求められる科目です</strong>🏃</p>
+      <ul>
+      <li>「<strong>学年末試験</strong>」に向けて総復習に取り組んでください。</li>
+      <li><a href="lecture13.html#課題2">課題2</a> に取り組んでください。</li>
+      <li>必要に応じて<a href="lecture13.html#ex課題-任意">EX課題 (任意)</a> に取り組んでください。
+      <ul>
+      <li>いずれも期限は <strong><em>2月18日 (水) 23時</em></strong> です。</li>
+      </ul></li>
+      </ul>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/DB-2025/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
