@@ -70,9 +70,12 @@ class="toc-section-number">5.4</span> ドキュメントの抽出</a></li>
 <li><a href="#vscode-から-mongosh-にスクリプトを送信"
 id="toc-vscode-から-mongosh-にスクリプトを送信"><span class="toc-section-number">5.5</span> VSCode
 から mongosh にスクリプトを送信</a></li>
+<li><a href="#コレクションの確認" id="toc-コレクションの確認"><span
+class="toc-section-number">5.6</span> コレクションの確認</a></li>
 </ul></li>
+<li><a href="#演習" id="toc-演習"><span class="toc-section-number">6</span> 演習</a></li>
 <li><a href="#授業時間外学習の指示" id="toc-授業時間外学習の指示"><span
-class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
+class="toc-section-number">7</span> 授業時間外学習の指示</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -120,7 +123,8 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
       の形式で出席番号とフルネーム氏名を記入してください。四角枠内には、それ以外の情報を記入しないでください。</li>
       <li>出席番号と氏名の枠がないメモ、<strong>手書き以外で作成したメモ (プリントアウトやコピー)
       の持ち込みは</strong> <strong><em>不正行為</em></strong> として扱います。</li>
-      <li>ルーズリーフなども、<strong>A4サイズに切り取られたものであれば使用可能</strong>です。また、出席番号と氏名の<u>枠線、罫線や方眼などは印刷でも問題ありません</u>。</li>
+      <li>ルーズリーフなども、<strong>A4サイズのものであれば使用可能</strong>です。</li>
+      <li>出席番号と氏名の<u>枠線、罫線や方眼などは印刷でも問題ありません</u>。</li>
       </ul></li>
       </ul>
       <figure>
@@ -130,9 +134,9 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
       <h3 data-number="2.0.2" id="出題内容と範囲について"><span
       class="header-section-number">2.0.2</span> 出題内容と範囲について</h3>
       <ul>
-      <li>第01回講義 から 第14回講義 (今回) までの内容を出題範囲としています。
+      <li>第01回講義 から 第14回講義 (今回) までの内容が出題範囲となります。
       <ul>
-      <li>MongoDB を操作するコード (＝mongosh で実行する具体的なコード)
+      <li>MongoDB を操作するコード (＝mongosh 上で実行する具体的なコード)
       を問う問題については出題しません。</li>
       </ul></li>
       <li>本科目は、学修単位科目であり、その授業時間外学習を前提とした「難易度」で試験問題を作成しています。</li>
@@ -144,12 +148,13 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
       </ul></li>
       </ul>
       <h1 data-number="3" id="mongodb"><span class="header-section-number">3</span> MongoDB</h1>
-      <p>今回と次回では、ドキュメント指向データベースマネジメントシステムである
+      <p>今回と次回 (学年末試験後)
+      では、<strong>ドキュメント指向データベースマネジメントシステム</strong> である
       <strong><em>MongoDB</em></strong> について学んでいきます。 Mongo
-      は「モンゴ」または「モンゴー」と読みます。</p>
+      は「<strong>モンゴ</strong>」と読みます。</p>
       <ul>
-      <li>ドキュメント指向データベース (<strong>document-oriented database</strong>)
-      は、一般に「<strong>ドキュメント型データベース</strong>」とも呼ばれます。</li>
+      <li>ドキュメント指向データベース (<strong>Document-oriented Database</strong>)
+      は、一般に「<strong>ドキュメント<u>型</u>データベース</strong>」とも呼ばれます。</li>
       </ul>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
@@ -158,42 +163,46 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
       についての基礎の知識と利用経験があるので、それを踏まえて比較しながら解説してください。</p>
       </blockquote>
       <blockquote>
-      <p>ドキュメント指向データベースには、CouchDB や Firestore などがありますが、そのなかでの
-      MongoDB の特徴について解説してください。</p>
+      <p>ドキュメント指向データベースには、CouchDB や Firestore
+      などがありますが、それらと比較した場合の MongoDB の特徴について解説してください。</p>
       </blockquote>
       <h2 data-number="3.1" id="nosql"><span class="header-section-number">3.1</span> NoSQL</h2>
       <p><a
       href="lecture01.html#データベースの種類">第01回講義</a>でも簡単に触れましたが、<strong>データベースのアーキテクチャ</strong>
-      (内部の仕組み/データの整理方法)
+      (＝内部の仕組み/データの整理方法)
       は、大きく「<strong>RDB</strong>」と「<strong>NoSQL</strong>」の2つに分類することができます。</p>
-      <p>基本的に <span class="masked">RDB 以外は、NoSQL に分類される</span> ため、NoSQL
-      には様々な方式のデータベースが存在します。そのなかでも
-      <strong>ドキュメント指向データベース</strong> の一種である MongoDB は、NoSQL
+      <p>基本的に <span class="masked">RDB 以外は、すべて NoSQL に分類される</span> ため、NoSQL
+      には様々な方式のデータベース (ドキュメント型、キー・バリュー型、グラフ型など)
+      が存在します。このなかでも <strong>ドキュメント指向データベース</strong> に属する MongoDB
+      は、NoSQL
       を代表するデータベースとして、<strong>特に知名度が高く実務でも広く利用されています</strong>。</p>
-      <p><strong>JSON形式</strong> (JSON: JavaScript Object Notation)
+      <p>MongoDB は、<strong>JSON形式</strong> (JSON: JavaScript Object Notation)
       でデータを扱えるという特性から、<strong>ウェブアプリ開発との親和性が高く</strong>、APIサーバやバックエンドのデータベースとして採用されるケースが多いことが特徴となっています。</p>
       <ul>
       <li><a
-      href="https://www.mongodb.com/solutions/customer-case-studies">MongoDBを導入している企業やサービス</a></li>
+      href="https://www.mongodb.com/solutions/customer-case-studies">MongoDBを導入している企業やサービス</a>(MongoDB
+      公式HP)</li>
       </ul>
-      <p>MongoDB には、サーバ構築や運用を意識せずに利用できるマネージドサービスである <a
+      <p>MongoDB
+      は、自前でサーバを用意して運用することも可能ですが、サーバ構築や保守・運用を意識せずに利用できるマネージドサービスとして<a
       href="https://www.mongodb.com/ja-jp/products/platform/atlas-database">MongoDB
-      Atlas</a>も提供されています (簡単に言えば <span
-      class="masked">クラウド提供されるMongoDB</span>
-      です)。<u>クレジットカード登録不要で、無料利用枠もあるので</u>、個人開発のウェブアプリなどでも採用されることが多いです。</p>
+      Atlas</a>も提供されています (簡単に言えば <span class="masked">クラウドで提供される
+      MongoDB</span> です)。</p>
       <ul>
+      <li>MongoDB Atlas
+      は<u>クレジットカード登録不要で、無料利用枠もあるので</u>、個人開発のウェブアプリなどでも採用されることが多いです。</li>
       <li>この授業では MongoDB Atlas (DBaaS: Database as a Service) は利用せず、<span
       class="masked">MongoDB の Docker コンテナ</span> を使用します。</li>
       </ul>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
-      <p>MongoDB Atlas とは、どのようなウェブサービスですか？ウェブアプリを個人開発する場合、自前で
+      <p>MongoDB Atlas とは、どのようなウェブサービスですか？ウェブアプリを個人開発するとき、自前で
       MongoDB サーバを用意する場合 (セルフホストする場合)
       と比較して、どのようなメリットがありますか。</p>
       </blockquote>
       <blockquote>
       <p>「MongoDB Atlas
-      はマネージドデータベースサービスである」という文脈において、マネージドデータベースサービスとは、どのような意味ですか。</p>
+      はマネージドデータベースサービスである」といった文脈において、マネージドとは、どのような意味ですか。</p>
       </blockquote>
       <h3 data-number="3.1.1" id="定着確認"><span class="header-section-number">3.1.1</span>
       定着確認</h3>
@@ -203,7 +212,7 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
       <ul>
       <li><strong>答え</strong>: <span class="masked">MongoDB Atlas</span></li>
       </ul></li>
-      <li>MongoDB 以外の、代表的なドキュメント指向データベースを1つ挙げよ。
+      <li>MongoDB 以外の代表的なドキュメント指向データベースの名称を1つ挙げよ。
       <ul>
       <li><strong>答え</strong>: <span class="masked">CouchDB、Firestore</span></li>
       </ul></li>
@@ -211,12 +220,13 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
       <h2 data-number="3.2" id="mongodb-の特徴"><span class="header-section-number">3.2</span>
       MongoDB の特徴</h2>
       <p>MongoDB は、キーバリュー構造を持った <strong>ドキュメント</strong> (Document)
-      を基本単位にデータを管理する方式のデータベースになります。MongoDB
+      を基本単位としてデータを管理する方式のデータベースになります。MongoDB
       において、1件1件のデータは「ドキュメント」という単位で扱われ、RDB
       との大きな違いとして、ドキュメント内部に <span
-      class="masked">入れ子構造や配列構造をそのまま含められること</span> が挙げられます。</p>
-      <p>より具体的には、MongoDB のドキュメントは表面的には <strong>JSON形式のデータ</strong>
-      で表現されます。そのため、RDB
+      class="masked">「入れ子構造」や「配列構造」をそのまま含められること</span>
+      が挙げられます。</p>
+      <p>より具体的には、MongoDB における「ドキュメント」は表面的には
+      <strong>JSON形式のデータ</strong> で表現されます。そのため、RDB
       では複数テーブルに分割して管理していたようなデータ構造も、次のように
       <strong>1つのドキュメント</strong> としてまとめて保持することができます。</p>
       <div class="sourceCode" id="cb1" data-caption="MongoDBにおけるドキュメントの例"><pre
@@ -243,30 +253,36 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
 <span id="cb1-21"><a href="#cb1-21"></a>  <span class="dt">&quot;level&quot;</span><span class="fu">:</span> <span class="dv">35</span><span class="fu">,</span></span>
 <span id="cb1-22"><a href="#cb1-22"></a>  <span class="dt">&quot;created_at&quot;</span><span class="fu">:</span> <span class="er">ISODate(</span><span class="st">&quot;2025-01-10T12:00:00Z&quot;</span><span class="er">)</span></span>
 <span id="cb1-23"><a href="#cb1-23"></a><span class="fu">}</span></span></code></pre></div>
-      <p>これらのドキュメントは、内部的には <span class="masked">BSON (Binary JSON)</span>
-      形式で保存されています。BSON（ビーソン）は、JSON
-      を拡張したバイナリ形式のデータ表現であり、<strong>型情報や長さ情報を持つことで、高速なアクセスや効率的なデータ管理が可能</strong>
+      <p>このようなドキュメントは、MongoDB の内部では <span class="masked">BSON (Binary JSON)</span>
+      形式で保存・管理されています。BSON（ビーソン）は、JSON を拡張した
+      <u>バイナリ形式のデータ表現</u>
+      であり、<strong>「型情報」や「長さ情報」を持つことで、高速なアクセスや効率的なデータ管理が可能</strong>
       となっています。</p>
       <p>概念的には、RDB における <span class="masked">行・レコード</span> が MongoDB
       における「<strong>ドキュメント</strong>」に対応します。同様に、RDB
       における「テーブル」が、MongoDB では <span class="masked">「コレクション」</span>
       とよばれます。</p>
       <p>また、MongoDB は「<strong>スキーマレス</strong>」という特徴を持ちます。RDB
-      のように厳密なスキーマを事前に定義する必要がなく、同じコレクションのなかでも <span
-      class="masked">ドキュメントごとに異なる構造のデータを格納できることが可能</span>
-      になっています。この柔軟性により、アジャイル開発や、仕様変更が頻繁に発生するウェブアプリケーションとも相性がよいデータベースとなっています。</p>
+      のように厳密なスキーマを事前に定義する必要がなく、同じコレクションのなかに <span
+      class="masked">異なる構造のドキュメントを格納可能</span>
+      となっています。このような柔軟性から、アジャイル開発や、仕様変更が頻繁に発生するウェブアプリケーションとも相性がよいデータベースとなっています。</p>
       <ul>
-      <li>MongoDB の名称は、英語の humongous（＝非常に大きい）に由来するとされています。</li>
+      <li>MongoDB の名称は、英語の <span class="masked">Humongous (＝非常に大きい)</span>
+      に由来するとされています。</li>
       </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>ソフトウェア開発の文脈において「アジャイル開発」とは、どのような開発手法ですか。</p>
+      </blockquote>
       <h3 data-number="3.2.1" id="定着確認-1"><span class="header-section-number">3.2.1</span>
       定着確認</h3>
       <ul>
-      <li>データモデルの観点から見たとき、RDB におけるレコード (行) に対応する MongoDB
+      <li>データモデルの観点から見たとき、RDB における「レコード (行)」に対応する MongoDB
       の基本的なデータ単位を答えよ。カタカナもしくは英語で答えよ。
       <ul>
       <li><strong>答え</strong>: <span class="masked">ドキュメント、Document</span></li>
       </ul></li>
-      <li>データモデルの観点から見たとき、RDB におけるテーブルに対応する MongoDB
+      <li>データモデルの観点から見たとき、RDB における「テーブル」に対応する MongoDB
       の基本的なデータ単位を答えよ。カタカナもしくは英語で答えよ。
       <ul>
       <li><strong>答え</strong>: <span class="masked">コレクション、Collection</span></li>
@@ -276,14 +292,15 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
       <ul>
       <li><strong>答え</strong>: <span class="masked">BSON</span></li>
       </ul></li>
-      <li>データベースにおいて「スキーマレスである」とは、同じデータ集合内のすべてのデータが、同一の構造を持つことが保証されていることを意味する。この説明は「適切である」か「不適切である」か答えよ。
+      <li>データベースにおいて「スキーマレスである」とは、「同じデータ集合内のすべてのデータが、同一の構造を持つことが保証されていること」を意味する。この説明は「適切である」か「適切ではない」か答えよ。
       <ul>
-      <li><strong>答え</strong>: <span class="masked">不適切である</span></li>
+      <li><strong>答え</strong>: <span class="masked">適切ではない</span></li>
       </ul></li>
       </ul>
       <h1 data-number="4" id="mongodb-演習環境のセットアップ"><span
       class="header-section-number">4</span> MongoDB 演習環境のセットアップ</h1>
-      <p>こちらの <i class="fa-brands fa-github"></i> <a
+      <p>Dockerコンテナを利用した MongoDB
+      の演習環境をセットアップします。こちらの<i class="fa-brands fa-github"></i><a
       href="https://github.com/TakeshiWada1980/DB-2025-MongoDB">リポジトリ</a> の Readme
       を参照しながらセットアップと動作確認をしてください。</p>
       <p><strong>(プロンプト例)</strong></p>
@@ -292,11 +309,15 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
       とは、何のために使用する、どのようなツールですか？</p>
       </blockquote>
       <blockquote>
-      <p>MongoDB について学ぼうと思っています。MongoDB Compass
+      <p>MongoDB について学ぼうと思っています。mongosh
       とは、何のために使用する、どのようなツールですか？</p>
       </blockquote>
       <blockquote>
-      <p>MongoDB について学ぼうと思っています。mongosh
+      <p>MongoDB について学ぼうと思っています。mongoose
+      とは、何のために使用する、どのようなライブラリですか？</p>
+      </blockquote>
+      <blockquote>
+      <p>MongoDB について学ぼうと思っています。MongoDB Compass
       とは、何のために使用する、どのようなツールですか？</p>
       </blockquote>
       <h3 data-number="4.0.1" id="定着確認-2"><span class="header-section-number">4.0.1</span>
@@ -307,22 +328,26 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
       <ul>
       <li><strong>答え</strong>: <span class="masked">mongo-express</span></li>
       </ul></li>
+      <li>Node.js 環境において、MongoDB を JavaScript / TypeScript から扱うために用いられる ODM
+      (Object Data Modeling) ライブラリ の名称を答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">mongoose</span></li>
+      </ul></li>
       </ul>
       <h1 data-number="5" id="mongosh-による-mongodb-の操作"><span
       class="header-section-number">5</span> mongosh による MongoDB の操作</h1>
       <p>PostgreSQL では、<strong>psql</strong> という CLI (Command Line Interface)
-      の公式ツールを用いて、対話的にデータベースの管理操作をすることや、SQL
-      クエリを発行することができました (<a
-      href="lecture02.html#psql-の対話モードで-postgresql-を操作%22">第02回講義</a>)。</p>
+      の公式ツールを用いて、対話的にデータベースの管理操作をしたり、SQL クエリを発行したりできました
+      (<a href="lecture02.html#psql-の対話モードで-postgresql-を操作%22">第02回講義</a>)。</p>
       <p>MongoDB においても、これと同様の役割を持つ公式 CLI ツールとして <span
       class="masked">mongosh (モンゴシェル)</span> が提供されています。この <strong>mongosh</strong>
       を利用することで、MongoDB に接続し、対話的に各種管理操作やクエリ発行をすることができます。</p>
       <ul>
       <li>mongosh は、「Mongo」と「sh (shellの略)」をつなげた語になります。</li>
       </ul>
-      <p>実際に mongosh を起動して操作してみます。</p>
-      <p>現在の環境では <strong>MongoDB はコンテナ内で稼働しており</strong>、ホスト側 (Windows 上)
-      には mongosh は存在しません。そのため、MongoDB コンテナ (<code>mongo8</code>)
+      <p>実際に mongosh を起動して MongoDB を操作してみます。</p>
+      <p>なお、現在の環境では <strong>MongoDB はコンテナ内で稼働しており</strong>、ホスト側 (Windows
+      上) には mongosh は存在しません。そのため、MongoDB コンテナ (<code>mongo8</code>)
       に接続し、コンテナ内部で <code>mongosh</code> を実行します。</p>
       <h3 data-number="5.0.1" id="定着確認-3"><span class="header-section-number">5.0.1</span>
       定着確認</h3>
@@ -372,8 +397,8 @@ class="toc-section-number">6</span> 授業時間外学習の指示</a></li>
       <p>実行すると、以下のような応答があるはずです。</p>
       <pre><code>switched to db playground
 playground&gt;</code></pre>
-      <p><code>s_users</code> というコレクション (RDBで言うところの <span
-      class="masked">テーブル</span> に相当) を作成します。</p>
+      <p>このデータベースのなかに <code>s_users</code> というコレクション (RDBで言うところの <span
+      class="masked">テーブル</span> に相当) を作成していきます。</p>
       <p>その前準備として、<u>同名のコレクションが存在する場合は削除</u>
       しておきます。以下のコマンドは、<strong>s_users</strong>
       コレクションが存在すれば削除し、存在しない場合は <code>false</code> を返すものになります。</p>
@@ -426,7 +451,7 @@ playground&gt;</code></pre>
       <h2 data-number="5.4" id="ドキュメントの抽出"><span class="header-section-number">5.4</span>
       ドキュメントの抽出</h2>
       <p><strong>s_users</strong>
-      テーブルからレベルが「<strong>20以上</strong>」のユーザを抽出してみます。ここで使用している
+      コレクションからレベルが「<strong>20以上</strong>」のユーザを抽出してみます。ここで使用している
       <code>printjson</code> は、JavaScript オブジェクトを整形して見やすく出力するための mongosh
       の補助関数になります。</p>
       <pre><code>printjson(
@@ -437,13 +462,16 @@ playground&gt;</code></pre>
 );</code></pre>
       <p>この例では…</p>
       <ul>
-      <li><code>find()</code> で条件に合致するドキュメントを抽出し、</li>
+      <li><code>find()</code> で条件に合致するドキュメントを抽出し、
+      <ul>
+      <li><code>$gte</code> は <span class="masked">Greater Than or Equal</span> の意味</li>
+      </ul></li>
       <li><code>sort()</code> でレベルの高い順 (降順) に並べ替え、</li>
       <li><code>toArray()</code> で結果を配列として取得したうえで、</li>
       <li><code>printjson()</code> によって内容を確認</li>
       </ul>
       <p>…しています。</p>
-      <p>次のような応答が返ってきます。</p>
+      <p>実行すると、次のような応答が返ってきます。</p>
       <pre><code>[
   {
     _id: ObjectId(&#39;6979d3e5d53c0e2c7c8de667&#39;),
@@ -462,14 +490,19 @@ playground&gt;</code></pre>
       は正しく終了しています。</p>
       <h2 data-number="5.5" id="vscode-から-mongosh-にスクリプトを送信"><span
       class="header-section-number">5.5</span> VSCode から mongosh にスクリプトを送信</h2>
-      <p>以上で紹介したような手順によって、MongoDB
+      <p>以上で説明した手順で MongoDB
       を操作することができますが、かなり煩雑なものとなります。そこで、演習環境では
-      <code>*.mongosh.js</code> というファイルを作成し、そこに記述したスクリプトをコンテナの mongosh
-      に送信し、実行できるようにしています。</p>
+      <code>*.mongosh.js</code> というファイルを作成し、そこに記述したスクリプトを <span
+      class="masked">コンテナの mongosh に流し込んで実行できるように</span> しています。</p>
       <p><code>mongosh/14/sample.mongosh.js</code> を作成し、以下を貼付けてください。</p>
       <ul>
       <li>ファイルの拡張子は必ず <code>.mongosh.js</code> としてください。そうでない場合、ESLint
-      によるエラーや警告が発生します。</li>
+      によるエラーや警告が発生します。
+      <ul>
+      <li>実際に、ファイルネームを <code>sample.js</code> に書き換えて、ESLint
+      のチェックにひっかかることを確認してみてください。</li>
+      <li>詳しくは <code>eslint.config.js</code> を参照してください。</li>
+      </ul></li>
       <li>ファイルを配置するフォルダは必ず <code>mongosh</code>
       配下としてください。そうでない場合、ESLint によるエラーや警告が発生します。</li>
       </ul>
@@ -493,10 +526,19 @@ playground&gt;</code></pre>
       に流し込むことが) できます。もしくは <code>[Ctrl]+[Shift]+[B]</code> でも実行できます。</p>
       <pre><code>npm run mql mongosh/14/sample.mongosh.js </code></pre>
       <ul>
-      <li>この方法で実行した場合、操作対象となるデータベースは <code>playground</code>
+      <li>この方法で実行した場合、操作対象となるデータベースは、自動的に <code>playground</code>
       となります。詳しくは <code>scripts/mqlFileRunner.ts</code> を参照してください。</li>
       </ul>
-      <h3 data-number="5.5.1" id="定着確認-5"><span class="header-section-number">5.5.1</span>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>VSCode で mongosh 用のスクリプトを記述していたら、ESLint
+      から大量のエラーや警告がでました。なぜ、このようになるのですか。</p>
+      </blockquote>
+      <h2 data-number="5.6" id="コレクションの確認"><span class="header-section-number">5.6</span>
+      コレクションの確認</h2>
+      <p><a href="http://localhost:8081/">http://localhost:8081/</a>から mongo-express
+      に接続して、上記で作成したコレクションとドキュメントについて確認してください。</p>
+      <h3 data-number="5.6.1" id="定着確認-5"><span class="header-section-number">5.6.1</span>
       定着確認</h3>
       <ul>
       <li>ソフトウェア開発におけるツールの操作形態の文脈で「CLI」とは何の略語か。英語で答えよ。
@@ -504,7 +546,37 @@ playground&gt;</code></pre>
       <li><strong>答え</strong>: <span class="masked">Command Line Interface</span></li>
       </ul></li>
       </ul>
-      <h1 data-number="6" id="授業時間外学習の指示"><span class="header-section-number">6</span>
+      <h1 data-number="6" id="演習"><span class="header-section-number">6</span> 演習</h1>
+      <p>演習環境を利用して MongoDB における CRUD の基本について学んでください。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>あなたは、実務経験豊富で理論と実践のバランスに優れたIT講師です。<br />
+      MongoDB の CRUD の基本について、初学者 (ただし RDB については経験あり)
+      を対象としたハンズオン形式の講義をしてください。<br />
+      ## 前提条件<br />
+      - MongoDB のインストールおよび環境構築は完了している<br />
+      - mongosh は起動済みで、使用するデータベースもすでに選択されている<br />
+      - MongoDB の JavaScript API のみを使用する。文末には <code>;</code> を付ける<br />
+      - mongosh のメタコマンドは一切使用しない - RDB との対比を適宜交えながら説明すること -
+      実際に手を動かしながら理解できるように、コード例 → 実行結果のイメージ →
+      補足説明の流れを意識すること</p>
+      <p>まずは Create: <code>insertOne</code>、<code>insertMany</code>
+      の使い分けからハンズオン形式の講義をしてください。</p>
+      </blockquote>
+      <blockquote>
+      <p>つづいて Read: <code>find</code>、<code>findOne</code> とクエリ演算子
+      (<code>$eq</code>、<code>$gt</code>、<code>$in</code>)
+      についてハンズオン形式の講義をしてください。</p>
+      </blockquote>
+      <blockquote>
+      <p>つづいて Update: <code>updateOne</code>、<code>updateMany</code>、<code>replaceOne</code>
+      についてハンズオン形式の講義をしてください。</p>
+      </blockquote>
+      <blockquote>
+      <p>つづいて Delete: <code>deleteOne</code>、<code>deleteMany</code>
+      についてハンズオン形式の講義をしてください。</p>
+      </blockquote>
+      <h1 data-number="7" id="授業時間外学習の指示"><span class="header-section-number">7</span>
       授業時間外学習の指示</h1>
       <p>🚨<strong>本科目は「学修単位科目」であり、1回の講義あたり「4時間相当」の授業時間外学習が求められる科目です</strong>🏃</p>
       <ul>
