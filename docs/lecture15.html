@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>第15回 4I-データベース工学</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#課題2-と-ex課題" id="toc-課題2-と-ex課題"><span class="toc-section-number">1</span>
+課題2 と EX課題</a>
+<ul>
+<li><a href="#最終チェック" id="toc-最終チェック"><span class="toc-section-number">1.1</span>
+最終チェック</a></li>
+</ul></li>
+<li><a href="#成績評価" id="toc-成績評価"><span class="toc-section-number">2</span>
+成績評価</a></li>
+<li><a href="#問題1の解説補足" id="toc-問題1の解説補足"><span class="toc-section-number">3</span>
+「問題1」の解説・補足</a>
+<ul>
+<li><a href="#と-05" id="toc-と-05"><span class="toc-section-number">3.1</span> (04) と
+(05)</a></li>
+<li><a href="#section" id="toc-section"><span class="toc-section-number">3.2</span> (07)</a></li>
+</ul></li>
+<li><a href="#問題3の解説補足" id="toc-問題3の解説補足"><span class="toc-section-number">4</span>
+「問題3」の解説・補足</a>
+<ul>
+<li><a href="#section-1" id="toc-section-1"><span class="toc-section-number">4.1</span>
+(21)</a></li>
+<li><a href="#section-2" id="toc-section-2"><span class="toc-section-number">4.2</span>
+(22)</a></li>
+<li><a href="#section-3" id="toc-section-3"><span class="toc-section-number">4.3</span>
+(23)</a></li>
+<li><a href="#section-4" id="toc-section-4"><span class="toc-section-number">4.4</span>
+(24)</a></li>
+<li><a href="#section-5" id="toc-section-5"><span class="toc-section-number">4.5</span>
+(25)</a></li>
+<li><a href="#section-6" id="toc-section-6"><span class="toc-section-number">4.6</span>
+(26)</a></li>
+<li><a href="#section-7" id="toc-section-7"><span class="toc-section-number">4.7</span>
+(27)</a></li>
+<li><a href="#section-8" id="toc-section-8"><span class="toc-section-number">4.8</span>
+(28)</a></li>
+<li><a href="#section-9" id="toc-section-9"><span class="toc-section-number">4.9</span>
+(29)</a></li>
+<li><a href="#section-10" id="toc-section-10"><span class="toc-section-number">4.10</span>
+(30)</a></li>
+</ul></li>
+<li><a href="#問題4の解説補足" id="toc-問題4の解説補足"><span class="toc-section-number">5</span>
+「問題4」の解説・補足</a>
+<ul>
+<li><a href="#section-11" id="toc-section-11"><span class="toc-section-number">5.1</span>
+(32)</a></li>
+<li><a href="#section-12" id="toc-section-12"><span class="toc-section-number">5.2</span>
+(33)</a></li>
+</ul></li>
+<li><a href="#授業評価アンケート" id="toc-授業評価アンケート"><span
+class="toc-section-number">6</span> 授業評価アンケート</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>2025-4I データベース工学 第13回 講義資料</p>
+      <p>2026年02月19日 (木) 3-4時限</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="課題2-と-ex課題"><span class="header-section-number">1</span> 課題2 と
+      EX課題</h1>
+      <p><a
+      href="lecture13.html#課題2">課題2</a>を未提出の人は、早急に提出ください。採点後は、<strong>修正版の再提出や追提出があっても原則として再評価はしません</strong>が、Teams
+      で点数がフィードバックされるまでは、(URLに変更がない範囲で)
+      加筆・修正等が可能です。実際の採点は、早ければ 2月24日 (火) から開始予定です。</p>
+      <ul>
+      <li>課題2 (+EX課題) の<a
+      href="https://omunet-my.sharepoint.com/:t:/g/personal/z21707r_omu_ac_jp/IQAqvKfdnZwBTpsyDkxUtvMdARdgwOGy5WxR5LAXxgxVBgk?e=4vs0vx">共有リンク</a><font size="-1">(学内のみ)</font>
+      <ul>
+      <li><a href="lecture13.html#EX課題">EX課題</a>のURL提出については締め切りました。</li>
+      </ul></li>
+      </ul>
+      <h2 data-number="1.1" id="最終チェック"><span class="header-section-number">1.1</span>
+      最終チェック</h2>
+      <ul>
+      <li>✅ 90分以上のハンズオン形式の学習体験が可能なコンテンツ (ボリューム・難易度・レベル感)
+      である。</li>
+      <li>✅ 本科目で使用した環境 (<a
+      href="https://github.com/TakeshiWada1980/DB-2025-PostgreSQL">PostgreSQL 17
+      のDockerコンテナ</a>) で実行した実験や検証が含まれている。
+      <ul>
+      <li>⚠️実験や検証、実証を含まない単なる調査や解説の記事は不可です</li>
+      </ul></li>
+      <li>✅ 理解度を確認する問題と演習、また、それらの解答例が含まれている。</li>
+      <li>✅ 解説記事の末尾に <code>本コンテンツの作成時間：約XX時間</code> が記載されている。</li>
+      <li>✅ 適切な体裁・デザインで構成されている。
+      <ul>
+      <li>タイトル、構成 (セクション分け)、<a
+      href="https://www.google.com/search?q=シンタックスハイライト">シンタックスハイライト</a>、配色</li>
+      </ul></li>
+      </ul>
+      <h1 data-number="2" id="成績評価"><span class="header-section-number">2</span> 成績評価</h1>
+      <p><strong>総合成績</strong>（年度末の最終成績）は、シラバス記載のように「試験<strong>45%</strong>、小テスト<strong>35%</strong>、課題<strong>20%</strong>の割合で総合して評価」します。</p>
+      <ul>
+      <li>後期中間試験 (100点満点) と学年末試験 (100点満点) の合計200点を <strong>45点換算</strong>
+      (小数以下四捨五入)</li>
+      <li>全10回の小テスト (各10点満点) の合計100点を <strong>35点換算</strong>
+      (小数以下四捨五入)</li>
+      <li>課題1 (10点満点) を 0.75倍、課題2 (10点満点) を 1.25倍 した合計20点を
+      <strong>20点換算</strong> (小数以下四捨五入)</li>
+      </ul>
+      <h1 data-number="3" id="問題1の解説補足"><span class="header-section-number">3</span>
+      「問題1」の解説・補足</h1>
+      <h2 data-number="3.1" id="と-05"><span class="header-section-number">3.1</span> (04) と
+      (05)</h2>
+      <blockquote>
+      <p>ER図の文脈において「多重度」は、英語で何と表現されるか。英語もしくはカタカタで答えよ。</p>
+      </blockquote>
+      <blockquote>
+      <p>ER図の文脈において「任意性」は、英語で何と表現されるか。英語もしくはカタカタで答えよ。</p>
+      </blockquote>
+      <p>問題4の (44) の問題文のなかに答え (＝カーディナリティ、オプショナリティ)
+      が書かれています。</p>
+      <h2 data-number="3.2" id="section"><span class="header-section-number">3.2</span> (07)</h2>
+      <blockquote>
+      <p>PostgreSQLにおいて、タイムゾーン情報を含めた日時を保持するために最も適したデータ型を答えよ。</p>
+      </blockquote>
+      <p><code>TIMESTAMPZ</code> という誤答が (中間試験に引き続き)
+      目立ちました。<code>TIMESTAMPTZ</code> が正しいです。</p>
+      <ul>
+      <li><code>TZ</code> は <span class="masked">with Time Zone</span> の略です。</li>
+      <li><code>TIMESTAMP WITH TIME ZONE</code> でも OK です。</li>
+      </ul>
+      <h1 data-number="4" id="問題3の解説補足"><span class="header-section-number">4</span>
+      「問題3」の解説・補足</h1>
+      <h2 data-number="4.1" id="section-1"><span class="header-section-number">4.1</span> (21)</h2>
+      <blockquote>
+      <p>UNIQUE 制約を指定しているカラムで、<code>NULL</code>
+      が複数行に存在しても一意性違反にはならない。</p>
+      </blockquote>
+      <p>👉 ⭕ <strong>正しい</strong>。</p>
+      <h2 data-number="4.2" id="section-2"><span class="header-section-number">4.2</span> (22)</h2>
+      <blockquote>
+      <p>NOT NULL 制約を指定していないカラムのデフォルト値は、自動的に <code>NULL</code>
+      となる。</p>
+      </blockquote>
+      <p>👉 ⭕ <strong>正しい</strong>。</p>
+      <h2 data-number="4.3" id="section-3"><span class="header-section-number">4.3</span> (23)</h2>
+      <blockquote>
+      <p>ageカラムが、<code>age INTEGER CHECK (age &gt;= 0)</code>
+      のように定義されるとき、このカラムに NULL を挿入することはできない。</p>
+      </blockquote>
+      <p>👉 ❌ <strong>誤り</strong>。値が <code>null</code> のとき、<code>age &gt;= 0</code> は
+      <code>UNKNOWN</code> と評価されます。そして、評価結果が UNKNOWN
+      のとき、「CHECK制約には違反していない」と判断されます。</p>
+      <h2 data-number="4.4" id="section-4"><span class="header-section-number">4.4</span> (24)</h2>
+      <blockquote>
+      <p>内部結合では、結合条件を評価して <code>FALSE</code>
+      とならなかった行のみが結果セットに残る。</p>
+      </blockquote>
+      <p>👉 ❌ <strong>誤り</strong>。評価結果が <code>FALSE</code> または
+      <code>UNKNOWN (NULL)</code> ではない行のみが結果セットに含まれます。言い換えれば、評価結果が
+      <code>TRUE</code> となる行のみが結果セットに含まれます。</p>
+      <h2 data-number="4.5" id="section-5"><span class="header-section-number">4.5</span> (25)</h2>
+      <blockquote>
+      <p>CHECK制約においては、条件の評価結果が <code>FALSE</code> もしくは <code>UNKNOWN</code>
+      となるときに制約違反となる。</p>
+      </blockquote>
+      <p>👉 ❌ <strong>誤り</strong>。(23)
+      とも関連。チェック制約が満たされないと判断されるのは、評価結果が <code>FALSE</code>
+      の場合のみです。</p>
+      <h2 data-number="4.6" id="section-6"><span class="header-section-number">4.6</span> (26)</h2>
+      <blockquote>
+      <p>標準SQLにおいて <code>table_1 OUTER JOIN table_2</code>
+      と記述した場合、構文エラーとなる。</p>
+      </blockquote>
+      <p>👉 ⭕ <strong>正しい</strong>。<code>LEFT JOIN</code> や <code>LEFT OUTER JOIN</code>
+      はよいが、<code>OUTER JOIN</code> は構文エラーとなります。</p>
+      <h2 data-number="4.7" id="section-7"><span class="header-section-number">4.7</span> (27)</h2>
+      <blockquote>
+      <p>2つのテーブルのクロス結合においては、結合順を入れ替えても、結果セットの正味の内容
+      (集合としての行) は変化しない。</p>
+      </blockquote>
+      <p>👉 ⭕ <strong>正しい</strong>。</p>
+      <h2 data-number="4.8" id="section-8"><span class="header-section-number">4.8</span> (28)</h2>
+      <blockquote>
+      <p>外部結合と等価な処理は、内部結合とWHERE句の組み合わせで記述することもできる。</p>
+      </blockquote>
+      <p>👉 ❌
+      <strong>誤り</strong>。内部結合では、WHERE句と組み合わせても、片方のテーブルにしか存在しない行を結果に含めることはできない。</p>
+      <h2 data-number="4.9" id="section-9"><span class="header-section-number">4.9</span> (29)</h2>
+      <blockquote>
+      <p>PostgreSQLにおいてNUMERIC(n, m) とDECIMAL(n, m) は同義語で内部実装も同じとなっている。</p>
+      </blockquote>
+      <p>👉 ⭕ <strong>正しい</strong>。</p>
+      <h2 data-number="4.10" id="section-10"><span class="header-section-number">4.10</span>
+      (30)</h2>
+      <blockquote>
+      <p><code>CHECK(age &lt; 20)</code> と <code>CHECK(age &gt; 80)</code>
+      という2つのチェック制約の列挙と<code>CHECK(age &lt; 20 OR age &gt; 80)</code>
+      は、論理的に等価である。</p>
+      </blockquote>
+      <p>👉
+      <strong>誤り</strong>。複数のCHECK制約を列挙した場合、それらはAND条件で結合されます。</p>
+      <h1 data-number="5" id="問題4の解説補足"><span class="header-section-number">5</span>
+      「問題4」の解説・補足</h1>
+      <h2 data-number="5.1" id="section-11"><span class="header-section-number">5.1</span> (32)</h2>
+      <div class="sourceCode" id="cb1" data-caption="問題4 (32) 解答例1"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">id</span> <span class="dt">INTEGER</span> <span class="kw">GENERATED</span> ALWAYS <span class="kw">AS</span> IDENTITY <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span></code></pre></div>
+      <div class="sourceCode" id="cb2" data-caption="問題4 (32) 解答例2 ※ 開始番号を明示"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">id</span> <span class="dt">INTEGER</span> <span class="kw">GENERATED</span> ALWAYS <span class="kw">AS</span> IDENTITY (</span>
+<span id="cb2-2"><a href="#cb2-2"></a>    <span class="kw">START</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="kw">WITH</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>      <span class="dv">1</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>) <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, </span></code></pre></div>
+      <div class="sourceCode" id="cb3" data-caption="問題4 (32) NG例 手動採番可能"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">id</span> <span class="dt">INTEGER</span> <span class="kw">GENERATED</span> <span class="kw">BY</span> <span class="kw">DEFAULT</span> <span class="kw">AS</span> IDENTITY <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span></code></pre></div>
+      <h2 data-number="5.2" id="section-12"><span class="header-section-number">5.2</span> (33)</h2>
+      <div class="sourceCode" id="cb4" data-caption="問題4 (33) 解答例1"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a>purchased_at <span class="dt">TIMESTAMP</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="fu">LOCALTIMESTAMP</span>(<span class="dv">0</span>)</span></code></pre></div>
+      <div class="sourceCode" id="cb5" data-caption="問題4 (33) 解答例2"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1"></a>purchased_at <span class="dt">TIMESTAMP</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="fu">CURRENT_TIMESTAMP</span>(<span class="dv">0</span>)</span></code></pre></div>
+      <div class="sourceCode" id="cb6" data-caption="問題4 (33) 解答例3"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a>purchased_at <span class="dt">TIMESTAMP</span> <span class="kw">DEFAULT</span> DATE_TRUNC(<span class="st">&#39;second&#39;</span>, <span class="fu">CURRENT_TIMESTAMP</span>) <span class="kw">NOT</span> <span class="kw">NULL</span></span></code></pre></div>
+      <h1 data-number="6" id="授業評価アンケート"><span class="header-section-number">6</span>
+      授業評価アンケート</h1>
+      <p>本科目の達成目標は、以下のようになります。</p>
+      <blockquote>
+      <ol type="1">
+      <li>データベース管理システムの基本概念と利点を説明できる。</li>
+      <li>主要なデータベースモデル（リレーショナル／ドキュメント指向など）の特性を理解し、適切な選択ができる。</li>
+      <li>現実世界の要件を分析し、概念データモデル（ER図など）に変換できる。</li>
+      <li>リレーショナルデータベースの論理設計（正規化など）ができる。</li>
+      <li>SQLを用いてリレーショナルデータベースに対する基本的な操作とクエリを実行できる。</li>
+      </ol>
+      </blockquote>
+      <ul>
+      <li><a
+      href="https://forms.office.com/Pages/ResponsePage.aspx?id=6Zxr3Lqm0069Z5-eOshc8SH_YJDoHplAu8RAabW5cppUMlFJWUJRMzlaSk9ZVUFYUVI1NVVWQkw1VC4u">授業アンケート</a></li>
+      </ul>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/DB-2025/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
